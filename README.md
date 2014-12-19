@@ -46,38 +46,41 @@ TODO: animated gif here.
 - It smiles to you. (Go on, drag something on it. You'll see).
 
 ## Keyboard and mouse bindings
-You'll figure this out in a pinch. Probably without even having checked this table. Trust me.
+You'll figure this out in a pinch. Probably without even checking this table. Trust me.
 
-When you do this | This will happen
----------------- | ----------------
-press `SPACE` or `ENTER` | play/ pause
-press `UP` or `W` | faster by 5 words per minute
-press `DOWN` or `S` | slower by 5 words per minute
-press `RIGHT` or `D` | next word. If playing: pause.
-press `LEFT` or `A` | previous word. If playing: pause.
-press `PAGEUP` or `E` | end of sentence. If playing: pause.
-press `PAGEDOWN` or `Q` | start of sentence. If playing: pause. 
-press`B` | saves current position (note: also automatically happens on pause)
-press `1` .. `0` | selects a theme
-click on the right side of the screen | play/ pause
-click on the left side of the screen | start of sentence. If playing: continue playing
-click on the top of the screen | faster by 5 words per minute
-click on the bottom of the screen | slower by 5 words per minute
-click on the progress bar | go to that position in the text
-`scroll` | scroll through the text 
-press `,` or `.` | shows/ hides stats on the current session
-press `t` | shows time left
+When you want this         |  keyboard                        | mouse        
+-------------------------- | -------------------------------- | ---------------------------------
+pause/ play                | `SPACE` or `ENTER`               | click the _right_ of the screen
+go slower                  | `DOWN` or `s`                    | click the _bottom_ of the screen
+go faster                  | `UP` or `w`                      | click the _top_ of the screen
+go back a word             | `LEFT` or `a`                    | scroll down
+go back a sentence         | `PAGEDOWN` or `q`                | click the _left_ of the screen
+go forward a word          | `RIGHT` or `d`                   | scroll up
+go forward a sentence      | `PAGEDOWN` or `Q`                | -
+change Theme               | `1`, `2`, ..., `9`, `0`          | -
+show amount of time left   | `t`                              | - 
+show stats                 | `.` or `,`                       | - 
+save current position      | `b`                              | - 
+jump to position           | not implemented yet              | click on the progress bar on the bottom of the screen and WordyWordy will go there. |
+
+- @scrolling: effect depends a bit on your mouse/ track pad. 
+- @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones
+- @save current position: pausing or navigating automatically save the position. Heck, it even magically saves _speed_ and _theme_ along with the _position_.
+  Hit `b` when you don't trust that. Or when you don't pause or navigate.
 
 ## Bookmarklet
 There is a [bookmarklet](bookmarklet.js). It works. It's not yet perfect.
 
 ## URL parameters
-(Skip this if you don't know what these are - you won't miss anything)
-speed - number in words per minute. Minimum 60 - maximum 600.
-pos - a number representing the position (word) to start reading.
-text - url/ uri encoded text to read. When left out it'll start reading from the latest 
-theme - a number between 0 and 12 - each of which represents a theme
-play - 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was  loaded.
+(Skip this if you don't know what an URL parameter is - you won't miss anything)
+
+parameter | 'splanation
+--------- | -----------------
+speed     | A `number` between 60 and 600 words per minute. When WordyWordy doesn't understand, it'll pick a default speed (300 wpm).
+pos       | A number representing the position (word) to start reading. When WordyWordy doesn't understand, it will start at position 0.
+text      | Text to read. Expected to be URI encoded. When left out WordyWordy will start reading from the latest text you left last time your started it.
+theme     | a number between 0 and 12 - each of which represents a theme. 
+play      | 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was  loaded.
 
 Example: 
 ```
@@ -85,13 +88,13 @@ https://sverweij.github.io/wordywordy/index.html?speed=200&theme=5&pos=0&play=1&
 ```
 
 ## Roadmap?
-Yes. There is one. I'll pasted it here when it is legible :-)
+Yes. There is one. I'll share when it is legible.
 
 ## A word on speeds
 The speed you selected is the _target_ speed. It is a good indication of the actual speed. 
 However, the actual speed depends on the type of text. 
 
-I have chosen to not follow the standard to count 5 letters as a word, which feels like 
+I have chosen to not follow the standard to count each 5 letters as a word. It feels like 
 cheating.
 
 ## Licenses and dependencies
@@ -99,7 +102,6 @@ WordyWordy is free software [licensed under GPLv3](LICENSE). This means (a.o.) y
 it as part of other free software. You can *not* use it as part of non free software.
 
 WordyWordy uses two non-standard fonts:
-- Roboto (from Google's Android). Roboto-thin came out hands-down as the easiest to read.
-- [Open Dyslexic](https://github.com/antijingoist/open-dyslexic). Used in the dyslexic themes. 
+- **Roboto** (from Google's Android). Roboto-thin came out hands-down as the easiest to read.
+- **[Open Dyslexic](https://github.com/antijingoist/open-dyslexic)**. Used in the dyslexic themes. 
 I hope it improves usability for dyslexic people.
-
