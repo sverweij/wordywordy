@@ -115,7 +115,7 @@ Q: Why did you implement this?
 > better has been collecting dust in my mind since. 
 >
 > During 2014 christmas holiday I needed a vehicle to test some technical stuff for an other 
-> project (webapp, local storage, file handling, dicking around with founds) and this 
+> project (webapp, local storage, file handling, dicking around with fonts) and this 
 > suited the bill.
 
 Q: Do you have a road map? 
