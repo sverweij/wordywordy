@@ -1,6 +1,4 @@
 # WordyWordy
-*Read text. One word at a time.*
-
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
 ## Why and for whom?
