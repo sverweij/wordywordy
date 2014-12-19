@@ -3,26 +3,22 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 
 ## Why and for whom?
 **Faster**.
-  It is possible to read _faster_ with this kind of text display. Faster then
-  reading from conventional text display (i.e. books) anyway. Research shows it
-  is possible to read comfortably up to 400 words per minute. Anything faster
-  will hamper understanding.
+  It is possible to read faster with this kind of text display. Faster then
+  reading the typical ~250-300 words per minute you'd get from conventional text
+  display (i.e. books) anyway. I get about 340 wpm comfortably. Which is poor
+  if I must believe the various wikipedia lemmas on the subject.
   
 **Bigger**. 
   You can show words stupid big when you only display one of them at the time. 
-  Might be useful for visualy-impaired people. I use it during fitness exercises.
-  
-**Slower**.
-  The speed can be adjusted to show about 1 word per second. It's also possible to 
-  step through the text manually (using the arrow keys).
-  
-**Dyslexica**.
+  Which might be useful for visualy-impaired people. I use it during fitness exercises.
+
+**Dyslexia**.
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. It makes sense, and it might even be true for some types 
   of dyslexia. I don't know. I have included a font designed for 
   people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
 
-
+TODO: mention that you won't need to hunt for the start of a sentence.
 TODO: add links to claims & research
 
 ## Screenshot!
