@@ -1,7 +1,7 @@
 # WordyWordy
 *Read text. One word at a time.*
 
-WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow. 
+WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
 ## Why and for whom?
 **Faster**.
@@ -18,10 +18,11 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
   The speed can be adjusted to show about 1 word per second. It's also possible to 
   step through the text manually (using the arrow keys).
   
-**Dyslexics**.
-  I've read claims that presenting text this way helps people dyslexia. It might 
-  be true for some types. I don't know. I have included a font designed for 
-  people with dyslexia, just in case it does. They're under keys `6`, `7`, `8` and `9`.
+**Dyslexica**.
+  I've read claims that presenting text this way helps people with dyslexia
+  read more easily. It makes sense, and it might even be true for some types 
+  of dyslexia. I don't know. I have included a font designed for 
+  people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
 
 
 TODO: add links to claims & research
@@ -84,11 +85,8 @@ play      | 1 or 0 - if this parameter equals `1`, the text will automatically s
 
 Example: 
 ```
-https://sverweij.github.io/wordywordy/index.html?speed=200&theme=5&pos=0&play=1&text=This reads some text to you at about 200 words per minute. The text is presented in the open dyslexic font with a sepia color scheme. 
+https://sverweij.github.io/wordywordy/index.html?speed=200&theme=6&pos=0&play=1&text=This reads some text to you at about 200 words per minute. The text is presented in the open dyslexic font with a sepia color scheme. 
 ```
-
-## Roadmap?
-Yes. There is one. I'll share when it is legible.
 
 ## A word on speeds
 The speed you selected is the _target_ speed. It is a good indication of the actual speed. 
@@ -102,6 +100,41 @@ WordyWordy is free software [licensed under GPLv3](LICENSE). This means (a.o.) y
 it as part of other free software. You can *not* use it as part of non free software.
 
 WordyWordy uses two non-standard fonts:
-- **Roboto** (from Google's Android). Roboto-thin came out hands-down as the easiest to read.
+- **Roboto** (from Google's Android). Roboto-thin came out hands-down as the easiest to read from my own reading tests with WordyWordy.
 - **[Open Dyslexic](https://github.com/antijingoist/open-dyslexic)**. Used in the dyslexic themes. 
 I hope it improves usability for dyslexic people.
+
+## Frequently Anticipated Questions
+Q: You haven't mentioned RSVP (rapid serial visual presentation) once. This _is_ RSVP, isn't it?
+> A: It is Serial, and it's Presenting things. Visually. But it's only rapid when you want it to. 
+
+Q: Did you hear of ... ?
+> A: Yes. Some of the options out there are excelent and seem well-researched and field tested. 
+> By all means, use them!
+
+Q: Why did you implement this?
+> A: I had a (self written) thing like this lying around for a long time. I used it for some time
+> but it had some serious usability flaws. Some of these were due to technology restrictions 
+> (html on windows CE is not funny), some of them due to my lack of subject matter knowledge
+> (constant speed, lack of navigation options, no on the fly changes). The idea to make something
+> better has been collecting dust in my mind since. 
+>
+> During 2014 christmas holiday I needed a vehicle to test some technical stuff for an other 
+> project (webapp, local storage, file handling, dicking around with founds) and this 
+> suited the bill.
+
+Q: Do you have a road map? 
+> A: Yes. It's a bit sketchy, and I add stuff to it while I'm using WordyWordy myself. So it'll change.
+> Expect small things like
+>  - better usability on mobile devices
+>  - polished bookmarklet
+>  - multiple buffers
+>  - icon
+>  - an old-fashioned file open dialog
+
+Q: Do you have a time line?
+> A: This thing shares time with some other projects (life, work, [mscgen_js](https://sverweij.github.io/mscgen_js), to name a few).
+> I'll add features when it suits me.
+
+Q: Are you afraid you'll stay the only user of this?
+> A: No. On the other hand - having a README.md and a FAQ on github would be a bit awkward, though.
