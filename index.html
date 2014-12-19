@@ -37,7 +37,7 @@
         <link rel="apple-touch-icon-precomposed" href="./iosfavicon-57.png">
         <link rel="shortcut icon" href="./favicon.ico">
 
-        <title>rsvp</title>
+        <title>WordyWordy</title>
         <style>
             @font-face {
                 font-family      : "Roboto";
@@ -809,7 +809,7 @@ var ctrl = function () {
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 0.5)",
-                fontFamily: "Roboto, sans-serif"
+                fontFamily: "Roboto-normal, sans-serif"
             },
             {
                 name: "Sepia - dyslexic", 
@@ -1202,7 +1202,7 @@ var ctrl = function () {
         displayWord(words.getCurrentWord());
     }
     if (rParams.play && (["1", "true", "y", "yes"].indexOf(rParams.play)> -1)){
-        window.setTimeout(play, 500);
+        window.setTimeout(play, 1000);
     }
 }();
     </script>
