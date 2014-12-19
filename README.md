@@ -55,14 +55,15 @@ pause/ play                | `SPACE` or `ENTER`               | click the _right
 go slower                  | `DOWN` or `s`                    | click the _bottom_ of the screen
 go faster                  | `UP` or `w`                      | click the _top_ of the screen
 go back a word             | `LEFT` or `a`                    | scroll down
-go back a sentence         | `PAGEDOWN` or `q`                | click the _left_ of the screen
+go back a sentence         | `PAGEUP` or `q`                  | click the _left_ of the screen
 go forward a word          | `RIGHT` or `d`                   | scroll up
-go forward a sentence      | `PAGEDOWN` or `Q`                | -
+go forward a sentence      | `PAGEDOWN` or `e`                | -
+go to start of text        | `HOME`                           | -
 change Theme               | `1`, `2`, ..., `9`, `0`          | -
 show amount of time left   | `t`                              | - 
 show stats                 | `.` or `,`                       | - 
 save current position      | `b`                              | - 
-jump to position           | not implemented yet              | click on the progress bar on the bottom of the screen and WordyWordy will go there. |
+jump to position           | not implemented yet              | click in the progress bar (bottom) |
 
 - @scrolling: effect depends a bit on your mouse/ track pad. 
 - @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones
@@ -137,4 +138,4 @@ Q: Do you have a time line?
 > I'll add features when it suits me.
 
 Q: Are you afraid you'll stay the only user of this?
-> A: No. On the other hand - having a README.md and a FAQ on github would be a bit awkward, though.
+> A: No. On the other hand - having a README.md and a FAQ on github would be a bit awkward.
