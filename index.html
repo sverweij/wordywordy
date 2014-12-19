@@ -777,6 +777,13 @@ var ctrl = function () {
     function setTheme(pThemeNumber){
         var lThemes = [
             {
+                name: "Night - low contrast", 
+                backgroundColor: "rgba(0, 0, 0, 1)",
+                color: "rgba(60, 60, 60, 1)",
+                accentColor: "rgba(60, 60, 60, 0.5)",
+                fontFamily: "Roboto-normal, sans-serif"
+            },
+            {
                 name: "Sepia", 
                 backgroundColor: "rgba(251, 240, 217, 1)",
                 color: "rgba(95, 75, 50, 1)",
@@ -840,13 +847,6 @@ var ctrl = function () {
                 fontFamily: "dyslexic, sans-serif"
             },
             {
-                name: "Night - low contrast", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(60, 60, 60, 1)",
-                accentColor: "rgba(60, 60, 60, 0.5)",
-                fontFamily: "Roboto-normal, sans-serif"
-            },
-            {
                 name: "Zany", 
                 backgroundColor: "rgba(255, 0, 255, 1)",
                 color: "rgba(0, 255, 0, 1)",
@@ -876,7 +876,7 @@ var ctrl = function () {
             ||(isNaN (pThemeNumber))
             ||(pThemeNumber < 0)
             ||(pThemeNumber >= lThemes.length)){
-            pThemeNumber = 0;
+            pThemeNumber = 1;
         }
         window.document.body.style.backgroundColor = lThemes[pThemeNumber].backgroundColor;
         window.document.body.style.color = lThemes[pThemeNumber].color;
@@ -1085,34 +1085,34 @@ var ctrl = function () {
             toast("position saved");
         }
         if (ZERO_KEY === pEvent.keyCode) {
-            setTheme(9);
-        }
-        if (ONE_KEY === pEvent.keyCode) {
             setTheme(0);
         }
-        if (TWO_KEY === pEvent.keyCode) {
+        if (ONE_KEY === pEvent.keyCode) {
             setTheme(1);
         }
-        if (THREE_KEY === pEvent.keyCode) {
+        if (TWO_KEY === pEvent.keyCode) {
             setTheme(2);
         }
-        if (FOUR_KEY === pEvent.keyCode) {
+        if (THREE_KEY === pEvent.keyCode) {
             setTheme(3);
         }
-        if (FIVE_KEY === pEvent.keyCode) {
+        if (FOUR_KEY === pEvent.keyCode) {
             setTheme(4);
         }
-        if (SIX_KEY === pEvent.keyCode) {
+        if (FIVE_KEY === pEvent.keyCode) {
             setTheme(5);
         }
-        if (SEVEN_KEY === pEvent.keyCode) {
+        if (SIX_KEY === pEvent.keyCode) {
             setTheme(6);
         }
-        if (EIGHT_KEY === pEvent.keyCode) {
+        if (SEVEN_KEY === pEvent.keyCode) {
             setTheme(7);
         }
-        if (NINE_KEY === pEvent.keyCode) {
+        if (EIGHT_KEY === pEvent.keyCode) {
             setTheme(8);
+        }
+        if (NINE_KEY === pEvent.keyCode) {
+            setTheme(9);
         }
         if (   SECTION_KEY_FF === pEvent.keyCode 
             || SECTION_KEY === pEvent.keyCode) {
