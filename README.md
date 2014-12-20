@@ -57,20 +57,22 @@ change Theme               | `1`, `2`, ..., `9`, `0`          | -
 show amount of time left   | `t`                              | - 
 show stats                 | `.` or `,`                       | - 
 save current position      | `b`                              | - 
-jump to position           | not implemented yet              | click in the progress bar (bottom) |
+jump to position           | not implemented yet              | click in the progress bar (bottom)
+clear                      | `c`                              |
 
 - @scrolling: effect depends a bit on your mouse/ track pad. 
 - @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones
 - @save current position: pausing or navigating automatically save the position. Heck, it even magically saves _speed_ and _theme_ along with the _position_.
   Hit `b` when you don't trust that. Or when you don't pause or navigate.
+- @clear: clears the current buffer and removes all stuff WordyWordy put in local storate (buffer, title, last saved position, speed, theme)
 
 ## Bookmarklet
 There is a [bookmarklet](bookmarklet.js). It works. It's not yet perfect.
 
 ## URL parameters
-(Skip this if you don't know what an URL parameter is - you won't miss anything)
+(Skip this if you don't know what an URL parameter is. You won't miss anything.)
 
-parameter | 'splanation
+parameter | explanation
 --------- | -----------------
 speed     | A `number` between 60 and 600 words per minute. When WordyWordy doesn't understand, it'll pick a default speed (300 wpm).
 pos       | A number representing the position (word) to start reading. When WordyWordy doesn't understand, it will start at position 0.
@@ -126,6 +128,8 @@ Q: Do you have a road map?
 >  - multiple buffers
 >  - icon
 >  - an old-fashioned file open dialog
+>  - smile when done reading
+> I'd also like to clean up the code a bit
 
 Q: Do you have a time line?
 > A: This thing shares time with some other projects (life, work, [mscgen_js](https://sverweij.github.io/mscgen_js), to name a few).
