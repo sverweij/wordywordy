@@ -1,30 +1,24 @@
 # WordyWordy
-*Read text. One word at a time.*
-
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
 ## Why and for whom?
 **Faster**.
-  It is possible to read _faster_ with this kind of text display. Faster then
-  reading from conventional text display (i.e. books) anyway. Research shows it
-  is possible to read comfortably up to 400 words per minute. Anything faster
-  will hamper understanding.
+  It is possible to read faster with this kind of text display. Faster then
+  reading the typical ~250-300 words per minute you'd get from conventional text
+  display (i.e. books) anyway. I get about 340 wpm comfortably. Which is poor
+  if I must believe the various wikipedia lemmas on the subject.
   
 **Bigger**. 
   You can show words stupid big when you only display one of them at the time. 
-  Might be useful for visualy-impaired people. I use it during fitness exercises.
-  
-**Slower**.
-  The speed can be adjusted to show about 1 word per second. It's also possible to 
-  step through the text manually (using the arrow keys).
-  
-**Dyslexica**.
+  Which might be useful for visualy-impaired people. I use it during fitness exercises.
+
+**Dyslexia**.
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. It makes sense, and it might even be true for some types 
   of dyslexia. I don't know. I have included a font designed for 
   people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
 
-
+TODO: mention that you won't need to hunt for the start of a sentence.
 TODO: add links to claims & research
 
 ## Screenshot!
@@ -55,27 +49,30 @@ pause/ play                | `SPACE` or `ENTER`               | click the _right
 go slower                  | `DOWN` or `s`                    | click the _bottom_ of the screen
 go faster                  | `UP` or `w`                      | click the _top_ of the screen
 go back a word             | `LEFT` or `a`                    | scroll down
-go back a sentence         | `PAGEDOWN` or `q`                | click the _left_ of the screen
+go back a sentence         | `PAGEUP` or `q`                  | click the _left_ of the screen
 go forward a word          | `RIGHT` or `d`                   | scroll up
-go forward a sentence      | `PAGEDOWN` or `Q`                | -
+go forward a sentence      | `PAGEDOWN` or `e`                | -
+go to start of text        | `HOME`                           | -
 change Theme               | `1`, `2`, ..., `9`, `0`          | -
 show amount of time left   | `t`                              | - 
 show stats                 | `.` or `,`                       | - 
 save current position      | `b`                              | - 
-jump to position           | not implemented yet              | click on the progress bar on the bottom of the screen and WordyWordy will go there. |
+jump to position           | not implemented yet              | click in the progress bar (bottom)
+clear                      | `c`                              |
 
 - @scrolling: effect depends a bit on your mouse/ track pad. 
 - @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones
 - @save current position: pausing or navigating automatically save the position. Heck, it even magically saves _speed_ and _theme_ along with the _position_.
   Hit `b` when you don't trust that. Or when you don't pause or navigate.
+- @clear: clears the current buffer and removes all stuff WordyWordy put in local storate (buffer, title, last saved position, speed, theme)
 
 ## Bookmarklet
 There is a [bookmarklet](bookmarklet.js). It works. It's not yet perfect.
 
 ## URL parameters
-(Skip this if you don't know what an URL parameter is - you won't miss anything)
+(Skip this if you don't know what an URL parameter is. You won't miss anything.)
 
-parameter | 'splanation
+parameter | explanation
 --------- | -----------------
 speed     | A `number` between 60 and 600 words per minute. When WordyWordy doesn't understand, it'll pick a default speed (300 wpm).
 pos       | A number representing the position (word) to start reading. When WordyWordy doesn't understand, it will start at position 0.
@@ -120,7 +117,7 @@ Q: Why did you implement this?
 > better has been collecting dust in my mind since. 
 >
 > During 2014 christmas holiday I needed a vehicle to test some technical stuff for an other 
-> project (webapp, local storage, file handling, dicking around with founds) and this 
+> project (webapp, local storage, file handling, dicking around with fonts) and this 
 > suited the bill.
 
 Q: Do you have a road map? 
@@ -131,10 +128,12 @@ Q: Do you have a road map?
 >  - multiple buffers
 >  - icon
 >  - an old-fashioned file open dialog
+>  - smile when done reading
+> I'd also like to clean up the code a bit
 
 Q: Do you have a time line?
 > A: This thing shares time with some other projects (life, work, [mscgen_js](https://sverweij.github.io/mscgen_js), to name a few).
 > I'll add features when it suits me.
 
 Q: Are you afraid you'll stay the only user of this?
-> A: No. On the other hand - having a README.md and a FAQ on github would be a bit awkward, though.
+> A: No. On the other hand - having a README.md and a FAQ on github would be a bit awkward.
