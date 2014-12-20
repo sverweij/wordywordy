@@ -22,6 +22,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="TBD">
         <meta name="keywords" content="TBD">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon.ico">
         <link rel="icon" sizes="228x228" href="./favicon-228.png">
         <link rel="icon" sizes="195x195" href="./favicon-195.png">
@@ -274,18 +275,32 @@
     <script>
 
 var words = function () {
-    var MAX_SPEED = 600; // words per minute
-    var MIN_SPEED = 60; // words per minute
+    var MIN_SPEED     = 60; // words per minute
     var DEFAULT_SPEED = 300 /// words per minute
+    var MAX_SPEED     = 600; // words per minute
 
-    var rAry = [];
+    var MIN_DELAY               = 100;
+    var LETTER_DELAY            = 30;
+    var CJK_DELAY               = 250;
+    var NUMBER_DELAY            = 50;
+    var CAPITALS_DELAY          = 50;
+    var QUOTE_DELAY             = 40;
+    var BRACKET_DELAY           = 100;
+    var SHORT_PUNCTUATION_DELAY = 180;
+    var LONG_PUNCTUATION_DELAY  = 250;
+    var SENTENCE_END_DELAY      = 400;
+    var PARAGRAPH_END_DELAY     = 250;
+     
+    var rAry           = [];
     var rSelectedSpeed = DEFAULT_SPEED; // words per minute
-    var rPosition = 0; // word
+    var rPosition      = 0; // word
     var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
     var MAX_SKIP_AHEAD = 42; // words
-    var rMinDelay = 100*speed2Base(rSelectedSpeed); 
-    var rLetterDelay = 30*speed2Base(rSelectedSpeed);
-    var rRe2delay = [];
+    var rMinDelay      = MIN_DELAY*speed2Base(rSelectedSpeed); 
+    var rLetterDelay   = LETTER_DELAY*speed2Base(rSelectedSpeed);
+    var rRe2delay      = [];
+
+         
     /*
      * SPACES_RE includes all spaces as mentioned
      * in https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
@@ -365,23 +380,25 @@ var words = function () {
     }
 
     function _setSpeed(pSpeed) {
-        pSpeed = _sanitizeNumber(pSpeed, DEFAULT_SPEED);
+
+        pSpeed         = _sanitizeNumber(pSpeed, DEFAULT_SPEED);
 
         rSelectedSpeed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, pSpeed));
-        var lBase = speed2Base(pSpeed);
-        rMinDelay = 100*lBase;
-        rLetterDelay = 30*lBase;
+        var lBase      = speed2Base(pSpeed);
+        rMinDelay      = MIN_DELAY*lBase;
+        rLetterDelay   = LETTER_DELAY*lBase;
 
         rRe2delay = [
-            {re: SENTENCE_END_RE, delay: 400*lBase}, // was 250
-            {re: /[;:…–\u00B7|\u2010-\u2015]/, delay: 250*lBase}, // was 140
-            {re: /[-,\/\uFF0C]/, delay: 180*lBase}, // was 100
-            {re: /[\(\)\[\]\{\}]/, delay: 100*lBase},
-            {re: /["'‘’“”]/, delay: 40*lBase},
-            {re: /\u00A0/, delay: 250*lBase}, // was 250
-            {re: /[0-9=\+]/, delay: 50*lBase},
-            {re: /[A-Z]/, delay: 50*lBase},
-            {re: CJK_RE, delay: 250*lBase} // was 140
+            {re: SENTENCE_END_RE,  delay: SENTENCE_END_DELAY*lBase}, 
+            {re: /[;:…–\u00B7|\u2010-\u2015]/,
+                                   delay: LONG_PUNCTUATION_DELAY*lBase},
+            {re: /[-,\/\uFF0C]/,   delay: SHORT_PUNCTUATION_DELAY*lBase},
+            {re: /[\(\)\[\]\{\}]/, delay: BRACKET_DELAY*lBase},
+            {re: /["'‘’“”]/,       delay: QUOTE_DELAY*lBase},
+            {re: /\u00A0/,         delay: PARAGRAPH_END_DELAY*lBase},
+            {re: /[0-9=\+]/,       delay: NUMBER_DELAY*lBase},
+            {re: /[A-Z]/,          delay: CAPITALS_DELAY*lBase},
+            {re: CJK_RE,           delay: CJK_DELAY*lBase}
         ];
     }
 
@@ -1037,12 +1054,10 @@ var ctrl = function () {
                 localStorage.removeItem(LS_KEY_THEME);
             }
             words.setPosition(0);
-            pause();
             updateNavigation(true);
         }
         if (   END_KEY === pEvent.keyCode ) {
             words.setPosition(words.getLength());
-            pause();
             updateNavigation(true);
         }
         if (   DOT_KEY === pEvent.keyCode
@@ -1098,38 +1113,18 @@ var ctrl = function () {
             }
             toast("position saved");
         }
-        if (ZERO_KEY === pEvent.keyCode) {
-            setTheme(0);
-        }
-        if (ONE_KEY === pEvent.keyCode) {
-            setTheme(1);
-        }
-        if (TWO_KEY === pEvent.keyCode) {
-            setTheme(2);
-        }
-        if (THREE_KEY === pEvent.keyCode) {
-            setTheme(3);
-        }
-        if (FOUR_KEY === pEvent.keyCode) {
-            setTheme(4);
-        }
-        if (FIVE_KEY === pEvent.keyCode) {
-            setTheme(5);
-        }
-        if (SIX_KEY === pEvent.keyCode) {
-            setTheme(6);
-        }
-        if (SEVEN_KEY === pEvent.keyCode) {
-            setTheme(7);
-        }
-        if (EIGHT_KEY === pEvent.keyCode) {
-            setTheme(8);
-        }
-        if (NINE_KEY === pEvent.keyCode) {
-            setTheme(9);
-        }
+        if (ZERO_KEY  === pEvent.keyCode) { setTheme(0); }
+        if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
+        if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
+        if (THREE_KEY === pEvent.keyCode) { setTheme(3); }
+        if (FOUR_KEY  === pEvent.keyCode) { setTheme(4); }
+        if (FIVE_KEY  === pEvent.keyCode) { setTheme(5); }
+        if (SIX_KEY   === pEvent.keyCode) { setTheme(6); }
+        if (SEVEN_KEY === pEvent.keyCode) { setTheme(7); }
+        if (EIGHT_KEY === pEvent.keyCode) { setTheme(8); }
+        if (NINE_KEY  === pEvent.keyCode) { setTheme(9); }
         if (   SECTION_KEY_FF === pEvent.keyCode 
-            || SECTION_KEY === pEvent.keyCode) {
+            || SECTION_KEY    === pEvent.keyCode) {
             setTheme(10);
         }
         window.__droparea.value = "";
@@ -1165,15 +1160,15 @@ var ctrl = function () {
 
     rReader.addEventListener("loadend", loadend);
 
-    window.__droparea.addEventListener ("drag", drag, true);
-    window.__droparea.addEventListener ("dragenter", dragEnter, true);
-    window.__droparea.addEventListener ("dragleave", dragLeave, true);
-    window.__droparea.addEventListener ("dragstart", dragStart, true);
-    window.__droparea.addEventListener ("dragover", dragOver, true);
-    window.__droparea.addEventListener ("dragend", dragEnd, true);
-    window.__droparea.addEventListener ("paste", paste, true);
+    window.__droparea.addEventListener("drag", drag, true);
+    window.__droparea.addEventListener("dragenter", dragEnter, true);
+    window.__droparea.addEventListener("dragleave", dragLeave, true);
+    window.__droparea.addEventListener("dragstart", dragStart, true);
+    window.__droparea.addEventListener("dragover", dragOver, true);
+    window.__droparea.addEventListener("dragend", dragEnd, true);
+    window.__droparea.addEventListener("paste", paste, true);
     window.__droparea.addEventListener("click", click, true);
-    window.__droparea.addEventListener ("drop", drop, true);
+    window.__droparea.addEventListener("drop", drop, true);
     window.document.body.addEventListener("keydown", keydown, true);
     window.document.body.addEventListener("wheel", wheel, true);
 
