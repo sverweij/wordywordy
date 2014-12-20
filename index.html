@@ -127,6 +127,7 @@
             .breathing {
                 /*
                  nice idea. Strangely, saps a lot of energy.
+
                 -webkit-animation-name: breathe-border;
                 -webkit-animation-duration: 6s;
                 -webkit-animation-iteration-count: infinite;
@@ -224,7 +225,6 @@
         <div class="outputwrap">
             <span id="__output" class="breathing"></span>
         </div>
-        <div id="__percentage"></div>
         <span id="__status">
             <div>
             <table>
@@ -269,6 +269,7 @@
             </div>
         </span>
         <span id="__toast"></span>
+        <div id="__percentage"></div>
     </body>
     <script>
 
@@ -280,6 +281,8 @@ var words = function () {
     var rAry = [];
     var rSelectedSpeed = DEFAULT_SPEED; // words per minute
     var rPosition = 0; // word
+    var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
+    var MAX_SKIP_AHEAD = 42; // words
     var rMinDelay = 100*speed2Base(rSelectedSpeed); 
     var rLetterDelay = 30*speed2Base(rSelectedSpeed);
     var rRe2delay = [];
@@ -399,7 +402,7 @@ var words = function () {
         if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
             rPosition--;
         }
-        var lLimit = Math.max(rPosition - 42, 0);
+        var lLimit = Math.max(rPosition - MAX_SKIP_AHEAD, 0);
         for (rPosition; (!lFound && (rPosition > lLimit)); rPosition--){
             if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
                 lFound = true;
@@ -410,7 +413,7 @@ var words = function () {
 
     function _gotoEndOfSentence() {
         var lFound = false;
-        var lLimit = Math.min(rPosition + 42, rAry.length);
+        var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rAry.length);
         for (rPosition; (!lFound && (rPosition < lLimit)); rPosition++){
             if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
                 lFound = true;
@@ -443,7 +446,7 @@ var words = function () {
     }
 
     function speed2Base (pSpeed) {
-        return (60000/pSpeed)/280;// 280 = min delay + 6xletter delay
+        return (MILLISECONDS_PER_MINUTE/pSpeed)/280;// 280 = min delay + 6xletter delay
     }
     
     function _getDisplayTime() {
@@ -462,7 +465,7 @@ var words = function () {
     }
 
     function _getEstimatedTimeToGo(){
-        return 60000*(rAry.length - rPosition)/rSelectedSpeed;
+        return MILLISECONDS_PER_MINUTE*(rAry.length - rPosition)/rSelectedSpeed;
     }
 
     return {
@@ -486,23 +489,28 @@ var words = function () {
 }();
 
 var timefmt = function (){ 
+
+    var MILLISECONDS_PER_SECOND = 1000; // millseconds
+    var SECONDS_PER_MINUTE      = 60; // seconds
+    var MINUTES_PER_HOUR        = 60; // minutes
+    var HOURS_PER_DAY           = 24; // hours
     
     function millisToTimeStruct (pMilliSeconds) {
-        var lSeconds     = pMilliSeconds/ 1000;
-        var lMinutes     = Math.max(0, lSeconds/ 60); 
-        var lHours       = Math.max(0, lMinutes/ 60);
-        var lDays        = Math.max(0, lHours/ 24);
+        var lSeconds = pMilliSeconds/ MILLISECONDS_PER_SECOND;
+        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE); 
+        var lHours   = Math.max(0, lMinutes/ MINUTES_PER_HOUR);
+        var lDays    = Math.max(0, lHours/ HOURS_PER_DAY);
 
-        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds)*1000));
-        lSeconds     = Math.max(0, lSeconds - (Math.floor(lMinutes) * 60));
-        lMinutes     = Math.max(0, lMinutes - (Math.floor(lHours) * 60));
-        lHours       = Math.max(0, lHours - (Math.floor(lDays) * 24));
+        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds)*MILLISECONDS_PER_SECOND));
+        lSeconds     = Math.max(0, lSeconds - (Math.floor(lMinutes) * SECONDS_PER_MINUTE));
+        lMinutes     = Math.max(0, lMinutes - (Math.floor(lHours) * MINUTES_PER_HOUR));
+        lHours       = Math.max(0, lHours - (Math.floor(lDays) * HOURS_PER_DAY));
 
         return {
-            "days" : Math.floor(lDays),
-            "hours" : Math.floor(lHours),
-            "minutes" : Math.floor(lMinutes),
-            "seconds" : Math.floor(lSeconds),
+            "days"         : Math.floor(lDays),
+            "hours"        : Math.floor(lHours),
+            "minutes"      : Math.floor(lMinutes),
+            "seconds"      : Math.floor(lSeconds),
             "milliseconds" : lMilliSeconds
         };  
     }   
@@ -651,6 +659,18 @@ var ctrl = function () {
     var CH_INCREASE     = '\u25B3'; // or '\u23F6' which is not available in std font
     var CH_DECREASE     = '\u25BD'; // or '\u23F7' which is not available in std font
 
+
+    var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
+    var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
+    var TOAST_FADE_TIME         = 2200;  // milliseconds
+
+    /* localStorage keys */
+    var LS_KEY_BUFFER    = 'buffer';
+    var LS_KEY_TITLE     = 'title';
+    var LS_KEY_POSITION  = 'position';
+    var LS_KEY_SPEED     = 'speed';
+    var LS_KEY_THEME     = 'theme';
+
     var rStopwatch = new Stopwatch();
     var rReader    = new FileReader();
     var rParams    = paramslikker.getParams(window.location.search);
@@ -659,7 +679,7 @@ var ctrl = function () {
     function playString(pString) {
         rWordsPlayed = 0;
         words.init(pString, 0);
-        toast(CH_TIMERCLOCK + " -" + timefmt.formatTime(words.getEstimatedTimeToGo()));
+        updateTimeToGo();
         rStopwatch.start();
         play();
     }
@@ -698,7 +718,7 @@ var ctrl = function () {
 
     function updateStatus() {
         var lTimeElapsed = rStopwatch.getTimeElapsed();
-        var lMinutesRead = (lTimeElapsed)/60000;
+        var lMinutesRead = (lTimeElapsed)/MILLISECONDS_PER_MINUTE;
 
         var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed/ lMinutesRead : 0;
         var lTimeToGo    = words.getEstimatedTimeToGo(); 
@@ -763,15 +783,35 @@ var ctrl = function () {
         window.__toast.innerHTML = pString;
         rToastTimer = window.setTimeout(function(){
                     window.__toast.className = "fade-away";
-                },2200);
+                },TOAST_FADE_TIME);
     }
 
     function setDocumentTitle(pString) {
         rDocumentTitle = pString;
 
         if (localStorageOK()){
-            localStorage.setItem('title', pString);
+            localStorage.setItem(LS_KEY_BUFFER, pString);
         }
+    }
+
+    function updateNavigation (pPause) {
+        if (pPause) {
+            pause();
+        }
+        displayWord(words.getCurrentWord(), false);
+        toast(words.getPercentage().toFixed(1) + "%");
+    }
+
+    function updateSpeed (pSpeed) {
+        updateStatus();
+        toast(pSpeed + " wpm");
+        if (localStorageOK()) {
+            localStorage.setItem(LS_KEY_SPEED, pSpeed);
+        }
+    }
+
+    function updateTimeToGo() {
+        toast(CH_TIMERCLOCK + " -" + timefmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
     function setTheme(pThemeNumber){
@@ -886,7 +926,7 @@ var ctrl = function () {
         toast(lThemes[pThemeNumber].name);
 
         if (localStorageOK()){
-            localStorage.setItem('theme', pThemeNumber);
+            localStorage.setItem(LS_KEY_THEME, pThemeNumber);
         }
 
     }
@@ -900,7 +940,7 @@ var ctrl = function () {
         if (pEvent && pEvent.clipboardData) {
             window.__output.className = "";
             if (localStorageOK()) {
-                localStorage.setItem('buffer', pEvent.clipboardData.getData("text/plain"))
+                localStorage.setItem(LS_KEY_BUFFER, pEvent.clipboardData.getData("text/plain"))
             }
             setDocumentTitle("clipboard");
             playString(pEvent.clipboardData.getData("text/plain"));
@@ -949,7 +989,7 @@ var ctrl = function () {
 
             if (hasTextMime(pEvent.dataTransfer.types)) {
                 if (localStorageOK()) {
-                    localStorage.setItem('buffer', pEvent.dataTransfer.getData("text/plain"))
+                    localStorage.setItem(LS_KEY_BUFFER, pEvent.dataTransfer.getData("text/plain"))
                 }
                 setDocumentTitle("drag/ drop");
                 playString(pEvent.dataTransfer.getData("text/plain"));
@@ -962,33 +1002,20 @@ var ctrl = function () {
         if (pEvent.clientY > (window.innerHeight - 25)){
             var lSelectedPosition = pEvent.clientX/__droparea.scrollWidth;
             words.setPosition(Math.floor(lSelectedPosition * words.getLength()));
-            displayWord(words.getCurrentWord(), false);
-            toast(words.getPercentage().toFixed(1) + "%");
-            if (localStorageOK()) {
-                localStorage.setItem('position', words.getPosition());
-            }
+            updateNavigation(true);
         } else {
             if (pEvent.clientX > ((3/4)*window.innerWidth)){
                 togglePlay();
             } else if (pEvent.clientX < ((1/4)*window.innerWidth)){
                 words.gotoStartOfSentence();
-                displayWord(words.getCurrentWord(), false);
-                toast(words.getPercentage().toFixed(1) + "%");
+                updateNavigation(false);
             } else {
                 if (pEvent.clientY < ((1/4)*window.innerHeight)){
                     words.incSpeed(5);
-                    updateStatus();
-                    toast(words.getSpeed() + " wpm");
-                    if (localStorageOK()) {
-                        localStorage.setItem('speed', words.getSpeed());
-                    }
+                    updateSpeed(words.getSpeed());
                 } else if (pEvent.clientY > ((3/4)*window.innerHeight)){
                     words.decSpeed(5);
-                    updateStatus();
-                    toast(words.getSpeed() + " wpm");
-                    if (localStorageOK()) {
-                        localStorage.setItem('speed', words.getSpeed());
-                    }
+                    updateSpeed(words.getSpeed());
                 }
             }
         }
@@ -998,22 +1025,25 @@ var ctrl = function () {
         // console.log(pEvent.keyCode);
         if (   HOME_KEY === pEvent.keyCode ) {
             words.setPosition(0);
-            pause();
-            displayWord(words.getCurrentWord(), false);
+            updateNavigation(true);
         }
         if (   C_KEY === pEvent.keyCode ) {
             playString("");
             if (localStorageOK()) {
-                localStorage.removeItem('buffer');
+                localStorage.removeItem(LS_KEY_BUFFER);
+                localStorage.removeItem(LS_KEY_TITLE);
+                localStorage.removeItem(LS_KEY_POSITION);
+                localStorage.removeItem(LS_KEY_SPEED);
+                localStorage.removeItem(LS_KEY_THEME);
             }
             words.setPosition(0);
             pause();
-            displayWord(words.getCurrentWord(), false);
+            updateNavigation(true);
         }
         if (   END_KEY === pEvent.keyCode ) {
             words.setPosition(words.getLength());
             pause();
-            displayWord(words.getCurrentWord(), false);
+            updateNavigation(true);
         }
         if (   DOT_KEY === pEvent.keyCode
             || COMMA_KEY === pEvent.keyCode
@@ -1021,7 +1051,7 @@ var ctrl = function () {
             toggleStatus();
         }
         if (   T_KEY === pEvent.keyCode ) {
-            toast(CH_TIMERCLOCK + " -" + timefmt.formatTime(words.getEstimatedTimeToGo()));
+            updateTimeToGo();
         }
         if(   SPACE_KEY === pEvent.keyCode
            || ENTER_KEY === pEvent.keyCode ) {
@@ -1032,55 +1062,39 @@ var ctrl = function () {
             || H_KEY === pEvent.keyCode
             || A_KEY === pEvent.keyCode ){
             words.decPosition(1);
-            pause();
-            displayWord(words.getCurrentWord(), false);
-            toast(words.getPercentage().toFixed(1) + "%");
+            updateNavigation(true);
         }
         if (    PAGEDOWN_KEY === pEvent.keyCode
              || E_KEY === pEvent.keyCode) {
             words.gotoEndOfSentence();
-            pause();
-            displayWord(words.getCurrentWord(), false);
-            toast(words.getPercentage().toFixed(1) + "%");
+            updateNavigation(true);
         }
         if (   RIGHT_KEY === pEvent.keyCode
             || L_KEY === pEvent.keyCode
             || D_KEY === pEvent.keyCode ) {
             words.incPosition(1);
-            pause();
-            displayWord(words.getCurrentWord(), false);
-            toast(words.getPercentage().toFixed(1) + "%");
+            updateNavigation(true);
         }
         if (    PAGEUP_KEY === pEvent.keyCode
              || Q_KEY === pEvent.keyCode) {
             words.gotoStartOfSentence();
-            pause();
-            displayWord(words.getCurrentWord(), false);
-            toast(words.getPercentage().toFixed(1) + "%");
+            updateNavigation(true);
         }
         if (    DOWN_KEY === pEvent.keyCode
              || J_KEY === pEvent.keyCode
              || S_KEY === pEvent.keyCode) {
             words.decSpeed(5);
-            updateStatus();
-            toast(words.getSpeed() + " wpm");
-            if (localStorageOK()) {
-                localStorage.setItem('speed', words.getSpeed());
-            }
+            updateSpeed(words.getSpeed());
         }
         if (    UP_KEY === pEvent.keyCode
              || K_KEY == pEvent.keyCode
              || W_KEY == pEvent.keyCode ) {
             words.incSpeed(5);
-            updateStatus();
-            toast(words.getSpeed() + " wpm");
-            if (localStorageOK()) {
-                localStorage.setItem('speed', words.getSpeed());
-            }
+            updateSpeed(words.getSpeed());
         }
         if ( B_KEY === pEvent.keyCode ) {
             if (localStorageOK()) {
-                localStorage.setItem('position', words.getPosition()); 
+                localStorage.setItem(LS_KEY_POSITION, words.getPosition()); 
             }
             toast("position saved");
         }
@@ -1137,15 +1151,13 @@ var ctrl = function () {
                 words.incPosition(1); // not a typo
             }
         }
-        pause();
-        displayWord(words.getCurrentWord(), false);
-        toast(words.getPercentage().toFixed(1) + "%");
+        updateNavigation(true);
     }
 
     function loadend (pEvent){
         if (pEvent && pEvent.target && pEvent.target.result) {
             if (localStorageOK()) {
-                localStorage.setItem('buffer', pEvent.target.result);
+                localStorage.setItem(LS_KEY_BUFFER, pEvent.target.result);
             }
             playString(pEvent.target.result);
         }
@@ -1167,21 +1179,21 @@ var ctrl = function () {
 
 
     if (localStorageOK()) {
-        if (localStorage.getItem('speed')){
-            words.setSpeed(localStorage.getItem('speed'));
+        if (localStorage.getItem(LS_KEY_SPEED)){
+            words.setSpeed(localStorage.getItem(LS_KEY_SPEED));
         }
-        if (localStorage.getItem('buffer')){
-            words.init(localStorage.getItem('buffer'));
+        if (localStorage.getItem(LS_KEY_BUFFER)){
+            words.init(localStorage.getItem(LS_KEY_BUFFER));
         }
-        if (localStorage.getItem('title')){
-            setDocumentTitle(localStorage.getItem('title'));
+        if (localStorage.getItem(LS_KEY_TITLE)){
+            setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
         }
-        if (localStorage.getItem('position')){
-            words.setPosition(localStorage.getItem('position'));
+        if (localStorage.getItem(LS_KEY_POSITION)){
+            words.setPosition(localStorage.getItem(LS_KEY_POSITION));
             displayWord(words.getCurrentWord());
         }
-        if (localStorage.getItem('theme')){
-            setTheme(localStorage.getItem('theme'));
+        if (localStorage.getItem(LS_KEY_THEME)){
+            setTheme(localStorage.getItem(LS_KEY_THEME));
         }
     }
 
@@ -1194,7 +1206,7 @@ var ctrl = function () {
     if (rParams.text) {
         words.init(decodeURIComponent(rParams.text));
         displayWord(words.getCurrentWord());
-        toast(CH_TIMERCLOCK + " -" + timefmt.formatTime(words.getEstimatedTimeToGo()));
+        updateTimeToGo();
         rDocumentTitle = "url";
     }
     if (rParams.pos) {
@@ -1202,7 +1214,7 @@ var ctrl = function () {
         displayWord(words.getCurrentWord());
     }
     if (rParams.play && (["1", "true", "y", "yes"].indexOf(rParams.play)> -1)){
-        window.setTimeout(play, 1000);
+        window.setTimeout(play, INITIAL_DISPLAY_DELAY);
     }
 }();
     </script>
