@@ -89,13 +89,13 @@
                 top: 40%;
                 background-color: inherit; 
             }
-            @keyframes openmouth {
-                0% {}
-                100% {border-radius:1em; border-width: 0.2em; border-color: inherit;} 
-            }
             @-webkit-keyframes openmouth {
                 0% {}
-                100% {border-radius:1em; border-width: 0.2em; border-color: inherit;} 
+                100% {border-radius:1em; border-width: 0.2em; } 
+            }
+            @keyframes openmouth {
+                0% {}
+                100% {border-radius:1em; border-width: 0.2em; } 
             }
             .openmouth {
                 -webkit-animation-name: openmouth;
@@ -110,6 +110,44 @@
                 animation-timing-function: linear;
                 animation-direction: alternate;
                 animation-fill-mode:forwards;
+            }
+            .smile {
+                -webkit-animation-name: openmouth;
+                -webkit-animation-duration: 1.0s;
+                -webkit-animation-iteration-count:2;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-direction: alternate;
+                animation-name: openmouth;
+                animation-duration: 1.0s;
+                animation-iteration-count:2;
+                animation-timing-function: linear;
+                animation-direction: alternate;
+            }
+            @-webkit-keyframes reload {
+                0% {}
+                85% {
+                    padding: 0 0 0.2em 25%;
+                    border-radius: 0 0 0 1em;
+                }
+                100% {}
+            }
+            @keyframes reload {
+                0% {}
+                85% {
+                    padding: 0 0 0.2em 25%;
+                    border-radius: 0 0 0 1em;
+                }
+                100% {}
+            }
+            .reload {
+                -webkit-animation-name: reload;
+                -webkit-animation-duration: 950ms;
+                -webkit-animation-iteration-count: 1;
+                -webkit-animation-timing-function: linear;
+                animation-name: reload;
+                animation-duration: 950ms;
+                animation-iteration-count: 1;
+                animation-timing-function: linear;
             }
             @-webkit-keyframes breathe-border {
                 0% { border-color: currentColor; } 
@@ -621,6 +659,7 @@ var ctrl = function () {
     var rWordTimer;
     var rToastTimer;
     var rShowStatus    = false;
+    var rLoop          = false;
     var rDocumentTitle = "";
     var rAppName       = "WordyWordy";
 
@@ -705,15 +744,22 @@ var ctrl = function () {
         if (rWordTimer){
             window.clearTimeout(rWordTimer);
         }
+        if (rLoop === true) {
+            window.__output.className = "playing";
+        }
 
         if (rPlaying){
             if (words.getPosition() < words.getLength()){
                 displayWord(words.getCurrentWord(), true);
                 rWordTimer = window.setTimeout(outputNextWord, words.getDisplayTime());
                 words.incPosition(1);
+            } else if (rLoop === true) {
+                words.setPosition(0);
+                window.__output.className = "reload";
+                rWordTimer = window.setTimeout(outputNextWord, 1000);
             } else {
                 window.__output.innerHTML = "";
-                window.__output.className = "breathing";
+                window.__output.className = "smile";
                 pause();
             }
         }
@@ -775,7 +821,7 @@ var ctrl = function () {
     function pause() {
         rStopwatch.pause();
         rPlaying = false;
-        __output.className = "breathing";
+        // __output.className = "breathing";
         document.title = rDocumentTitle + " - " + rAppName;
         if (localStorageOK()) {
             localStorage.setItem("position", words.getPosition());
@@ -807,7 +853,7 @@ var ctrl = function () {
         rDocumentTitle = pString;
 
         if (localStorageOK()){
-            localStorage.setItem(LS_KEY_BUFFER, pString);
+            localStorage.setItem(LS_KEY_TITLE, pString);
         }
     }
 
@@ -923,7 +969,44 @@ var ctrl = function () {
                 color: "rgba(255, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 0.5)",
                 fontFamily: "dyslexic, sans-serif"
+            },
+            {
+                name: "220",
+                backgroundColor: "rgba(255, 180, 0, 1)",
+                color: "rgba(0, 45, 95, 1)",
+                accentColor: "rgba(0, 45, 95, 0.5)",
+                fontFamily: "Roboto-normal, sans-serif"
+            },
+            {
+                name: "057",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(0, 43, 84, 1)",
+                accentColor: "rgba(255, 50, 0, 1)",
+                fontFamily: "Roboto-normal, sans-serif"
+            },
+            {
+                name: "074",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(24, 164, 229, 1)",
+                accentColor: "rgba(227, 114, 34, 1)",
+                fontFamily: "Roboto-normal, sans-serif"
+            },
+            {
+                name: "DHJ",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(222, 37, 51, 1)",
+                accentColor: "rgba(222, 37, 51, 1)",
+                fontFamily: "sans-serif"
+            },
+            {
+                name: "VVD",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(7, 27, 115, 1)",
+                accentColor: "rgba(253, 122, 0, 1)",
+                fontFamily: "Roboto-normal, sans-serif"
             }
+
+
         ];
         
         if ( typeof pThemeNumber === 'string'){
@@ -1192,6 +1275,14 @@ var ctrl = function () {
         }
     }
 
+
+    /**
+     * returns true if pString equals "1", "true", "y" or "yes
+     */
+    function isBooleanesqueTrue (pString){
+        return (["1", "true", "y", "yes"].indexOf(pString)> -1);
+    }
+
     if (rParams.speed) {
         words.setSpeed(rParams.speed);
     }
@@ -1208,7 +1299,13 @@ var ctrl = function () {
         words.setPosition(rParams.pos);
         displayWord(words.getCurrentWord());
     }
-    if (rParams.play && (["1", "true", "y", "yes"].indexOf(rParams.play)> -1)){
+    if (rParams.loop && isBooleanesqueTrue(rParams.loop)) {
+        rLoop = true;
+        console.log("loopy");
+    } else {
+        rLoop = false;
+    }
+    if (rParams.play && isBooleanesqueTrue(rParams.play)) {
         window.setTimeout(play, INITIAL_DISPLAY_DELAY);
     }
 }();

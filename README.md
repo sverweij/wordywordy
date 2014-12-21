@@ -77,6 +77,8 @@ pos       | A number representing the position (word) to start reading. When Wor
 text      | Text to read. Expected to be URI encoded. When left out, WordyWordy will start reading from the latest text you left last time your started it.
 theme     | a number between 0 and 12 - each of which represents a theme. 
 play      | 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was loaded.
+loop      | 1 or 0 - if this parameter equals `1`, the text will infinitely loop. Usefull for kiosk display.
+
 
 Example: 
 ```
