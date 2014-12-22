@@ -42,27 +42,39 @@
         <style>
             @font-face {
                 font-family      : "Roboto";
-                font-weight      : lighter;
+                font-weight      : 100;
                 font-style       : normal;
                 src: url('font/Roboto-Thin.ttf');
             }
             @font-face {
                 font-family      : "Roboto";
-                font-weight      : lighter;
+                font-weight      : 100;
                 font-style       : italic;
                 src: url('font/Roboto-ThinItalic.ttf');
             }
             @font-face {
-                font-family      : "Roboto-normal";
-                font-weight      : normal;
+                font-family      : "Roboto";
+                font-weight      : 300;
                 font-style       : normal;
                 src: url('font/Roboto-Light.ttf');
             }
             @font-face {
-                font-family      : "Roboto-normal";
-                font-weight      : normal;
+                font-family      : "Roboto";
+                font-weight      : 300;
                 font-style       : italic;
                 src: url('font/Roboto-LightItalic.ttf');
+            }
+            @font-face {
+                font-family      : "Roboto";
+                font-weight      : 400;
+                font-style       : normal;
+                src: url('font/Roboto-Regular.ttf');
+            }
+            @font-face {
+                font-family      : "Roboto";
+                font-weight      : 400;
+                font-style       : italic;
+                src: url('font/Roboto-Italic.ttf');
             }
             @font-face {
                 font-family      : "dyslexic";
@@ -79,7 +91,7 @@
                 background-color: rgba(251, 240, 217, 1);
                 color: rgba(95, 75, 50, 1);
                 font-family: Roboto, sans-serif;
-                font-weight: lighter;
+                font-weight: 300;
                 font-size: 48pt;
             }
             div.outputwrap {
@@ -220,6 +232,7 @@
                 width: 100%;
             }
             #__status td {
+                font-weight: 300;
             }
             #__status td:first-child{
                 font-style: italic;
@@ -281,6 +294,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Calculated speed</td>
+                    <td>
+                        <span id="__avgSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
                     <td>Position</td>
                     <td>
                         <span id="__position"></span> of
@@ -329,14 +349,16 @@ var words = function () {
     var SENTENCE_END_DELAY      = 400;
     var PARAGRAPH_END_DELAY     = 250;
      
-    var rAry           = [];
-    var rSelectedSpeed = DEFAULT_SPEED; // words per minute
-    var rPosition      = 0; // word
+    var rAry            = [];
+    var rLength         = 0; // words
+    var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
+    var rPosition       = 0; // word
     var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
-    var MAX_SKIP_AHEAD = 42; // words
-    var rMinDelay      = MIN_DELAY*speed2Base(rSelectedSpeed); 
-    var rLetterDelay   = LETTER_DELAY*speed2Base(rSelectedSpeed);
-    var rRe2delay      = [];
+    var MAX_SKIP_AHEAD  = 42; // words
+    var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed); 
+    var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
+    var rRe2delay       = [];
+    var rRe2delayLength = 0;
 
          
     /*
@@ -380,6 +402,7 @@ var words = function () {
                     .replace(CJK_RE, " $1") //
                     .split(SPACES_RE);
 
+        rLength = rAry.length;
         _setPositionSafe(pPosition);
     }
 
@@ -406,7 +429,7 @@ var words = function () {
     }
 
     function _setPosition(pPosition){
-        rPosition = Math.min(_getLength(), Math.max(0, pPosition));
+        rPosition = Math.min(rLength, Math.max(0, pPosition));
     }
 
     function _getPosition(){
@@ -414,7 +437,7 @@ var words = function () {
     }
 
     function _getPercentage(){
-        return rAry.length > 0 ? 100*(rPosition/rAry.length) : 0;
+        return rLength > 0 ? 100*(rPosition/rLength) : 0;
     }
 
     function _setSpeed(pSpeed) {
@@ -438,6 +461,7 @@ var words = function () {
             {re: /[A-Z]/,          delay: CAPITALS_DELAY*lBase},
             {re: CJK_RE,           delay: CJK_DELAY*lBase}
         ];
+        rRe2delayLength = rRe2delay.length;
     }
 
     function _getSpeed(){
@@ -468,7 +492,7 @@ var words = function () {
 
     function _gotoEndOfSentence() {
         var lFound = false;
-        var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rAry.length);
+        var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rLength);
         for (rPosition; (!lFound && (rPosition < lLimit)); rPosition++){
             if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
                 lFound = true;
@@ -478,7 +502,7 @@ var words = function () {
     }
 
     function _getLength(){
-        return rAry.length;
+        return rLength;
     }
 
     function _getCurrentWord(){
@@ -486,33 +510,40 @@ var words = function () {
     }
 
     function regexp2duration(pChar){
-        var lRetval = 0;
-        var lMatched = false;
-        for (var i = 0;(i < rRe2delay.length && !lMatched); i++){
-            if (pChar.match(rRe2delay[i].re)){
-                lRetval += rRe2delay[i].delay;
-                lMatched = true;
+        for (var i = 0; i < rRe2delayLength; i++){
+            if (rRe2delay[i].re.test(pChar)){
+                return rRe2delay[i].delay;
             }
         }
-        if (!lMatched){
-            lRetval += rLetterDelay;
+        return rLetterDelay;
+    }
+
+    /*
+     * return the average speed in wpm for the current string
+     */
+    function _getAverageSpeed(){
+        var lTotalDisplayTime = 0;
+        for (var i = 0; i < rLength; i++){
+            lTotalDisplayTime += _determineDisplayTime(rAry[i]);
         }
-        return lRetval;
+        // console.log("total projected time: " + lTotalDisplayTime);
+        // console.log("ms per word: " + lTotalDisplayTime/rLength)
+        return rLength/(lTotalDisplayTime/MILLISECONDS_PER_MINUTE);
     }
 
     function speed2Base (pSpeed) {
-        return (MILLISECONDS_PER_MINUTE/pSpeed)/280;// 280 = min delay + 6xletter delay
+        return (MILLISECONDS_PER_MINUTE/pSpeed)/300;// 300 = min delay + (6 2/3)xletter delay. Works ok for english.
     }
     
     function _getDisplayTime() {
-        return _determineDisplayTime(_getCurrentWord());
+        return _determineDisplayTime(rAry[rPosition]);
     }
 
     function _determineDisplayTime(pWord){
         var lRetval = 0;
         if (pWord){
             lRetval = rMinDelay;
-            for (var i = 0; i < pWord.length; i++){
+            for (var i = 0, lLength = pWord.length; i < lLength; i++){
                 lRetval += regexp2duration(pWord[i]);
             }
         }
@@ -520,7 +551,7 @@ var words = function () {
     }
 
     function _getEstimatedTimeToGo(){
-        return MILLISECONDS_PER_MINUTE*(rAry.length - rPosition)/rSelectedSpeed;
+        return MILLISECONDS_PER_MINUTE*(rLength - rPosition)/rSelectedSpeed;
     }
 
     return {
@@ -534,6 +565,7 @@ var words = function () {
         getLength: _getLength,
         getPercentage: _getPercentage,
         getEstimatedTimeToGo: _getEstimatedTimeToGo,
+        getAverageSpeed: _getAverageSpeed,
         getPosition: _getPosition,
         setPosition: _setPosition,
         incPosition: _incPosition,
@@ -735,6 +767,7 @@ var ctrl = function () {
     function playString(pString) {
         rWordsPlayed = 0;
         words.init(pString, 0);
+        window.__avgSpeed.innerHTML = words.getAverageSpeed().toFixed(1);
         updateTimeToGo();
         rStopwatch.start();
         play();
@@ -750,8 +783,8 @@ var ctrl = function () {
 
         if (rPlaying){
             if (words.getPosition() < words.getLength()){
-                displayWord(words.getCurrentWord(), true);
                 rWordTimer = window.setTimeout(outputNextWord, words.getDisplayTime());
+                displayWord(words.getCurrentWord(), true);
                 words.incPosition(1);
             } else if (rLoop === true) {
                 words.setPosition(0);
@@ -884,91 +917,91 @@ var ctrl = function () {
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(60, 60, 60, 1)",
                 accentColor: "rgba(60, 60, 60, 0.5)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 400 48pt Roboto, sans-serif"
             },
             {
                 name: "Sepia", 
                 backgroundColor: "rgba(251, 240, 217, 1)",
                 color: "rgba(95, 75, 50, 1)",
                 accentColor: "rgba(95, 75, 50, 0.5)",
-                fontFamily: "Roboto, sans-serif"
+                font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
                 name: "Day", 
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(0, 0, 0, 1)",
                 accentColor: "rgba(0, 0, 0, 0.5)",
-                fontFamily: "Roboto, sans-serif"
+                font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
                 name: "Night", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 255, 1)",
                 accentColor: "rgba(255, 255, 255, 0.5)",
-                fontFamily: "Roboto, sans-serif"
+                font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
                 name: "Night - low contrast", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(60, 60, 60, 1)",
                 accentColor: "rgba(60, 60, 60, 0.5)",
-                fontFamily: "Roboto, sans-serif"
+                font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
                 name: "Night - high contrast", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 0.5)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 400 48pt Roboto, sans-serif"
             },
             {
                 name: "Sepia - dyslexic", 
                 backgroundColor: "rgba(251, 240, 217, 1)",
                 color: "rgba(95, 75, 50, 1)",
                 accentColor: "rgba(95, 75, 50, 0.5)",
-                fontFamily: "dyslexic, sans-serif"
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "Day - dyslexic", 
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(0, 0, 0, 1)",
                 accentColor: "rgba(0, 0, 0, 0.5)",
-                fontFamily: "dyslexic, sans-serif"
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "Night - dyslexic", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 255, 1)",
                 accentColor: "rgba(255, 255, 255, 0.5)",
-                fontFamily: "dyslexic, sans-serif"
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "Night - low contrast - dyslexic", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(60, 60, 60, 1)",
                 accentColor: "rgba(60, 60, 60, 0.5)",
-                fontFamily: "dyslexic, sans-serif"
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "Zany", 
                 backgroundColor: "rgba(255, 0, 255, 1)",
                 color: "rgba(0, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 1)",
-                fontFamily: "Comic Sans MS, Verdana"
+                font: "normal normal 400 48pt Comic Sans MS, Verdana"
             },
             {
                 name: "Sepia - roboto", 
                 backgroundColor: "rgba(251, 240, 217, 1)",
                 color: "rgba(95, 75, 50, 1)",
                 accentColor: "rgba(95, 75, 50, 0.5)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 300 48pt Roboto, sans-serif"
             },
             {
                 name: "Night - high contrast - dyslexic", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 0.5)",
-                fontFamily: "dyslexic, sans-serif"
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "220",
@@ -982,31 +1015,43 @@ var ctrl = function () {
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(0, 43, 84, 1)",
                 accentColor: "rgba(255, 50, 0, 1)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 300 48pt Roboto, sans-serif"
             },
             {
                 name: "074",
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(24, 164, 229, 1)",
                 accentColor: "rgba(227, 114, 34, 1)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 100 48pt Roboto, sans-serif"
+            },
+            {
+                name: "HV",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(130, 191, 58, 1)",
+                accentColor: "rgba(2, 119, 195, 1)",
+                font: "normal normal 400 48pt Roboto, sans-serif"
             },
             {
                 name: "DHJ",
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(222, 37, 51, 1)",
                 accentColor: "rgba(222, 37, 51, 1)",
-                fontFamily: "sans-serif"
+                font: 'normal normal 400 48pt "Helvetica Neue",Arial,sans-serif'
             },
             {
-                name: "VVD",
+                name: "liberal",
                 backgroundColor: "rgba(255, 255, 255, 1)",
                 color: "rgba(7, 27, 115, 1)",
                 accentColor: "rgba(253, 122, 0, 1)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 400 48pt Roboto, sans-serif"
+            },
+            {
+                name: "progressive",
+                backgroundColor: "rgba(255, 255, 255, 1)",
+                color: "rgba(218, 23, 46, 1)",
+                accentColor: "rgba(134, 188, 0, 1)",
+                font: "normal normal 300 48pt Roboto, sans-serif"
             }
-
-
         ];
         
         if ( typeof pThemeNumber === 'string'){
@@ -1020,7 +1065,7 @@ var ctrl = function () {
         }
         window.document.body.style.backgroundColor = lThemes[pThemeNumber].backgroundColor;
         window.document.body.style.color = lThemes[pThemeNumber].color;
-        window.document.body.style.fontFamily = lThemes[pThemeNumber].fontFamily;
+        window.document.body.style.font  = lThemes[pThemeNumber].font;
         window.__output.style.borderBottomColor = lThemes[pThemeNumber].accentColor;
 
         toast(lThemes[pThemeNumber].name);
@@ -1301,7 +1346,6 @@ var ctrl = function () {
     }
     if (rParams.loop && isBooleanesqueTrue(rParams.loop)) {
         rLoop = true;
-        console.log("loopy");
     } else {
         rLoop = false;
     }
