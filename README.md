@@ -11,7 +11,10 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
   You can show words stupid big when only displaying one of them at the time. 
   This might be useful for visualy-impaired people.
 
-**Dyslexia**.
+**Hands free**.
+  It keeps on rolling. Practical when you want to read while doing 
+  something else. Working out for example.
+  
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. I don't know. I have included a font designed for 
   people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
@@ -23,15 +26,15 @@ TODO: add links to claims & research
 TODO: animated gif here.
 
 ## Features
+- Proportionally pauses on punctuation and paragraphs, for a natural reading experience.
 - Adjustable speed. On the fly.
-- Adjustable theme to match your taste or need:
-  - Sepia/ Day/ Night
-  - Night low contrast
-  - High contrast (yellow on black, fat letters)
-  - Regular and dyslexic friendly fonts.
-- Proportionally pauses on punctuation and paragraphs. Gives your brain a little rest.
 - Remembers your last text. And where you left of in it.
 - Forward/ backward navigation with mouse and/ or keys. On the fly.
+- Adjustable theme to match your taste. Or need:
+  - Sepia/ Day/ Night
+  - High contrast (yellow on black, fat letters)
+  - Night low contrast
+  - Regular and dyslexic friendly fonts.
 - Supports Chinese/ Japanes/ Korean (there is a reason 字 means translates to _character_, but also to _word_)
 - Heuristics for correcting common typographic errors.
 - Reading stats for your current session.
@@ -87,7 +90,7 @@ https://sverweij.github.io/wordywordy/index.html?speed=200&theme=6&pos=0&play=1&
 
 ## A word on speeds
 The speed you selected is the _target_ speed. It is a good indication of the actual speed. 
-However, the actual speed depends on the type of text. 
+However, the actual speed depends on the actual text.
 
 ## Licenses and dependencies
 WordyWordy is free software [licensed under GPLv3](LICENSE). This
