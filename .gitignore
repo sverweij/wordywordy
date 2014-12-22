@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
+*.swo
 .project
 .settings/*
 node_modules
@@ -12,3 +13,4 @@ src/*tmp*.*
 tracking.*
 siteverification.id
 samples
+*tmp*
