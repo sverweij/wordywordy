@@ -22,8 +22,9 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 TODO: mention that you won't need to hunt for the start of a sentence.
 TODO: add links to claims & research
 
-## Screenshot!
+## Screenshots!
 ![screenshots](images/screenshots.gif)
+(Note that the speed deliberately slow.)
 
 ## Features
 - Proportionally pauses on punctuation and paragraphs, for a natural reading experience.
