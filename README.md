@@ -37,9 +37,9 @@ TODO: animated gif here.
   - Regular and dyslexic friendly fonts.
 - Supports Chinese/ Japanes/ Korean (there is a reason 字 means translates to _character_, but also to _word_)
 - Heuristics for correcting common typographic errors.
-- Reading stats for your current session.
+- Reading stats the current text.
 
-- Smiles to you. (Go on, drag something on it. You'll see).
+- It smiles. (Go on, drag something on it. You'll see).
 
 ## Keyboard and mouse bindings
 You'll figure this out in a pinch. Probably without even checking this table. Trust me.
