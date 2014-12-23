@@ -23,7 +23,7 @@ TODO: mention that you won't need to hunt for the start of a sentence.
 TODO: add links to claims & research
 
 ## Screenshot!
-TODO: animated gif here.
+![screenshots](images/screenshots.gif)
 
 ## Features
 - Proportionally pauses on punctuation and paragraphs, for a natural reading experience.
