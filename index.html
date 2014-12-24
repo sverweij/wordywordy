@@ -18,6 +18,7 @@
        - html
        - epub
     -->
+        <meta http-equiv="Default-Style" content="Sepia">
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow. Runs within your browser. Remembers where you left off between sessions. On the fly adjustable speed. Copious navigation options. GPLv3 open source licensed.">
@@ -151,11 +152,12 @@
                 85% {
                     padding: 0 0 0.2em 25%;
                     border-radius: 0 0 0 1em;
+                    -moz-filter: blur(0px);
                     filter: blur(0px);
-                    color: red;
                 }
                 100% {
-                    filter: blur(0px);
+                    -moz-filter: blur(0.2em);
+                    filter: blur(0.2em);
                 }
             }
             .reload {
@@ -278,6 +280,252 @@
                 animation-fill-mode : forwards;
             }
         </style>
+        <style title="Sepia">
+            body{
+                color: rgba(95, 75, 50, 1);
+                background-color: rgba(251, 240, 217, 1);
+                font: normal normal 100 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(95, 75, 50, 0.5);
+            }
+        </style>
+        <style title="Day">
+            body{
+                color: rgba(0, 0, 0, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 100 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(0, 0, 0, 0.5);
+            }
+        </style>
+        <style title="Night">
+            body{
+                color: rgba(255, 255, 255, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 100 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 255, 255, 0.5);
+            }
+        </style>
+        <style title="Low contrast">
+            body{
+                color: rgba(60, 60, 60, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 100 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(60, 60, 60, 0.5);
+            }
+        </style>
+        <style title="High contrast">
+            body{
+                color: rgba(255, 255, 0, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 400 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 255, 0, 0.5);
+            }
+        </style>
+        <style title="Dyslexic - Sepia">
+            body{
+                color: rgba(95, 75, 50, 1);
+                background-color: rgba(251, 240, 217, 1);
+                font: normal normal 400 48pt dyslexic, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(95, 75, 50, 0.5);
+            }
+        </style>
+        <style title="Dyslexic - Day">
+            body{
+                color: rgba(0, 0, 0, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 400 48pt dyslexic, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(0, 0, 0, 0.5);
+            }
+        </style>
+        <style title="Dyslexic - Night">
+            body{
+                color: rgba(255, 255, 255, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 400 48pt dyslexic, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 255, 255, 0.5);
+            }
+        </style>
+        <style title="Dyslexic - Low contrast">
+            body{
+                color: rgba(60, 60, 60, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 400 48pt dyslexic, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(60, 60, 60, 0.5);
+            }
+        </style>
+        <style title="Dyslexic - High contrast">
+            body{
+                color: rgba(255, 255, 0, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 400 48pt dyslexic, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 255, 0, 0.5);
+            }
+        </style> 
+        <style title="Zany">
+            body{
+                color: rgba(0, 255, 0, 1);
+                background-color: rgba(255, 0, 255, 1);
+                font: normal normal 400 48pt Comic Sans MS, Verdana;
+                text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 255, 0, 1);
+            }
+            #__toast {
+                color: cyan;
+                opacity: 1;
+            }
+            #__percentage {
+                background-color: pink;
+                opacity: 1;
+            }
+            #__status {
+                color: white;
+                text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+            }
+            #__status div {
+                opacity: 1;
+            }
+            @-webkit-keyframes animate {
+                50%{
+                    -webkit-transform: scale(0.99);
+                    transform: scale(0.99);
+                }
+            }
+            @keyframes animate {
+                50%{
+                    transform: scale(0.99);
+                }
+            }
+            div.outputwrap {
+                -webkit-animation-name: animate;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-duration: 1.2s;
+                -webkit-animation-timing-function: ease-in-out;
+                animation-name: animate;
+                animation-iteration-count: infinite;
+                animation-duration: 1.2s;
+                animation-timing-function: ease-in-out;
+            }
+        </style>
+        <style title="Low contrast - fatter font">
+            body{
+                color: rgba(60, 60, 60, 1);
+                background-color: rgba(0, 0, 0, 1);
+                font: normal normal 400 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(60, 60, 60, 0.5);
+            }
+        </style>
+        <style title="Sepia - fatter font">
+            body{
+                color: rgba(95, 75, 50, 1);
+                background-color: rgba(251, 240, 217, 1);
+                font: normal normal 400 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(95, 75, 50, 0.5);
+            }
+        </style>
+        <style title="220">
+            body{
+                color: rgba(0, 45, 95, 1);
+                background-color: rgba(255, 180, 0, 1);
+                font: normal normal 300 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(0, 45, 95, 0.5);
+            }
+        </style>
+        <style title="057">
+            body{
+                color: rgba(0, 43, 84, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 300 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(255, 50, 0, 1);
+            }
+        </style>
+        <style title="074">
+            body{
+                color: rgba(24, 164, 229, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 100 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(227, 114, 34, 1);
+            }
+            #__percentage {
+                opacity: 1;
+            }
+        </style>
+        <style title="HV">
+            body{
+                color: rgba(130, 191, 58, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 400 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(2, 119, 195, 1);
+                border-bottom-width: 4px;
+            }
+        </style>
+        <style title="DHJ">
+            body{
+                color: rgba(222, 37, 51, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 400 48pt "Helvetica Neue",Arial,sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(222, 37, 51, 1);
+            }
+        </style>
+        <style title="liberal">
+            body{
+                color: rgba(7, 27, 115, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 400 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(253, 122, 0, 1);
+                border-bottom-width: 6px;
+            }
+            #__percentage {
+                background-color: rgba(253, 122, 0, 1);
+                opacity: 1;
+            }
+        </style>
+        <style title="progressive">
+            body{
+                color: rgba(218, 23, 46, 1);
+                background-color: rgba(255, 255, 255, 1);
+                font: normal normal 300 48pt Roboto, sans-serif;
+            }
+            #__output {
+                border-bottom-color: rgba(134, 188, 0, 1);
+            }
+        </style>
     </head>
     <body> 
         <textarea id="__droparea"></textarea>
@@ -338,6 +586,74 @@
         <div id="__percentage"></div>
     </body>
     <script>
+var fmt = function (){ 
+
+    var MILLISECONDS_PER_SECOND = 1000; // millseconds
+    var SECONDS_PER_MINUTE      = 60; // seconds
+    var MINUTES_PER_HOUR        = 60; // minutes
+    var HOURS_PER_DAY           = 24; // hours
+    
+    function millisToTimeStruct (pMilliSeconds) {
+        var lSeconds = pMilliSeconds/ MILLISECONDS_PER_SECOND;
+        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE); 
+        var lHours   = Math.max(0, lMinutes/ MINUTES_PER_HOUR);
+        var lDays    = Math.max(0, lHours/ HOURS_PER_DAY);
+
+        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds)*MILLISECONDS_PER_SECOND));
+        lSeconds     = Math.max(0, lSeconds - (Math.floor(lMinutes) * SECONDS_PER_MINUTE));
+        lMinutes     = Math.max(0, lMinutes - (Math.floor(lHours) * MINUTES_PER_HOUR));
+        lHours       = Math.max(0, lHours - (Math.floor(lDays) * HOURS_PER_DAY));
+
+        return {
+            "days"         : Math.floor(lDays),
+            "hours"        : Math.floor(lHours),
+            "minutes"      : Math.floor(lMinutes),
+            "seconds"      : Math.floor(lSeconds),
+            "milliseconds" : lMilliSeconds
+        };  
+    }   
+
+    function formatTimeBlob (pInt) {
+        if (pInt < 10) {
+            return "0" + pInt;
+        }   
+        return pInt.toString();
+    }   
+
+    function _sanitizeNumber(pThing, pDefault){
+        if (typeof pThing  === 'string') {
+            pThing = parseInt(pThing);
+        }
+        if (typeof pThing !== 'number' || pThing === NaN ){
+            pThing = pDefault;
+        }
+        return pThing;
+    }
+
+    /**
+     * returns true if pString equals "1", "true", "y" or "yes
+     */
+    function _sanitizeBooleanesque (pString){
+        return (["1", "true", "y", "yes"].indexOf(pString)> -1);
+    }
+
+
+        
+    return {
+        formatTime : function (pMilliSeconds, pShowMillis) {
+            var lTimeStruct = millisToTimeStruct(pMilliSeconds);
+            if (!pShowMillis) { pShowMillis = false; }
+            var lRetval =  
+                   (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
+                   formatTimeBlob (lTimeStruct.minutes) + ":" +
+                   formatTimeBlob (lTimeStruct.seconds) +
+                   (pShowMillis ? "." + lTimeStruct.milliseconds: "");
+            return lRetval;
+        },
+        sanitizeNumber       : _sanitizeNumber,
+        sanitizeBooleanesque : _sanitizeBooleanesque
+    };  
+}();
 
 var words = function () {
     var MIN_SPEED     = 60; // words per minute
@@ -413,18 +729,8 @@ var words = function () {
         _setPositionSafe(pPosition);
     }
 
-    function _sanitizeNumber(pThing, pDefault){
-        if (typeof pThing  === 'string') {
-            pThing = parseInt(pThing);
-        }
-        if (typeof pThing !== 'number' || pThing === NaN ){
-            pThing = pDefault;
-        }
-        return pThing;
-    }
-
     function _setPositionSafe(pPosition){
-        pPosition = _sanitizeNumber(pPosition, 0);
+        pPosition = fmt.sanitizeNumber(pPosition, 0);
         _setPosition(pPosition);
     }
     function _incPosition(pAmount) {
@@ -449,7 +755,7 @@ var words = function () {
 
     function _setSpeed(pSpeed) {
 
-        pSpeed         = _sanitizeNumber(pSpeed, DEFAULT_SPEED);
+        pSpeed         = fmt.sanitizeNumber(pSpeed, DEFAULT_SPEED);
 
         rSelectedSpeed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, pSpeed));
         var lBase      = speed2Base(pSpeed);
@@ -582,54 +888,6 @@ var words = function () {
     };
 }();
 
-var timefmt = function (){ 
-
-    var MILLISECONDS_PER_SECOND = 1000; // millseconds
-    var SECONDS_PER_MINUTE      = 60; // seconds
-    var MINUTES_PER_HOUR        = 60; // minutes
-    var HOURS_PER_DAY           = 24; // hours
-    
-    function millisToTimeStruct (pMilliSeconds) {
-        var lSeconds = pMilliSeconds/ MILLISECONDS_PER_SECOND;
-        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE); 
-        var lHours   = Math.max(0, lMinutes/ MINUTES_PER_HOUR);
-        var lDays    = Math.max(0, lHours/ HOURS_PER_DAY);
-
-        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds)*MILLISECONDS_PER_SECOND));
-        lSeconds     = Math.max(0, lSeconds - (Math.floor(lMinutes) * SECONDS_PER_MINUTE));
-        lMinutes     = Math.max(0, lMinutes - (Math.floor(lHours) * MINUTES_PER_HOUR));
-        lHours       = Math.max(0, lHours - (Math.floor(lDays) * HOURS_PER_DAY));
-
-        return {
-            "days"         : Math.floor(lDays),
-            "hours"        : Math.floor(lHours),
-            "minutes"      : Math.floor(lMinutes),
-            "seconds"      : Math.floor(lSeconds),
-            "milliseconds" : lMilliSeconds
-        };  
-    }   
-
-    function formatTimeBlob (pInt) {
-        if (pInt < 10) {
-            return "0" + pInt;
-        }   
-        return pInt.toString();
-    }   
-        
-    return {
-        formatTime : function (pMilliSeconds, pShowMillis) {
-            var lTimeStruct = millisToTimeStruct(pMilliSeconds);
-            if (!pShowMillis) { pShowMillis = false; }
-            var lRetval =  
-                   (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
-                   formatTimeBlob (lTimeStruct.minutes) + ":" +
-                   formatTimeBlob (lTimeStruct.seconds) +
-                   (pShowMillis ? "." + lTimeStruct.milliseconds: "");
-            return lRetval;
-        }   
-    };  
-}();
-
 var paramslikker = function(){
     function _getParams(pSearchString) {
         var lRetval = {};
@@ -718,9 +976,6 @@ var ctrl = function () {
     var D_KEY = 68;
     var E_KEY = 69;
     var H_KEY = 72;
-    var J_KEY = 74;
-    var K_KEY = 75;
-    var L_KEY = 76;
     var Q_KEY = 81;
     var S_KEY = 83;
     var T_KEY = 84;
@@ -754,7 +1009,6 @@ var ctrl = function () {
     var CH_INCREASE     = '\u25B3'; // or '\u23F6' which is not available in std font
     var CH_DECREASE     = '\u25BD'; // or '\u23F7' which is not available in std font
 
-
     var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
     var TOAST_FADE_TIME         = 2200;  // milliseconds
@@ -774,7 +1028,7 @@ var ctrl = function () {
     function playString(pString) {
         rWordsPlayed = 0;
         words.init(pString, 0);
-        window.__avgSpeed.innerHTML = words.getAverageSpeed().toFixed(1);
+        window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
         updateTimeToGo();
         rStopwatch.start();
         play();
@@ -798,8 +1052,8 @@ var ctrl = function () {
                 window.__output.className = "reload";
                 rWordTimer = window.setTimeout(outputNextWord, 1000);
             } else {
-                window.__output.innerHTML = "";
-                window.__output.className = "smile";
+                window.__output.textContent = "";
+                window.__output.className   = "smile";
                 pause();
             }
         }
@@ -807,7 +1061,7 @@ var ctrl = function () {
 
     function displayWord(pWord, pAddsToPlayedCount){
         if (undefined !== pWord) {
-            window.__output.innerHTML = pWord;
+            window.__output.textContent = pWord;
             window.__percentage.setAttribute("style",
                             "width: " + words.getPercentage() + "%;");
             if (rShowStatus){
@@ -827,17 +1081,17 @@ var ctrl = function () {
         var lTimeToGo    = words.getEstimatedTimeToGo(); 
         var lTimeTotal   = lTimeElapsed + lTimeToGo;
 
-        window.__documentTitle.innerHTML = rDocumentTitle;
-        window.__selectedSpeed.innerHTML = words.getSpeed();
-        window.__actualSpeed.innerHTML   = lActualSpeed.toFixed(0);
-        window.__position.innerHTML      =  words.getPosition();
-        window.__positionInPercent.innerHTML = words.getPercentage().toFixed(1);
-        window.__wordsPlayed.innerHTML   =  rWordsPlayed;
-        window.__wordsTotal.innerHTML    = words.getLength();
+        window.__documentTitle.textContent = rDocumentTitle;
+        window.__selectedSpeed.textContent = words.getSpeed();
+        window.__actualSpeed.textContent   = lActualSpeed.toFixed(0);
+        window.__position.textContent      =  words.getPosition();
+        window.__positionInPercent.textContent = words.getPercentage().toFixed(1);
+        window.__wordsPlayed.textContent   =  rWordsPlayed;
+        window.__wordsTotal.textContent    = words.getLength();
 
-        window.__timeElapsed.innerHTML   = timefmt.formatTime(lTimeElapsed);
-        window.__timeToGo.innerHTML      = timefmt.formatTime(lTimeToGo);
-        window.__timeTotal.innerHTML     = timefmt.formatTime(lTimeTotal);
+        window.__timeElapsed.textContent   = fmt.formatTime(lTimeElapsed);
+        window.__timeToGo.textContent      = fmt.formatTime(lTimeToGo);
+        window.__timeTotal.textContent     = fmt.formatTime(lTimeTotal);
     }
 
     function toggleStatus(){
@@ -883,7 +1137,7 @@ var ctrl = function () {
         }
         window.__toast.style.display = "block";
         window.__toast.className = "";
-        window.__toast.innerHTML = pString;
+        window.__toast.textContent = pString;
         rToastTimer = window.setTimeout(function(){
                     window.__toast.className = "fade-away";
                 },TOAST_FADE_TIME);
@@ -914,173 +1168,55 @@ var ctrl = function () {
     }
 
     function updateTimeToGo() {
-        toast(CH_TIMERCLOCK + " -" + timefmt.formatTime(words.getEstimatedTimeToGo()));
+        toast(CH_TIMERCLOCK + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
     function setTheme(pThemeNumber){
-        var lThemes = [
-            {
-                name: "High contrast - dyslexic", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(255, 255, 0, 1)",
-                accentColor: "rgba(255, 255, 0, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
-                name: "Sepia", 
-                backgroundColor: "rgba(251, 240, 217, 1)",
-                color: "rgba(95, 75, 50, 1)",
-                accentColor: "rgba(95, 75, 50, 0.5)",
-                font: "normal normal 100 48pt Roboto, sans-serif"
-            },
-            {
-                name: "Day", 
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(0, 0, 0, 1)",
-                accentColor: "rgba(0, 0, 0, 0.5)",
-                font: "normal normal 100 48pt Roboto, sans-serif"
-            },
-            {
-                name: "Night", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(255, 255, 255, 1)",
-                accentColor: "rgba(255, 255, 255, 0.5)",
-                font: "normal normal 100 48pt Roboto, sans-serif"
-            },
-            {
-                name: "Low contrast", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(60, 60, 60, 1)",
-                accentColor: "rgba(60, 60, 60, 0.5)",
-                font: "normal normal 100 48pt Roboto, sans-serif"
-            },
-            {
-                name: "High contrast", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(255, 255, 0, 1)",
-                accentColor: "rgba(255, 255, 0, 0.5)",
-                font: "normal normal 400 48pt Roboto, sans-serif"
-            },
-            {
-                name: "Sepia - dyslexic", 
-                backgroundColor: "rgba(251, 240, 217, 1)",
-                color: "rgba(95, 75, 50, 1)",
-                accentColor: "rgba(95, 75, 50, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
-                name: "Day - dyslexic", 
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(0, 0, 0, 1)",
-                accentColor: "rgba(0, 0, 0, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
-                name: "Night - dyslexic", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(255, 255, 255, 1)",
-                accentColor: "rgba(255, 255, 255, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
-                name: "Low contrast - dyslexic", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(60, 60, 60, 1)",
-                accentColor: "rgba(60, 60, 60, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
-                name: "Zany", 
-                backgroundColor: "rgba(255, 0, 255, 1)",
-                color: "rgba(0, 255, 0, 1)",
-                accentColor: "rgba(255, 255, 0, 1)",
-                font: "normal normal 400 48pt Comic Sans MS, Verdana"
-            },
-            {
-                name: "Low contrast - normal font", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(60, 60, 60, 1)",
-                accentColor: "rgba(60, 60, 60, 0.5)",
-                font: "normal normal 400 48pt Roboto, sans-serif"
-            },
-            {
-                name: "Sepia - normal font", 
-                backgroundColor: "rgba(251, 240, 217, 1)",
-                color: "rgba(95, 75, 50, 1)",
-                accentColor: "rgba(95, 75, 50, 0.5)",
-                font: "normal normal 300 48pt Roboto, sans-serif"
-            },
-            {
-                name: "220",
-                backgroundColor: "rgba(255, 180, 0, 1)",
-                color: "rgba(0, 45, 95, 1)",
-                accentColor: "rgba(0, 45, 95, 0.5)",
-                font: "normal normal 300 48pt Roboto, sans-serif"
-            },
-            {
-                name: "057",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(0, 43, 84, 1)",
-                accentColor: "rgba(255, 50, 0, 1)",
-                font: "normal normal 300 48pt Roboto, sans-serif"
-            },
-            {
-                name: "074",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(24, 164, 229, 1)",
-                accentColor: "rgba(227, 114, 34, 1)",
-                font: "normal normal 100 48pt Roboto, sans-serif"
-            },
-            {
-                name: "HV",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(130, 191, 58, 1)",
-                accentColor: "rgba(2, 119, 195, 1)",
-                font: "normal normal 400 48pt Roboto, sans-serif"
-            },
-            {
-                name: "DHJ",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(222, 37, 51, 1)",
-                accentColor: "rgba(222, 37, 51, 1)",
-                font: 'normal normal 400 48pt "Helvetica Neue",Arial,sans-serif'
-            },
-            {
-                name: "liberal",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(7, 27, 115, 1)",
-                accentColor: "rgba(253, 122, 0, 1)",
-                font: "normal normal 400 48pt Roboto, sans-serif"
-            },
-            {
-                name: "progressive",
-                backgroundColor: "rgba(255, 255, 255, 1)",
-                color: "rgba(218, 23, 46, 1)",
-                accentColor: "rgba(134, 188, 0, 1)",
-                font: "normal normal 300 48pt Roboto, sans-serif"
-            }
-        ];
         
-        if ( typeof pThemeNumber === 'string'){
-            pThemeNumber = parseInt(pThemeNumber);
-        }
-        if ((  typeof pThemeNumber !== 'number')
-            ||(isNaN (pThemeNumber))
-            ||(pThemeNumber < 0)
-            ||(pThemeNumber >= lThemes.length)){
-            pThemeNumber = 1;
-        }
-        window.document.body.style.backgroundColor = lThemes[pThemeNumber].backgroundColor;
-        window.document.body.style.color = lThemes[pThemeNumber].color;
-        window.document.body.style.font  = lThemes[pThemeNumber].font;
-        window.__output.style.borderBottomColor = lThemes[pThemeNumber].accentColor;
+        /* 
+         * The perfectly sensible way to do this is to 
+         * use the document.styleSheets collection and switch 
+         * the disabled property to false for the selected
+         * theme, and switch it off for the others.
+         *
+         * WebKut, however, only sees the first stylesheet
+         * with a title. Hence this even-more-ugly-than-usual 
+         * piece of code...
+         */
 
-        toast(lThemes[pThemeNumber].name);
+        var lStyleSheets = document.querySelectorAll("style");
+        var lStyleMetaTag = document.querySelectorAll("meta[http-equiv=Default-Style]")[0];
+        var lStyleSheetsLength = lStyleSheets.length;
 
-        if (localStorageOK()){
-            localStorage.setItem(LS_KEY_THEME, pThemeNumber);
+        if ((lStyleSheetsLength > 1) && lStyleMetaTag) {
+            pThemeNumber = Math.min( lStyleSheetsLength - 1,
+                                     Math.max(1, fmt.sanitizeNumber(pThemeNumber, 1))
+                                   );
+            
+            /*
+             * Dynamically setting the meta tag then doesn't work in 
+             * Gecko, hence some funky feature detection
+             * (which only works when there are no external stylesheets
+             * - which is good enough (tm) for now) and the straighforward
+             * for loop
+             */
+            if (document.styleSheets.length === lStyleSheetsLength) {
+                for (var i = 1; i < lStyleSheetsLength; i++){
+                    if (i === pThemeNumber) {
+                        document.styleSheets[i].disabled = false;
+                    } else {
+                        document.styleSheets[i].disabled = true;
+                    }
+                }
+            } else {
+                lStyleMetaTag.content = lStyleSheets[pThemeNumber].title;
+            }
+
+            toast(lStyleSheets[pThemeNumber].title);
+            if (localStorageOK()){
+                localStorage.setItem(LS_KEY_THEME, pThemeNumber);
+            }
         }
-
     }
 
     function localStorageOK(){
@@ -1245,7 +1381,6 @@ var ctrl = function () {
             }
             toast("position saved");
         }
-        if (ZERO_KEY  === pEvent.keyCode) { setTheme(0); }
         if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
         if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
         if (THREE_KEY === pEvent.keyCode) { setTheme(3); }
@@ -1255,9 +1390,10 @@ var ctrl = function () {
         if (SEVEN_KEY === pEvent.keyCode) { setTheme(7); }
         if (EIGHT_KEY === pEvent.keyCode) { setTheme(8); }
         if (NINE_KEY  === pEvent.keyCode) { setTheme(9); }
+        if (ZERO_KEY  === pEvent.keyCode) { setTheme(10); }
         if (   SECTION_KEY_FF === pEvent.keyCode 
             || SECTION_KEY    === pEvent.keyCode) {
-            setTheme(10);
+            setTheme(11);
         }
         window.__droparea.value = "";
     }
@@ -1324,14 +1460,6 @@ var ctrl = function () {
         }
     }
 
-
-    /**
-     * returns true if pString equals "1", "true", "y" or "yes
-     */
-    function isBooleanesqueTrue (pString){
-        return (["1", "true", "y", "yes"].indexOf(pString)> -1);
-    }
-
     if (rParams.speed) {
         words.setSpeed(rParams.speed);
     }
@@ -1348,12 +1476,12 @@ var ctrl = function () {
         words.setPosition(rParams.pos);
         displayWord(words.getCurrentWord());
     }
-    if (rParams.loop && isBooleanesqueTrue(rParams.loop)) {
+    if (rParams.loop && fmt.sanitizeBooleanesque(rParams.loop)) {
         rLoop = true;
     } else {
         rLoop = false;
     }
-    if (rParams.play && isBooleanesqueTrue(rParams.play)) {
+    if (rParams.play && fmt.sanitizeBooleanesque(rParams.play)) {
         window.setTimeout(play, INITIAL_DISPLAY_DELAY);
     }
 }();
