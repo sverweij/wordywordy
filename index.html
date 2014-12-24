@@ -20,9 +20,9 @@
     -->
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="TBD">
-        <meta name="keywords" content="TBD">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow. Runs within your browser. Remembers where you left off between sessions. On the fly adjustable speed. Copious navigation options. GPLv3 open source licensed.">
+        <meta name="keywords" content="rsvp, rapid serial visual presentation, wordywordy, one word at a time">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon.ico">
         <link rel="icon" sizes="228x228" href="./favicon-228.png">
         <link rel="icon" sizes="195x195" href="./favicon-195.png">
@@ -140,16 +140,23 @@
                 85% {
                     padding: 0 0 0.2em 25%;
                     border-radius: 0 0 0 1em;
+                    -webkit-filter: blur(0px);
                 }
-                100% {}
+                100% {
+                    -webkit-filter: blur(0.2em);
+                }
             }
             @keyframes reload {
                 0% {}
                 85% {
                     padding: 0 0 0.2em 25%;
                     border-radius: 0 0 0 1em;
+                    filter: blur(0px);
+                    color: red;
                 }
-                100% {}
+                100% {
+                    filter: blur(0px);
+                }
             }
             .reload {
                 -webkit-animation-name: reload;
@@ -913,11 +920,11 @@ var ctrl = function () {
     function setTheme(pThemeNumber){
         var lThemes = [
             {
-                name: "Night - low contrast", 
+                name: "High contrast - dyslexic", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(60, 60, 60, 1)",
-                accentColor: "rgba(60, 60, 60, 0.5)",
-                font: "normal normal 400 48pt Roboto, sans-serif"
+                color: "rgba(255, 255, 0, 1)",
+                accentColor: "rgba(255, 255, 0, 0.5)",
+                font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
                 name: "Sepia", 
@@ -941,14 +948,14 @@ var ctrl = function () {
                 font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
-                name: "Night - low contrast", 
+                name: "Low contrast", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(60, 60, 60, 1)",
                 accentColor: "rgba(60, 60, 60, 0.5)",
                 font: "normal normal 100 48pt Roboto, sans-serif"
             },
             {
-                name: "Night - high contrast", 
+                name: "High contrast", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(255, 255, 0, 1)",
                 accentColor: "rgba(255, 255, 0, 0.5)",
@@ -976,7 +983,7 @@ var ctrl = function () {
                 font: "normal normal 400 48pt dyslexic, sans-serif"
             },
             {
-                name: "Night - low contrast - dyslexic", 
+                name: "Low contrast - dyslexic", 
                 backgroundColor: "rgba(0, 0, 0, 1)",
                 color: "rgba(60, 60, 60, 1)",
                 accentColor: "rgba(60, 60, 60, 0.5)",
@@ -990,25 +997,25 @@ var ctrl = function () {
                 font: "normal normal 400 48pt Comic Sans MS, Verdana"
             },
             {
-                name: "Sepia - roboto", 
+                name: "Low contrast - normal font", 
+                backgroundColor: "rgba(0, 0, 0, 1)",
+                color: "rgba(60, 60, 60, 1)",
+                accentColor: "rgba(60, 60, 60, 0.5)",
+                font: "normal normal 400 48pt Roboto, sans-serif"
+            },
+            {
+                name: "Sepia - normal font", 
                 backgroundColor: "rgba(251, 240, 217, 1)",
                 color: "rgba(95, 75, 50, 1)",
                 accentColor: "rgba(95, 75, 50, 0.5)",
                 font: "normal normal 300 48pt Roboto, sans-serif"
             },
             {
-                name: "Night - high contrast - dyslexic", 
-                backgroundColor: "rgba(0, 0, 0, 1)",
-                color: "rgba(255, 255, 0, 1)",
-                accentColor: "rgba(255, 255, 0, 0.5)",
-                font: "normal normal 400 48pt dyslexic, sans-serif"
-            },
-            {
                 name: "220",
                 backgroundColor: "rgba(255, 180, 0, 1)",
                 color: "rgba(0, 45, 95, 1)",
                 accentColor: "rgba(0, 45, 95, 0.5)",
-                fontFamily: "Roboto-normal, sans-serif"
+                font: "normal normal 300 48pt Roboto, sans-serif"
             },
             {
                 name: "057",
@@ -1183,6 +1190,7 @@ var ctrl = function () {
             }
             words.setPosition(0);
             updateNavigation(true);
+            toast("Forgot everything");
         }
         if (   END_KEY === pEvent.keyCode ) {
             words.setPosition(words.getLength());
@@ -1202,7 +1210,6 @@ var ctrl = function () {
         }
         if (   LEFT_KEY === pEvent.keyCode
             || BACKSPACE_KEY === pEvent.keyCode
-            || H_KEY === pEvent.keyCode
             || A_KEY === pEvent.keyCode ){
             words.decPosition(1);
             updateNavigation(true);
@@ -1213,7 +1220,6 @@ var ctrl = function () {
             updateNavigation(true);
         }
         if (   RIGHT_KEY === pEvent.keyCode
-            || L_KEY === pEvent.keyCode
             || D_KEY === pEvent.keyCode ) {
             words.incPosition(1);
             updateNavigation(true);
@@ -1224,13 +1230,11 @@ var ctrl = function () {
             updateNavigation(true);
         }
         if (    DOWN_KEY === pEvent.keyCode
-             || J_KEY === pEvent.keyCode
              || S_KEY === pEvent.keyCode) {
             words.decSpeed(5);
             updateSpeed(words.getSpeed());
         }
         if (    UP_KEY === pEvent.keyCode
-             || K_KEY == pEvent.keyCode
              || W_KEY == pEvent.keyCode ) {
             words.incSpeed(5);
             updateSpeed(words.getSpeed());
