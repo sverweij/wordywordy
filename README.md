@@ -9,7 +9,7 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
   
 **Bigger**. 
   You can show words stupid big when only displaying one of them at the time. 
-  This might be useful for visualy-impaired people.
+  This might be useful when you have low vision.
 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing 
@@ -17,7 +17,7 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
   
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. I don't know. I have included a font designed for 
-  people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
+  people with dyslexia, just in case. They're under keys `6`, `7`, `8`, `9` and `0`.
 
 TODO: mention that you won't need to hunt for the start of a sentence.
 TODO: add links to claims & research
@@ -36,10 +36,9 @@ TODO: add links to claims & research
   - High contrast (yellow on black, fat letters)
   - Night low contrast
   - Regular and dyslexic friendly fonts.
-- Supports Chinese/ Japanes/ Korean (there is a reason 字 means translates to _character_, but also to _word_)
+- Supports Chinese/ Japanes/ Korean. There is a reason 字 translates to _character_, but also to _word_.
 - Heuristics for correcting common typographic errors.
-- Reading stats the current text.
-
+- Reading stats on the current text.
 - It smiles. (Go on, drag something on it. You'll see).
 
 ## Keyboard and mouse bindings
@@ -63,7 +62,7 @@ jump to position           | not implemented yet              | click in the pro
 clear                      | `c`                              | -
 
 - @scrolling: effect depends a bit on your mouse/ track pad. 
-- @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones.
+- @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-0` the  dyslexic ones.
 - @save current position: pausing or navigating automatically save the position. Heck, it even magically saves _speed_ and _theme_ along with the _position_.
   Hit `b` when you don't trust that. Or when you don't pause or navigate.
 - @clear: makes WordyWordy forget  all stuff it usually remembers (buffer, title, last saved position, speed, theme).
