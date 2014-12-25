@@ -115,17 +115,15 @@ Q: Did you hear of ... ?
 > By all means, use them!
 
 Q: Why did you implement this?
-> A: I had a (self written) thing like this lying around for a long
-> time. I used it for some time but it had some serious usability
-> flaws. Some of these were due to technology restrictions (html on
-> windows CE was not funny), some of them due to my lack of subject
-> matter knowledge (constant speed, no navigation options, no
-> on the fly changes). The idea to make something better has been
-> collecting dust in my mind since.
+> A: I had a (self written) thing like this lying around when 
+> hunting sabre tooth tigers was all the rage and dinosaurs still
+> roamed the earth. I used it for some time but it was 
+> hampered. By technologic restrictions (getting html to work in
+> IE on windows CE was challinging). And by my lack of subject
+> matter knowledge. 
 > 
 > During 2014 christmas holiday I needed a vehicle to test some
-> technical stuff for an other project (webapp, local storage, file
-> handling, dicking around with fonts) and this fit the bill.
+> technical stuff for an other project. This fit the bill.
 
 Q: Do you have a road map? 
 > A: Kind of. Expect small things like
@@ -134,7 +132,6 @@ Q: Do you have a road map?
 >  - multiple buffers
 >  - icon
 >  - an old-fashioned file open dialog
->  - smile when done reading
 >
 > I'd also like to clean up the code ~~a bit~~
 
