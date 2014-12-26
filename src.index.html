@@ -579,6 +579,10 @@
                         <span id="__timeTotal"></span>
                     </td>
                 </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>${version}</td>
+                </tr>
             </table>
             </div>
         </span>
@@ -979,6 +983,7 @@ var ctrl = function () {
     var Q_KEY = 81;
     var S_KEY = 83;
     var T_KEY = 84;
+    var V_KEY = 86;
     var W_KEY = 87;
     var PAGEUP_KEY   = 33;
     var PAGEDOWN_KEY = 34;
@@ -1380,6 +1385,9 @@ var ctrl = function () {
                 localStorage.setItem(LS_KEY_POSITION, words.getPosition()); 
             }
             toast("position saved");
+        }
+        if ( V_KEY === pEvent.keyCode ) {
+            toast(rAppName + " ${version}");
         }
         if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
         if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
