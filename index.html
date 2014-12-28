@@ -279,6 +279,17 @@
                 animation-timing-function: ease-in;
                 animation-fill-mode : forwards;
             }
+            /**
+             * 1. Correct text resizing oddly in IE 6/7 when body
+             *    `font-size` is set using `em` units.
+             * 2. Prevent iOS text size adjust after orientation
+             *    change, without disabling user zoom.
+             */
+            html {
+                font-size: 100%; /* 1 */
+                -ms-text-size-adjust: 100%; /* 2 */
+                -webkit-text-size-adjust: 100%; /* 2 */
+            }
         </style>
         <style title="Sepia">
             body{
@@ -318,6 +329,9 @@
             }
             #__output {
                 border-bottom-color: rgba(60, 60, 60, 0.5);
+            }
+            #__status {
+                color: white;
             }
         </style>
         <style title="High contrast">
