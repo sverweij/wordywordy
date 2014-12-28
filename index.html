@@ -984,7 +984,6 @@ var ctrl = function () {
     var UP_KEY       = 38;
     var RIGHT_KEY    = 39;
     var DOWN_KEY     = 40;
-    var BACKSPACE_KEY = 8;
     var SECTION_KEY_FF = 0;
     var SECTION_KEY  = 192; // on FF this is the ` (backquote)
                            // in safari both the § and ` key listen to 192
@@ -1364,7 +1363,6 @@ var ctrl = function () {
             togglePlay();
         }
         if (   LEFT_KEY === pEvent.keyCode
-            || BACKSPACE_KEY === pEvent.keyCode
             || A_KEY === pEvent.keyCode ){
             words.decPosition(1);
             updateNavigation(true);
