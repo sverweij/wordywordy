@@ -11,7 +11,6 @@
 
     - Content retrieval methods
        - url
-       - file open
        - rss (?)
        - bookmarklet
     - Support other formats
@@ -279,16 +278,33 @@
                 animation-timing-function: ease-in;
                 animation-fill-mode : forwards;
             }
-            /**
-             * 1. Correct text resizing oddly in IE 6/7 when body
-             *    `font-size` is set using `em` units.
-             * 2. Prevent iOS text size adjust after orientation
-             *    change, without disabling user zoom.
-             */
-            html {
-                font-size: 100%; /* 1 */
-                -ms-text-size-adjust: 100%; /* 2 */
-                -webkit-text-size-adjust: 100%; /* 2 */
+            #__controls {
+              position: fixed;
+              text-align: center;
+              width: 99%;
+              bottom: .5em;
+              z-index: 481;
+            }
+            #__controls nav {
+              color: white;
+              background-color: black;
+              font-family: Webdings;
+              font-size: 60%;
+              padding: 0.25em 0.25em 0.25em 0.25em;
+              opacity: 0.1;
+              box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
+              display: inline-block;
+            }
+            #__controls button {
+              color: inherit;
+              background-color: inherit;
+              font-family: inherit;
+              font-size: inherit;
+              box-shadow: none;
+              border: none;
+            }
+            #__controls nav:hover {
+              opacity: 0.8;
             }
         </style>
         <style title="Sepia">
@@ -329,9 +345,6 @@
             }
             #__output {
                 border-bottom-color: rgba(60, 60, 60, 0.5);
-            }
-            #__status {
-                color: white;
             }
         </style>
         <style title="High contrast">
@@ -595,13 +608,25 @@
                 </tr>
                 <tr>
                     <td>Version</td>
-                    <td>0.1.0</td>
+                    <td>0.1.1</td>
                 </tr>
             </table>
             </div>
         </span>
         <span id="__toast"></span>
         <div id="__percentage"></div>
+        <div id="__controls">
+            <nav id="__nav">
+                <button id="__btn_open" title="open a text file to read">&#xF0CC;</button>
+                &nbsp;
+                <button id="__btn_home" title="go to first frame">&#xF039;</button>
+                <button id="__btn_dec" title="one step back">&#xF037;</button>
+                <button id="__btn_playpause" title="play/ pause">&#xF034;</button>
+                <button id="__btn_inc" title="one step forward">&#xF038;</button>
+                <button id="__btn_end" title="go to last frame">&#xF03A;</button>
+            </nav>
+            <input id="__input_file" type="file" accept="text/plain" style="display:none" ></input>
+        </div>
     </body>
     <script>
 var fmt = function (){ 
@@ -857,8 +882,6 @@ var words = function () {
         for (var i = 0; i < rLength; i++){
             lTotalDisplayTime += _determineDisplayTime(rAry[i]);
         }
-        // console.log("total projected time: " + lTotalDisplayTime);
-        // console.log("ms per word: " + lTotalDisplayTime/rLength)
         return rLength/(lTotalDisplayTime/MILLISECONDS_PER_MINUTE);
     }
 
@@ -927,45 +950,49 @@ var paramslikker = function(){
     };
 }();
 
-function Stopwatch () {
-    this.reset = function () {
-        this.state = "paused"; // running, paused
-        this.startTime = Date.now();
-        this.pauseStartTime = this.startTime;
-        this.cumulativePauses = 0;
+var stopwatch = function(){
+    function Stopwatch () {
+        this.reset = function () {
+            this.state = "paused"; // running, paused
+            this.startTime = Date.now();
+            this.pauseStartTime = this.startTime;
+            this.cumulativePauses = 0;
+        };
+
+        // constructor hack
+        this.reset();
+    }
+
+    Stopwatch.prototype.start = function () {
+        this.state             = "running";
+        this.startTime         = Date.now();
+        this.pauseStartTime    = this.startTime;
+        this.cumulativePauses  = 0;
     };
 
-    // constructor hack
-    this.reset();
-}
+    Stopwatch.prototype.resume = function () {
+        this.state             = "running";
+        var lPause             = (Date.now() - this.pauseStartTime);
+        this.cumulativePauses += lPause;
+    };
 
-Stopwatch.prototype.start = function () {
-    this.state             = "running";
-    this.startTime         = Date.now();
-    this.pauseStartTime    = this.startTime;
-    this.cumulativePauses  = 0;
-};
+    Stopwatch.prototype.pause = function () {
+        if (this.state !== "paused"){
+            this.state             = "paused";
+            this.pauseStartTime    = Date.now();
+        }
+    };
 
-Stopwatch.prototype.resume = function () {
-    this.state             = "running";
-    var lPause             = (Date.now() - this.pauseStartTime);
-    this.cumulativePauses += lPause;
-};
+    Stopwatch.prototype.getTimeElapsed = function () {
+        if (this.state === "running"){
+            return Date.now() - this.startTime - this.cumulativePauses;
+        } else {
+            return this.pauseStartTime - this.startTime - this.cumulativePauses;
+        }
+    };
 
-Stopwatch.prototype.pause = function () {
-    if (this.state !== "paused"){
-        this.state             = "paused";
-        this.pauseStartTime    = Date.now();
-    }
-};
-
-Stopwatch.prototype.getTimeElapsed = function () {
-    if (this.state === "running"){
-        return Date.now() - this.startTime - this.cumulativePauses;
-    } else {
-        return this.pauseStartTime - this.startTime - this.cumulativePauses;
-    }
-};
+    return {Stopwatch: Stopwatch};
+}();
 
 var ctrl = function () {
     var rPlaying     = false;
@@ -993,6 +1020,7 @@ var ctrl = function () {
     var D_KEY = 68;
     var E_KEY = 69;
     var H_KEY = 72;
+    var O_KEY = 79;
     var Q_KEY = 81;
     var S_KEY = 83;
     var T_KEY = 84;
@@ -1017,15 +1045,17 @@ var ctrl = function () {
     var EIGHT_KEY    = 56;
     var NINE_KEY     = 57;
 
-    var CH_STOPWATCH    = '\u23F1';
-    var CH_TIMERCLOCK   = '\u25F7'; // or '\u23F2' which is not availble in std font
-    var CH_PLAY         = '\u25B7'; // or \u23F5 not available in std font
-    var CH_PAUSE        = '\u25A1'; 
-    var CH_STOP         = '\u25A1';// '\u23F8' not available in std font
-    var CH_FASTFORWARD  = '\u23E9';
-    var CH_FASTBACKWARD = '\u23EA';
-    var CH_INCREASE     = '\u25B3'; // or '\u23F6' which is not available in std font
-    var CH_DECREASE     = '\u25BD'; // or '\u23F7' which is not available in std font
+    var CH_STOPWATCH      = '\u23F1';
+    var CH_TIMERCLOCK     = '\u25F7'; // or '\u23F2' which is not availble in std font
+    var CH_PLAY           = '\u25B7'; // or \u23F5 not available in std font
+    var CH_WEBDINGS_PLAY  = '\uF034'; // only in webdings font
+    var CH_WEBDINGS_PAUSE = '\uF03B'; // only in webdings font
+    var CH_PAUSE          = '\u25A1'; 
+    var CH_STOP           = '\u25A1';// '\u23F8' not available in std font
+    var CH_FASTFORWARD    = '\u23E9';
+    var CH_FASTBACKWARD   = '\u23EA';
+    var CH_INCREASE       = '\u25B3'; // or '\u23F6' which is not available in std font
+    var CH_DECREASE       = '\u25BD'; // or '\u23F7' which is not available in std font
 
     var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
@@ -1038,7 +1068,7 @@ var ctrl = function () {
     var LS_KEY_SPEED     = 'speed';
     var LS_KEY_THEME     = 'theme';
 
-    var rStopwatch = new Stopwatch();
+    var rStopwatch = new stopwatch.Stopwatch();
     var rReader    = new FileReader();
     var rParams    = paramslikker.getParams(window.location.search);
     
@@ -1126,6 +1156,7 @@ var ctrl = function () {
         rStopwatch.resume();
         rPlaying = true;
         window.__output.className = "playing";
+        window.__btn_playpause.textContent = CH_WEBDINGS_PAUSE;
         document.title = CH_PLAY + " " + rDocumentTitle + " - " + rAppName;
         outputNextWord();
     }
@@ -1135,17 +1166,9 @@ var ctrl = function () {
         rPlaying = false;
         // __output.className = "breathing";
         document.title = rDocumentTitle + " - " + rAppName;
+        window.__btn_playpause.textContent = CH_WEBDINGS_PLAY;
         if (localStorageOK()) {
             localStorage.setItem("position", words.getPosition());
-        }
-    }
-
-    function togglePlay(){
-        rPlaying = !rPlaying;
-        if(rPlaying) {
-            play();
-        } else {
-            pause();
         }
     }
 
@@ -1241,6 +1264,48 @@ var ctrl = function () {
         return (typeof localStorage !== 'undefined');
     }
 
+    function openFile(){
+        updateNavigation(true);
+        __input_file.click();
+    }
+    function setPos(pPosition){
+        words.setPosition(pPosition);
+        updateNavigation(true);
+    }
+    function home(){
+        setPos(0);
+    }
+    function dec(){
+        words.decPosition(1);
+        updateNavigation(true);
+    }
+    function playpause(){
+        rPlaying = !rPlaying;
+        if(rPlaying) {
+            play();
+        } else {
+            pause();
+        }
+    }
+    function inc(){
+        words.incPosition(1);
+        updateNavigation(true);
+    }
+    function end(){
+        setPos(words.getLength());
+    }
+
+    function speedUp(pAmount){
+        pAmount = pAmount ? pAmount: 5;
+        words.incSpeed(pAmount);
+        updateSpeed(words.getSpeed());
+    }
+    function slowDown(pAmount){
+        pAmount = pAmount ? pAmount: 5;
+        words.decSpeed(pAmount);
+        updateSpeed(words.getSpeed());
+    }
+
     /* event handling */
     function paste(pEvent){
         if (pEvent && pEvent.clipboardData) {
@@ -1307,21 +1372,18 @@ var ctrl = function () {
     function click (pEvent) {
         if (pEvent.clientY > (window.innerHeight - 25)){
             var lSelectedPosition = pEvent.clientX/__droparea.scrollWidth;
-            words.setPosition(Math.floor(lSelectedPosition * words.getLength()));
-            updateNavigation(true);
+            setPos(Math.floor(lSelectedPosition * words.getLength()));
         } else {
             if (pEvent.clientX > ((3/4)*window.innerWidth)){
-                togglePlay();
+                playpause();
             } else if (pEvent.clientX < ((1/4)*window.innerWidth)){
                 words.gotoStartOfSentence();
                 updateNavigation(false);
             } else {
                 if (pEvent.clientY < ((1/4)*window.innerHeight)){
-                    words.incSpeed(5);
-                    updateSpeed(words.getSpeed());
+                    speedUp();
                 } else if (pEvent.clientY > ((3/4)*window.innerHeight)){
-                    words.decSpeed(5);
-                    updateSpeed(words.getSpeed());
+                    slowDown();
                 }
             }
         }
@@ -1330,8 +1392,7 @@ var ctrl = function () {
     function keydown (pEvent) {
         // console.log(pEvent.keyCode);
         if (   HOME_KEY === pEvent.keyCode ) {
-            words.setPosition(0);
-            updateNavigation(true);
+            home();
         }
         if (   C_KEY === pEvent.keyCode ) {
             playString("");
@@ -1342,13 +1403,11 @@ var ctrl = function () {
                 localStorage.removeItem(LS_KEY_SPEED);
                 localStorage.removeItem(LS_KEY_THEME);
             }
-            words.setPosition(0);
-            updateNavigation(true);
+            home();
             toast("Forgot everything");
         }
         if (   END_KEY === pEvent.keyCode ) {
-            words.setPosition(words.getLength());
-            updateNavigation(true);
+            end();
         }
         if (   DOT_KEY === pEvent.keyCode
             || COMMA_KEY === pEvent.keyCode
@@ -1360,12 +1419,11 @@ var ctrl = function () {
         }
         if(   SPACE_KEY === pEvent.keyCode
            || ENTER_KEY === pEvent.keyCode ) {
-            togglePlay();
+            playpause();
         }
         if (   LEFT_KEY === pEvent.keyCode
             || A_KEY === pEvent.keyCode ){
-            words.decPosition(1);
-            updateNavigation(true);
+            dec();
         }
         if (    PAGEDOWN_KEY === pEvent.keyCode
              || E_KEY === pEvent.keyCode) {
@@ -1374,8 +1432,7 @@ var ctrl = function () {
         }
         if (   RIGHT_KEY === pEvent.keyCode
             || D_KEY === pEvent.keyCode ) {
-            words.incPosition(1);
-            updateNavigation(true);
+            inc();
         }
         if (    PAGEUP_KEY === pEvent.keyCode
              || Q_KEY === pEvent.keyCode) {
@@ -1384,13 +1441,14 @@ var ctrl = function () {
         }
         if (    DOWN_KEY === pEvent.keyCode
              || S_KEY === pEvent.keyCode) {
-            words.decSpeed(5);
-            updateSpeed(words.getSpeed());
+            slowDown();
         }
         if (    UP_KEY === pEvent.keyCode
              || W_KEY == pEvent.keyCode ) {
-            words.incSpeed(5);
-            updateSpeed(words.getSpeed());
+            speedUp();
+        }
+        if ( O_KEY === pEvent.keyCode ) {
+            openFile();
         }
         if ( B_KEY === pEvent.keyCode ) {
             if (localStorageOK()) {
@@ -1399,7 +1457,7 @@ var ctrl = function () {
             toast("position saved");
         }
         if ( V_KEY === pEvent.keyCode ) {
-            toast(rAppName + " 0.1.0");
+            toast(rAppName + " 0.1.1");
         }
         if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
         if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
@@ -1422,16 +1480,16 @@ var ctrl = function () {
         pEvent.preventDefault();
         if (pEvent.deltaY) {
             if (pEvent.deltaY > 0){
-                words.incPosition(1);
+                inc();
             } else if(pEvent.deltaY < 0)  {
-                words.decPosition(1);
+                dec();
             }
         } else if (   pEvent.deltaX && pEvent.deltaX !== 0
                    && pEvent.deltaY === 0){
             if (pEvent.deltaX > 0){
-                words.decPosition(1); // not a typo
+                dec(); // not a typo
             } else if(pEvent.deltaX < 0)  {
-                words.incPosition(1); // not a typo
+                inc(); // not a typo
             }
         }
         updateNavigation(true);
@@ -1448,6 +1506,19 @@ var ctrl = function () {
 
     rReader.addEventListener("loadend", loadend);
 
+    function oink (pEvent){
+        if (pEvent.target.files.length > 0){
+            var lFile = pEvent.target.files[0];
+            if (lFile.type === "text/plain"){
+                rReader.readAsText(lFile);
+                setDocumentTitle(lFile.name);
+            } 
+        }
+    }
+
+    function mousemove(pEvent){
+    }
+
     window.__droparea.addEventListener("drag", drag, true);
     window.__droparea.addEventListener("dragenter", dragEnter, true);
     window.__droparea.addEventListener("dragleave", dragLeave, true);
@@ -1456,9 +1527,17 @@ var ctrl = function () {
     window.__droparea.addEventListener("dragend", dragEnd, true);
     window.__droparea.addEventListener("paste", paste, true);
     window.__droparea.addEventListener("click", click, true);
+    window.__input_file.addEventListener("change", oink, true);
+    window.__btn_open.addEventListener("click", openFile, true);
+    window.__btn_home.addEventListener("click", home, true);
+    window.__btn_dec.addEventListener("click", dec, true);
+    window.__btn_playpause.addEventListener("click", playpause, true);
+    window.__btn_inc.addEventListener("click", inc, true);
+    window.__btn_end.addEventListener("click", end, true);
     window.__droparea.addEventListener("drop", drop, true);
     window.document.body.addEventListener("keydown", keydown, true);
     window.document.body.addEventListener("wheel", wheel, true);
+    window.document.body.addEventListener("mousemove", mousemove, true);
 
 
     if (localStorageOK()) {
