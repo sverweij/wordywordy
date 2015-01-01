@@ -91,7 +91,9 @@ https://sverweij.github.io/wordywordy/index.html?speed=200&theme=6&pos=0&play=1&
 
 ## A word on speeds
 The speed you selected is the _target_ speed. It is a good indication of the actual speed. 
-However, the actual speed depends on the actual text.
+However, the actual speed depends on the characteristics of the selected text. E.g.
+- Your text contains many long words and short sentences: the actual speed will be _slower_ than the target speed.
+- Your text contains many short words and long sentences: the actual speed will be _faster_.
 
 ## Licenses and dependencies
 WordyWordy is free software [licensed under GPLv3](LICENSE). This
@@ -131,7 +133,7 @@ Q: Do you have a road map?
 >  - polished bookmarklet
 >  - multiple buffers
 >  - icon
->  - an old-fashioned file open dialog
+>  ~~~- an old-fashioned file open dialog~~~
 >
 > I'd also like to clean up the code ~~a bit~~
 
@@ -140,5 +142,5 @@ Q: Do you have a time line?
 > ([mscgen_js](https://sverweij.github.io/mscgen_js), work. Life).
 
 Q: Are you afraid you'll stay the only user of this?
-> A: No. On the other hand - having a README.md and a FAQ on github
+> A: No. On the other hand - having an FAQ on github
 > would be a bit awkward.
