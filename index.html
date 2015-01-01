@@ -28,8 +28,7 @@
         <link rel="icon" sizes="195x195" href="./favicon-195.png">
         <link rel="icon" sizes="152x152" href="./favicon-152.png">
         <link rel="icon" sizes="144x144" href="./favicon-144.png">
-        <link rel="icon" sizes="128x128" href="./favicon-128.png">
-        
+        <link rel="icon" sizes="128x128" href="./favicon-128.png"> 
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./iosfavicon-152.png">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./iosfavicon-144.png">
         <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./iosfavicon-120.png">
@@ -38,8 +37,72 @@
         <link rel="apple-touch-icon-precomposed" href="./iosfavicon-57.png">
         <link rel="shortcut icon" href="./favicon.ico">
 
+
         <title>WordyWordy</title>
         <style>
+            @font-face {
+                font-family: 'controls';
+                src:url('font/controls.eot?-i9on8r');
+                src:url('font/controls.eot?#iefix-i9on8r') format('embedded-opentype'),
+                    url('font/controls.woff?-i9on8r') format('woff'),
+                    url('font/controls.ttf?-i9on8r') format('truetype'),
+                    url('font/controls.svg?-i9on8r#controls') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+            [class^="icon-"], [class*=" icon-"] {
+                font-family: 'controls';
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            .icon-folder:before { content: "\e92f"; }
+            .icon-stopwatch:before { content: "\e952"; }
+            .icon-zoom-in:before { content: "\e987"; }
+            .icon-zoom-out:before { content: "\e988"; }
+            .icon-question:before { content: "\ea09"; }
+            .icon-plus:before { content: "\ea0a"; }
+            .icon-minus:before { content: "\ea0b"; }
+            .icon-info:before { content: "\ea0c"; }
+            .icon-cancel-circle:before { content: "\ea0d"; }
+            .icon-cross:before { content: "\ea0f"; }
+            .icon-play2:before { content: "\ea15"; }
+            .icon-pause:before { content: "\ea16"; }
+            .icon-stop:before { content: "\ea17"; }
+            .icon-previous:before { content: "\ea18"; }
+            .icon-next:before { content: "\ea19"; }
+            .icon-backward:before { content: "\ea1a"; }
+            .icon-forward2:before { content: "\ea1b"; }
+            .icon-play3:before { content: "\ea1c"; }
+            .icon-pause2:before { content: "\ea1d"; }
+            .icon-stop2:before { content: "\ea1e"; }
+            .icon-backward2:before { content: "\ea1f"; }
+            .icon-forward3:before { content: "\ea20"; }
+            .icon-first:before { content: "\ea21"; }
+            .icon-last:before { content: "\ea22"; }
+            .icon-previous2:before { content: "\ea23"; }
+            .icon-next2:before { content: "\ea24"; }
+            .icon-loop2:before { content: "\ea2e"; }
+            .icon-arrow-up-left:before { content: "\ea31"; }
+            .icon-arrow-up:before { content: "\ea32"; }
+            .icon-arrow-right:before { content: "\ea34"; }
+            .icon-arrow-down-right:before { content: "\ea35"; }
+            .icon-arrow-down:before { content: "\ea36"; }
+            .icon-arrow-left:before { content: "\ea38"; }
+            .icon-circle-up:before { content: "\ea41"; }
+            .icon-circle-right:before { content: "\ea42"; }
+            .icon-circle-down:before { content: "\ea43"; }
+            .icon-circle-left:before { content: "\ea44"; }
+            .icon-share:before { content: "\ea7d"; }
+            .icon-embed:before { content: "\ea7f"; }
+            .icon-terminal:before { content: "\ea81"; }
             @font-face {
                 font-family      : "Roboto";
                 font-weight      : 100;
@@ -288,10 +351,10 @@
             #__controls nav {
               color: white;
               background-color: black;
-              font-family: Webdings;
+              font-family: controls;
               font-size: 60%;
               padding: 0.25em 0.25em 0.25em 0.25em;
-              opacity: 0.1;
+              opacity: 0.6;
               box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
               display: inline-block;
             }
@@ -304,7 +367,7 @@
               border: none;
             }
             #__controls nav:hover {
-              opacity: 0.8;
+              opacity: 0.9;
             }
         </style>
         <style title="Sepia">
@@ -599,7 +662,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>&#x025F7; spent + left = total</td>
+                    <td><span class="icon-stopwatch"></span> spent + left = total</td>
                     <td>
                         <span id="__timeElapsed"></span> + 
                         <span id="__timeToGo"></span> = 
@@ -617,13 +680,15 @@
         <div id="__percentage"></div>
         <div id="__controls">
             <nav id="__nav">
-                <button id="__btn_open" title="open a text file to read">&#xF0CC;</button>
-                &nbsp;
-                <button id="__btn_home" title="go to first frame">&#xF039;</button>
-                <button id="__btn_dec" title="one step back">&#xF037;</button>
-                <button id="__btn_playpause" title="play/ pause">&#xF034;</button>
-                <button id="__btn_inc" title="one step forward">&#xF038;</button>
-                <button id="__btn_end" title="go to last frame">&#xF03A;</button>
+                <button id="__btn_open" class="icon-folder" title="open a text file to read"></button>&nbsp;
+                <button id="__btn_home" class="icon-first" title="go to start of text"/>
+                <button id="__btn_dec" class="icon-previous2" title="one word back"/>
+                <button id="__btn_playpause" class="icon-play3" title="play/ pause"/>
+                <button id="__btn_inc" class="icon-next2" title="one word forward"/>
+                <button id="__btn_end" class="icon-last" title="go to end of text"/>
+                <button id="__btn_slowdown" class="icon-circle-down" title="slow down"/>
+                <button id="__btn_speedup" class="icon-circle-up" title="speed up"/>
+                <button id="__btn_info" class="icon-info" title="toggle stats display"/>
             </nav>
             <input id="__input_file" type="file" accept="text/plain" style="display:none" ></input>
         </div>
@@ -1000,6 +1065,8 @@ var ctrl = function () {
 
     var rWordTimer;
     var rToastTimer;
+    var rControlsTimer;
+    var rHoveringOverControls = false;
     var rShowStatus    = false;
     var rLoop          = false;
     var rDocumentTitle = "";
@@ -1045,17 +1112,11 @@ var ctrl = function () {
     var EIGHT_KEY    = 56;
     var NINE_KEY     = 57;
 
-    var CH_STOPWATCH      = '\u23F1';
+    var CH_STOPWATCH      = '\uE952'; // unicode character '\u23F1'; also works - not available everywhere
     var CH_TIMERCLOCK     = '\u25F7'; // or '\u23F2' which is not availble in std font
-    var CH_PLAY           = '\u25B7'; // or \u23F5 not available in std font
-    var CH_WEBDINGS_PLAY  = '\uF034'; // only in webdings font
-    var CH_WEBDINGS_PAUSE = '\uF03B'; // only in webdings font
-    var CH_PAUSE          = '\u25A1'; 
-    var CH_STOP           = '\u25A1';// '\u23F8' not available in std font
-    var CH_FASTFORWARD    = '\u23E9';
-    var CH_FASTBACKWARD   = '\u23EA';
-    var CH_INCREASE       = '\u25B3'; // or '\u23F6' which is not available in std font
-    var CH_DECREASE       = '\u25BD'; // or '\u23F7' which is not available in std font
+    var CH_PLAY           = '\u25B7'; // or \u23F5 which not available in std font
+    var ICON_PLAY_CLASS   = "icon-play3";
+    var ICON_PAUSE_CLASS  = "icon-pause2";
 
     var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
@@ -1156,7 +1217,7 @@ var ctrl = function () {
         rStopwatch.resume();
         rPlaying = true;
         window.__output.className = "playing";
-        window.__btn_playpause.textContent = CH_WEBDINGS_PAUSE;
+        window.__btn_playpause.className = ICON_PAUSE_CLASS;
         document.title = CH_PLAY + " " + rDocumentTitle + " - " + rAppName;
         outputNextWord();
     }
@@ -1166,10 +1227,20 @@ var ctrl = function () {
         rPlaying = false;
         // __output.className = "breathing";
         document.title = rDocumentTitle + " - " + rAppName;
-        window.__btn_playpause.textContent = CH_WEBDINGS_PLAY;
+        window.__btn_playpause.className = ICON_PLAY_CLASS;
         if (localStorageOK()) {
             localStorage.setItem("position", words.getPosition());
         }
+    }
+
+    function toastControls(){
+        if (rControlsTimer){
+            window.clearTimeout(rControlsTimer);
+        }
+        window.__controls.className = "";
+        rControlsTimer = window.setTimeout(function(){
+                    window.__controls.className = "fade-away";
+                }, TOAST_FADE_TIME);
     }
 
     function toast(pString){
@@ -1178,7 +1249,7 @@ var ctrl = function () {
         }
         window.__toast.style.display = "block";
         window.__toast.className = "";
-        window.__toast.textContent = pString;
+        window.__toast.innerHTML = pString;
         rToastTimer = window.setTimeout(function(){
                     window.__toast.className = "fade-away";
                 },TOAST_FADE_TIME);
@@ -1209,7 +1280,7 @@ var ctrl = function () {
     }
 
     function updateTimeToGo() {
-        toast(CH_TIMERCLOCK + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
+        toast("<span class='icon-stopwatch'></span>" + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
     function setTheme(pThemeNumber){
@@ -1295,14 +1366,12 @@ var ctrl = function () {
         setPos(words.getLength());
     }
 
-    function speedUp(pAmount){
-        pAmount = pAmount ? pAmount: 5;
-        words.incSpeed(pAmount);
+    function speedUp(){
+        words.incSpeed(5);
         updateSpeed(words.getSpeed());
     }
-    function slowDown(pAmount){
-        pAmount = pAmount ? pAmount: 5;
-        words.decSpeed(pAmount);
+    function slowDown(){
+        words.decSpeed(5);
         updateSpeed(words.getSpeed());
     }
 
@@ -1517,6 +1586,21 @@ var ctrl = function () {
     }
 
     function mousemove(pEvent){
+        if (!rHoveringOverControls) {
+            toastControls();
+        }
+    }
+
+    function controlsMouseover(pEvent){
+        if (rControlsTimer) {
+            window.clearTimeout(rControlsTimer);
+        }
+        rHoveringOverControls = true;
+        window.__controls.className = "";
+    }
+
+    function controlsMouseout(pEvent){
+        rHoveringOverControls = false;
     }
 
     window.__droparea.addEventListener("drag", drag, true);
@@ -1534,10 +1618,15 @@ var ctrl = function () {
     window.__btn_playpause.addEventListener("click", playpause, true);
     window.__btn_inc.addEventListener("click", inc, true);
     window.__btn_end.addEventListener("click", end, true);
+    window.__btn_slowdown.addEventListener("click", slowDown, true);
+    window.__btn_speedup.addEventListener("click", speedUp, true);
+    window.__btn_info.addEventListener("click", toggleStatus, true);
     window.__droparea.addEventListener("drop", drop, true);
     window.document.body.addEventListener("keydown", keydown, true);
     window.document.body.addEventListener("wheel", wheel, true);
     window.document.body.addEventListener("mousemove", mousemove, true);
+    window.__controls.addEventListener("mouseover", controlsMouseover, true);
+    window.__controls.addEventListener("mouseout", controlsMouseout, true);
 
 
     if (localStorageOK()) {
