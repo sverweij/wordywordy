@@ -1,4 +1,4 @@
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
     <!--
@@ -63,6 +63,11 @@
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
             }
+            .icon-film:before { content: "\e913"; }
+            .icon-video-camera:before { content: "\e914"; }
+            .icon-file-text2:before { content: "\e926"; }
+            .icon-copy:before { content: "\e92c"; }
+            .icon-paste:before { content: "\e92d"; }
             .icon-folder:before { content: "\e92f"; }
             .icon-stopwatch:before { content: "\e952"; }
             .icon-zoom-in:before { content: "\e987"; }
@@ -267,15 +272,22 @@
                 border-bottom: 3px solid currentColor; /*accent*/
                 background-color: inherit; 
             }
+            #__percentagewrap {
+                position: fixed;
+                bottom:0;
+                left:0;
+                height: 0.3em;
+                width: 100%;
+                z-index: 3;
+            }
             #__percentage {
                 background-color:currentColor; /*accent*/
                 opacity: 0.5;
-                position:fixed;
-                bottom:0;
-                left:0;
                 text-align: left;
                 height: 0.2em;
                 width: 0;
+                bottom: 0;
+                position:absolute;
             }
             #__droparea {
                 position: fixed;
@@ -287,12 +299,44 @@
                 resize: none;
                 cursor: default;
             }
+            .clickarea {
+                position: fixed;
+                z-index: 2;
+                /*
+                background-color: red;
+                opacity: 0.6;
+                */
+            }
+            #__leftarea {
+                position: fixed;
+                width: 20%;
+                left: 0;
+                height: 100%;
+            }
+            #__rightarea {
+                position: fixed;
+                width: 20%;
+                right: 0;
+                height: 100%;
+            }
+            #__uparea {
+                position: fixed;
+                width: 100%;
+                top: 0.3em;
+                height: 20%;
+            }
+            #__downarea {
+                position: fixed;
+                width: 100%;
+                bottom: 0.3em;
+                height: 20%;
+            }
             #__status {
                 width: 100%;
                 position: absolute;
                 text-align: center;
                 display: none;
-                font-size: 0.4em;
+                font-size: 0.3em;
             }
             #__status div {
                 color: inherit; /*accent*/
@@ -301,9 +345,12 @@
             #__status table {
                 color: inherit;
                 width: 100%;
+                font-size: inherit;
             }
             #__status td {
                 font-weight: 300;
+                text-align: left;
+                font-size: inherit;
             }
             #__status td:first-child{
                 font-style: italic;
@@ -368,6 +415,22 @@
             }
             #__controls nav:hover {
               opacity: 0.9;
+            }
+            @media only screen and (max-width: 480px), (max-height: 480px) {
+                .hideonmobile {
+                    display:none;
+                }
+                #__controls {
+                    bottom: 0;
+                }
+                #__percentagewrap {
+                    bottom: inherit;
+                    top: 0;
+                }
+                #__percentage {
+                    bottom: inherit;
+                    top: 0;
+                }
             }
         </style>
         <style title="Sepia">
@@ -618,7 +681,11 @@
         </style>
     </head>
     <body> 
-        <textarea id="__droparea"></textarea>
+        <textarea id="__droparea" class="hideonmobile"></textarea>
+        <div class="clickarea" id="__uparea"></div>
+        <div class="clickarea" id="__downarea"></div>
+        <div class="clickarea" id="__leftarea"></div>
+        <div class="clickarea" id="__rightarea"></div>
         <div class="outputwrap">
             <span id="__output" class="breathing"></span>
         </div>
@@ -671,24 +738,26 @@
                 </tr>
                 <tr>
                     <td>Version</td>
-                    <td>0.1.1</td>
+                    <td>0.1.2</td>
                 </tr>
             </table>
             </div>
         </span>
         <span id="__toast"></span>
-        <div id="__percentage"></div>
+        <div id="__percentagewrap">
+            <div id="__percentage"></div>
+        </div>
         <div id="__controls">
             <nav id="__nav">
-                <button id="__btn_open" class="icon-folder" title="open a text file to read"></button>&nbsp;
+                <button id="__btn_open" class="icon-folder" title="open a text file to read"/>
                 <button id="__btn_home" class="icon-first" title="go to start of text"/>
                 <button id="__btn_dec" class="icon-previous2" title="one word back"/>
                 <button id="__btn_playpause" class="icon-play3" title="play/ pause"/>
                 <button id="__btn_inc" class="icon-next2" title="one word forward"/>
-                <button id="__btn_end" class="icon-last" title="go to end of text"/>
-                <button id="__btn_slowdown" class="icon-circle-down" title="slow down"/>
-                <button id="__btn_speedup" class="icon-circle-up" title="speed up"/>
-                <button id="__btn_info" class="icon-info" title="toggle stats display"/>
+                <button id="__btn_end" class="icon-last hideonmobile" title="go to end of text" />
+                <button id="__btn_slowdown" class="icon-circle-down" title="slow down" style="display:none"/>
+                <button id="__btn_speedup" class="icon-circle-up" title="speed up" style="display:none"/>
+                <button id="__btn_info" class="icon-info" title="toggle stats display" style="display:none"/>
             </nav>
             <input id="__input_file" type="file" accept="text/plain" style="display:none" ></input>
         </div>
@@ -1438,10 +1507,14 @@ var ctrl = function () {
         pEvent.preventDefault();
     }
 
+    function percentageClick(pEvent) {
+        var lSelectedPosition = pEvent.clientX/__percentagewrap.scrollWidth;
+        setPos(Math.floor(lSelectedPosition * words.getLength()));
+    }
     function click (pEvent) {
-        if (pEvent.clientY > (window.innerHeight - 25)){
-            var lSelectedPosition = pEvent.clientX/__droparea.scrollWidth;
-            setPos(Math.floor(lSelectedPosition * words.getLength()));
+        if (pEvent.clientY > (window.innerHeight - 25)
+           || pEvent.clientY < 25) {
+           // that's the percentage area - leave alone
         } else {
             if (pEvent.clientX > ((3/4)*window.innerWidth)){
                 playpause();
@@ -1526,7 +1599,7 @@ var ctrl = function () {
             toast("position saved");
         }
         if ( V_KEY === pEvent.keyCode ) {
-            toast(rAppName + " 0.1.1");
+            toast(rAppName + " 0.1.2");
         }
         if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
         if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
@@ -1610,18 +1683,23 @@ var ctrl = function () {
     window.__droparea.addEventListener("dragover", dragOver, true);
     window.__droparea.addEventListener("dragend", dragEnd, true);
     window.__droparea.addEventListener("paste", paste, true);
-    window.__droparea.addEventListener("click", click, true);
+    window.__droparea.addEventListener("drop", drop, true);
+    window.__percentagewrap.addEventListener("click", percentageClick, true);
+    // window.document.addEventListener("click", click, true);
+    window.__uparea.addEventListener("click", speedUp, true);
+    window.__downarea.addEventListener("click", slowDown, true);
+    window.__leftarea.addEventListener("click", dec, true);
+    window.__rightarea.addEventListener("click", playpause, true);
     window.__input_file.addEventListener("change", oink, true);
     window.__btn_open.addEventListener("click", openFile, true);
     window.__btn_home.addEventListener("click", home, true);
     window.__btn_dec.addEventListener("click", dec, true);
-    window.__btn_playpause.addEventListener("click", playpause, true);
+    window.__btn_playpause.addEventListener("click", playpause, false);
     window.__btn_inc.addEventListener("click", inc, true);
     window.__btn_end.addEventListener("click", end, true);
     window.__btn_slowdown.addEventListener("click", slowDown, true);
     window.__btn_speedup.addEventListener("click", speedUp, true);
     window.__btn_info.addEventListener("click", toggleStatus, true);
-    window.__droparea.addEventListener("drop", drop, true);
     window.document.body.addEventListener("keydown", keydown, true);
     window.document.body.addEventListener("wheel", wheel, true);
     window.document.body.addEventListener("mousemove", mousemove, true);
