@@ -28,7 +28,7 @@
         <link rel="icon" sizes="195x195" href="./favicon-195.png">
         <link rel="icon" sizes="152x152" href="./favicon-152.png">
         <link rel="icon" sizes="144x144" href="./favicon-144.png">
-        <link rel="icon" sizes="128x128" href="./favicon-128.png"> 
+        <link rel="icon" sizes="128x128" href="./favicon-128.png">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./iosfavicon-152.png">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./iosfavicon-144.png">
         <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./iosfavicon-120.png">
@@ -167,15 +167,15 @@
                 position: absolute;
                 text-align: center;
                 top: 40%;
-                background-color: inherit; 
+                background-color: inherit;
             }
             @-webkit-keyframes openmouth {
                 0% {}
-                100% {border-radius:1em; border-width: 0.2em; } 
+                100% {border-radius:1em; border-width: 0.2em; }
             }
             @keyframes openmouth {
                 0% {}
-                100% {border-radius:1em; border-width: 0.2em; } 
+                100% {border-radius:1em; border-width: 0.2em; }
             }
             .openmouth {
                 -webkit-animation-name: openmouth;
@@ -238,7 +238,7 @@
                 animation-timing-function: linear;
             }
             @-webkit-keyframes breathe-border {
-                0% { border-color: currentColor; } 
+                0% { border-color: currentColor; }
                 40% { border-color: rgba(128, 128, 128, 1); }
                 50% { border-color: rgba(128, 128, 128, 1); }
                 60% { border-color: rgba(128, 128, 128, 1); }
@@ -270,7 +270,7 @@
             #__output {
                 padding: 0 0.6em 0.2em 0.6em;
                 border-bottom: 3px solid currentColor; /*accent*/
-                background-color: inherit; 
+                background-color: inherit;
             }
             #__percentagewrap {
                 position: fixed;
@@ -403,7 +403,7 @@
               padding: 0.25em 0.25em 0.25em 0.25em;
               opacity: 0.6;
               box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
-              display: inline-block;
+              display: inline;
             }
             #__controls button {
               color: inherit;
@@ -532,7 +532,7 @@
             #__output {
                 border-bottom-color: rgba(255, 255, 0, 0.5);
             }
-        </style> 
+        </style>
         <style title="Zany">
             body{
                 color: rgba(0, 255, 0, 1);
@@ -680,7 +680,7 @@
             }
         </style>
     </head>
-    <body> 
+    <body>
         <textarea id="__droparea" class="hideonmobile"></textarea>
         <div class="clickarea" id="__uparea"></div>
         <div class="clickarea" id="__downarea"></div>
@@ -731,8 +731,8 @@
                 <tr>
                     <td><span class="icon-stopwatch"></span> spent + left = total</td>
                     <td>
-                        <span id="__timeElapsed"></span> + 
-                        <span id="__timeToGo"></span> = 
+                        <span id="__timeElapsed"></span> +
+                        <span id="__timeToGo"></span> =
                         <span id="__timeTotal"></span>
                     </td>
                 </tr>
@@ -763,16 +763,16 @@
         </div>
     </body>
     <script>
-var fmt = function (){ 
+var fmt = function (){
 
     var MILLISECONDS_PER_SECOND = 1000; // millseconds
     var SECONDS_PER_MINUTE      = 60; // seconds
     var MINUTES_PER_HOUR        = 60; // minutes
     var HOURS_PER_DAY           = 24; // hours
-    
+
     function millisToTimeStruct (pMilliSeconds) {
         var lSeconds = pMilliSeconds/ MILLISECONDS_PER_SECOND;
-        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE); 
+        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE);
         var lHours   = Math.max(0, lMinutes/ MINUTES_PER_HOUR);
         var lDays    = Math.max(0, lHours/ HOURS_PER_DAY);
 
@@ -787,49 +787,43 @@ var fmt = function (){
             "minutes"      : Math.floor(lMinutes),
             "seconds"      : Math.floor(lSeconds),
             "milliseconds" : lMilliSeconds
-        };  
-    }   
+        };
+    }
 
     function formatTimeBlob (pInt) {
         if (pInt < 10) {
             return "0" + pInt;
-        }   
+        }
         return pInt.toString();
-    }   
-
-    function _sanitizeNumber(pThing, pDefault){
-        if (typeof pThing  === 'string') {
-            pThing = parseInt(pThing);
-        }
-        if (typeof pThing !== 'number' || pThing === NaN ){
-            pThing = pDefault;
-        }
-        return pThing;
     }
 
-    /**
-     * returns true if pString equals "1", "true", "y" or "yes
-     */
-    function _sanitizeBooleanesque (pString){
-        return (["1", "true", "y", "yes"].indexOf(pString)> -1);
-    }
-
-
-        
     return {
         formatTime : function (pMilliSeconds, pShowMillis) {
             var lTimeStruct = millisToTimeStruct(pMilliSeconds);
             if (!pShowMillis) { pShowMillis = false; }
-            var lRetval =  
+            var lRetval =
                    (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
                    formatTimeBlob (lTimeStruct.minutes) + ":" +
                    formatTimeBlob (lTimeStruct.seconds) +
                    (pShowMillis ? "." + lTimeStruct.milliseconds: "");
             return lRetval;
         },
-        sanitizeNumber       : _sanitizeNumber,
-        sanitizeBooleanesque : _sanitizeBooleanesque
-    };  
+        sanitizeNumber : function (pThing, pDefault){
+            if (typeof pThing  === 'string') {
+                pThing = parseInt(pThing);
+            }
+            if (typeof pThing !== 'number' || pThing === NaN ){
+                pThing = pDefault;
+            }
+            return pThing;
+        },
+        /**
+         * returns true if pString equals "1", "true", "y" or "yes
+         */
+        sanitizeBooleanesque : function (pString){
+            return (["1", "true", "y", "yes"].indexOf(pString)> -1);
+        }
+    };
 }();
 
 var words = function () {
@@ -848,22 +842,13 @@ var words = function () {
     var LONG_PUNCTUATION_DELAY  = 250;
     var SENTENCE_END_DELAY      = 400;
     var PARAGRAPH_END_DELAY     = 250;
-     
-    var rAry            = [];
-    var rLength         = 0; // words
-    var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
-    var rPosition       = 0; // word
-    var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
-    var MAX_SKIP_AHEAD  = 42; // words
-    var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed); 
-    var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
-    var rRe2delay       = [];
-    var rRe2delayLength = 0;
 
-         
+    var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
+    var MAX_SKIP_AHEAD          = 42; // words
+
     /*
-     * SPACES_RE includes all spaces as mentioned
-     * in https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+     * SPACES_RE includes all spaces as mentioned in
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
      * under \s, except the non-breaking space character, which is misused
      * in the time algorithm.
      */
@@ -875,16 +860,25 @@ var words = function () {
      * Picture scripts (e.g. Chinese, Korean) need a different treatment.
      * These unicode code pointranges come from
      * http://www.unicode.org/Public/UCD/latest/ucd/Scripts.txt
-     * 
+     *
      * Japanese Hiragana and Katakana have been skipped intentionally as
-     * these are actually 
-     * 
-     */ 
+     * these are actually phonetic scripts
+     *
+     */
     var HAN_CHAR  = "\u2E80-\u2E99|\u2E9B-\u2EF3|\u2F00-\u2FD5|\u3005|\u3007|\u3021-\u3029|\u3038-\u303A|\u303B|\u3400-\u4DB5|\u4E00-\u9FCC|\uF900-\uFA6D|\uFA70-\uFAD9";
     var YI_CHAR   = "\uA000-\uA014|\uA015|\uA016-\uA48C|\uA490-\uA4C6";
     var HANGUL_CHAR = "\u1100-\u11FF|\u302E-\u302F|\u3131-\u318E|\u3200-\u321E|\u3260-\u327E|\uA960-\uA97C|\uAC00-\uD7A3|\uD7B0-\uD7C6|\uD7CB-\uD7FB|\uFFA0-\uFFBE|\uFFC2-\uFFC7|\uFFCA-\uFFCF|\uFFD2-\uFFD7|\uFFDA-\uFFDC";
     var CJK_CHAR  = HAN_CHAR + "|" + YI_CHAR + "|" + HANGUL_CHAR;
     var CJK_RE    = new RegExp("(["+ CJK_CHAR +"])", "g");
+
+    var rAry            = [];
+    var rLength         = 0; // words
+    var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
+    var rPosition       = 0; // word
+    var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed);
+    var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
+    var rRe2delay       = [];
+    var rRe2delayLength = 0;
 
     function _init(pString, pPosition){
         rAry = pString
@@ -903,13 +897,9 @@ var words = function () {
                     .split(SPACES_RE);
 
         rLength = rAry.length;
-        _setPositionSafe(pPosition);
+        _setPosition(fmt.sanitizeNumber(pPosition, 0))
     }
 
-    function _setPositionSafe(pPosition){
-        pPosition = fmt.sanitizeNumber(pPosition, 0);
-        _setPosition(pPosition);
-    }
     function _incPosition(pAmount) {
         _setPosition(rPosition + pAmount);
     }
@@ -940,7 +930,7 @@ var words = function () {
         rLetterDelay   = LETTER_DELAY*lBase;
 
         rRe2delay = [
-            {re: SENTENCE_END_RE,  delay: SENTENCE_END_DELAY*lBase}, 
+            {re: SENTENCE_END_RE,  delay: SENTENCE_END_DELAY*lBase},
             {re: /[;:…–\u00B7|\u2010-\u2015]/,
                                    delay: LONG_PUNCTUATION_DELAY*lBase},
             {re: /[-,\/\uFF0C]/,   delay: SHORT_PUNCTUATION_DELAY*lBase},
@@ -1022,7 +1012,7 @@ var words = function () {
     function speed2Base (pSpeed) {
         return (MILLISECONDS_PER_MINUTE/pSpeed)/300;// 300 = min delay + (6 2/3)xletter delay. Works ok for english.
     }
-    
+
     function _getDisplayTime() {
         return _determineDisplayTime(rAry[rPosition]);
     }
@@ -1064,23 +1054,21 @@ var words = function () {
 }();
 
 var paramslikker = function(){
-    function _getParams(pSearchString) {
-        var lRetval = {};
-        if (pSearchString) {
-            var lKeyValAry;
-            //  search string always starts with a "?" - skip this
-            pSearchString.slice(1).split("&").forEach(function(pKeyVal){
-                lKeyValAry = pKeyVal.split("=");
-                if (2 === lKeyValAry.length) {
-                    lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
-                }
-            });
-        }
-        return lRetval;
-    }
-
     return {
-        getParams : _getParams
+        getParams: function (pSearchString) {
+            var lRetval = {};
+            if (pSearchString) {
+                var lKeyValAry;
+                //  search string always starts with a "?" - skip this
+                pSearchString.slice(1).split("&").forEach(function(pKeyVal){
+                    lKeyValAry = pKeyVal.split("=");
+                    if (2 === lKeyValAry.length) {
+                        lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
+                    }
+                });
+            }
+            return lRetval;
+        }
     };
 }();
 
@@ -1150,18 +1138,18 @@ var ctrl = function () {
     var SECTION_KEY_FF = 0;
     var SECTION_KEY  = 192; // on FF this is the ` (backquote)
                            // in safari both the § and ` key listen to 192
-    var A_KEY = 65;
-    var B_KEY = 66;
-    var C_KEY = 67;
-    var D_KEY = 68;
-    var E_KEY = 69;
-    var H_KEY = 72;
-    var O_KEY = 79;
-    var Q_KEY = 81;
-    var S_KEY = 83;
-    var T_KEY = 84;
-    var V_KEY = 86;
-    var W_KEY = 87;
+    var A_KEY        = 65;
+    var B_KEY        = 66;
+    var C_KEY        = 67;
+    var D_KEY        = 68;
+    var E_KEY        = 69;
+    var H_KEY        = 72;
+    var O_KEY        = 79;
+    var Q_KEY        = 81;
+    var S_KEY        = 83;
+    var T_KEY        = 84;
+    var V_KEY        = 86;
+    var W_KEY        = 87;
     var PAGEUP_KEY   = 33;
     var PAGEDOWN_KEY = 34;
     var HOME_KEY     = 36;
@@ -1201,7 +1189,7 @@ var ctrl = function () {
     var rStopwatch = new stopwatch.Stopwatch();
     var rReader    = new FileReader();
     var rParams    = paramslikker.getParams(window.location.search);
-    
+
 
     function playString(pString) {
         rWordsPlayed = 0;
@@ -1239,12 +1227,12 @@ var ctrl = function () {
 
     function displayWord(pWord, pAddsToPlayedCount){
         if (undefined !== pWord) {
-            window.__output.textContent = pWord;
+            window.__output.innerHTML = pWord;
             window.__percentage.setAttribute("style",
                             "width: " + words.getPercentage() + "%;");
             if (rShowStatus){
                 updateStatus();
-            } 
+            }
             if (pAddsToPlayedCount) {
                 rWordsPlayed++;
             }
@@ -1256,7 +1244,7 @@ var ctrl = function () {
         var lMinutesRead = (lTimeElapsed)/MILLISECONDS_PER_MINUTE;
 
         var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed/ lMinutesRead : 0;
-        var lTimeToGo    = words.getEstimatedTimeToGo(); 
+        var lTimeToGo    = words.getEstimatedTimeToGo();
         var lTimeTotal   = lTimeElapsed + lTimeToGo;
 
         window.__documentTitle.textContent = rDocumentTitle;
@@ -1353,15 +1341,15 @@ var ctrl = function () {
     }
 
     function setTheme(pThemeNumber){
-        
-        /* 
-         * The perfectly sensible way to do this is to 
-         * use the document.styleSheets collection and switch 
+
+        /*
+         * The perfectly sensible way to do this is to
+         * use the document.styleSheets collection and switch
          * the disabled property to false for the selected
          * theme, and switch it off for the others.
          *
          * WebKut, however, only sees the first stylesheet
-         * with a title. Hence this even-more-ugly-than-usual 
+         * with a title. Hence this even-more-ugly-than-usual
          * piece of code...
          */
 
@@ -1373,9 +1361,9 @@ var ctrl = function () {
             pThemeNumber = Math.min( lStyleSheetsLength - 1,
                                      Math.max(1, fmt.sanitizeNumber(pThemeNumber, 1))
                                    );
-            
+
             /*
-             * Dynamically setting the meta tag then doesn't work in 
+             * Dynamically setting the meta tag then doesn't work in
              * Gecko, hence some funky feature detection
              * (which only works when there are no external stylesheets
              * - which is good enough (tm) for now) and the straighforward
@@ -1486,7 +1474,7 @@ var ctrl = function () {
                 rReader.readAsText(lFile);
                 setDocumentTitle(lFile.name);
             }
-        } else { 
+        } else {
             function hasTextMime(pKindOfIterableObject){
                 for (var i=0;i<pKindOfIterableObject.length;i++){
                     if ("text/plain" === pKindOfIterableObject[i]) {
@@ -1594,7 +1582,7 @@ var ctrl = function () {
         }
         if ( B_KEY === pEvent.keyCode ) {
             if (localStorageOK()) {
-                localStorage.setItem(LS_KEY_POSITION, words.getPosition()); 
+                localStorage.setItem(LS_KEY_POSITION, words.getPosition());
             }
             toast("position saved");
         }
@@ -1611,7 +1599,7 @@ var ctrl = function () {
         if (EIGHT_KEY === pEvent.keyCode) { setTheme(8); }
         if (NINE_KEY  === pEvent.keyCode) { setTheme(9); }
         if (ZERO_KEY  === pEvent.keyCode) { setTheme(10); }
-        if (   SECTION_KEY_FF === pEvent.keyCode 
+        if (   SECTION_KEY_FF === pEvent.keyCode
             || SECTION_KEY    === pEvent.keyCode) {
             setTheme(11);
         }
@@ -1654,7 +1642,7 @@ var ctrl = function () {
             if (lFile.type === "text/plain"){
                 rReader.readAsText(lFile);
                 setDocumentTitle(lFile.name);
-            } 
+            }
         }
     }
 
@@ -1749,6 +1737,17 @@ var ctrl = function () {
     }
     if (rParams.play && fmt.sanitizeBooleanesque(rParams.play)) {
         window.setTimeout(play, INITIAL_DISPLAY_DELAY);
+    }
+    var rCannedTexts = {
+      "choo-choo": "Don't ask me silly questions, I won't play silly games. I'm just a simple choo-choo train, and I'll always be the same. I only want to race along, beneath the bright blue sky. And be a happy choo-choo train until the day I die.",
+      "1984":"DOWN WITH BIG BROTHER!\nDOWN WITH BIG BROTHER!\nDOWN WITH BIG BROTHER!",
+      "intro": "Thank you for your interest in WordyWordy! As you might have surmised, WordyWordy displays text. One word at a time. At the speed you want it to.\n\nThe speed at which you are reading this is 150 words per minute. If this is not right for you, you can change it with the {up} and {down} keys on your keyboard. If you don't have a keyboard, click or tap the middle top of the screen to speed up and the middle bottom of the screen to slow down.\n\nGo on.\n\nAdjust it while you are at it. Faster={up}. Slower={down}.\n\nHere is some text to test if the reading speed is comfortable, while you are twiddling the {up} and {down} keys. (What? You weren't? go on! {up} , {up} , {up}!). As a reference: when you are an average adult person you will probably read books and papers at a rate of about 240 words per minute. When that seems too fast for you: RELAX. You're <em>NOT</em> <em>average</em>. Being NOT AVERAGE is TOTALY OK. Even better: WordyWordy was created with you in mind.\n\nOn the other hand, if faster seems to do it for you: knock yourself out! There's people who claim they can read at 400 words per minute. There's even people who claim they can read faster than that, although I don't believe them :-).\n\nNow that your reading speed is adjusted to your comfort level, you might want to know some things. I'll tick them off in order of likelihood:\n\n1. -->WHY?<--\n\nWhy would people read text in this way? I have identified several of them:\n1. Low vision.\n2. Dyslexia.\n3. Hands free reading.\n4. Speed reading.\n\n1/4  Low vision\n\nYou might have noticed the letters are BIG. And you don't have to move your eyes a lot. This can be practical for people with low vision. There is even a special HIGH CONTRAST theme (accessible under the {5} (five) key of your keyboard).\n\n\n2/4 Dyslexia\n\nI have read claims (but not proof) that people with dyslexia can absorb text better this way. I have no idea whether or not that is true. Just in case it is, WordyWordy has some themes that sport dyslexia friendly fonts. A dyslexia friendly front is bottom heavy. Letters in a dyslexia friendly font are as distinct from each other as possible.\n\nIf you want to see the dyslexia font in action, you can hit the {6} (six) key on your keyboard. You can hit {1} to go back to the regular font.\n\n\n3/4 Hands free reading\n\nWell, this is self evident. You didn't have to scroll one bit while reading this. You can step on your home trainer and have WordyWordy read a book to you. Or do push-ups.\n\n\n4/4 Speed reading\n\nIt is also claimed, although I haven't seen actual research supporting this, you can read faster like this. Exactly because your eyes don't have to move to the start of the next line again.\n\nThe second thing you might want to know...\n\n2. How do I navigate through the text?\n\nIf you want to pause text display, hit your {space} bar, or click/ tap on the {>} button in the controls island.\n\nWait. Controls island? What are you talking about?\n\nThe controls island is the thing that keeps popping in and out of view while you move your mouse.\n\nHitting the {space} bar or the {>} one of these again will make WordyWordy resume reading from the current position.\n\nThere's a lot of ways to move back and forth through the text. You can use the {left} and {right} keys on your keyboard. You can use the {<<} and {>>} buttons on the controls island. You can use the {scroll} wheel on your mouse.\n\nIf you are an advanced reader, you might be happy to know WordyWordy supports like navigating sentences or paragraphs at a time. If you're interested, take a peek at the (short but concise) documentation on github.\n\nThe third thing you might want to know...\n\n3. How do I get this to read MY text?\n\nCurrently there are three ways to do this: copy/ paste, drag/ drop, open file. There is a fourth one but that is an itty bitty technical (URL). You can look it up on the github home page of this project if you want to.\n\nGetting text into WordyWordy 1/3: copy/ paste\nCopy some text and paste it on the horizontal line in the middle of the screen (or thereabouts). WordyWordy will start reading it to you at its current speed (which you can adjust, remember? {up} {down}).\n\nGetting text into WordyWordy 2/3: drag/ drop\nSelect a file on you desktop computer and drag it over to the horizontal line in the middle of the screen and drop it there. You'll know you do it right when WordyWordy smiles at you.\n\nGetting text into WordyWordy 3/3: open file\nYou might have noticed the {FOLDER} icon on the bottom of this screen (if it's not in view, move your mouse a bit or tap the middle of the screen). When you click it, WordyWordy will open your browser's upload dialog. With this, select a text file you want it to read. When done, WordyWordy will read it to you. We have tested this with pretty big text files (900 kilobytes).\n\nJust remember that, at this time, WordyWordy only knows how to handle plain text files, so it doesn't know what to do with word documents or ebook formats like ePub. I might want to tell it some day, but it will take some time...\n\nHey you! <b>Wow</b>! Thanks for reading up to here! You're <em>awesome</em>. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {.} (dot) or {,} (comma) key after WordyWordy has given its smile and you'll see the nerdy stats."
+    };
+    if (!(rParams.text) && rParams.canned && rCannedTexts[rParams.canned]){
+      words.init(rCannedTexts[rParams.canned]);
+      displayWord(words.getCurrentWord());
+      updateTimeToGo();
+      rDocumentTitle = rParams.canned;
     }
 }();
     </script>
