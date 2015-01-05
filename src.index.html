@@ -403,7 +403,7 @@
               padding: 0.25em 0.25em 0.25em 0.25em;
               opacity: 0.6;
               box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
-              display: inline-block;
+              display: inline;
             }
             #__controls button {
               color: inherit;
@@ -797,25 +797,6 @@ var fmt = function (){
         return pInt.toString();
     }   
 
-    function _sanitizeNumber(pThing, pDefault){
-        if (typeof pThing  === 'string') {
-            pThing = parseInt(pThing);
-        }
-        if (typeof pThing !== 'number' || pThing === NaN ){
-            pThing = pDefault;
-        }
-        return pThing;
-    }
-
-    /**
-     * returns true if pString equals "1", "true", "y" or "yes
-     */
-    function _sanitizeBooleanesque (pString){
-        return (["1", "true", "y", "yes"].indexOf(pString)> -1);
-    }
-
-
-        
     return {
         formatTime : function (pMilliSeconds, pShowMillis) {
             var lTimeStruct = millisToTimeStruct(pMilliSeconds);
@@ -827,8 +808,21 @@ var fmt = function (){
                    (pShowMillis ? "." + lTimeStruct.milliseconds: "");
             return lRetval;
         },
-        sanitizeNumber       : _sanitizeNumber,
-        sanitizeBooleanesque : _sanitizeBooleanesque
+        sanitizeNumber : function (pThing, pDefault){
+            if (typeof pThing  === 'string') {
+                pThing = parseInt(pThing);
+            }
+            if (typeof pThing !== 'number' || pThing === NaN ){
+                pThing = pDefault;
+            }
+            return pThing;
+        },
+        /**
+         * returns true if pString equals "1", "true", "y" or "yes
+         */
+        sanitizeBooleanesque : function (pString){
+            return (["1", "true", "y", "yes"].indexOf(pString)> -1);
+        }
     };  
 }();
 
@@ -848,22 +842,13 @@ var words = function () {
     var LONG_PUNCTUATION_DELAY  = 250;
     var SENTENCE_END_DELAY      = 400;
     var PARAGRAPH_END_DELAY     = 250;
-     
-    var rAry            = [];
-    var rLength         = 0; // words
-    var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
-    var rPosition       = 0; // word
-    var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
-    var MAX_SKIP_AHEAD  = 42; // words
-    var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed); 
-    var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
-    var rRe2delay       = [];
-    var rRe2delayLength = 0;
 
+    var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
+    var MAX_SKIP_AHEAD          = 42; // words
          
     /*
-     * SPACES_RE includes all spaces as mentioned
-     * in https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+     * SPACES_RE includes all spaces as mentioned in
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
      * under \s, except the non-breaking space character, which is misused
      * in the time algorithm.
      */
@@ -877,7 +862,7 @@ var words = function () {
      * http://www.unicode.org/Public/UCD/latest/ucd/Scripts.txt
      * 
      * Japanese Hiragana and Katakana have been skipped intentionally as
-     * these are actually 
+     * these are actually phonetic scripts 
      * 
      */ 
     var HAN_CHAR  = "\u2E80-\u2E99|\u2E9B-\u2EF3|\u2F00-\u2FD5|\u3005|\u3007|\u3021-\u3029|\u3038-\u303A|\u303B|\u3400-\u4DB5|\u4E00-\u9FCC|\uF900-\uFA6D|\uFA70-\uFAD9";
@@ -885,6 +870,15 @@ var words = function () {
     var HANGUL_CHAR = "\u1100-\u11FF|\u302E-\u302F|\u3131-\u318E|\u3200-\u321E|\u3260-\u327E|\uA960-\uA97C|\uAC00-\uD7A3|\uD7B0-\uD7C6|\uD7CB-\uD7FB|\uFFA0-\uFFBE|\uFFC2-\uFFC7|\uFFCA-\uFFCF|\uFFD2-\uFFD7|\uFFDA-\uFFDC";
     var CJK_CHAR  = HAN_CHAR + "|" + YI_CHAR + "|" + HANGUL_CHAR;
     var CJK_RE    = new RegExp("(["+ CJK_CHAR +"])", "g");
+     
+    var rAry            = [];
+    var rLength         = 0; // words
+    var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
+    var rPosition       = 0; // word
+    var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed); 
+    var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
+    var rRe2delay       = [];
+    var rRe2delayLength = 0;
 
     function _init(pString, pPosition){
         rAry = pString
@@ -903,13 +897,9 @@ var words = function () {
                     .split(SPACES_RE);
 
         rLength = rAry.length;
-        _setPositionSafe(pPosition);
+        _setPosition(fmt.sanitizeNumber(pPosition, 0))
     }
 
-    function _setPositionSafe(pPosition){
-        pPosition = fmt.sanitizeNumber(pPosition, 0);
-        _setPosition(pPosition);
-    }
     function _incPosition(pAmount) {
         _setPosition(rPosition + pAmount);
     }
@@ -1064,23 +1054,21 @@ var words = function () {
 }();
 
 var paramslikker = function(){
-    function _getParams(pSearchString) {
-        var lRetval = {};
-        if (pSearchString) {
-            var lKeyValAry;
-            //  search string always starts with a "?" - skip this
-            pSearchString.slice(1).split("&").forEach(function(pKeyVal){
-                lKeyValAry = pKeyVal.split("=");
-                if (2 === lKeyValAry.length) {
-                    lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
-                }
-            });
-        }
-        return lRetval;
-    }
-
     return {
-        getParams : _getParams
+        getParams: function (pSearchString) {
+            var lRetval = {};
+            if (pSearchString) {
+                var lKeyValAry;
+                //  search string always starts with a "?" - skip this
+                pSearchString.slice(1).split("&").forEach(function(pKeyVal){
+                    lKeyValAry = pKeyVal.split("=");
+                    if (2 === lKeyValAry.length) {
+                        lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
+                    }
+                });
+            }
+            return lRetval;
+        }
     };
 }();
 
@@ -1150,18 +1138,18 @@ var ctrl = function () {
     var SECTION_KEY_FF = 0;
     var SECTION_KEY  = 192; // on FF this is the ` (backquote)
                            // in safari both the § and ` key listen to 192
-    var A_KEY = 65;
-    var B_KEY = 66;
-    var C_KEY = 67;
-    var D_KEY = 68;
-    var E_KEY = 69;
-    var H_KEY = 72;
-    var O_KEY = 79;
-    var Q_KEY = 81;
-    var S_KEY = 83;
-    var T_KEY = 84;
-    var V_KEY = 86;
-    var W_KEY = 87;
+    var A_KEY        = 65;
+    var B_KEY        = 66;
+    var C_KEY        = 67;
+    var D_KEY        = 68;
+    var E_KEY        = 69;
+    var H_KEY        = 72;
+    var O_KEY        = 79;
+    var Q_KEY        = 81;
+    var S_KEY        = 83;
+    var T_KEY        = 84;
+    var V_KEY        = 86;
+    var W_KEY        = 87;
     var PAGEUP_KEY   = 33;
     var PAGEDOWN_KEY = 34;
     var HOME_KEY     = 36;
@@ -1239,7 +1227,7 @@ var ctrl = function () {
 
     function displayWord(pWord, pAddsToPlayedCount){
         if (undefined !== pWord) {
-            window.__output.textContent = pWord;
+            window.__output.innerHTML = pWord;
             window.__percentage.setAttribute("style",
                             "width: " + words.getPercentage() + "%;");
             if (rShowStatus){
