@@ -763,9 +763,12 @@
         </div>
     </body>
     <script>
+/* jshint browser:true */
+/* jshint nonstandard:true */
 var fmt = function (){
+    "use strict";
 
-    var MILLISECONDS_PER_SECOND = 1000; // millseconds
+    var MILLISECONDS_PER_SECOND = 1000; // milliseconds
     var SECONDS_PER_MINUTE      = 60; // seconds
     var MINUTES_PER_HOUR        = 60; // minutes
     var HOURS_PER_DAY           = 24; // hours
@@ -812,7 +815,7 @@ var fmt = function (){
             if (typeof pThing  === 'string') {
                 pThing = parseInt(pThing);
             }
-            if (typeof pThing !== 'number' || pThing === NaN ){
+            if (typeof pThing !== 'number' || isNaN(pThing) ){
                 pThing = pDefault;
             }
             return pThing;
@@ -827,8 +830,10 @@ var fmt = function (){
 }();
 
 var words = function () {
+    "use strict";
+
     var MIN_SPEED     = 60; // words per minute
-    var DEFAULT_SPEED = 300 /// words per minute
+    var DEFAULT_SPEED = 300; /// words per minute
     var MAX_SPEED     = 600; // words per minute
 
     var MIN_DELAY               = 100;
@@ -897,7 +902,7 @@ var words = function () {
                     .split(SPACES_RE);
 
         rLength = rAry.length;
-        _setPosition(fmt.sanitizeNumber(pPosition, 0))
+        _setPosition(fmt.sanitizeNumber(pPosition, 0));
     }
 
     function _incPosition(pAmount) {
@@ -1072,7 +1077,9 @@ var paramslikker = function(){
     };
 }();
 
-var stopwatch = function(){
+var stopwatch = function (){
+    "use strict";
+
     function Stopwatch () {
         this.reset = function () {
             this.state = "paused"; // running, paused
@@ -1117,6 +1124,8 @@ var stopwatch = function(){
 }();
 
 var ctrl = function () {
+    "use strict";
+
     var rPlaying     = false;
     var rWordsPlayed = 0;
 
@@ -1143,7 +1152,6 @@ var ctrl = function () {
     var C_KEY        = 67;
     var D_KEY        = 68;
     var E_KEY        = 69;
-    var H_KEY        = 72;
     var O_KEY        = 79;
     var Q_KEY        = 81;
     var S_KEY        = 83;
@@ -1169,8 +1177,6 @@ var ctrl = function () {
     var EIGHT_KEY    = 56;
     var NINE_KEY     = 57;
 
-    var CH_STOPWATCH      = '\uE952'; // unicode character '\u23F1'; also works - not available everywhere
-    var CH_TIMERCLOCK     = '\u25F7'; // or '\u23F2' which is not availble in std font
     var CH_PLAY           = '\u25B7'; // or \u23F5 which not available in std font
     var ICON_PLAY_CLASS   = "icon-play3";
     var ICON_PAUSE_CLASS  = "icon-pause2";
@@ -1394,7 +1400,7 @@ var ctrl = function () {
 
     function openFile(){
         updateNavigation(true);
-        __input_file.click();
+        window.__input_file.click();
     }
     function setPos(pPosition){
         words.setPosition(pPosition);
@@ -1437,7 +1443,7 @@ var ctrl = function () {
         if (pEvent && pEvent.clipboardData) {
             window.__output.className = "";
             if (localStorageOK()) {
-                localStorage.setItem(LS_KEY_BUFFER, pEvent.clipboardData.getData("text/plain"))
+                localStorage.setItem(LS_KEY_BUFFER, pEvent.clipboardData.getData("text/plain"));
             }
             setDocumentTitle("clipboard");
             playString(pEvent.clipboardData.getData("text/plain"));
@@ -1466,6 +1472,14 @@ var ctrl = function () {
         pEvent.preventDefault();
         window.__output.className = "breathing";
     }
+    function hasTextMime(pKindOfIterableObject){
+        for (var i=0;i<pKindOfIterableObject.length;i++){
+            if ("text/plain" === pKindOfIterableObject[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
     function drop(pEvent){
         window.__output.className = "playing";
         if (pEvent.dataTransfer.files.length > 0){
@@ -1475,18 +1489,9 @@ var ctrl = function () {
                 setDocumentTitle(lFile.name);
             }
         } else {
-            function hasTextMime(pKindOfIterableObject){
-                for (var i=0;i<pKindOfIterableObject.length;i++){
-                    if ("text/plain" === pKindOfIterableObject[i]) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
             if (hasTextMime(pEvent.dataTransfer.types)) {
                 if (localStorageOK()) {
-                    localStorage.setItem(LS_KEY_BUFFER, pEvent.dataTransfer.getData("text/plain"))
+                    localStorage.setItem(LS_KEY_BUFFER, pEvent.dataTransfer.getData("text/plain"));
                 }
                 setDocumentTitle("drag/ drop");
                 playString(pEvent.dataTransfer.getData("text/plain"));
@@ -1496,27 +1501,8 @@ var ctrl = function () {
     }
 
     function percentageClick(pEvent) {
-        var lSelectedPosition = pEvent.clientX/__percentagewrap.scrollWidth;
+        var lSelectedPosition = pEvent.clientX/window.__percentagewrap.scrollWidth;
         setPos(Math.floor(lSelectedPosition * words.getLength()));
-    }
-    function click (pEvent) {
-        if (pEvent.clientY > (window.innerHeight - 25)
-           || pEvent.clientY < 25) {
-           // that's the percentage area - leave alone
-        } else {
-            if (pEvent.clientX > ((3/4)*window.innerWidth)){
-                playpause();
-            } else if (pEvent.clientX < ((1/4)*window.innerWidth)){
-                words.gotoStartOfSentence();
-                updateNavigation(false);
-            } else {
-                if (pEvent.clientY < ((1/4)*window.innerHeight)){
-                    speedUp();
-                } else if (pEvent.clientY > ((3/4)*window.innerHeight)){
-                    slowDown();
-                }
-            }
-        }
     }
 
     function keydown (pEvent) {
@@ -1539,42 +1525,42 @@ var ctrl = function () {
         if (   END_KEY === pEvent.keyCode ) {
             end();
         }
-        if (   DOT_KEY === pEvent.keyCode
-            || COMMA_KEY === pEvent.keyCode
-            || SLASH_KEY === pEvent.keyCode ) {
+        if ( DOT_KEY === pEvent.keyCode ||
+             COMMA_KEY === pEvent.keyCode ||
+             SLASH_KEY === pEvent.keyCode ) {
             toggleStatus();
         }
-        if (   T_KEY === pEvent.keyCode ) {
+        if ( T_KEY === pEvent.keyCode ) {
             updateTimeToGo();
         }
-        if(   SPACE_KEY === pEvent.keyCode
-           || ENTER_KEY === pEvent.keyCode ) {
+        if( SPACE_KEY === pEvent.keyCode ||
+            ENTER_KEY === pEvent.keyCode ) {
             playpause();
         }
-        if (   LEFT_KEY === pEvent.keyCode
-            || A_KEY === pEvent.keyCode ){
+        if ( LEFT_KEY === pEvent.keyCode ||
+             A_KEY === pEvent.keyCode ){
             dec();
         }
-        if (    PAGEDOWN_KEY === pEvent.keyCode
-             || E_KEY === pEvent.keyCode) {
+        if (  PAGEDOWN_KEY === pEvent.keyCode ||
+              E_KEY === pEvent.keyCode) {
             words.gotoEndOfSentence();
             updateNavigation(true);
         }
-        if (   RIGHT_KEY === pEvent.keyCode
-            || D_KEY === pEvent.keyCode ) {
+        if ( RIGHT_KEY === pEvent.keyCode ||
+             D_KEY === pEvent.keyCode ) {
             inc();
         }
-        if (    PAGEUP_KEY === pEvent.keyCode
-             || Q_KEY === pEvent.keyCode) {
+        if ( PAGEUP_KEY === pEvent.keyCode ||
+             Q_KEY === pEvent.keyCode) {
             words.gotoStartOfSentence();
             updateNavigation(true);
         }
-        if (    DOWN_KEY === pEvent.keyCode
-             || S_KEY === pEvent.keyCode) {
+        if ( DOWN_KEY === pEvent.keyCode ||
+             S_KEY === pEvent.keyCode) {
             slowDown();
         }
-        if (    UP_KEY === pEvent.keyCode
-             || W_KEY == pEvent.keyCode ) {
+        if ( UP_KEY === pEvent.keyCode ||
+             W_KEY == pEvent.keyCode ) {
             speedUp();
         }
         if ( O_KEY === pEvent.keyCode ) {
@@ -1599,8 +1585,8 @@ var ctrl = function () {
         if (EIGHT_KEY === pEvent.keyCode) { setTheme(8); }
         if (NINE_KEY  === pEvent.keyCode) { setTheme(9); }
         if (ZERO_KEY  === pEvent.keyCode) { setTheme(10); }
-        if (   SECTION_KEY_FF === pEvent.keyCode
-            || SECTION_KEY    === pEvent.keyCode) {
+        if ( SECTION_KEY_FF === pEvent.keyCode ||
+             SECTION_KEY    === pEvent.keyCode) {
             setTheme(11);
         }
         window.__droparea.value = "";
@@ -1614,8 +1600,8 @@ var ctrl = function () {
             } else if(pEvent.deltaY < 0)  {
                 dec();
             }
-        } else if (   pEvent.deltaX && pEvent.deltaX !== 0
-                   && pEvent.deltaY === 0){
+        } else if ( pEvent.deltaX && pEvent.deltaX !== 0 &&
+                    pEvent.deltaY === 0){
             if (pEvent.deltaX > 0){
                 dec(); // not a typo
             } else if(pEvent.deltaX < 0)  {
@@ -1646,13 +1632,13 @@ var ctrl = function () {
         }
     }
 
-    function mousemove(pEvent){
+    function mousemove(){
         if (!rHoveringOverControls) {
             toastControls();
         }
     }
 
-    function controlsMouseover(pEvent){
+    function controlsMouseover(){
         if (rControlsTimer) {
             window.clearTimeout(rControlsTimer);
         }
@@ -1660,7 +1646,7 @@ var ctrl = function () {
         window.__controls.className = "";
     }
 
-    function controlsMouseout(pEvent){
+    function controlsMouseout(){
         rHoveringOverControls = false;
     }
 
@@ -1673,7 +1659,6 @@ var ctrl = function () {
     window.__droparea.addEventListener("paste", paste, true);
     window.__droparea.addEventListener("drop", drop, true);
     window.__percentagewrap.addEventListener("click", percentageClick, true);
-    // window.document.addEventListener("click", click, true);
     window.__uparea.addEventListener("click", speedUp, true);
     window.__downarea.addEventListener("click", slowDown, true);
     window.__leftarea.addEventListener("click", dec, true);

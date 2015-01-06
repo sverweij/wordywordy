@@ -7,7 +7,7 @@ MOCHA_FORK=node_modules/mocha/bin/_mocha
 COVER=node node_modules/istanbul/lib/cli.js
 COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory 
 GIT=git
-LINT=node_modules/jshint/bin/jshint --verbose --show-non-errors
+LINT=node_modules/jshint/bin/jshint --verbose --show-non-errors --extract auto
 CSSLINT=node node_modules/csslint/cli.js --format=compact --quiet --ignore=ids
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
@@ -119,7 +119,7 @@ csslint:
 	$(CSSLINT) src.index.html
 
 lint:
-	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE)
+	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src.index.html
 
 cover: dev-build
 	$(COVER) cover $(MOCHA_FORK) src/script/test/
