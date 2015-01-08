@@ -24,7 +24,7 @@ TODO: add links to claims & research
 
 ## Screenshots!
 
-![screenshots](images/screenshots.gif)
+![screenshots](src/images/screenshots.gif)
 
 
 ## Features

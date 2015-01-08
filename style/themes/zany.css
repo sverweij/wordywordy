@@ -1,0 +1,45 @@
+body{
+    color: rgba(0, 255, 0, 1);
+    background-color: rgba(255, 0, 255, 1);
+    font: normal normal 400 48pt Comic Sans MS, Verdana;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+}
+#__output {
+    border-bottom-color: rgba(255, 255, 0, 1);
+}
+#__toast {
+    color: cyan;
+    opacity: 1;
+}
+#__percentage {
+    background-color: pink;
+    opacity: 1;
+}
+#__status {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+}
+#__status div {
+    opacity: 1;
+}
+@-webkit-keyframes animate {
+    50%{
+        -webkit-transform: scale(0.99);
+        transform: scale(0.99);
+    }
+}
+@keyframes animate {
+    50%{
+        transform: scale(0.99);
+    }
+}
+div.outputwrap {
+    -webkit-animation-name: animate;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-name: animate;
+    animation-iteration-count: infinite;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+}

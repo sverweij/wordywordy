@@ -17,19 +17,13 @@ SEDVERSION=utl/sedversion.sh
 NPM=npm
 DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
-GENERATED_SOURCES_WEB=
-GENERATED_SOURCES_NODE=
-GENERATED_SOURCES=$(GENERATED_SOURCES_WEB) $(GENERATED_SOURCES_NODE)
-SCRIPT_SOURCES_NODE=
-SOURCES_NODE=$(GENERATED_SOURCES_NODE) $(SCRIPT_SOURCES_NODE)
-PRODDIRS=font images
-LIB_SOURCES_WEB=
+PRODDIRS=style font images script lib
+LIB_SOURCES_WEB=src/lib/require.js
 SCRIPT_SOURCES_WEB=
 SOURCES_WEB=$(GENERATED_SOURCES_WEB) $(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
-EMBED_SOURCES_WEB=$(GENERATED_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
-FAVICONMASTER=images/wordywordy.png
+FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=favicon.ico
-VERSIONEMBEDDABLESOURCES=index.html
+VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
 
 .PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites build-prerequisites-node report test
 
@@ -59,11 +53,23 @@ help:
 	#
 # production rules
 
-%.html: src.%.html tracking.id tracking.host VERSION
+%.html: src/%.html
 	$(SEDVERSION) < $< > $@
 
-style/%.css: style/src.%.css
-	cp $< $@
+font/: src/font
+	cp -R $< .
+
+style/: src/style
+	cp -R $< .
+
+images/: src/images
+	cp -R $< .
+
+lib/: src/lib
+	cp -R $< .
+
+script:
+	mkdir $@
 
 favicon.ico: $(FAVICONMASTER)
 	$(PNG2FAVICO) $< $@
@@ -74,15 +80,24 @@ favicon-%.png: $(FAVICONMASTER)
 iosfavicon-%.png: $(FAVICONMASTER)
 	$(IOSRESIZE) $< $@ 
 
-$(PRODDIRS):
-	mkdir $@
 
 # file targets dev
 
-src.index.html: 
 
 # file targets prod
-index.html: $(PRODDIRS) src.index.html images/ samples/ $(FAVICONS) siteverification.id tracking.id tracking.host
+index.html: $(PRODDIRS) src/index.html images/ $(FAVICONS) siteverification.id tracking.id tracking.host script/wordywordy.js style/wordywordy.css
+
+script/wordywordy.js: src/wordywordy.js 
+	$(RJS) -o baseUrl="./src/script" \
+			name="wordywordy" \
+			out=$@ \
+
+src/wordywordy.js: src/script/ui-control/controler.js
+
+src/script/ui-control/controler.js: src/script/chopper/chopper.js src/script/utl/formatting.js src/script/utl/paramslikker.js src/script/utl/stopwatch.js
+
+src/script/chopper/chopper.js: src/script/utl/formatting.js
+
 
 siteverification.id:
 	@echo yoursiteverifactionidhere > $@
@@ -101,25 +116,25 @@ lib/require.js: src/lib/require.js
 
 # "phony" targets
 build-prerequisites:
-	$(NPM) install jshint plato mocha istanbul csslint
+	$(NPM) install requirejs jshint plato mocha istanbul csslint
 
 prerequisites: build-prerequisites
 
-dev-build: $(GENERATED_SOURCES_NODE) src.index.html
+dev-build: src/index.html
 
 noconsolestatements:
 	@echo "scanning for console statements (run 'make consolecheck' to see offending lines)"
-	grep -r console src.index.html | grep -c console | grep ^0$$
+	grep -r console src/index.html | grep -c console | grep ^0$$
 	@echo ... ok
 
 consolecheck:
-	grep -r console src.index.html
+	grep -r console src/index.html
 
 csslint:
-	$(CSSLINT) src.index.html
+	$(CSSLINT) src/index.html
 
 lint:
-	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src.index.html
+	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html
 
 cover: dev-build
 	$(COVER) cover $(MOCHA_FORK) src/script/test/
@@ -155,10 +170,8 @@ somewhatclean:
 	rm -rf index.html
 	rm -rf jsdoc
 	rm -rf coverage
+	rm -rf $(PRODDIRS)
 	rm -rf testcoverage-report
 
-mostlyclean: somewhatclean
-	rm -rf $(GENERATED_SOURCES)
-
-clean: mostlyclean
+clean: somewhatclean
 	rm -rf $(FAVICONS)

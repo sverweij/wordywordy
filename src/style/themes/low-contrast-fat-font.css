@@ -1,0 +1,8 @@
+body{
+    color: rgba(60, 60, 60, 1);
+    background-color: rgba(0, 0, 0, 1);
+    font: normal normal 400 48pt Roboto, sans-serif;
+}
+#__output {
+    border-bottom-color: rgba(60, 60, 60, 0.5);
+}
