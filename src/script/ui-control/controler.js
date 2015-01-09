@@ -249,7 +249,8 @@ define(["../chopper/chopper",
          * piece of code...
          */
 
-        var lStyleSheets = document.querySelectorAll("style");
+        // var lStyleSheets = document.querySelectorAll("style");
+        var lStyleSheets = document.querySelectorAll("link[type='text/css']");
         var lStyleMetaTag = document.querySelectorAll("meta[http-equiv=Default-Style]")[0];
         var lStyleSheetsLength = lStyleSheets.length;
 
