@@ -19,8 +19,12 @@ DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
 PRODDIRS=style font images script lib
 LIB_SOURCES_WEB=src/lib/require.js
-SCRIPT_SOURCES_WEB=
-SOURCES_WEB=$(GENERATED_SOURCES_WEB) $(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
+SCRIPT_SOURCES_WEB=src/script/ui-control/controler.js \
+	src/script/chopper/chopper.js \
+	src/script/utl/formatting.js \
+	src/script/utl/paramslikker.js \
+	src/script/utl/stopwatch.js
+SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=favicon.ico
 VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
@@ -85,7 +89,14 @@ iosfavicon-%.png: $(FAVICONMASTER)
 
 
 # file targets prod
-index.html: $(PRODDIRS) src/index.html images/ $(FAVICONS) siteverification.id tracking.id tracking.host script/wordywordy.js style/wordywordy.css
+index.html: $(PRODDIRS) \
+	src/index.html \
+	$(FAVICONS) \
+	siteverification.id \
+	tracking.id \
+	tracking.host \
+	script/wordywordy.js \
+	style/wordywordy.css
 
 script/wordywordy.js: src/wordywordy.js 
 	$(RJS) -o baseUrl="./src/script" \
@@ -94,10 +105,12 @@ script/wordywordy.js: src/wordywordy.js
 
 src/wordywordy.js: src/script/ui-control/controler.js
 
-src/script/ui-control/controler.js: src/script/chopper/chopper.js src/script/utl/formatting.js src/script/utl/paramslikker.js src/script/utl/stopwatch.js
+src/script/ui-control/controler.js: src/script/chopper/chopper.js \
+	src/script/utl/formatting.js \
+	src/script/utl/paramslikker.js \
+	src/script/utl/stopwatch.js
 
 src/script/chopper/chopper.js: src/script/utl/formatting.js
-
 
 siteverification.id:
 	@echo yoursiteverifactionidhere > $@
