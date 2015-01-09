@@ -23,7 +23,8 @@ SCRIPT_SOURCES_WEB=src/script/ui-control/controler.js \
 	src/script/chopper/chopper.js \
 	src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
-	src/script/utl/stopwatch.js
+	src/script/utl/stopwatch.js \
+	src/script/utl/browserutl.js
 SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=favicon.ico
@@ -108,7 +109,8 @@ src/wordywordy.js: src/script/ui-control/controler.js
 src/script/ui-control/controler.js: src/script/chopper/chopper.js \
 	src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
-	src/script/utl/stopwatch.js
+	src/script/utl/stopwatch.js \
+	src/script/utl/browserutl.js
 
 src/script/chopper/chopper.js: src/script/utl/formatting.js
 
@@ -144,7 +146,7 @@ consolecheck:
 	grep -r console src/index.html
 
 csslint:
-	$(CSSLINT) src/index.html
+	$(CSSLINT) src/style/*.css src/style/themes/*.css
 
 lint:
 	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html
