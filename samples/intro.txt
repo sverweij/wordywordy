@@ -6,7 +6,7 @@ Go on.
 
 Adjust it while you are at it. Faster={up}. Slower={down}.
 
-Here is some text to test if the reading speed is comfortable, while you are twiddling the {up} and {down} keys. (What? You weren't? go on! {up} , {up} , {up}!). As a reference: when you are an average adult person you will probably read books and papers at a rate of about 240 words per minute. When that seems too fast for you: RELAX. You're <em>NOT</em> <em>average</em>. Being NOT AVERAGE is TOTALY OK. Even better: WordyWordy was created with you in mind.
+Here is some text to test if the reading speed is comfortable, while you are twiddling the {up} and {down} keys. (What? You weren't? go on! {up} , {up} , {up}!). As a reference: when you are an average adult person you will probably read books and papers at a rate of about 240 words per minute. When that seems too fast for you: RELAX. You're NOT average. Being NOT AVERAGE is TOTALY OK. Even better: WordyWordy was created with you in mind.
 
 On the other hand, if faster seems to do it for you: knock yourself out! There's people who claim they can read at 400 words per minute. There's even people who claim they can read faster than that, although I don't believe them :-).
 
@@ -74,4 +74,4 @@ You might have noticed the {FOLDER} icon on the bottom of this screen (if it's n
 
 Just remember that, at this time, WordyWordy only knows how to handle plain text files, so it doesn't know what to do with word documents or ebook formats like ePub. I might want to tell it some day, but it will take some time...
 
-Hey you! <b>Wow</b>! Thanks for reading up to here! You're <em>awesome</em>. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {.} (dot) or {,} (comma) key after WordyWordy has given its smile and you'll see the nerdy stats.
+Hey you! Wow! Thanks for reading up to here! You're awesome. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {.} (dot) or {,} (comma) key after WordyWordy has given its smile and you'll see the nerdy stats.
