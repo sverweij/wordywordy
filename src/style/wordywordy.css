@@ -120,7 +120,7 @@ body {
     font-weight: 300;
     font-size: 48pt;
 }
-div.outputwrap {
+.outputwrap {
     width:100%;
     position: absolute;
     text-align: center;
@@ -360,7 +360,7 @@ div.outputwrap {
   font-size: 60%;
   padding: 0.25em 0.25em 0.25em 0.25em;
   opacity: 0.6;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
   display: inline;
 }
 #__controls button {
