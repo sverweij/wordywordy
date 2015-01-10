@@ -136,7 +136,7 @@ define(["../chopper/chopper",
 
     function updateStatus() {
         var lTimeElapsed = rStopwatch.getTimeElapsed();
-        var lMinutesRead = (lTimeElapsed)/MILLISECONDS_PER_MINUTE;
+        var lMinutesRead = lTimeElapsed/MILLISECONDS_PER_MINUTE;
 
         var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed/ lMinutesRead : 0;
         var lTimeToGo    = words.getEstimatedTimeToGo();
@@ -309,7 +309,7 @@ define(["../chopper/chopper",
     }
     function dragLeave(pEvent){
         pEvent.preventDefault();
-         window.__output.className="breathing";
+         window.__output.className="";
     }
     function dragStart(pEvent){
         pEvent.preventDefault();
@@ -320,7 +320,7 @@ define(["../chopper/chopper",
     }
     function dragEnd(pEvent){
         pEvent.preventDefault();
-        window.__output.className = "breathing";
+        window.__output.className = "";
     }
     function hasTextMime(pKindOfIterableObject){
         for (var i=0;i<pKindOfIterableObject.length;i++){
@@ -410,7 +410,7 @@ define(["../chopper/chopper",
             slowDown();
         }
         if ( UP_KEY === pEvent.keyCode ||
-             W_KEY == pEvent.keyCode ) {
+             W_KEY === pEvent.keyCode ) {
             speedUp();
         }
         if ( O_KEY === pEvent.keyCode ) {
@@ -472,7 +472,7 @@ define(["../chopper/chopper",
 
     rReader.addEventListener("loadend", loadend);
 
-    function oink (pEvent){
+    function inputFileOnChange (pEvent){
         if (pEvent.target.files.length > 0){
             var lFile = pEvent.target.files[0];
             if (lFile.type === "text/plain"){
@@ -500,108 +500,117 @@ define(["../chopper/chopper",
         rHoveringOverControls = false;
     }
 
-    window.__droparea.addEventListener("drag", drag, true);
-    window.__droparea.addEventListener("dragenter", dragEnter, true);
-    window.__droparea.addEventListener("dragleave", dragLeave, true);
-    window.__droparea.addEventListener("dragstart", dragStart, true);
-    window.__droparea.addEventListener("dragover", dragOver, true);
-    window.__droparea.addEventListener("dragend", dragEnd, true);
-    window.__droparea.addEventListener("paste", paste, true);
-    window.__droparea.addEventListener("drop", drop, true);
-    window.__percentagewrap.addEventListener("click", percentageClick, true);
-    window.__uparea.addEventListener("click", speedUp, true);
-    window.__downarea.addEventListener("click", slowDown, true);
-    window.__leftarea.addEventListener("click", dec, true);
-    window.__rightarea.addEventListener("click", playpause, true);
-    window.__input_file.addEventListener("change", oink, true);
-    window.__btn_open.addEventListener("click", openFile, true);
-    window.__btn_home.addEventListener("click", home, true);
-    window.__btn_dec.addEventListener("click", dec, true);
-    window.__btn_playpause.addEventListener("click", playpause, false);
-    window.__btn_inc.addEventListener("click", inc, true);
-    window.__btn_end.addEventListener("click", end, true);
-    window.__btn_slowdown.addEventListener("click", slowDown, true);
-    window.__btn_speedup.addEventListener("click", speedUp, true);
-    window.__btn_info.addEventListener("click", toggleStatus, true);
-    window.document.body.addEventListener("keydown", keydown, true);
-    window.document.body.addEventListener("wheel", wheel, true);
-    window.document.body.addEventListener("mousemove", mousemove, true);
-    window.__controls.addEventListener("mouseover", controlsMouseover, true);
-    window.__controls.addEventListener("mouseout", controlsMouseout, true);
-
-
-    if (localStorageOK()) {
-        if (localStorage.getItem(LS_KEY_SPEED)){
-            words.setSpeed(localStorage.getItem(LS_KEY_SPEED));
-        }
-        if (localStorage.getItem(LS_KEY_BUFFER)){
-            words.init(localStorage.getItem(LS_KEY_BUFFER));
-        }
-        if (localStorage.getItem(LS_KEY_TITLE)){
-            setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
-        }
-        if (localStorage.getItem(LS_KEY_POSITION)){
-            words.setPosition(localStorage.getItem(LS_KEY_POSITION));
-            displayWord(words.getCurrentWord());
-        }
-        if (localStorage.getItem(LS_KEY_THEME)){
-            setTheme(localStorage.getItem(LS_KEY_THEME));
-        }
+    function addEventListeners(){
+        window.__droparea.addEventListener("drag", drag, true);
+        window.__droparea.addEventListener("dragenter", dragEnter, true);
+        window.__droparea.addEventListener("dragleave", dragLeave, true);
+        window.__droparea.addEventListener("dragstart", dragStart, true);
+        window.__droparea.addEventListener("dragover", dragOver, true);
+        window.__droparea.addEventListener("dragend", dragEnd, true);
+        window.__droparea.addEventListener("paste", paste, true);
+        window.__droparea.addEventListener("drop", drop, true);
+        window.__percentagewrap.addEventListener("click", percentageClick, true);
+        window.__uparea.addEventListener("click", speedUp, true);
+        window.__downarea.addEventListener("click", slowDown, true);
+        window.__leftarea.addEventListener("click", dec, true);
+        window.__rightarea.addEventListener("click", playpause, true);
+        window.__input_file.addEventListener("change", inputFileOnChange, true);
+        window.__btn_open.addEventListener("click", openFile, true);
+        window.__btn_home.addEventListener("click", home, true);
+        window.__btn_dec.addEventListener("click", dec, true);
+        window.__btn_playpause.addEventListener("click", playpause, false);
+        window.__btn_inc.addEventListener("click", inc, true);
+        window.__btn_end.addEventListener("click", end, true);
+        window.__btn_slowdown.addEventListener("click", slowDown, true);
+        window.__btn_speedup.addEventListener("click", speedUp, true);
+        window.__btn_info.addEventListener("click", toggleStatus, true);
+        window.document.body.addEventListener("keydown", keydown, true);
+        window.document.body.addEventListener("wheel", wheel, true);
+        window.document.body.addEventListener("mousemove", mousemove, true);
+        window.__controls.addEventListener("mouseover", controlsMouseover, true);
+        window.__controls.addEventListener("mouseout", controlsMouseout, true);
     }
 
-    if (rParams.speed) {
-        words.setSpeed(rParams.speed);
+
+    function retrieveStateFromLocalStorage() {
+        if (localStorageOK()) {
+            if (localStorage.getItem(LS_KEY_SPEED)){
+                words.setSpeed(localStorage.getItem(LS_KEY_SPEED));
+            }
+            if (localStorage.getItem(LS_KEY_BUFFER)){
+                words.init(localStorage.getItem(LS_KEY_BUFFER));
+            }
+            if (localStorage.getItem(LS_KEY_TITLE)){
+                setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
+            }
+            if (localStorage.getItem(LS_KEY_POSITION)){
+                words.setPosition(localStorage.getItem(LS_KEY_POSITION));
+                displayWord(words.getCurrentWord());
+            }
+            if (localStorage.getItem(LS_KEY_THEME)){
+                setTheme(localStorage.getItem(LS_KEY_THEME));
+            }
+        }
     }
-    if (rParams.theme) {
-        setTheme(rParams.theme);
-    }
-    if (rParams.text) {
-        words.init(decodeURIComponent(rParams.text));
-        displayWord(words.getCurrentWord());
-        updateTimeToGo();
-        rDocumentTitle = "url";
-    }
-    if (rParams.pos) {
-        words.setPosition(rParams.pos);
-        displayWord(words.getCurrentWord());
-    }
-    if (rParams.loop && fmt.sanitizeBooleanesque(rParams.loop)) {
-        rLoop = true;
-    } else {
-        rLoop = false;
-    }
-    if (rParams.play && fmt.sanitizeBooleanesque(rParams.play)) {
-        window.setTimeout(play, INITIAL_DISPLAY_DELAY);
-    }
-    var rCannedTexts = {
-      "thoughts": "samples/thoughts.txt",
-      "1984":"samples/1984.txt",
-      "freedom": "samples/freedom.txt",
-      "intro": "samples/intro.txt",
-      "laozi": "samples/laozi.txt"
-    };
-    if (!(rParams.text) && rParams.canned ){
-        butl.ajax (decodeURIComponent(rCannedTexts[rParams.canned]), function(pEvent){
-            words.init(pEvent.target.response);
+
+    function processParameters() {
+        if (rParams.speed) {
+            words.setSpeed(rParams.speed);
+        }
+        if (rParams.theme) {
+            setTheme(rParams.theme);
+        }
+        if (rParams.text) {
+            words.init(decodeURIComponent(rParams.text));
             displayWord(words.getCurrentWord());
             updateTimeToGo();
-            rDocumentTitle = rParams.canned;
-        }, function (){
-            // toast("Can't load that :-/");
+            rDocumentTitle = "url";
         }
-        );
-    }
-    if (!(rParams.text) && rParams.url ){
-        butl.ajax (decodeURIComponent(rParams.url), function(pEvent){
-            words.init(pEvent.target.response);
+        if (rParams.pos) {
+            words.setPosition(rParams.pos);
             displayWord(words.getCurrentWord());
-            updateTimeToGo();
-            rDocumentTitle = rParams.url;
-        }, function (){
-            // toast("Can't load that :-/");
         }
-        );
+        if (rParams.loop && fmt.sanitizeBooleanesque(rParams.loop)) {
+            rLoop = true;
+        } else {
+            rLoop = false;
+        }
+        if (rParams.play && fmt.sanitizeBooleanesque(rParams.play)) {
+            window.setTimeout(play, INITIAL_DISPLAY_DELAY);
+        }
+        var rCannedTexts = {
+          "thoughts": "samples/thoughts.txt",
+          "1984":"samples/1984.txt",
+          "freedom": "samples/freedom.txt",
+          "intro": "samples/intro.txt",
+          "laozi": "samples/laozi.txt"
+        };
+        if (!(rParams.text) && rParams.canned ){
+            butl.ajax (decodeURIComponent(rCannedTexts[rParams.canned]), function(pEvent){
+                words.init(pEvent.target.response);
+                displayWord(words.getCurrentWord());
+                updateTimeToGo();
+                rDocumentTitle = rParams.canned;
+            }, function (){
+                // toast("Can't load that :-/");
+            }
+            );
+        }
+        if (!(rParams.text) && rParams.url ){
+            butl.ajax (decodeURIComponent(rParams.url), function(pEvent){
+                words.init(pEvent.target.response);
+                displayWord(words.getCurrentWord());
+                updateTimeToGo();
+                rDocumentTitle = rParams.url;
+            }, function (){
+                // toast("Can't load that :-/");
+            }
+            );
+        }
     }
+    addEventListeners();
+    retrieveStateFromLocalStorage();
+    processParameters();
 });
 
 /*
