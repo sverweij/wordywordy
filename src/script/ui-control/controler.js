@@ -45,7 +45,6 @@ define(["../chopper/chopper",
     var Q_KEY        = 81;
     var S_KEY        = 83;
     var T_KEY        = 84;
-    var V_KEY        = 86;
     var W_KEY        = 87;
     var PAGEUP_KEY   = 33;
     var PAGEDOWN_KEY = 34;
@@ -236,9 +235,31 @@ define(["../chopper/chopper",
     }
 
     function setTheme(pThemeNumber){
-        var lStyleSheetTitle = butl.selectStyleSheet(pThemeNumber);
+        var lStyleSheets = [ 
+         {title: "Zany", href: "style/themes/zany.css"},
+         {title: "Sepia", href: "style/themes/sepia.css"},
+         {title: "Day", href: "style/themes/day.css"},
+         {title: "Night", href: "style/themes/night.css"},
+         {title: "Low contrast", href: "style/themes/low-contrast.css"},
+         {title: "High contrast", href: "style/themes/high-contrast.css"},
+         {title: "Dyslexia - sepia", href: "style/themes/dyslexia-sepia.css"},
+         {title: "Dyslexia - day", href: "style/themes/dyslexia-day.css"},
+         {title: "Dyslexia - night", href: "style/themes/dyslexia-night.css"},
+         {title: "Dyslexia - low contrast", href: "style/themes/dyslexia-low-contrast.css"},
+         {title: "Dyslexia - high contrast", href: "style/themes/dyslexia-high-contrast.css"},
+         {title: "Low contrast fat font", href: "style/themes/low-contrast-fat-font.css"},
+         {title: "Sepia fat font", href: "style/themes/sepia-fat-font.css"},
+         {title: "220", href: "style/themes/220.css"},
+         {title: "057", href: "style/themes/057.css"},
+         {title: "074", href: "style/themes/074.css"},
+         {title: "HV", href: "style/themes/hv.css"},
+         {title: "liberal", href: "style/themes/liberal.css"},
+         {title: "progressive", href: "style/themes/progressive.css"}
+        ];
+        pThemeNumber = Math.max(Math.min(pThemeNumber, lStyleSheets.length), 0);
+        window.customtheme.href=lStyleSheets[pThemeNumber].href;
 
-        toast(lStyleSheetTitle);
+        toast(lStyleSheets[pThemeNumber].title);
         if (localStorageOK()){
             localStorage.setItem(LS_KEY_THEME, pThemeNumber);
         }
@@ -422,9 +443,6 @@ define(["../chopper/chopper",
             }
             toast("position saved");
         }
-        if ( V_KEY === pEvent.keyCode ) {
-            toast(rAppName + " ${version}");
-        }
         if (ONE_KEY   === pEvent.keyCode) { setTheme(1); }
         if (TWO_KEY   === pEvent.keyCode) { setTheme(2); }
         if (THREE_KEY === pEvent.keyCode) { setTheme(3); }
@@ -437,7 +455,7 @@ define(["../chopper/chopper",
         if (ZERO_KEY  === pEvent.keyCode) { setTheme(10); }
         if ( SECTION_KEY_FF === pEvent.keyCode ||
              SECTION_KEY    === pEvent.keyCode) {
-            setTheme(11);
+            setTheme(0);
         }
         window.__droparea.value = "";
     }
