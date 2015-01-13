@@ -5,7 +5,7 @@ body{
 }
 #__output {
     border-bottom-color: rgba(253, 122, 0, 1);
-    border-bottom-width: 6px;
+    border-bottom-width: 14px;
 }
 #__percentage {
     background-color: rgba(253, 122, 0, 1);
