@@ -256,12 +256,20 @@ define(["../chopper/chopper",
          {title: "liberal", href: "style/themes/liberal.css"},
          {title: "progressive", href: "style/themes/progressive.css"}
         ];
-        pThemeNumber = Math.max(Math.min(pThemeNumber, lStyleSheets.length), 0);
-        window.customtheme.href=lStyleSheets[pThemeNumber].href;
+        var lThemeNumber =
+            Math.max(
+                Math.min(
+                    fmt.sanitizeNumber(pThemeNumber,1),
+                    lStyleSheets.length-1
+                ),
+                0
+            );
+        console.log(lThemeNumber);
+        window.customtheme.href=lStyleSheets[lThemeNumber].href;
 
-        toast(lStyleSheets[pThemeNumber].title);
+        toast(lStyleSheets[lThemeNumber].title);
         if (localStorageOK()){
-            localStorage.setItem(LS_KEY_THEME, pThemeNumber);
+            localStorage.setItem(LS_KEY_THEME, lThemeNumber);
         }
     }
 
