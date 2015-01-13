@@ -389,6 +389,12 @@ body {
         bottom: inherit;
         top: 0;
     }
+    #__toast {
+        bottom: inherit;
+        top: 10%;
+        margin-top: 0;
+        font-size: 0.7em;
+    }
 }
 
 /* default style: sepia */
