@@ -1,6 +1,6 @@
 /* jshint browser:true */
 /* global define */
-define(["./formatting"], function(fmt){
+define([], function(){
     "use strict";
 
     return {

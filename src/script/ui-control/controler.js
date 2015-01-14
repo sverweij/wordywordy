@@ -264,7 +264,6 @@ define(["../chopper/chopper",
                 ),
                 0
             );
-        console.log(lThemeNumber);
         window.customtheme.href=lStyleSheets[lThemeNumber].href;
 
         toast(lStyleSheets[lThemeNumber].title);
@@ -422,7 +421,7 @@ define(["../chopper/chopper",
         }
         if (  PAGEDOWN_KEY === pEvent.keyCode ||
               E_KEY === pEvent.keyCode) {
-            words.gotoEndOfSentence();
+            words.gotoStartOfNextSentence();
             updateNavigation(true);
         }
         if ( RIGHT_KEY === pEvent.keyCode ||

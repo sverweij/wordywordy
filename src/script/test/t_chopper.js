@@ -42,12 +42,18 @@ describe('chopper', function() {
             chop.decSpeed(5);
             assert.equal(100, chop.getSpeed());
         });
-
         it ('goes to start of current sentence', function(){
             chop.setPosition(17);
             chop.gotoStartOfSentence();
             assert.equal(10, chop.getPosition());
             assert.equal("'t", chop.getCurrentWord());
+        });
+        it ('goes to start of previous sentence when current word is start of current sentence', function(){
+            chop.setPosition(17);
+            chop.gotoStartOfSentence();
+            chop.gotoStartOfSentence();
+            assert.equal(0, chop.getPosition());
+            assert.equal("Jantje", chop.getCurrentWord());
         });
         it ('goes to end of current sentence', function(){
             chop.setPosition(3);
@@ -60,6 +66,12 @@ describe('chopper', function() {
             chop.gotoStartOfSentence();
             assert.equal(0, chop.getPosition());
             assert.equal("Jantje", chop.getCurrentWord());
+        });
+        it ('goes to start of next sentence', function(){
+            chop.setPosition(3);
+            chop.gotoStartOfNextSentence();
+            assert.equal(10, chop.getPosition());
+            assert.equal("'t", chop.getCurrentWord());
         });
     });
 });

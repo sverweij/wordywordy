@@ -137,6 +137,9 @@ define(["../utl/formatting"], function(fmt) {
 
     function _gotoStartOfSentence() {
         var lFound = false;
+        if (rAry[rPosition-1] && rAry[rPosition-1].match(SENTENCE_END_RE)){
+            rPosition--;
+        }
         if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
             rPosition--;
         }
@@ -145,6 +148,17 @@ define(["../utl/formatting"], function(fmt) {
             if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
                 lFound = true;
                 rPosition += 2;
+            }
+        }
+    }
+
+    function _gotoStartOfNextSentence(){
+        var lFound = false;
+
+        var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rLength);
+        for (rPosition; (!lFound && (rPosition < lLimit)); rPosition++){
+            if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
+                lFound = true;
             }
         }
     }
@@ -228,7 +242,8 @@ define(["../utl/formatting"], function(fmt) {
         incPosition: _incPosition,
         decPosition: _decPosition,
         gotoEndOfSentence: _gotoEndOfSentence,
-        gotoStartOfSentence: _gotoStartOfSentence
+        gotoStartOfSentence: _gotoStartOfSentence,
+        gotoStartOfNextSentence: _gotoStartOfNextSentence
     };
 });
 
