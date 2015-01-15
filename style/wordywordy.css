@@ -363,13 +363,14 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
   display: inline;
 }
-#__controls button {
+#__controls span {
+  cursor: pointer;
   color: inherit;
   background-color: inherit;
   font-family: inherit;
   font-size: inherit;
-  box-shadow: none;
-  border: none;
+  border: 0;
+  padding: 0.2em;
 }
 #__controls nav:hover {
   opacity: 0.9;
@@ -379,7 +380,18 @@ body {
         display:none;
     }
     #__controls {
+        width: 100%;
         bottom: 0;
+    }
+    #__controls nav {
+        word-spacing: 0;
+        white-space: nowrap;
+        width: 100%;
+        box-shadow: 0;
+        bottom: 0;
+    }
+    #__controls span {
+      padding:0.06em;
     }
     #__percentagewrap {
         bottom: inherit;
