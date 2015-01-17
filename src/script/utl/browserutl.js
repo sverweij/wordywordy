@@ -18,7 +18,11 @@ define([], function(){
             lHttpRequest.open('GET', pURL);
             lHttpRequest.responseType = "text";
             lHttpRequest.send();
+        },
+        localStorageOK: function (){
+            return (typeof localStorage !== 'undefined');
         }
+
     };
 });
 /*
@@ -31,9 +35,9 @@ define([], function(){
 
  WordyWordy is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNEdq.SS FOR A PARTICULAR PURPOSE.  See the
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
  along with WordyWordy.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/

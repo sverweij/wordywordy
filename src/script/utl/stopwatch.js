@@ -48,7 +48,6 @@ define([], function() {
 
     return {Stopwatch: Stopwatch};
 });
-
 /*
  This file is part of WordyWordy.
 
@@ -64,4 +63,4 @@ define([], function() {
 
  You should have received a copy of the GNU General Public License
  along with WordyWordy.  If not, see <http://www.gnu.org/licenses/>.
-*/ 
+*/
