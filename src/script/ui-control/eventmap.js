@@ -131,6 +131,10 @@ define(["./actions"], function(actions) {
                 rKey2Func[rCode2Key[pEvent.keyCode]].func();
             }
         }
+        /*
+         * to prevent keystrokes getting characters into the drop area ...
+         */
+        window.__droparea.value = "";
     }
 
     function wheel (pEvent){
