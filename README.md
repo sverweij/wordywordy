@@ -47,17 +47,17 @@ You'll figure this out in a pinch. Probably without even checking this table. Tr
 
 When you want this         |  keyboard                        | mouse        
 -------------------------- | -------------------------------- | ---------------------------------
-pause/ play                | `SPACE` or `ENTER`               | click the _right_ of the screen
-go slower                  | `DOWN` or `s`                    | click the _bottom_ of the screen
-go faster                  | `UP` or `w`                      | click the _top_ of the screen
-go back a word             | `LEFT` or `a`                    | scroll down
-go back a sentence         | `PAGEUP` or `q`                  | click the _left_ of the screen
-go forward a word          | `RIGHT` or `d`                   | scroll up
+pause/ play                | `SPACE` or `ENTER`               | click the "play" button (~ :arrow_forward:)
+go slower                  | `DOWN` or `s`                    | click the button with the down arrow
+go faster                  | `UP` or `w`                      | click the button with the up arrow
+go back a word             | `LEFT` or `a`                    | scroll down or click the "next" button
+go back a sentence         | `PAGEUP` or `q`                  | -
+go forward a word          | `RIGHT` or `d`                   | scroll up or click the "previous" button
 go forward a sentence      | `PAGEDOWN` or `e`                | -
-go to start of text        | `HOME`                           | -
-change Theme               | `1`, `2`, ..., `9`, `0`          | -
+go to start of text        | `HOME`                           | click the "home" button
+change Theme               | `1`, `2`, ..., `9`, `0`          | click the button with cycle (~:arrows_counterclockwise:)
 show amount of time left   | `t`                              | - 
-show stats                 | `.` or `,`                       | - 
+show stats                 | `.` or `,`                       | click the (i) button
 save current position      | `b`                              | - 
 jump to position           | not implemented yet              | click in the progress bar (bottom)
 clear                      | `c`                              | -
