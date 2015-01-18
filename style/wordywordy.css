@@ -1,25 +1,25 @@
 @font-face {
-    font-family: 'controls';
-    src:url('../font/controls.eot?-i9on8r');
-    src:url('../font/controls.eot?#iefix-i9on8r') format('embedded-opentype'),
-        url('../font/controls.woff?-i9on8r') format('woff'),
-        url('../font/controls.ttf?-i9on8r') format('truetype'),
-        url('../font/controls.svg?-i9on8r#controls') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'controls';
+  src:url('../font/controls.eot?-i9on8r');
+  src:url('../font/controls.eot?#iefix-i9on8r') format('embedded-opentype'),
+    url('../font/controls.woff?-i9on8r') format('woff'),
+    url('../font/controls.ttf?-i9on8r') format('truetype'),
+    url('../font/controls.svg?-i9on8r#controls') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 [class^="icon-"], [class*=" icon-"] {
-    font-family: 'controls';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+  font-family: 'controls';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .icon-film:before { content: "\e913"; }
 .icon-video-camera:before { content: "\e914"; }
@@ -67,298 +67,312 @@
 .icon-embed:before { content: "\ea7f"; }
 .icon-terminal:before { content: "\ea81"; }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 100;
-    font-style       : normal;
-    src: url('../font/Roboto-Thin.ttf');
+  font-family    : "Roboto";
+  font-weight    : 100;
+  font-style     : normal;
+  src: url('../font/Roboto-Thin.ttf');
 }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 100;
-    font-style       : italic;
-    src: url('../font/Roboto-ThinItalic.ttf');
+  font-family    : "Roboto";
+  font-weight    : 100;
+  font-style     : italic;
+  src: url('../font/Roboto-ThinItalic.ttf');
 }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 300;
-    font-style       : normal;
-    src: url('../font/Roboto-Light.ttf');
+  font-family    : "Roboto";
+  font-weight    : 300;
+  font-style     : normal;
+  src: url('../font/Roboto-Light.ttf');
 }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 300;
-    font-style       : italic;
-    src: url('../font/Roboto-LightItalic.ttf');
+  font-family    : "Roboto";
+  font-weight    : 300;
+  font-style     : italic;
+  src: url('../font/Roboto-LightItalic.ttf');
 }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 400;
-    font-style       : normal;
-    src: url('../font/Roboto-Regular.ttf');
+  font-family    : "Roboto";
+  font-weight    : 400;
+  font-style     : normal;
+  src: url('../font/Roboto-Regular.ttf');
 }
 @font-face {
-    font-family      : "Roboto";
-    font-weight      : 400;
-    font-style       : italic;
-    src: url('../font/Roboto-Italic.ttf');
+  font-family    : "Roboto";
+  font-weight    : 400;
+  font-style     : italic;
+  src: url('../font/Roboto-Italic.ttf');
 }
 @font-face {
-    font-family      : "dyslexic";
-    font-weight      : normal;
-    font-style       : normal;
-    src: url('../font/OpenDyslexicAlta-Regular.otf');
+  font-family    : "dyslexic";
+  font-weight    : normal;
+  font-style     : normal;
+  src: url('../font/OpenDyslexicAlta-Regular.otf');
 }
 body, span, div, textarea {
-    margin: 0;
-    border: 0;
-    padding: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 body {
-    background-color: rgba(251, 240, 217, 1);
-    color: rgba(95, 75, 50, 1);
-    font-family: Roboto, sans-serif;
-    font-weight: 300;
-    font-size: 48pt;
+  background-color: rgba(251, 240, 217, 1);
+  color: rgba(95, 75, 50, 1);
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 48pt;
 }
 .outputwrap {
-    width:100%;
-    position: absolute;
-    text-align: center;
-    top: 40%;
-    background-color: inherit;
+  width:100%;
+  position: absolute;
+  text-align: center;
+  top: 40%;
+  background-color: inherit;
 }
 @-webkit-keyframes openmouth {
-    0% {}
-    100% {border-radius:1em; border-width: 0.2em; }
+  0% {}
+  100% {border-radius:1em; border-width: 0.2em; }
 }
 @keyframes openmouth {
-    0% {}
-    100% {border-radius:1em; border-width: 0.2em; }
+  0% {}
+  100% {border-radius:1em; border-width: 0.2em; }
 }
 .openmouth {
-    -webkit-animation-name: openmouth;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-iteration-count:1;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-direction: alternate;
-    -webkit-animation-fill-mode:forwards;
-    animation-name: openmouth;
-    animation-duration: 1s;
-    animation-iteration-count:1;
-    animation-timing-function: linear;
-    animation-direction: alternate;
-    animation-fill-mode:forwards;
+  -webkit-animation-name: openmouth;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count:1;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-fill-mode:forwards;
+  animation-name: openmouth;
+  animation-duration: 1s;
+  animation-iteration-count:1;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-fill-mode:forwards;
 }
 .smile {
-    -webkit-animation-name: openmouth;
-    -webkit-animation-duration: 1.0s;
-    -webkit-animation-iteration-count:2;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-direction: alternate;
-    animation-name: openmouth;
-    animation-duration: 1.0s;
-    animation-iteration-count:2;
-    animation-timing-function: linear;
-    animation-direction: alternate;
+  -webkit-animation-name: openmouth;
+  -webkit-animation-duration: 1.0s;
+  -webkit-animation-iteration-count:2;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+  animation-name: openmouth;
+  animation-duration: 1.0s;
+  animation-iteration-count:2;
+  animation-timing-function: linear;
+  animation-direction: alternate;
 }
 @-webkit-keyframes reload {
-    0% {}
-    85% {
-        padding: 0 0 0.2em 25%;
-        border-radius: 0 0 0 1em;
-        -webkit-filter: blur(0px);
-    }
-    100% {
-        -webkit-filter: blur(0.2em);
-    }
+  0% {}
+  85% {
+    padding: 0 0 0.2em 25%;
+    border-radius: 0 0 0 1em;
+    -webkit-filter: blur(0px);
+  }
+  100% {
+    -webkit-filter: blur(0.2em);
+  }
 }
 @keyframes reload {
-    0% {}
-    85% {
-        padding: 0 0 0.2em 25%;
-        border-radius: 0 0 0 1em;
-        -moz-filter: blur(0px);
-        filter: blur(0px);
-    }
-    100% {
-        -moz-filter: blur(0.2em);
-        filter: blur(0.2em);
-    }
+  0% {}
+  85% {
+    padding: 0 0 0.2em 25%;
+    border-radius: 0 0 0 1em;
+    -moz-filter: blur(0px);
+    filter: blur(0px);
+  }
+  100% {
+    -moz-filter: blur(0.2em);
+    filter: blur(0.2em);
+  }
 }
 .reload {
-    -webkit-animation-name: reload;
-    -webkit-animation-duration: 950ms;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-    animation-name: reload;
-    animation-duration: 950ms;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
+  -webkit-animation-name: reload;
+  -webkit-animation-duration: 950ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  animation-name: reload;
+  animation-duration: 950ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
 }
 @-webkit-keyframes breathe-border {
-    0% { border-color: currentColor; }
-    40% { border-color: rgba(128, 128, 128, 1); }
-    50% { border-color: rgba(128, 128, 128, 1); }
-    60% { border-color: rgba(128, 128, 128, 1); }
-    100% { border-color: currentColor; }
+  0% { border-color: currentColor; }
+  40% { border-color: rgba(128, 128, 128, 1); }
+  50% { border-color: rgba(128, 128, 128, 1); }
+  60% { border-color: rgba(128, 128, 128, 1); }
+  100% { border-color: currentColor; }
 }
 @keyframes breathe-border {
-    0% { border-color: currentColor; }
-    40% { border-color: rgba(128, 128, 128, 1); }
-    50% { border-color: rgba(128, 128, 128, 1); }
-    60% { border-color: rgba(128, 128, 128, 1); }
-    100% { border-color: currentColor; }
+  0% { border-color: currentColor; }
+  40% { border-color: rgba(128, 128, 128, 1); }
+  50% { border-color: rgba(128, 128, 128, 1); }
+  60% { border-color: rgba(128, 128, 128, 1); }
+  100% { border-color: currentColor; }
 }
 .breathing {
-    /*
-     nice idea. Strangely, saps a lot of energy.
+  /*
+   nice idea. Strangely, saps a lot of energy.
 
-    -webkit-animation-name: breathe-border;
-    -webkit-animation-duration: 6s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: ease-in-out;
-    animation-name: breathe-border;
-    animation-duration: 6s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    */
+  -webkit-animation-name: breathe-border;
+  -webkit-animation-duration: 6s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-name: breathe-border;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  */
 }
 .playing {
 }
 #__output {
-    padding: 0 0.6em 0.2em 0.6em;
-    border-bottom: 3px solid currentColor; /*accent*/
-    background-color: inherit;
+  padding: 0 0.6em 0.2em 0.6em;
+  border-bottom: 3px solid currentColor; /*accent*/
+  background-color: inherit;
 }
 #__percentagewrap {
-    position: fixed;
-    bottom:0;
-    left:0;
-    height: 0.3em;
-    width: 100%;
-    z-index: 3;
+  position: fixed;
+  bottom:0;
+  left:0;
+  height: 0.2em;
+  width: 100%;
+  z-index: 3;
 }
 #__percentage {
-    background-color:currentColor; /*accent*/
-    opacity: 0.5;
-    text-align: left;
-    height: 0.2em;
-    width: 0;
-    bottom: 0;
-    position:absolute;
+  background-color:currentColor; /*accent*/
+  opacity: 0.5;
+  text-align: left;
+  height: inherit;
+  width: 0;
+  bottom: 0;
+  position:absolute;
+}
+#__actionbar {
+  font-family: sans-serif;
+  font-size: 60%;
+  position: fixed;
+  top:0;
+  width: 1em;
+  z-index: 4;
+  margin-top: 0.5em;
+  padding: 0.25em;
+}
+#__actionbar span:hover {
+  opacity: 1;
+}
+#__actionbar span {
+  cursor: pointer;
+  padding: 0.2em;
+  opacity: 0.5;
 }
 #__droparea {
-    position: fixed;
-    z-index: 1;
-    background-color: transparent;
-    color: transparent;
-    width: 100%;
-    height: 100%;
-    resize: none;
-    cursor: default;
+  position: fixed;
+  z-index: 1;
+  background-color: transparent;
+  color: transparent;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  cursor: default;
 }
 .clickarea {
-    position: fixed;
-    z-index: 2;
-    /*
-    background-color: red;
-    opacity: 0.6;
-    */
+  position: fixed;
+  z-index: 2;
 }
 #__leftarea {
-    position: fixed;
-    width: 20%;
-    left: 0;
-    height: 100%;
+  position: fixed;
+  width: 20%;
+  left: 0;
+  height: 100%;
 }
 #__rightarea {
-    position: fixed;
-    width: 20%;
-    right: 0;
-    height: 100%;
+  position: fixed;
+  width: 20%;
+  right: 0;
+  height: 100%;
 }
 #__uparea {
-    position: fixed;
-    width: 100%;
-    top: 0.3em;
-    height: 20%;
+  position: fixed;
+  width: 100%;
+  top: 0.3em;
+  height: 20%;
 }
 #__downarea {
-    position: fixed;
-    width: 100%;
-    bottom: 0.3em;
-    height: 20%;
+  position: fixed;
+  width: 100%;
+  bottom: 0.3em;
+  height: 20%;
 }
 #__status {
-    width: 100%;
-    position: absolute;
-    text-align: center;
-    display: none;
-    font-size: 0.3em;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  display: none;
+  font-size: 0.3em;
 }
 #__status div {
-    color: inherit; /*accent*/
-    opacity: 0.5;
+  color: inherit; /*accent*/
+  opacity: 0.5;
 }
 #__status table {
-    color: inherit;
-    width: 100%;
-    font-size: inherit;
+  color: inherit;
+  width: 100%;
+  font-size: inherit;
 }
 #__status td {
-    font-weight: 300;
-    text-align: left;
-    font-size: inherit;
+  font-weight: 300;
+  text-align: left;
+  font-size: inherit;
 }
 #__status td:first-child{
-    font-style: italic;
-    padding-right: 1em;
-    text-align: right;
+  font-style: italic;
+  padding-right: 1em;
+  text-align: right;
 }
 #__toast {
-    position: absolute;
-    bottom: 20%;
-    margin-top: 1.4em;
-    width: 100%;
-    height: 1.4em;
-    background-color: transparent;
-    padding-top: 0.4em;
-    /* color: inherit;*/ /*accent*/
-    opacity: 0.5;
-    text-align: center;
-    display: none;
+  position: absolute;
+  bottom: 20%;
+  margin-top: 1.4em;
+  width: 100%;
+  height: 1.4em;
+  background-color: transparent;
+  padding-top: 0.4em;
+  /* color: inherit;*/ /*accent*/
+  opacity: 0.5;
+  text-align: center;
+  display: none;
 }
 
 @keyframes fadeaway {
-    100% {opacity: 0}
+  100% {opacity: 0}
 }
 @-webkit-keyframes fadeaway {
-    0% {}
-    100% {opacity: 0}
+  0% {}
+  100% {opacity: 0}
 }
 .fade-away {
-    -webkit-animation-name: fadeaway;
-    -webkit-animation-duration: 0.3s;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-fill-mode : forwards;
-    animation-name: fadeaway;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-in;
-    animation-fill-mode : forwards;
+  -webkit-animation-name: fadeaway;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-fill-mode : forwards;
+  animation-name: fadeaway;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-fill-mode : forwards;
 }
 #__controls {
+  font-family: controls;
   position: fixed;
   text-align: center;
   width: 99%;
   bottom: .5em;
-  z-index: 481;
+  z-index: 3;
 }
 #__controls nav {
   color: white;
   background-color: black;
-  font-family: controls;
   font-size: 60%;
-  padding: 0.25em 0.25em 0.25em 0.25em;
+  padding: 0.25em;
   opacity: 0.6;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
   display: inline;
@@ -375,46 +389,54 @@ body {
 #__controls nav:hover {
   opacity: 0.9;
 }
+#__natvie_speedslider {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  z-index: 3;
+  position: fixed;
+  height: 100%;
+  left: -50px;
+}
 @media only screen and (max-width: 480px), (max-height: 480px) {
-    .hideonmobile {
-        display:none;
-    }
-    #__controls {
-        width: 100%;
-        bottom: 0;
-    }
-    #__controls nav {
-        word-spacing: 0;
-        white-space: nowrap;
-        width: 100%;
-        box-shadow: 0;
-        bottom: 0;
-    }
-    #__controls span {
-      padding:0.06em;
-    }
-    #__percentagewrap {
-        bottom: inherit;
-        top: 0;
-    }
-    #__percentage {
-        bottom: inherit;
-        top: 0;
-    }
-    #__toast {
-        bottom: inherit;
-        top: 10%;
-        margin-top: 0;
-        font-size: 0.7em;
-    }
+  .hideonmobile {
+    display:none;
+  }
+  #__controls {
+    width: 100%;
+    bottom: 0;
+  }
+  #__controls nav {
+    width: 100%;
+    box-shadow: 0;
+    bottom: 0;
+  }
+  /*
+  #__controls span {
+    padding:0.06em;
+  }
+  */
+  #__percentagewrap {
+    bottom: inherit;
+    top: 0;
+  }
+  #__percentage {
+    bottom: inherit;
+    top: 0;
+  }
+  #__toast {
+    bottom: inherit;
+    top: 10%;
+    margin-top: 0;
+    font-size: 0.7em;
+  }
 }
 
 /* default style: sepia */
 body{
-    color: rgba(95, 75, 50, 1);
-    background-color: rgba(251, 240, 217, 1);
-    font: normal normal 100 48pt Roboto, sans-serif;
+  color: rgba(95, 75, 50, 1);
+  background-color: rgba(251, 240, 217, 1);
+  font: normal normal 100 48pt Roboto, sans-serif;
 }
 #__output {
-    border-bottom-color: rgba(95, 75, 50, 0.5);
+  border-bottom-color: rgba(95, 75, 50, 0.5);
 }
