@@ -234,7 +234,7 @@ body {
   position: fixed;
   bottom:0;
   left:0;
-  height: 0.3em;
+  height: 0.2em;
   width: 100%;
   z-index: 3;
 }
@@ -242,10 +242,28 @@ body {
   background-color:currentColor; /*accent*/
   opacity: 0.5;
   text-align: left;
-  height: 0.2em;
+  height: inherit;
   width: 0;
   bottom: 0;
   position:absolute;
+}
+#__actionbar {
+  font-family: sans-serif;
+  font-size: 60%;
+  position: fixed;
+  top:0;
+  width: 1em;
+  z-index: 4;
+  margin-top: 0.5em;
+  padding: 0.25em;
+}
+#__actionbar span:hover {
+  opacity: 1;
+}
+#__actionbar span {
+  cursor: pointer;
+  padding: 0.2em;
+  opacity: 0.5;
 }
 #__droparea {
   position: fixed;
@@ -343,18 +361,18 @@ body {
   animation-fill-mode : forwards;
 }
 #__controls {
+  font-family: controls;
   position: fixed;
   text-align: center;
   width: 99%;
   bottom: .5em;
-  z-index: 481;
+  z-index: 3;
 }
 #__controls nav {
   color: white;
   background-color: black;
-  font-family: controls;
   font-size: 60%;
-  padding: 0.25em 0.25em 0.25em 0.25em;
+  padding: 0.25em;
   opacity: 0.6;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); /* 0.23 */
   display: inline;
@@ -371,6 +389,14 @@ body {
 #__controls nav:hover {
   opacity: 0.9;
 }
+#__natvie_speedslider {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  z-index: 3;
+  position: fixed;
+  height: 100%;
+  left: -50px;
+}
 @media only screen and (max-width: 480px), (max-height: 480px) {
   .hideonmobile {
     display:none;
@@ -380,15 +406,15 @@ body {
     bottom: 0;
   }
   #__controls nav {
-    word-spacing: 0;
-    white-space: nowrap;
     width: 100%;
     box-shadow: 0;
     bottom: 0;
   }
+  /*
   #__controls span {
     padding:0.06em;
   }
+  */
   #__percentagewrap {
     bottom: inherit;
     top: 0;

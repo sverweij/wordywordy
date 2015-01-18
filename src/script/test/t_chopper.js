@@ -73,5 +73,15 @@ describe('chopper', function() {
             assert.equal(10, chop.getPosition());
             assert.equal("'t", chop.getCurrentWord());
         });
+        it ('Derives the correct speed from a relative value', function(){
+            chop.setSpeedFraction(0.5)
+            assert.equal(330, chop.getSpeed());
+            assert.equal(0.5, chop.getSpeedFraction());
+        });
+        it ('Derives the correct relative speed from an absolute value', function(){
+            chop.setSpeed(465);
+            assert.equal(465, chop.getSpeed());
+            assert.equal(0.75, chop.getSpeedFraction());
+        });
     });
 });

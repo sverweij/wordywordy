@@ -92,20 +92,25 @@ define(["./actions"], function(actions) {
     function drag(pEvent){
         pEvent.preventDefault();
     }
+
     function dragEnter(pEvent){
         pEvent.preventDefault();
     }
+
     function dragLeave(pEvent){
         pEvent.preventDefault();
         window.__output.className="";
     }
+
     function dragStart(pEvent){
         pEvent.preventDefault();
     }
+
     function dragOver(pEvent){
         pEvent.preventDefault();
         window.__output.className = "openmouth";
     }
+
     function dragEnd(pEvent){
         pEvent.preventDefault();
         window.__output.className = "";
@@ -204,6 +209,7 @@ define(["./actions"], function(actions) {
         window.__rightarea.addEventListener("click", actions.playpause, true);
         window.__input_file.addEventListener("change", inputFileOnChange, true);
         window.__btn_open.addEventListener("click", actions.openFile, true);
+        window.__btn_theme.addEventListener("click", actions.cycleTheme, true);
         window.__btn_home.addEventListener("click", actions.home, true);
         window.__btn_dec.addEventListener("click", actions.dec, true);
         window.__btn_playpause.addEventListener("click", actions.playpause, false);
@@ -217,6 +223,8 @@ define(["./actions"], function(actions) {
         window.document.body.addEventListener("mousemove", actions.mousemove, true);
         window.__controls.addEventListener("mouseover", actions.controlsMouseover, true);
         window.__controls.addEventListener("mouseout", actions.controlsMouseout, true);
+        window.__actionbar.addEventListener("mouseover", actions.controlsMouseover, true);
+        window.__actionbar.addEventListener("mouseout", actions.controlsMouseout, true);
     }
     return {
         addEventListeners: addEventListeners

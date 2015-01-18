@@ -41,6 +41,30 @@ define(["../chopper/chopper",
 
     var rStopwatch = new stopwatch.Stopwatch();
 
+    var rCurrentTheme = 1;
+
+    var rStyleSheets = [ 
+     {title: "Zany", href: "style/themes/zany.css"},
+     {title: "Sepia", href: "style/themes/sepia.css"},
+     {title: "Day", href: "style/themes/day.css"},
+     {title: "Night", href: "style/themes/night.css"},
+     {title: "Low contrast", href: "style/themes/low-contrast.css"},
+     {title: "High contrast", href: "style/themes/high-contrast.css"},
+     {title: "Dyslexia - sepia", href: "style/themes/dyslexia-sepia.css"},
+     {title: "Dyslexia - day", href: "style/themes/dyslexia-day.css"},
+     {title: "Dyslexia - night", href: "style/themes/dyslexia-night.css"},
+     {title: "Dyslexia - low contrast", href: "style/themes/dyslexia-low-contrast.css"},
+     {title: "Dyslexia - high contrast", href: "style/themes/dyslexia-high-contrast.css"},
+     {title: "Low contrast fat font", href: "style/themes/low-contrast-fat-font.css"},
+     {title: "Sepia fat font", href: "style/themes/sepia-fat-font.css"},
+     {title: "220", href: "style/themes/220.css"},
+     {title: "057", href: "style/themes/057.css"},
+     {title: "074", href: "style/themes/074.css"},
+     {title: "HV", href: "style/themes/hv.css"},
+     {title: "liberal", href: "style/themes/liberal.css"},
+     {title: "progressive", href: "style/themes/progressive.css"}
+    ];
+
     function playString(pString) {
         rWordsPlayed = 0;
         words.init(pString, 0);
@@ -98,7 +122,7 @@ define(["../chopper/chopper",
         var lTimeTotal   = lTimeElapsed + lTimeToGo;
 
         window.__documentTitle.textContent = rDocumentTitle;
-        window.__selectedSpeed.textContent = words.getSpeed();
+        window.__selectedSpeed.textContent = words.getSpeed().toFixed(0);
         window.__actualSpeed.textContent   = lActualSpeed.toFixed(0);
         window.__position.textContent      =  words.getPosition();
         window.__positionInPercent.textContent = words.getPercentage().toFixed(1);
@@ -145,8 +169,10 @@ define(["../chopper/chopper",
             window.clearTimeout(rControlsTimer);
         }
         window.__controls.className = "";
+        window.__actionbar.className = "";
         rControlsTimer = window.setTimeout(function(){
                     window.__controls.className = "fade-away";
+                    window.__actionbar.className = "fade-away";
                 }, TOAST_FADE_TIME);
     }
 
@@ -180,7 +206,7 @@ define(["../chopper/chopper",
 
     function updateSpeed (pSpeed) {
         updateStatus();
-        toast(pSpeed + " wpm");
+        toast(pSpeed.toFixed(0) + " wpm");
         if (butl.localStorageOK()) {
             localStorage.setItem(LS_KEY_SPEED, pSpeed);
         }
@@ -190,39 +216,27 @@ define(["../chopper/chopper",
         toast("<span class='icon-stopwatch'></span>" + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
+    function cycleTheme(){
+        rCurrentTheme++;
+        if (rCurrentTheme >= rStyleSheets.length){
+            rCurrentTheme = 0;
+        }
+        setTheme(rCurrentTheme);
+    }
+
     function setTheme(pThemeNumber){
-        var lStyleSheets = [ 
-         {title: "Zany", href: "style/themes/zany.css"},
-         {title: "Sepia", href: "style/themes/sepia.css"},
-         {title: "Day", href: "style/themes/day.css"},
-         {title: "Night", href: "style/themes/night.css"},
-         {title: "Low contrast", href: "style/themes/low-contrast.css"},
-         {title: "High contrast", href: "style/themes/high-contrast.css"},
-         {title: "Dyslexia - sepia", href: "style/themes/dyslexia-sepia.css"},
-         {title: "Dyslexia - day", href: "style/themes/dyslexia-day.css"},
-         {title: "Dyslexia - night", href: "style/themes/dyslexia-night.css"},
-         {title: "Dyslexia - low contrast", href: "style/themes/dyslexia-low-contrast.css"},
-         {title: "Dyslexia - high contrast", href: "style/themes/dyslexia-high-contrast.css"},
-         {title: "Low contrast fat font", href: "style/themes/low-contrast-fat-font.css"},
-         {title: "Sepia fat font", href: "style/themes/sepia-fat-font.css"},
-         {title: "220", href: "style/themes/220.css"},
-         {title: "057", href: "style/themes/057.css"},
-         {title: "074", href: "style/themes/074.css"},
-         {title: "HV", href: "style/themes/hv.css"},
-         {title: "liberal", href: "style/themes/liberal.css"},
-         {title: "progressive", href: "style/themes/progressive.css"}
-        ];
         var lThemeNumber =
             Math.max(
                 Math.min(
                     fmt.sanitizeNumber(pThemeNumber,1),
-                    lStyleSheets.length-1
+                    rStyleSheets.length-1
                 ),
                 0
             );
-        window.customtheme.href=lStyleSheets[lThemeNumber].href;
+        rCurrentTheme = lThemeNumber;
+        window.customtheme.href=rStyleSheets[lThemeNumber].href;
 
-        toast(lStyleSheets[lThemeNumber].title);
+        toast(rStyleSheets[lThemeNumber].title);
         if (butl.localStorageOK()){
             localStorage.setItem(LS_KEY_THEME, lThemeNumber);
         }
@@ -272,6 +286,11 @@ define(["../chopper/chopper",
     }
     function setSpeed(pSpeed){
         words.setSpeed(pSpeed);
+        updateSpeed(words.getSpeed());
+    }
+    function setSpeedFraction(pFraction){
+        words.setSpeedFraction(pFraction);
+        updateSpeed(words.getSpeed());
     }
     function gotoStartOfNextSentence() {
         words.gotoStartOfNextSentence();
@@ -324,6 +343,7 @@ define(["../chopper/chopper",
         }
         rHoveringOverControls = true;
         window.__controls.className = "";
+        window.__actionbar.className = "";
     }
     function controlsMouseout(){
         rHoveringOverControls = false;
@@ -337,6 +357,7 @@ define(["../chopper/chopper",
         setDocumentTitle: setDocumentTitle,
         updateTimeToGo: updateTimeToGo,
         setTheme: setTheme,
+        cycleTheme: cycleTheme,
         openFile: openFile,
         setPos: setPos,
         setPosFraction: setPosFraction,
@@ -348,6 +369,7 @@ define(["../chopper/chopper",
         speedUp: speedUp,
         slowDown: slowDown,
         setSpeed: setSpeed,
+        setSpeedFraction: setSpeedFraction,
         gotoStartOfNextSentence: gotoStartOfNextSentence,
         gotoStartOfSentence: gotoStartOfSentence,
         savePosition: savePosition,

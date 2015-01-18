@@ -53,6 +53,8 @@ define(["../utl/formatting"], function(fmt) {
     var rAry            = [];
     var rLength         = 0; // words
     var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
+    var rSelectedSpeedFraction 
+                        = (DEFAULT_SPEED - MIN_SPEED)/(MAX_SPEED - MIN_SPEED); // fraction: >=0, <=1
     var rPosition       = 0; // word
     var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed);
     var rLetterDelay    = LETTER_DELAY*speed2Base(rSelectedSpeed);
@@ -100,10 +102,11 @@ define(["../utl/formatting"], function(fmt) {
     }
 
     function _setSpeed(pSpeed) {
-
         pSpeed         = fmt.sanitizeNumber(pSpeed, DEFAULT_SPEED);
 
         rSelectedSpeed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, pSpeed));
+        rSelectedSpeedFraction = (rSelectedSpeed - MIN_SPEED)/(MAX_SPEED - MIN_SPEED);
+
         var lBase      = speed2Base(pSpeed);
         rMinDelay      = MIN_DELAY*lBase;
         rLetterDelay   = LETTER_DELAY*lBase;
@@ -125,6 +128,15 @@ define(["../utl/formatting"], function(fmt) {
 
     function _getSpeed(){
         return rSelectedSpeed;
+    }
+
+    function _setSpeedFraction(pFraction){
+        rSelectedSpeedFraction = fmt.sanitizeNumber(pFraction, 0.5);
+        _setSpeed(MIN_SPEED + rSelectedSpeedFraction*(MAX_SPEED - MIN_SPEED));
+    }
+
+    function _getSpeedFraction() {
+        return rSelectedSpeedFraction;
     }
 
     function _incSpeed(pAmount){
@@ -229,6 +241,8 @@ define(["../utl/formatting"], function(fmt) {
         init: _init,
         getSpeed: _getSpeed,
         setSpeed: _setSpeed,
+        setSpeedFraction: _setSpeedFraction,
+        getSpeedFraction: _getSpeedFraction,
         incSpeed: _incSpeed,
         decSpeed: _decSpeed,
         getCurrentWord: _getCurrentWord,
