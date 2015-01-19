@@ -1,6 +1,6 @@
 Thank you for your interest in WordyWordy! As you might have surmised, WordyWordy displays text. One word at a time. At the speed you want it to.
 
-The speed at which you are reading this is 150 words per minute. If this is not right for you, you can change it with the {up} and {down} keys on your keyboard. If you don't have a keyboard, click or tap the middle top of the screen to speed up and the middle bottom of the screen to slow down.
+The speed at which you are reading this is 150 words per minute. If this is not right for you, you can change it with the {up} and {down} keys on your keyboard. If you don't have a keyboard, click or tap the encircled {up} and {down} arrows on the top left of your screen.
 
 Go on.
 
@@ -74,4 +74,4 @@ You might have noticed the {FOLDER} icon on the bottom of this screen (if it's n
 
 Just remember that, at this time, WordyWordy only knows how to handle plain text files, so it doesn't know what to do with word documents or ebook formats like ePub. I might want to tell it some day, but it will take some time...
 
-Hey you! Wow! Thanks for reading up to here! You're awesome. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {.} (dot) or {,} (comma) key after WordyWordy has given its smile and you'll see the nerdy stats.
+Hey you! Wow! Thanks for reading up to here! You're awesome. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {.} (dot) or {,} (comma) key after WordyWordy has given its smile and you'll see the nerdy stats. (For the keyboardless: click the (i) icon on the top left).
