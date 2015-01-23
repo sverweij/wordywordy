@@ -43,3 +43,4 @@ div.outputwrap {
     animation-duration: 1.2s;
     animation-timing-function: ease-in-out;
 }
+.icon-theme:before { content: "\e9e3"; }

@@ -7,3 +7,4 @@ body{
     border-bottom-color: rgba(2, 119, 195, 1);
     border-bottom-width: 4px;
 }
+.icon-theme:before { content: "\e9eb"; }
