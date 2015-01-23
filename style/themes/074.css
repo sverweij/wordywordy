@@ -9,3 +9,4 @@ body{
 #__percentage {
     opacity: 1;
 }
+.icon-theme:before { content: "\e9af"; }

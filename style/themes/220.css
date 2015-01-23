@@ -6,3 +6,4 @@ body{
 #__output {
     border-bottom-color: rgba(0, 45, 95, 0.5);
 }
+.icon-theme:before { content: "\e9af"; }

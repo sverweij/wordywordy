@@ -92,6 +92,9 @@
 .icon-share:before { content: "\ea7d"; }
 .icon-embed:before { content: "\ea7f"; }
 .icon-terminal:before { content: "\ea81"; }
+
+.icon-theme:before { content: "\e9eb"; }
+
 @font-face {
   font-family    : "Roboto";
   font-weight    : 100;
