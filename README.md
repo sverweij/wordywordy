@@ -139,9 +139,9 @@ Q: Do you have a road map?
 >  - multiple buffers
 >  - icon
 >  - export to gif
->  ~~~- some kind of demo/ intro mode~~~
->  ~~~- loading files through ajax~~~
->  ~~~- an old-fashioned file open dialog~~~
+>  - ~~~some kind of demo/ intro mode~~~
+>  - ~~~loading files through ajax~~~
+>  - ~~~an old-fashioned file open dialog~~~
 >
 > I'd also like to clean up the code ~~a bit~~
 
