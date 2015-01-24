@@ -55,7 +55,7 @@ go back a sentence         | `PAGEUP` or `q`                  | -
 go forward a word          | `RIGHT` or `d`                   | scroll up or click the "previous" button
 go forward a sentence      | `PAGEDOWN` or `e`                | -
 go to start of text        | `HOME`                           | click the "home" button
-change Theme               | `1`, `2`, ..., `9`, `0`          | click the button with cycle (~:arrows_counterclockwise:)
+change Theme               | `1`, `2`, ..., `9`, `0`          | click the button with the smiley (~:sunglasses:)
 show amount of time left   | `t`                              | - 
 show stats                 | `.` or `,`                       | click the (i) button
 save current position      | `b`                              | - 
