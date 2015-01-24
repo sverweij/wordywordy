@@ -120,21 +120,27 @@ Q: Did you hear of ... ?
 
 Q: Why did you implement this?
 > A: I had a (self written) thing like this lying around when 
-> hunting sabre tooth tigers was all the rage and dinosaurs still
-> roamed the earth. I used it for some time but it was 
-> hampered. By technologic restrictions (getting html to work in
-> IE on windows CE was challinging). And by my lack of subject
-> matter knowledge. 
+> hunting sabre tooth tigers was all the rage. I used it for some
+> time but it was hampered. By technologic restrictions (getting 
+> html to work in IE on windows CE was challinging). And by my
+> lack of subject matter knowledge. 
 > 
 > During 2014 christmas holiday I needed a vehicle to test some
-> technical stuff for an other project. This fit the bill.
+> technical stuff for [mscgen_js](https://sverweij.github.io/mscgen_js). 
+> This fit the bill.
 
 Q: Do you have a road map? 
 > A: Kind of. Expect small things like
->  - better usability on mobile devices
+>  - better usability on mobile devices 
+>   - important/ all features accessible through touch
+>   - full screen display
+>   - possibly some other stuff I can't think of now
 >  - polished bookmarklet
 >  - multiple buffers
 >  - icon
+>  - export to gif
+>  ~~~- some kind of demo/ intro mode~~~
+>  ~~~- loading files through ajax~~~
 >  ~~~- an old-fashioned file open dialog~~~
 >
 > I'd also like to clean up the code ~~a bit~~
