@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'controls';
-	src:url('../font/controls.eot?-ach606');
-	src:url('../font/controls.eot?#iefix-ach606') format('embedded-opentype'),
-		url('../font/controls.woff?-ach606') format('woff'),
-		url('../font/controls.ttf?-ach606') format('truetype'),
-		url('../font/controls.svg?-ach606#controls') format('svg');
+	src:url('../font/controls.eot?tf5yt7');
+	src:url('../font/controls.eot?#iefixtf5yt7') format('embedded-opentype'),
+		url('../font/controls.woff?tf5yt7') format('woff'),
+		url('../font/controls.ttf?tf5yt7') format('truetype'),
+		url('../font/controls.svg?tf5yt7#controls') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -31,6 +31,8 @@
 .icon-floppy-disk:before { content: "\e962"; } 
 .icon-zoom-in:before { content: "\e987"; } 
 .icon-zoom-out:before { content: "\e988"; }
+.icon-enlarge:before { content: "\e989"; }
+.icon-shrink:before { content: "\e98a"; } 
 .icon-leaf:before { content: "\e9a4"; }
 .icon-airplane:before { content: "\e9af"; }
 .icon-menu:before { content: "\e9bd"; }
@@ -44,12 +46,8 @@
 .icon-tongue2:before { content: "\e9e4"; }
 .icon-wink:before { content: "\e9e7"; }
 .icon-wink2:before { content: "\e9e8"; }
-.icon-grin:before { content: "\e9e9"; } 
-.icon-grin2:before { content: "\e9ea"; } 
 .icon-cool:before { content: "\e9eb"; } 
 .icon-cool2:before { content: "\e9ec"; } 
-.icon-baffled:before { content: "\e9f3"; } 
-.icon-baffled2:before { content: "\e9f4"; } 
 .icon-hipster:before { content: "\e9f9"; } 
 .icon-hipster2:before { content: "\e9fa"; } 
 .icon-question:before { content: "\ea09"; } 
@@ -74,7 +72,6 @@
 .icon-next2:before { content: "\ea24"; }
 .icon-loop2:before { content: "\ea2e"; }
 .icon-infinite:before { content: "\ea2f"; }
-.icon-arrow-left:before { content: "\ea38"; }
 .icon-arrow-up-left2:before { content: "\ea39"; }
 .icon-arrow-up2:before { content: "\ea3a"; }
 .icon-arrow-up-right2:before { content: "\ea3b"; }
@@ -142,7 +139,7 @@ body, span, div, textarea {
   border: 0;
   padding: 0;
 }
-body {
+html, body {
   background-color: rgba(251, 240, 217, 1);
   color: rgba(95, 75, 50, 1);
   font-family: Roboto, sans-serif;
@@ -291,7 +288,7 @@ body {
 }
 #__actionbar span {
   cursor: pointer;
-  padding: 0.2em;
+  padding: 0.3em 0.2em 0.3em 0.2em;
   opacity: 0.5;
 }
 #__droparea {
@@ -425,6 +422,22 @@ body {
   position: fixed;
   height: 100%;
   left: -50px;
+}
+/*
+.icon-enlarge:before { content: "\e989"; }
+.icon-shrink:before { content: "\e98a"; } 
+*/
+html:-webkit-full-screen #__btn_fullscreen:before {
+    content: "\e98a";
+}
+html:-moz-full-screen #__btn_fullscreen:before {
+    content: "\e98a";
+}
+html:-ms-fullscreen #__btn_fullscreen:before {
+    content: "\e98a";
+}
+html:fullscreen #__btn_fullscreen:before {
+    content: "\e98a";
 }
 @media only screen and (max-width: 480px), (max-height: 480px) {
   .hideonmobile {
