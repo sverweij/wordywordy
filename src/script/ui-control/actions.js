@@ -4,13 +4,15 @@
 define(["../chopper/chopper",
         "../utl/formatting",
         "../utl/stopwatch",
-        "../utl/browserutl"
+        "../utl/browserutl",
+        "../../lib/screenfull"
         ],
         function(
         words,
         fmt,
         stopwatch,
-        butl
+        butl,
+        _screenfull
         ) {
     "use strict";
     var rPlaying     = false;
@@ -331,6 +333,19 @@ define(["../chopper/chopper",
         home();
         toast("Forgot everything");
     }
+    function toggleFullscreen(){
+        if (window.screenfull.enabled) {
+            // window.screenfull.toggle(document.documentElement);
+            window.screenfull.toggle();
+            /*
+            if (window.screenfull.isFullscreen) {
+                window.__btn_fullscreen.className = "icon-shrink";
+            } else {
+                window.__btn_fullscreen.className = "icon-enlarge";
+            }
+            */
+        }
+    }
 
     function mousemove(){
         if (!rHoveringOverControls) {
@@ -376,6 +391,7 @@ define(["../chopper/chopper",
         initiateText: initiateText,
         setLooping: setLooping,
         forgetEverything: forgetEverything,
+        toggleFullscreen: toggleFullscreen,
         mousemove: mousemove,
         controlsMouseover: controlsMouseover,
         controlsMouseout: controlsMouseout

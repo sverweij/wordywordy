@@ -1,0 +1,17 @@
+{
+  "name": "WordyWordy",
+  "description": "Shows text to you. One word at a time.",
+  "launch_path": "/wordywordy",
+  "icons": {
+    "128": "/images/wordywordy.png",
+    "512": "/images/wordywordy.png"
+  },
+  developer: {
+    "name": "Sander Verweij",
+    "url": "https://sverweij.github.io"
+  },
+  "fullscreen": true,
+  "default_locale": "en",
+  "type": "web",
+  "version": "${version}"
+}

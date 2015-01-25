@@ -221,6 +221,7 @@ define(["./actions"], function(actions) {
         window.__btn_end.addEventListener("click", actions.end, true);
         window.__btn_slowdown.addEventListener("click", actions.slowDown, true);
         window.__btn_speedup.addEventListener("click", actions.speedUp, true);
+        window.__btn_fullscreen.addEventListener("click", actions.toggleFullscreen, true);
         window.__btn_info.addEventListener("click", actions.toggleStatus, true);
         window.document.body.addEventListener("keydown", keydown, true);
         window.document.body.addEventListener("wheel", wheel, true);

@@ -18,7 +18,8 @@ NPM=npm
 DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
 PRODDIRS=style font images script lib
-LIB_SOURCES_WEB=src/lib/require.js
+LIB_SOURCES_WEB=src/lib/require.js \
+	src/lib/screenfull.js
 SCRIPT_SOURCES_WEB=src/script/ui-control/controler.js \
 	src/script/ui-control/eventmap.js \
 	src/script/ui-control/actions.js \
@@ -120,7 +121,8 @@ src/script/ui-control/eventmap.js: src/script/ui-control/actions.js
 src/script/ui-control/actions.js: src/script/chopper/chopper.js \
 	src/script/utl/formatting.js \
 	src/script/utl/stopwatch.js \
-	src/script/utl/browserutl.js
+	src/script/utl/browserutl.js \
+	src/lib/screenfull.js
 
 src/script/chopper/chopper.js: src/script/utl/formatting.js
 
