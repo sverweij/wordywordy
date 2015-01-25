@@ -141,17 +141,17 @@ Q: Do you have a road map?
 > A: Kind of. Expect small things like
 >  - better usability on mobile devices 
 >   - important/ most/ all features accessible through touch
->   - ~~~full screen display~~~
+>   - ~~full screen display~~
 >   - possibly some other stuff I can't think of now
 >  - polished bookmarklet
 >  - multiple buffers
 >  - icon
 >  - export to gif
->  - ~~~some kind of demo/ intro mode~~~
->  - ~~~loading files through ajax~~~
->  - ~~~an old-fashioned file open dialog~~~
+>  - ~~some kind of demo/ intro mode~~
+>  - ~~loading files through ajax~~
+>  - ~~an old-fashioned file open dialog~~
 >
-> I'd also like to clean up the code ~~a bit~~
+> I'd also like to clean up the code a bit.
 
 Q: Do you have a time line?
 > A: Not really. This thing shares time with some other projects
