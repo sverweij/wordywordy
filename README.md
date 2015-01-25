@@ -132,8 +132,8 @@ Q: Why did you implement this?
 Q: Do you have a road map? 
 > A: Kind of. Expect small things like
 >  - better usability on mobile devices 
->   - important/ all features accessible through touch
->   - full screen display
+>   - important/ most/ all features accessible through touch
+>   - ~~~full screen display~~~
 >   - possibly some other stuff I can't think of now
 >  - polished bookmarklet
 >  - multiple buffers
@@ -147,7 +147,7 @@ Q: Do you have a road map?
 
 Q: Do you have a time line?
 > A: Not really. This thing shares time with some other projects
-> ([mscgen_js](https://sverweij.github.io/mscgen_js), work. Life).
+> ([mscgen_js](https://sverweij.github.io/mscgen_js). Work. Life).
 
 Q: Are you afraid you'll stay the only user of this?
 > A: No. On the other hand - having an FAQ on github
