@@ -102,12 +102,20 @@ WordyWordy is free software [licensed under GPLv3](LICENSE). This
 means (a.o.) you *can* use it as part of other free software. You
 can *not* use it as part of non free software.
 
-WordyWordy uses two non-standard fonts:
+It uses [require.js](http://requirejs.org) for module management and the [screenfull.js](https://github.com/sindresorhus/screenfull.js)
+library for getting in and out of full screen. Both libraries are 
+[MIT](http://opensource.org/licenses/MIT) licensed.
+
+WordyWordy uses some non-standard fonts:
 - **Roboto** (from Google's Android).
 After hours of testing, this one came out as easiest on the eyes.
 - **[Open Dyslexic](https://github.com/antijingoist/open-dyslexic)**.
 Used in the dyslexic themes. Bottom heavy and asymetric, just like the theory
 says it should. I hope it improves usability for dyslexic people.
+- A custom font for icons, created with the [IcoMoon App](https://icomoon.io/app/). 
+At the time the font was created it was licensed 
+[GPLv3](http://www.gnu.org/licenses/gpl.html) or 
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## Frequently Anticipated Questions
 Q: You haven't mentioned RSVP (rapid serial visual presentation) once. This _is_ RSVP, isn't it?
