@@ -87,6 +87,7 @@ define(["./actions"], function(actions) {
     function paste(pEvent){
         if (pEvent && pEvent.clipboardData) {
             actions.initiateText(pEvent.clipboardData.getData("text/plain"), "clipboard");
+            actions.play();
         }
         pEvent.preventDefault();
     }
@@ -160,6 +161,7 @@ define(["./actions"], function(actions) {
     function loadend (pEvent){
         if (pEvent && pEvent.target && pEvent.target.result) {
             actions.initiateText(pEvent.target.result, rLoadedTitle);
+            actions.play();
         }
     }
 
@@ -185,6 +187,7 @@ define(["./actions"], function(actions) {
         } else {
             if (hasTextMime(pEvent.dataTransfer.types)) {
                 actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
+                actions.play();
             }
         }
         pEvent.preventDefault();

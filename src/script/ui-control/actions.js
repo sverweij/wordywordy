@@ -67,15 +67,6 @@ define(["../chopper/chopper",
      {title: "progressive", href: "style/themes/progressive.css"}
     ];
 
-    function playString(pString) {
-        rWordsPlayed = 0;
-        words.init(pString, 0);
-        window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
-        updateTimeToGo();
-        rStopwatch.start();
-        play();
-    }
-
     function outputNextWord(){
         if (rWordTimer){
             window.clearTimeout(rWordTimer);
@@ -309,11 +300,13 @@ define(["../chopper/chopper",
         toast("position saved");
     }
     function initiateText(pText, pTitle) {
+        rWordsPlayed = 0;
         window.__output.className = "";
         if (butl.localStorageOK()) {
             localStorage.setItem(LS_KEY_BUFFER, pText);
         }
         words.init(pText);
+        window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
         displayWord(words.getCurrentWord());
         updateTimeToGo();
         setDocumentTitle(pTitle);
@@ -322,7 +315,7 @@ define(["../chopper/chopper",
         rLoop = pBoolean;
     }
     function forgetEverything(){
-        playString("");
+        initiateText("", "");
         if (butl.localStorageOK()) {
             localStorage.removeItem(LS_KEY_BUFFER);
             localStorage.removeItem(LS_KEY_TITLE);
@@ -335,15 +328,7 @@ define(["../chopper/chopper",
     }
     function toggleFullscreen(){
         if (window.screenfull.enabled) {
-            // window.screenfull.toggle(document.documentElement);
             window.screenfull.toggle();
-            /*
-            if (window.screenfull.isFullscreen) {
-                window.__btn_fullscreen.className = "icon-shrink";
-            } else {
-                window.__btn_fullscreen.className = "icon-enlarge";
-            }
-            */
         }
     }
 
@@ -364,7 +349,6 @@ define(["../chopper/chopper",
         rHoveringOverControls = false;
     }
     return {
-        playString: playString,
         toggleStatus: toggleStatus,
         play: play,
         pause: pause,
