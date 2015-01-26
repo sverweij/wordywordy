@@ -35,6 +35,7 @@ define(["./actions"], function(actions) {
         67  : "C_KEY",
         68  : "D_KEY",
         69  : "E_KEY",
+        73  : "I_KEY",
         79  : "O_KEY",
         81  : "Q_KEY",
         83  : "S_KEY",
@@ -44,8 +45,7 @@ define(["./actions"], function(actions) {
     var rKey2Func = {
         HOME_KEY       : {func: actions.home },
         END_KEY        : {func: actions.end },
-        DOT_KEY        : {func: actions.toggleStatus },
-        COMMA_KEY      : {func: actions.toggleStatus },
+        I_KEY          : {func: actions.toggleStatus },
         C_KEY          : {func: actions.forgetEverything },
         T_KEY          : {func: actions.updateTimeToGo },
         SPACE_KEY      : {func: actions.playpause },

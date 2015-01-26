@@ -57,7 +57,7 @@ go forward a sentence      | `PAGEDOWN` or `e`                | -
 go to start of text        | `HOME`                           | click the "home" button
 change Theme               | `1`, `2`, ..., `9`, `0`          | click the button with the smiley (~:sunglasses:)
 show amount of time left   | `t`                              | - 
-show stats                 | `.` or `,`                       | click the (i) button
+show stats                 | `i`                              | click the (i) button
 save current position      | `b`                              | - 
 jump to position           | not implemented yet              | click in the progress bar (bottom)
 clear                      | `c`                              | -
