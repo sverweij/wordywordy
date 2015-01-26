@@ -35,7 +35,7 @@ define(["./actions"], function(actions) {
         67  : "C_KEY",
         68  : "D_KEY",
         69  : "E_KEY",
-        69  : "F_KEY",
+        70  : "F_KEY",
         73  : "I_KEY",
         79  : "O_KEY",
         81  : "Q_KEY",
