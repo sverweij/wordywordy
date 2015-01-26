@@ -35,6 +35,7 @@ define(["./actions"], function(actions) {
         67  : "C_KEY",
         68  : "D_KEY",
         69  : "E_KEY",
+        69  : "F_KEY",
         73  : "I_KEY",
         79  : "O_KEY",
         81  : "Q_KEY",
@@ -64,6 +65,7 @@ define(["./actions"], function(actions) {
         W_KEY          : {func: actions.speedUp },
         O_KEY          : {func: actions.openFile },
         B_KEY          : {func: actions.savePosition },
+        F_KEY          : {func: actions.toggleFullscreen },
         ONE_KEY        : {func: actions.setTheme, arg: 1},
         TWO_KEY        : {func: actions.setTheme, arg: 2},
         THREE_KEY      : {func: actions.setTheme, arg: 3},
@@ -74,8 +76,8 @@ define(["./actions"], function(actions) {
         EIGHT_KEY      : {func: actions.setTheme, arg: 9},
         NINE_KEY       : {func: actions.setTheme, arg: 10},
         ZERO_KEY       : {func: actions.setTheme, arg: 11},
-        SECTION_KEY    : {func: actions.setTheme, arg: 0},
-        SECTION_KEY_FF : {func: actions.setTheme, arg: 0}
+        SECTION_KEY    : {func: actions.cycleTheme},
+        SECTION_KEY_FF : {func: actions.cycleTheme}
     };
 
     var rReader      = new FileReader();

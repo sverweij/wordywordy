@@ -55,12 +55,14 @@ go back a sentence         | `PAGEUP` or `q`                  | -
 go forward a word          | `RIGHT` or `d`                   | scroll up or click the "previous" button
 go forward a sentence      | `PAGEDOWN` or `e`                | -
 go to start of text        | `HOME`                           | click the "home" button
-change Theme               | `1`, `2`, ..., `9`, `0`          | click the button with the smiley (~:sunglasses:)
-show amount of time left   | `t`                              | - 
+cycle through themes       | `§`, ```                         | click the button with the smiley (~:sunglasses:)
+switch to a theme directly | `1`, `2`, ..., `9`, `0`          | -
+show amount of time left   | `t`                              | -
 show stats                 | `i`                              | click the (i) button
 save current position      | `b`                              | - 
 jump to position           | not implemented yet              | click in the progress bar (bottom)
 clear                      | `c`                              | -
+toggle full screen         | `f`                              | click the button with the outward (or inward, in full screen mode) pointing arrows
 
 - @scrolling: effect depends a bit on your mouse/ track pad. 
 - @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-0` the  dyslexic ones.
