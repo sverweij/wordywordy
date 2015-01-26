@@ -14,7 +14,7 @@ Now that your reading speed is adjusted to your comfort level, you might want to
 
 1. -->WHY?<--
 
-Why would people read text in this way? I have identified several of them:
+Why would people read in this way? I have identified several of them:
 1. Low vision.
 2. Dyslexia.
 3. Hands free reading.
@@ -74,4 +74,4 @@ You might have noticed the {FOLDER} icon on the bottom of this screen (if it's n
 
 Just remember that, at this time, WordyWordy only knows how to handle plain text files, so it doesn't know what to do with word documents or ebook formats like ePub. I might want to tell it some day, but it will take some time...
 
-Hey you! Wow! Thanks for reading up to here! You're awesome. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have take you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {i} key after WordyWordy has given its smile and you'll see the nerdy stats. (For the keyboardless: click the (i) icon on the top left).
+Hey you! Wow! Thanks for reading up to here! You're awesome. If you left the speed to 150 words per minute, it will have taken you about five and a half minutes. It will have taken you a lot less than that if you increased the reading speed. Want to know exactly how much of your time I have taken? And how much words were in this piece of text? Hit the {i} key after WordyWordy has given its smile and you'll see the nerdy stats. (For the keyboardless: click the (i) icon on the top left).
