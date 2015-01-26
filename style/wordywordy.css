@@ -91,7 +91,6 @@
 .icon-terminal:before { content: "\ea81"; }
 
 .icon-theme:before { content: "\e9eb"; }
-
 @font-face {
   font-family    : "Roboto";
   font-weight    : 100;
@@ -281,14 +280,13 @@ html, body {
   width: 1em;
   z-index: 4;
   margin-top: 0.5em;
-  padding: 0.25em;
 }
-#__actionbar span:hover {
+#__actionbar div:hover {
   opacity: 1;
 }
-#__actionbar span {
+#__actionbar div {
+  padding: 0.3em 0 0 0.25em;
   cursor: pointer;
-  padding: 0.3em 0.2em 0.3em 0.2em;
   opacity: 0.5;
 }
 #__droparea {
@@ -305,34 +303,13 @@ html, body {
   position: fixed;
   z-index: 2;
 }
-/*
-#__leftarea {
-  position: fixed;
-  width: 20%;
-  left: 0;
-  height: 100%;
-}
-*/
 #__rightarea {
   position: fixed;
   width: 20%;
   right: 0;
-  height: 100%;
+  top: 14%;
+  height: 72%;
 }
-/*
-#__uparea {
-  position: fixed;
-  width: 100%;
-  top: 0.3em;
-  height: 20%;
-}
-#__downarea {
-  position: fixed;
-  width: 100%;
-  bottom: 0.3em;
-  height: 20%;
-}
-*/
 #__status {
   width: 100%;
   position: absolute;
@@ -419,14 +396,6 @@ html, body {
 #__controls nav:hover {
   opacity: 0.9;
 }
-#__natvie_speedslider {
-  -webkit-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-  z-index: 3;
-  position: fixed;
-  height: 100%;
-  left: -50px;
-}
 /*
 .icon-enlarge:before { content: "\e989"; }
 .icon-shrink:before { content: "\e98a"; } 
@@ -456,11 +425,6 @@ html:fullscreen #__btn_fullscreen:before {
     box-shadow: 0;
     bottom: 0;
   }
-  /*
-  #__controls span {
-    padding:0.06em;
-  }
-  */
   #__percentagewrap {
     bottom: inherit;
     top: 0;
