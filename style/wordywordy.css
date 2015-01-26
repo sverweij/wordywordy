@@ -305,18 +305,21 @@ html, body {
   position: fixed;
   z-index: 2;
 }
+/*
 #__leftarea {
   position: fixed;
   width: 20%;
   left: 0;
   height: 100%;
 }
+*/
 #__rightarea {
   position: fixed;
   width: 20%;
   right: 0;
   height: 100%;
 }
+/*
 #__uparea {
   position: fixed;
   width: 100%;
@@ -329,6 +332,7 @@ html, body {
   bottom: 0.3em;
   height: 20%;
 }
+*/
 #__status {
   width: 100%;
   position: absolute;
