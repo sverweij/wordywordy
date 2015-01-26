@@ -207,9 +207,6 @@ define(["./actions"], function(actions) {
         window.__droparea.addEventListener("paste", paste, true);
         window.__droparea.addEventListener("drop", drop, true);
         window.__percentagewrap.addEventListener("click", percentageClick, true);
-        window.__uparea.addEventListener("click", actions.speedUp, true);
-        window.__downarea.addEventListener("click", actions.slowDown, true);
-        window.__leftarea.addEventListener("click", actions.dec, true);
         window.__rightarea.addEventListener("click", actions.playpause, true);
         window.__input_file.addEventListener("change", inputFileOnChange, true);
         window.__btn_open.addEventListener("click", actions.openFile, true);
