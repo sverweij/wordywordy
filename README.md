@@ -2,25 +2,28 @@
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
 ## Why and for whom?
-**Faster**.
-  It is possible to read faster than reading the typical ~250-300 words per minute.
-  I get about 340 wpm comfortably, but I read some people get ~600 wpm, without
-  loosing comprehension. The theory is that you don't need to mover your eyes so
-  much and won't neet to hunt for the start of a sentence.
-  
-**Bigger and more steady**. 
+**Bigger**. 
   You can show words stupid big when only displaying one of them at the time. 
-  This might be useful when you have low vision. Also: text stays in the same
-  place. When your field of vision is small, this can be more comfortable.
+  This might be useful when you have low vision. 
+
+**Steadier**
+  Text stays in the same place. When your field of vision is small, this
+  can be more comfortable.
+
+**Dyslexia friendly (?)**.
+  I've read claims that presenting text this way helps people with dyslexia
+  read more easily. I don't know. I have included a font designed for 
+  people with dyslexia, just in case. They're under keys `6`, `7`, `8`, `9` and `0`.
 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing 
   something else. Working out for example.
 
-**Dyslexia friendly**.
-  I've read claims that presenting text this way helps people with dyslexia
-  read more easily. I don't know. I have included a font designed for 
-  people with dyslexia, just in case. They're under keys `6`, `7`, `8`, `9` and `0`.
+**Faster**.
+  It is possible to read faster than reading the typical ~250-300 words per minute.
+  I get about 340 wpm comfortably, but I read some people get ~600 wpm, without
+  loosing comprehension. The theory is that you don't need to mover your eyes so
+  much and won't neet to hunt for the start of a sentence.
 
 ## Screenshots!
 
