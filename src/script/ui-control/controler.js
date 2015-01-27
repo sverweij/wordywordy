@@ -72,6 +72,7 @@ define(["../utl/formatting",
           "1984":"samples/1984.txt",
           "freedom": "samples/freedom.txt",
           "intro": "samples/intro.txt",
+          "intro_nl": "samples/intro.nl.txt",
           "laozi": "samples/laozi.txt"
         };
         if (!(rParams.text) && rParams.canned ){
