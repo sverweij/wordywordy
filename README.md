@@ -5,27 +5,26 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 **Faster**.
   It is possible to read faster than reading the typical ~250-300 words per minute.
   I get about 340 wpm comfortably, but I read some people get ~600 wpm, without
-  loosing comprehension.
+  loosing comprehension. The theory is that you don't need to mover your eyes so
+  much and won't neet to hunt for the start of a sentence.
   
-**Bigger**. 
+**Bigger and more steady**. 
   You can show words stupid big when only displaying one of them at the time. 
-  This might be useful when you have low vision.
+  This might be useful when you have low vision. Also: text stays in the same
+  place. When your field of vision is small, this can be more comfortable.
 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing 
   something else. Working out for example.
-  
+
+**Dyslexia friendly**.
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. I don't know. I have included a font designed for 
   people with dyslexia, just in case. They're under keys `6`, `7`, `8`, `9` and `0`.
 
-TODO: mention that you won't need to hunt for the start of a sentence.
-TODO: add links to claims & research
-
 ## Screenshots!
 
 ![screenshots](src/images/screenshots.gif)
-
 
 ## Features
 - Proportionally pauses on punctuation and paragraphs, for a natural reading experience.
@@ -84,7 +83,7 @@ text      | Text to read. Expected to be URI encoded. When left out, WordyWordy 
 theme     | a number between 0 and 18 - each of which represents a theme. 
 play      | 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was loaded.
 loop      | 1 or 0 - if this parameter equals `1`, the text will infinitely loop. Usefull for kiosk display.
-canned    | plays one of the texts pre-installed in WordyWordy. Values e.g. `intro` (which plays the soft landing/ instruction text), `thoughts`, `freedom`, `1984` (all three short test strings) and `laozi` (which plays the first few paragraphs from the 道德經 (Dàodé jīng) by 老子 (Lǎo zi) - useful for testing picture scripts)
+canned    | plays one of the texts pre-installed in WordyWordy. Values e.g. `intro`, `intro_nl` (which plays the soft landing/ instruction text in English or Dutch respectively), `thoughts`, `freedom`, `1984` (all three short test strings) and `laozi` (which plays the first few paragraphs from the 道德經 (Dàodé jīng) by 老子 (Lǎo zi) - useful for testing picture scripts)
 url       | plays the text present at the provided url. WordyWordy uses ajax to access the url, so it is restricted to (1) the current domain or (2) content from sites for which CORS is enabled. 
 
 
