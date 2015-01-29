@@ -64,7 +64,8 @@ define(["../chopper/chopper",
      {title: "074", href: "style/themes/074.css"},
      {title: "HV", href: "style/themes/hv.css"},
      {title: "liberal", href: "style/themes/liberal.css"},
-     {title: "progressive", href: "style/themes/progressive.css"}
+     {title: "progressive", href: "style/themes/progressive.css"},
+     {title: "background", href: "style/themes/background.css"}
     ];
 
     function outputNextWord(){

@@ -1,0 +1,21 @@
+html, body{
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+    font: normal normal 400 48pt Roboto, sans-serif;
+    background-image: url('../../images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% auto;
+}
+#__output {
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+.icon-theme:before { content: "\e9eb"; }
+
+@media (max-aspect-ratio:4/3) {
+    html, body {
+        background-size: auto 100%;
+    }
+}
+/* light-level: dim, normal, washed */
