@@ -5,7 +5,7 @@ html, body{
     background-image: url('../../images/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
+    background-position: top;
     background-size: 100% auto;
 }
 #__output {
@@ -13,7 +13,7 @@ html, body{
 }
 .icon-theme:before { content: "\e9eb"; }
 
-@media (max-aspect-ratio:4/3) {
+@media screen and (max-aspect-ratio:4/3) {
     html, body {
         background-size: auto 100%;
     }
