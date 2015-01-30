@@ -7,16 +7,25 @@ define([], function() {
     "use strict";
 
     function Stopwatch () {
+        /*
         this.reset = function () {
             this.state = "paused"; // running, paused
             this.startTime = Date.now();
             this.pauseStartTime = this.startTime;
             this.cumulativePauses = 0;
         };
+        */
 
         // constructor hack
         this.reset();
     }
+
+    Stopwatch.prototype.reset = function () {
+        this.state             = "paused"; // running, paused
+        this.startTime         = Date.now();
+        this.pauseStartTime    = this.startTime;
+        this.cumulativePauses  = 0;
+    };
 
     Stopwatch.prototype.start = function () {
         this.state             = "running";

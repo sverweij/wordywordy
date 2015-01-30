@@ -1,5 +1,6 @@
 /* jshint browser:true */
 /* jshint nonstandard:true */
+/* jshint unused:false */ //_screenfull
 /* global define */
 define(["../chopper/chopper",
         "../utl/formatting",
@@ -308,6 +309,7 @@ define(["../chopper/chopper",
         }
         words.init(pText);
         window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
+        rStopwatch.reset();
         displayWord(words.getCurrentWord());
         updateTimeToGo();
         setDocumentTitle(pTitle);
