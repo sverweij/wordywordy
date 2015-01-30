@@ -2,6 +2,7 @@ html, body{
     color: rgba(255, 255, 255, 1);
     background-color: transparent;
     font: normal normal 400 48pt Roboto, sans-serif;
+    text-shadow: black 0px 0px 6px; 
     background-image: url('../../images/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
