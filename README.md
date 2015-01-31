@@ -22,8 +22,8 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 **Faster**.
   It is possible to read faster than reading the typical ~250-300 words per minute.
   I get about 340 wpm comfortably, but I read some people get ~600 wpm, without
-  loosing comprehension. The theory is that you don't need to mover your eyes so
-  much and won't neet to hunt for the start of a sentence.
+  loosing comprehension. The theory is that you don't need to move your eyes so
+  much and won't need to hunt for the start of a sentence.
 
 ## Screenshots!
 
