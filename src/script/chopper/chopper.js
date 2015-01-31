@@ -7,7 +7,7 @@ define(["../utl/formatting"], function(fmt) {
     "use strict";
 
     var MIN_SPEED     = 60; // words per minute
-    var DEFAULT_SPEED = 300; /// words per minute
+    var DEFAULT_SPEED = 300; // words per minute
     var MAX_SPEED     = 600; // words per minute
 
     var MIN_DELAY               = 100;
@@ -23,7 +23,7 @@ define(["../utl/formatting"], function(fmt) {
     var PARAGRAPH_END_DELAY     = 250;
 
     var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
-    var MAX_SKIP_AHEAD          = 42; // words
+    var MAX_SKIP_AHEAD          = 256; // words
 
     /*
      * SPACES_RE includes all spaces as mentioned in
@@ -33,7 +33,8 @@ define(["../utl/formatting"], function(fmt) {
      */
     var SPACES_RE = new RegExp("[ \f\n\r\t\v\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]+");
     var SENTENCE_END_CHARS = "\.\?\!\u3002\uFF1F";
-    var SENTENCE_END_RE = new RegExp("["+SENTENCE_END_CHARS+"]");
+    var SENTENCE_END_RE    = new RegExp("["+SENTENCE_END_CHARS+"]");
+    var PARAGRAPH_END_RE   = new RegExp("\u00A0");
 
     /*
      * Picture scripts (e.g. Chinese, Korean) need a different treatment.
@@ -149,11 +150,19 @@ define(["../utl/formatting"], function(fmt) {
 
     function _gotoStartOfSentence() {
         var lFound = false;
+        /* 
+         * when currently at the start of a sentence, hop to the 
+         * previous one
+         */
         if (rAry[rPosition-1] && rAry[rPosition-1].match(SENTENCE_END_RE)){
-            rPosition--;
+            _decPosition(1);
         }
+        /*
+         * when currently at the end of a sentence, skip one word back
+         * so the searching doesn't get stuck on the current word
+         */
         if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
-            rPosition--;
+            _decPosition(1);
         }
         var lLimit = Math.max(rPosition - MAX_SKIP_AHEAD, 0);
         for (rPosition; (!lFound && (rPosition > lLimit)); rPosition--){
@@ -162,17 +171,30 @@ define(["../utl/formatting"], function(fmt) {
                 rPosition += 2;
             }
         }
+        /*
+         * And if you're in a paragraph marker: bump one ahead
+         */
+        if (rAry[rPosition].match(PARAGRAPH_END_RE)){
+            _incPosition(1);
+        }
     }
 
-    function _gotoStartOfNextSentence(){
+    function gotoStartOfNextRE(pRE) {
         var lFound = false;
 
         var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rLength);
         for (rPosition; (!lFound && (rPosition < lLimit)); rPosition++){
-            if (rAry[rPosition] && rAry[rPosition].match(SENTENCE_END_RE)){
+            if (rAry[rPosition] && rAry[rPosition].match(pRE)){
                 lFound = true;
             }
         }
+    }
+    function _gotoStartOfNextSentence(){
+        gotoStartOfNextRE(SENTENCE_END_RE);
+    }
+
+    function _gotoStartOfNextParagraph(){
+        gotoStartOfNextRE(PARAGRAPH_END_RE);
     }
 
     function _gotoEndOfSentence() {
@@ -257,7 +279,8 @@ define(["../utl/formatting"], function(fmt) {
         decPosition: _decPosition,
         gotoEndOfSentence: _gotoEndOfSentence,
         gotoStartOfSentence: _gotoStartOfSentence,
-        gotoStartOfNextSentence: _gotoStartOfNextSentence
+        gotoStartOfNextSentence: _gotoStartOfNextSentence,
+        gotoStartOfNextParagraph: _gotoStartOfNextParagraph
     };
 });
 
