@@ -243,7 +243,7 @@ define(["../chopper/chopper",
     }
     function setPos(pPosition){
         words.setPosition(pPosition);
-        updateNavigation(true);
+        updateNavigation(false);
     }
     function setPosFraction(pFraction){
         setPos(Math.floor(pFraction * words.getLength()));
