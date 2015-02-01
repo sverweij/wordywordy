@@ -289,7 +289,11 @@ define(["../chopper/chopper",
     }
     function gotoStartOfNextSentence() {
         words.gotoStartOfNextSentence();
-        updateNavigation(true);
+        updateNavigation(false);
+    }
+    function gotoStartOfNextParagraph() {
+        words.gotoStartOfNextParagraph();
+        updateNavigation(false);
     }
     function gotoStartOfSentence() {
         words.gotoStartOfSentence();
@@ -329,6 +333,27 @@ define(["../chopper/chopper",
         home();
         toast("Forgot everything");
     }
+
+    function retrieveStateFromLocalStorage() {
+        if (butl.localStorageOK()) {
+            if (localStorage.getItem(LS_KEY_SPEED)){
+                setSpeed(localStorage.getItem(LS_KEY_SPEED));
+            }
+            if (localStorage.getItem(LS_KEY_BUFFER)){
+                initiateText(localStorage.getItem(LS_KEY_BUFFER), "");
+            }
+            if (localStorage.getItem(LS_KEY_TITLE)){
+                setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
+            }
+            if (localStorage.getItem(LS_KEY_POSITION)){
+                setPos(localStorage.getItem(LS_KEY_POSITION));
+            }
+            if (localStorage.getItem(LS_KEY_THEME)){
+                setTheme(localStorage.getItem(LS_KEY_THEME));
+            }
+        }
+    }
+
     function toggleFullscreen(){
         if (window.screenfull.enabled) {
             window.screenfull.toggle();
@@ -344,8 +369,8 @@ define(["../chopper/chopper",
         if (rControlsTimer) {
             window.clearTimeout(rControlsTimer);
         }
-        rHoveringOverControls = true;
-        window.__controls.className = "";
+        rHoveringOverControls        = true;
+        window.__controls.className  = "";
         window.__actionbar.className = "";
     }
     function controlsMouseout(){
@@ -353,35 +378,38 @@ define(["../chopper/chopper",
     }
     return {
         toggleStatus: toggleStatus,
-        play: play,
-        pause: pause,
-        toast: toast,
-        setDocumentTitle: setDocumentTitle,
-        updateTimeToGo: updateTimeToGo,
-        setTheme: setTheme,
-        cycleTheme: cycleTheme,
-        openFile: openFile,
-        setPos: setPos,
-        setPosFraction: setPosFraction,
-        home: home,
-        end: end,
-        dec: dec,
-        playpause: playpause,
-        inc: inc,
-        speedUp: speedUp,
-        slowDown: slowDown,
-        setSpeed: setSpeed,
-        setSpeedFraction: setSpeedFraction,
-        gotoStartOfNextSentence: gotoStartOfNextSentence,
-        gotoStartOfSentence: gotoStartOfSentence,
-        savePosition: savePosition,
-        initiateText: initiateText,
-        setLooping: setLooping,
-        forgetEverything: forgetEverything,
-        toggleFullscreen: toggleFullscreen,
-        mousemove: mousemove,
-        controlsMouseover: controlsMouseover,
-        controlsMouseout: controlsMouseout
+        play                     : play,
+        pause                    : pause,
+        toast                    : toast,
+        setDocumentTitle         : setDocumentTitle,
+        updateTimeToGo           : updateTimeToGo,
+        setTheme                 : setTheme,
+        cycleTheme               : cycleTheme,
+        openFile                 : openFile,
+        setPos                   : setPos,
+        setPosFraction           : setPosFraction,
+        home                     : home,
+        end                      : end,
+        dec                      : dec,
+        playpause                : playpause,
+        inc                      : inc,
+        speedUp                  : speedUp,
+        slowDown                 : slowDown,
+        setSpeed                 : setSpeed,
+        setSpeedFraction         : setSpeedFraction,
+        gotoStartOfNextSentence  : gotoStartOfNextSentence,
+        gotoStartOfNextParagraph : gotoStartOfNextParagraph,
+        gotoStartOfSentence      : gotoStartOfSentence,
+        savePosition             : savePosition,
+        initiateText             : initiateText,
+        setLooping               : setLooping,
+        forgetEverything         : forgetEverything,
+        retrieveStateFromLocalStorage
+                                 : retrieveStateFromLocalStorage,
+        toggleFullscreen         : toggleFullscreen,
+        mousemove                : mousemove,
+        controlsMouseover        : controlsMouseover,
+        controlsMouseout         : controlsMouseout
     };
 });
 /*

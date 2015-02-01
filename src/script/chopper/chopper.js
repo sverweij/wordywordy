@@ -23,7 +23,7 @@ define(["../utl/formatting"], function(fmt) {
     var PARAGRAPH_END_DELAY     = 250;
 
     var MILLISECONDS_PER_MINUTE = 60000; //milliseconds
-    var MAX_SKIP_AHEAD          = 256; // words
+    var MAX_SKIP_AHEAD          = 69; // words
 
     /*
      * SPACES_RE includes all spaces as mentioned in

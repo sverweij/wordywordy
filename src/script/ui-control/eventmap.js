@@ -6,6 +6,7 @@ define(["./actions"], function(actions) {
 
     var rCode2Key = {
         0   : "SECTION_KEY_FF",// on FF this is the ` (backquote)
+        9   : "TAB_KEY",
         13  : "ENTER_KEY",
         188 : "COMMA_KEY",
         190 : "DOT_KEY",
@@ -39,6 +40,7 @@ define(["./actions"], function(actions) {
         73  : "I_KEY",
         79  : "O_KEY",
         81  : "Q_KEY",
+        82  : "R_KEY",
         83  : "S_KEY",
         84  : "T_KEY",
         87  : "W_KEY"
@@ -55,6 +57,7 @@ define(["./actions"], function(actions) {
         A_KEY          : {func: actions.dec },
         PAGEDOWN_KEY   : {func: actions.gotoStartOfNextSentence },
         E_KEY          : {func: actions.gotoStartOfNextSentence },
+        R_KEY          : {func: actions.gotoStartOfNextParagraph },
         RIGHT_KEY      : {func: actions.inc },
         D_KEY          : {func: actions.inc },
         PAGEUP_KEY     : {func: actions.gotoStartOfSentence },
