@@ -20,8 +20,7 @@ DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 PRODDIRS=style font images script lib
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
-SCRIPT_SOURCES_WEB=src/script/ui-control/controler.js \
-	src/script/ui-control/eventmap.js \
+SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
 	src/script/ui-control/actions.js \
 	src/script/chopper/chopper.js \
 	src/script/chopper/chopper.js \
@@ -108,9 +107,7 @@ script/wordywordy.js: src/wordywordy.js
 			name="wordywordy" \
 			out=$@ \
 
-src/wordywordy.js: src/script/ui-control/controler.js
-
-src/script/ui-control/controler.js: src/script/utl/formatting.js \
+src/wordywordy.js: src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
 	src/script/utl/browserutl.js \
 	src/script/ui-control/eventmap.js \
