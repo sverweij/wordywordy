@@ -219,11 +219,12 @@ define(["./actions"], function(actions) {
         window.__input_file.addEventListener("change", inputFileOnChange, true);
         window.__btn_open.addEventListener("click", actions.openFile, true);
         window.__btn_theme.addEventListener("click", actions.cycleTheme, true);
-        window.__btn_home.addEventListener("click", actions.home, true);
+        window.__btn_home.addEventListener("click", actions.gotoStartOfSentence, true);
         window.__btn_dec.addEventListener("click", actions.dec, true);
         window.__btn_playpause.addEventListener("click", actions.playpause, false);
         window.__btn_inc.addEventListener("click", actions.inc, true);
-        window.__btn_end.addEventListener("click", actions.end, true);
+        window.__btn_end.addEventListener("click", actions.gotoStartOfNextSentence, true);
+        window.__btn_paragraph.addEventListener("click", actions.gotoStartOfNextParagraph, true);
         window.__btn_slowdown.addEventListener("click", actions.slowDown, true);
         window.__btn_speedup.addEventListener("click", actions.speedUp, true);
         window.__btn_fullscreen.addEventListener("click", actions.toggleFullscreen, true);

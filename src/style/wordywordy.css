@@ -425,6 +425,9 @@ html:fullscreen #__btn_fullscreen:before {
     box-shadow: 0;
     bottom: 0;
   }
+  #__controls span {
+      padding: 0.1em;
+  }
   #__percentagewrap {
     bottom: inherit;
     top: 0;
