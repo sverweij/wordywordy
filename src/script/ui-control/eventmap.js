@@ -74,11 +74,11 @@ define(["./actions"], function(actions) {
         THREE_KEY      : {func: actions.setTheme, arg: 3},
         FOUR_KEY       : {func: actions.setTheme, arg: 4},
         FIVE_KEY       : {func: actions.setTheme, arg: 5},
-        SIX_KEY        : {func: actions.setTheme, arg: 7},
-        SEVEN_KEY      : {func: actions.setTheme, arg: 8},
-        EIGHT_KEY      : {func: actions.setTheme, arg: 9},
-        NINE_KEY       : {func: actions.setTheme, arg: 10},
-        ZERO_KEY       : {func: actions.setTheme, arg: 11},
+        SIX_KEY        : {func: actions.setTheme, arg: 6},
+        SEVEN_KEY      : {func: actions.setTheme, arg: 7},
+        EIGHT_KEY      : {func: actions.setTheme, arg: 8},
+        NINE_KEY       : {func: actions.setTheme, arg: 9},
+        ZERO_KEY       : {func: actions.setTheme, arg: 10},
         SECTION_KEY    : {func: actions.cycleTheme},
         SECTION_KEY_FF : {func: actions.cycleTheme}
     };
