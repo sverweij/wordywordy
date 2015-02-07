@@ -339,11 +339,11 @@ define(["../chopper/chopper",
             if (localStorage.getItem(LS_KEY_SPEED)){
                 setSpeed(localStorage.getItem(LS_KEY_SPEED));
             }
-            if (localStorage.getItem(LS_KEY_BUFFER)){
-                initiateText(localStorage.getItem(LS_KEY_BUFFER), "");
-            }
             if (localStorage.getItem(LS_KEY_TITLE)){
                 setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
+            }
+            if (localStorage.getItem(LS_KEY_BUFFER)){
+                initiateText(localStorage.getItem(LS_KEY_BUFFER), rDocumentTitle);
             }
             if (localStorage.getItem(LS_KEY_POSITION)){
                 setPos(localStorage.getItem(LS_KEY_POSITION));
