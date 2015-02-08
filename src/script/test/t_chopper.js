@@ -2,6 +2,7 @@ var assert = require("assert");
 var chop = require("../chopper/chopper");
 
 describe('chopper', function() {
+    /*jshint multistr:true */
     var gFixtureString = "De pruimeboom \
 Eene vertelling \
 \n\
@@ -29,7 +30,7 @@ Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
         it('Length calc for simple string ok.', function() {
             assert.equal(144, chop.getLength());
         });
-    })
+    });
     describe('#getPosition', function() {
         it ('doesnt scroll beyond the last word', function() {
             chop.incPosition(1000);
@@ -64,6 +65,10 @@ Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
             chop.setPosition(8);
             assert.equal("hangen,", chop.getCurrentWord());
             assert.equal(920, chop.getDisplayTime());
+        });
+        it ("doesn't break but returns 0 when there is no word to calc", function() {
+            chop.setPosition(100000);
+            assert.equal(0, chop.getDisplayTime());
         });
     });
     describe('#inc, #dec', function(){
@@ -121,7 +126,7 @@ Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
     });
     describe('#setSpeedFraction', function(){
         it ('Derives the correct speed from a relative value', function(){
-            chop.setSpeedFraction(0.5)
+            chop.setSpeedFraction(0.5);
             assert.equal(330, chop.getSpeed());
             assert.equal(0.5, chop.getSpeedFraction());
         });
