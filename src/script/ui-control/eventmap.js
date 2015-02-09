@@ -114,7 +114,7 @@ define(["./actions"], function(actions) {
 
     function dragOver(pEvent){
         pEvent.preventDefault();
-        window.__output.className = "openmouth";
+        window.__output.className = "smile";
     }
 
     function dragEnd(pEvent){

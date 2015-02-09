@@ -1,5 +1,5 @@
 .SUFFIXES:
-.SUFFIXES: .js .pegjs .css .html .msc .mscin .msgenny .svg .png .jpg
+.SUFFIXES: .js .pegjs .css .scss .html .msc .mscin .msgenny .svg .png .jpg
 RJS=node_modules/requirejs/bin/r.js
 PLATO=node_modules/plato/bin/plato
 MOCHA=node_modules/mocha/bin/mocha
@@ -32,6 +32,8 @@ SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=favicon.ico
 VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
+# SASS=node_modules/node-sass/bin/node-sass --output-style compressed
+SASS=node_modules/node-sass/bin/node-sass
 
 .PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites build-prerequisites-node report test
 
@@ -63,6 +65,9 @@ help:
 
 %.html: src/%.html
 	$(SEDVERSION) < $< > $@
+
+%.css: %.scss
+	$(SASS) $< $@
 
 font/: src/font
 	cp -R $< .
@@ -107,6 +112,13 @@ script/wordywordy.js: src/wordywordy.js
 			name="wordywordy" \
 			out=$@ \
 
+src/index.html: src/wordywordy.js \
+	src/style/wordywordy.css
+
+src/style/wordywordy.css: src/style/wordywordy.scss
+
+src/style/wordywordy.scss: src/style/_fonts.scss
+
 src/wordywordy.js: src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
 	src/script/utl/browserutl.js \
@@ -140,7 +152,7 @@ lib/require.js: src/lib/require.js
 
 # "phony" targets
 build-prerequisites:
-	$(NPM) install requirejs jshint plato mocha istanbul csslint
+	$(NPM) install requirejs jshint plato mocha istanbul csslint node-sass
 
 prerequisites: build-prerequisites
 
@@ -148,11 +160,11 @@ dev-build: src/index.html
 
 noconsolestatements:
 	@echo "scanning for console statements (run 'make consolecheck' to see offending lines)"
-	grep -r console src/index.html | grep -c console | grep ^0$$
+	grep -r console $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html | grep -c console | grep ^0$$
 	@echo ... ok
 
 consolecheck:
-	grep -r console src/index.html
+	grep -r console $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html
 
 csslint:
 	$(CSSLINT) src/style/*.css src/style/themes/*.css

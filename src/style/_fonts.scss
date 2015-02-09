@@ -1,0 +1,135 @@
+@font-face {
+	font-family: 'controls';
+	src:url('../font/controls.eot?tf5yt7');
+	src:url('../font/controls.eot?#iefixtf5yt7') format('embedded-opentype'),
+		url('../font/controls.woff?tf5yt7') format('woff'),
+		url('../font/controls.ttf?tf5yt7') format('truetype'),
+		url('../font/controls.svg?tf5yt7#controls') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'controls';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-film:before { content: "\e913"; }
+.icon-video-camera:before { content: "\e914"; }
+.icon-books:before { content: "\e920"; } 
+.icon-folder:before { content: "\e92f"; } 
+.icon-folder-open:before { content: "\e930"; } 
+.icon-folder-upload:before { content: "\e934"; } 
+.icon-stopwatch:before { content: "\e952"; } 
+.icon-floppy-disk:before { content: "\e962"; } 
+.icon-zoom-in:before { content: "\e987"; } 
+.icon-zoom-out:before { content: "\e988"; }
+.icon-enlarge:before { content: "\e989"; }
+.icon-shrink:before { content: "\e98a"; } 
+.icon-leaf:before { content: "\e9a4"; }
+.icon-airplane:before { content: "\e9af"; }
+.icon-menu:before { content: "\e9bd"; }
+.icon-bookmark:before { content: "\e9d2"; }
+.icon-bookmarks:before { content: "\e9d3"; }
+.icon-happy:before { content: "\e9df"; }
+.icon-happy2:before { content: "\e9e0"; }
+.icon-smile:before { content: "\e9e1"; }
+.icon-smile2:before { content: "\e9e2"; }
+.icon-tongue:before { content: "\e9e3"; }
+.icon-tongue2:before { content: "\e9e4"; }
+.icon-wink:before { content: "\e9e7"; }
+.icon-wink2:before { content: "\e9e8"; }
+.icon-cool:before { content: "\e9eb"; } 
+.icon-cool2:before { content: "\e9ec"; } 
+.icon-hipster:before { content: "\e9f9"; } 
+.icon-hipster2:before { content: "\e9fa"; } 
+.icon-question:before { content: "\ea09"; } 
+.icon-info:before { content: "\ea0c"; } 
+.icon-cancel-circle:before { content: "\ea0d"; }
+.icon-cross:before { content: "\ea0f"; }
+.icon-play2:before { content: "\ea15"; } 
+.icon-pause:before { content: "\ea16"; }
+.icon-stop:before { content: "\ea17"; }
+.icon-previous:before { content: "\ea18"; }
+.icon-next:before { content: "\ea19"; }
+.icon-backward:before { content: "\ea1a"; }
+.icon-forward2:before { content: "\ea1b"; }
+.icon-play3:before { content: "\ea1c"; }
+.icon-pause2:before { content: "\ea1d"; }
+.icon-stop2:before { content: "\ea1e"; }
+.icon-backward2:before { content: "\ea1f"; }
+.icon-forward3:before { content: "\ea20"; }
+.icon-first:before { content: "\ea21"; }
+.icon-last:before { content: "\ea22"; }
+.icon-previous2:before { content: "\ea23"; }
+.icon-next2:before { content: "\ea24"; }
+.icon-loop2:before { content: "\ea2e"; }
+.icon-infinite:before { content: "\ea2f"; }
+.icon-arrow-up-left2:before { content: "\ea39"; }
+.icon-arrow-up2:before { content: "\ea3a"; }
+.icon-arrow-up-right2:before { content: "\ea3b"; }
+.icon-arrow-right2:before { content: "\ea3c"; }
+.icon-arrow-down-right2:before { content: "\ea3d"; }
+.icon-arrow-down2:before { content: "\ea3e"; }
+.icon-arrow-down-left2:before { content: "\ea3f"; }
+.icon-arrow-left2:before { content: "\ea40"; }
+.icon-circle-up:before { content: "\ea41"; }
+.icon-circle-right:before { content: "\ea42"; }
+.icon-circle-down:before { content: "\ea43"; }
+.icon-circle-left:before { content: "\ea44"; }
+.icon-font-size:before { content: "\ea61"; }
+.icon-text-color:before { content: "\ea6d"; }
+.icon-share:before { content: "\ea7d"; }
+.icon-embed:before { content: "\ea7f"; }
+.icon-terminal:before { content: "\ea81"; }
+
+.icon-theme:before { content: "\e9eb"; }
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 100;
+  font-style     : normal;
+  src: url('../font/Roboto-Thin.ttf');
+}
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 100;
+  font-style     : italic;
+  src: url('../font/Roboto-ThinItalic.ttf');
+}
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 300;
+  font-style     : normal;
+  src: url('../font/Roboto-Light.ttf');
+}
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 300;
+  font-style     : italic;
+  src: url('../font/Roboto-LightItalic.ttf');
+}
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 400;
+  font-style     : normal;
+  src: url('../font/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family    : "Roboto";
+  font-weight    : 400;
+  font-style     : italic;
+  src: url('../font/Roboto-Italic.ttf');
+}
+@font-face {
+  font-family    : "dyslexic";
+  font-weight    : normal;
+  font-style     : normal;
+  src: url('../font/OpenDyslexicAlta-Regular.otf');
+}
