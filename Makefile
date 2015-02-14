@@ -17,7 +17,7 @@ SEDVERSION=utl/sedversion.sh
 NPM=npm
 DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
-PRODDIRS=style font images script lib
+PRODDIRS=style style/themes font images script lib
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
 SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
@@ -32,8 +32,8 @@ SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=favicon.ico
 VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
-# SASS=node_modules/node-sass/bin/node-sass --output-style compressed
-SASS=node_modules/node-sass/bin/node-sass
+SASS=node_modules/node-sass/bin/node-sass --output-style compressed
+# SASS=node_modules/node-sass/bin/node-sass
 
 .PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites build-prerequisites-node report test
 
@@ -60,7 +60,7 @@ help:
 	@echo
 	@echo \ \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
 	@echo
-	#
+
 # production rules
 
 %.html: src/%.html
@@ -69,20 +69,20 @@ help:
 %.css: %.scss
 	$(SASS) $< $@
 
-font/: src/font
-	cp -R $< .
+font/%: src/font/%
+	cp -R $< $@
 
-style/: src/style
-	cp -R $< .
+style/%.css: src/style/%.css
+	cp $< $@
 
-images/: src/images
-	cp -R $< .
+style/themes/%.css: src/style/themes/%.css
+	cp $< $@
 
-lib/: src/lib
-	cp -R $< .
+images/%: src/images/%
+	cp -R $< $@
 
-script:
-	mkdir $@
+lib/%.js: src/lib/%.js
+	cp -R $< $@
 
 favicon.ico: $(FAVICONMASTER)
 	$(PNG2FAVICO) $< $@
@@ -93,19 +93,55 @@ favicon-%.png: $(FAVICONMASTER)
 iosfavicon-%.png: $(FAVICONMASTER)
 	$(IOSRESIZE) $< $@ 
 
+$(PRODDIRS):
+	mkdir -p $@
 
 # file targets dev
 
-
 # file targets prod
 index.html: $(PRODDIRS) \
-	src/index.html \
 	$(FAVICONS) \
+	src/index.html \
 	siteverification.id \
 	tracking.id \
 	tracking.host \
+	lib/require.js \
+	lib/screenfull.js \
 	script/wordywordy.js \
-	style/wordywordy.css
+	style/wordywordy.css \
+	style/themes/057.css \
+	style/themes/074.css \
+	style/themes/220.css \
+	style/themes/background.css \
+	style/themes/day.css \
+	style/themes/dyslexia-day.css \
+	style/themes/dyslexia-high-contrast.css \
+	style/themes/dyslexia-low-contrast.css \
+	style/themes/dyslexia-night.css \
+	style/themes/dyslexia-sepia.css \
+	style/themes/high-contrast.css \
+	style/themes/hv.css \
+	style/themes/liberal.css \
+	style/themes/low-contrast-fat-font.css \
+	style/themes/low-contrast.css \
+	style/themes/night.css \
+	style/themes/progressive.css \
+	style/themes/sepia-fat-font.css \
+	style/themes/sepia.css \
+	style/themes/zany.css \
+	font/OpenDyslexic-Italic.otf \
+	font/OpenDyslexicAlta-Regular.otf \
+	font/Roboto-Italic.ttf \
+	font/Roboto-Light.ttf \
+	font/Roboto-LightItalic.ttf \
+	font/Roboto-Regular.ttf \
+	font/Roboto-Thin.ttf \
+	font/Roboto-ThinItalic.ttf \
+	font/controls.eot \
+	font/controls.svg \
+	font/controls.ttf \
+	font/controls.woff \
+	images/background.jpg
 
 script/wordywordy.js: src/wordywordy.js 
 	$(RJS) -o baseUrl="./src/script" \
@@ -113,7 +149,28 @@ script/wordywordy.js: src/wordywordy.js
 			out=$@ \
 
 src/index.html: src/wordywordy.js \
-	src/style/wordywordy.css
+	src/lib/require.js \
+	src/style/wordywordy.css \
+	src/style/themes/057.css \
+	src/style/themes/074.css \
+	src/style/themes/220.css \
+	src/style/themes/background.css \
+	src/style/themes/day.css \
+	src/style/themes/dyslexia-day.css \
+	src/style/themes/dyslexia-high-contrast.css \
+	src/style/themes/dyslexia-low-contrast.css \
+	src/style/themes/dyslexia-night.css \
+	src/style/themes/dyslexia-sepia.css \
+	src/style/themes/high-contrast.css \
+	src/style/themes/hv.css \
+	src/style/themes/liberal.css \
+	src/style/themes/low-contrast-fat-font.css \
+	src/style/themes/low-contrast.css \
+	src/style/themes/night.css \
+	src/style/themes/progressive.css \
+	src/style/themes/sepia-fat-font.css \
+	src/style/themes/sepia.css \
+	src/style/themes/zany.css
 
 src/style/wordywordy.css: src/style/wordywordy.scss
 
@@ -152,7 +209,7 @@ lib/require.js: src/lib/require.js
 
 # "phony" targets
 build-prerequisites:
-	$(NPM) install requirejs jshint plato mocha istanbul csslint node-sass
+	$(NPM) install requirejs amdefine jshint plato mocha istanbul csslint node-sass
 
 prerequisites: build-prerequisites
 
