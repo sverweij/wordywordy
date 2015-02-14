@@ -1,6 +1,5 @@
 /* jshint browser:true */
 /* jshint nonstandard:true */
-/* jshint unused:false */ //_screenfull
 /* global define */
 define(["../chopper/chopper",
         "../utl/formatting",
@@ -12,8 +11,7 @@ define(["../chopper/chopper",
         words,
         fmt,
         stopwatch,
-        butl,
-        _screenfull
+        butl
         ) {
     "use strict";
     var rPlaying     = false;
@@ -166,7 +164,7 @@ define(["../chopper/chopper",
         window.__controls.className = "";
         window.__actionbar.className = "";
         rControlsTimer = window.setTimeout(function(){
-                    window.__controls.className = "fade-away";
+                    window.__controls.className  = "fade-away";
                     window.__actionbar.className = "fade-away";
                 }, TOAST_FADE_TIME);
     }
@@ -176,8 +174,8 @@ define(["../chopper/chopper",
             window.clearTimeout(rToastTimer);
         }
         window.__toast.style.display = "block";
-        window.__toast.className = "";
-        window.__toast.innerHTML = pString;
+        window.__toast.className     = "";
+        window.__toast.innerHTML     = pString;
         rToastTimer = window.setTimeout(function(){
                     window.__toast.className = "fade-away";
                 },TOAST_FADE_TIME);
@@ -314,7 +312,7 @@ define(["../chopper/chopper",
         words.init(pText);
         window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
         rStopwatch.reset();
-        displayWord(words.getCurrentWord());
+        displayWord(words.getCurrentWord(), false);
         updateTimeToGo();
         setDocumentTitle(pTitle);
     }
@@ -377,7 +375,7 @@ define(["../chopper/chopper",
         rHoveringOverControls = false;
     }
     return {
-        toggleStatus: toggleStatus,
+        toggleStatus             : toggleStatus,
         play                     : play,
         pause                    : pause,
         toast                    : toast,
