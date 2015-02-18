@@ -1,6 +1,8 @@
 # WordyWordy
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
+[![Code Climate](https://codeclimate.com/github/sverweij/wordywordy/badges/gpa.svg)](https://codeclimate.com/github/sverweij/wordywordy)
+
 ## Why and for whom?
 **Bigger**. 
   You can show words stupid big when only displaying one of them at the time. 
