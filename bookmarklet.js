@@ -1,3 +1,4 @@
+/* global prompt */
 javascript:(function() {
     function se(d) {
         return d.selection ? d.selection.createRange().text : d.getSelection();
