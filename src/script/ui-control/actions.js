@@ -332,23 +332,19 @@ define(["../chopper/chopper",
         toast("Forgot everything");
     }
 
+    function retrieveKeyFromLocalStorage (pKey, pFunction, pParam){
+        if (localStorage.getItem(pKey)){
+            pFunction(localStorage.getItem(pKey), pParam);
+        }
+    }
+
     function retrieveStateFromLocalStorage() {
         if (butl.localStorageOK()) {
-            if (localStorage.getItem(LS_KEY_SPEED)){
-                setSpeed(localStorage.getItem(LS_KEY_SPEED));
-            }
-            if (localStorage.getItem(LS_KEY_TITLE)){
-                setDocumentTitle(localStorage.getItem(LS_KEY_TITLE));
-            }
-            if (localStorage.getItem(LS_KEY_BUFFER)){
-                initiateText(localStorage.getItem(LS_KEY_BUFFER), rDocumentTitle);
-            }
-            if (localStorage.getItem(LS_KEY_POSITION)){
-                setPos(localStorage.getItem(LS_KEY_POSITION));
-            }
-            if (localStorage.getItem(LS_KEY_THEME)){
-                setTheme(localStorage.getItem(LS_KEY_THEME));
-            }
+            retrieveKeyFromLocalStorage(LS_KEY_SPEED, setSpeed);
+            retrieveKeyFromLocalStorage(LS_KEY_TITLE, setDocumentTitle);
+            retrieveKeyFromLocalStorage(LS_KEY_BUFFER, initiateText, rDocumentTitle);
+            retrieveKeyFromLocalStorage(LS_KEY_POSITION, setPos);
+            retrieveKeyFromLocalStorage(LS_KEY_THEME, localStorage);
         }
     }
 
