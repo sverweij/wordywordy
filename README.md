@@ -145,8 +145,8 @@ Q: Why did you implement this?
 
 Q: Do you have a road map? 
 > A: Kind of. Expect small things like
->  - better usability on mobile devices 
->   - important/ most/ all features accessible through touch
+>  - ~~better usability on mobile devices~~
+>   - ~~important/ most/ all features accessible through touch~~
 >   - ~~full screen display~~
 >   - possibly some other stuff I can't think of now
 >  - polished bookmarklet
