@@ -205,7 +205,7 @@ define(["./actions"], function(actions) {
         return false;
     }
 
-    function addEventListeners(){
+    function addDropAreaListeners() {
         window.__droparea.addEventListener("drag", drag, true);
         window.__droparea.addEventListener("dragenter", dragEnter, true);
         window.__droparea.addEventListener("dragleave", dragLeave, true);
@@ -214,28 +214,41 @@ define(["./actions"], function(actions) {
         window.__droparea.addEventListener("dragend", dragEnd, true);
         window.__droparea.addEventListener("paste", paste, true);
         window.__droparea.addEventListener("drop", drop, true);
-        window.__percentagewrap.addEventListener("click", percentageClick, true);
-        window.__rightarea.addEventListener("click", actions.playpause, true);
-        window.__input_file.addEventListener("change", inputFileOnChange, true);
-        window.__btn_open.addEventListener("click", actions.openFile, true);
-        window.__btn_theme.addEventListener("click", actions.cycleTheme, true);
+    }
+    function addControlsIslandListeners (){
         window.__btn_home.addEventListener("click", actions.gotoStartOfSentence, true);
         window.__btn_dec.addEventListener("click", actions.dec, true);
         window.__btn_playpause.addEventListener("click", actions.playpause, false);
         window.__btn_inc.addEventListener("click", actions.inc, true);
         window.__btn_end.addEventListener("click", actions.gotoStartOfNextSentence, true);
         window.__btn_paragraph.addEventListener("click", actions.gotoStartOfNextParagraph, true);
+    }
+    function addSettingsIslandListeners (){
+        window.__input_file.addEventListener("change", inputFileOnChange, true);
+        window.__btn_open.addEventListener("click", actions.openFile, true);
+        window.__btn_theme.addEventListener("click", actions.cycleTheme, true);
         window.__btn_slowdown.addEventListener("click", actions.slowDown, true);
         window.__btn_speedup.addEventListener("click", actions.speedUp, true);
         window.__btn_fullscreen.addEventListener("click", actions.toggleFullscreen, true);
         window.__btn_info.addEventListener("click", actions.toggleStatus, true);
-        window.document.body.addEventListener("keydown", keydown, true);
+    }
+    function addMouseEventListeners (){
         window.document.body.addEventListener("wheel", wheel, true);
         window.document.body.addEventListener("mousemove", actions.mousemove, true);
         window.__controls.addEventListener("mouseover", actions.controlsMouseover, true);
         window.__controls.addEventListener("mouseout", actions.controlsMouseout, true);
         window.__actionbar.addEventListener("mouseover", actions.controlsMouseover, true);
         window.__actionbar.addEventListener("mouseout", actions.controlsMouseout, true);
+    }
+    function addEventListeners(){
+        addDropAreaListeners();
+        addControlsIslandListeners();
+        addSettingsIslandListeners();
+        window.__percentagewrap.addEventListener("click", percentageClick, true);
+        window.__rightarea.addEventListener("click", actions.playpause, true);
+        window.document.body.addEventListener("keydown", keydown, true);
+        addMouseEventListeners();
+
     }
     return {
         addEventListeners: addEventListeners
