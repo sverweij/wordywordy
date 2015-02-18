@@ -32,7 +32,7 @@ define(["../utl/formatting"], function(fmt) {
      * in the time algorithm.
      */
     var SPACES_RE = new RegExp("[ \f\n\r\t\v\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]+");
-    var SENTENCE_END_CHARS = "\.\?\!\u3002\uFF1F";
+    var SENTENCE_END_CHARS = "\.\?!\u3002\uFF1F";
     var SENTENCE_END_RE    = new RegExp("["+SENTENCE_END_CHARS+"]");
     var PARAGRAPH_END_RE   = new RegExp("\u00A0");
 
@@ -69,8 +69,8 @@ define(["../utl/formatting"], function(fmt) {
                     .replace(/[=]{4,}/g, "===") //
                     .replace(/[+]{4,}/g, "+++") //
                     .replace(/[~]{4,}/g, "~~~") //
-                    .replace(/\.\.\./g, "…") //
-                    .replace(/([a-zA-Z])([\(\)\[\]\{\}\.\?\!:;\-,…\/|\u2010-\u2015]{1,2})([a-zA-Z])/g, "$1$2 $3") //
+                    .replace(/\.\.\./g, "\u2026") //
+                    .replace(/([a-zA-Z])([\(\)\[\]\{\}\.\?!:;\-,\u2026\/|\u2010-\u2015]{1,2})([a-zA-Z])/g, "$1$2 $3") //
                     .replace(/&nbsp;/g, " ") //
                     .replace(/\u00A0/g, " ") //
                     .replace(/\r\n/g, "\n") //
@@ -114,7 +114,7 @@ define(["../utl/formatting"], function(fmt) {
 
         rRe2delay = [
             {re: SENTENCE_END_RE,  delay: SENTENCE_END_DELAY*lBase},
-            {re: /[;:…–\u00B7|\u2010-\u2015]/,
+            {re: /[;:\u2026–\u00B7|\u2010-\u2015]/,
                                    delay: LONG_PUNCTUATION_DELAY*lBase},
             {re: /[-,\/\uFF0C]/,   delay: SHORT_PUNCTUATION_DELAY*lBase},
             {re: /[\(\)\[\]\{\}]/, delay: BRACKET_DELAY*lBase},
