@@ -5,13 +5,17 @@ define(["../chopper/chopper",
         "../utl/formatting",
         "../utl/stopwatch",
         "../utl/browserutl",
+        "../ui-control/constants",
+        "../ui-control/themeswitcher",
         "../../lib/screenfull"
         ],
         function(
         words,
         fmt,
         stopwatch,
-        butl
+        butl,
+        C,
+        themeswitcher
         ) {
     "use strict";
     var rPlaying     = false;
@@ -33,40 +37,10 @@ define(["../chopper/chopper",
     var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
     var TOAST_FADE_TIME         = 2200;  // milliseconds
 
-    /* localStorage keys */
-    var LS_KEY_BUFFER    = 'buffer';
-    var LS_KEY_TITLE     = 'title';
-    var LS_KEY_POSITION  = 'position';
-    var LS_KEY_SPEED     = 'speed';
-    var LS_KEY_THEME     = 'theme';
-
     var rStopwatch = new stopwatch.Stopwatch();
 
-    var rCurrentTheme = 1;
 
-    var rStyleSheets = [ 
-     {title: "Zany", href: "style/themes/zany.css"},
-     {title: "Sepia", href: "style/themes/sepia.css"},
-     {title: "Day", href: "style/themes/day.css"},
-     {title: "Night", href: "style/themes/night.css"},
-     {title: "Low contrast", href: "style/themes/low-contrast.css"},
-     {title: "High contrast", href: "style/themes/high-contrast.css"},
-     {title: "Dyslexia - sepia", href: "style/themes/dyslexia-sepia.css"},
-     {title: "Dyslexia - day", href: "style/themes/dyslexia-day.css"},
-     {title: "Dyslexia - night", href: "style/themes/dyslexia-night.css"},
-     {title: "Dyslexia - low contrast", href: "style/themes/dyslexia-low-contrast.css"},
-     {title: "Dyslexia - high contrast", href: "style/themes/dyslexia-high-contrast.css"},
-     {title: "Low contrast fat font", href: "style/themes/low-contrast-fat-font.css"},
-     {title: "Sepia fat font", href: "style/themes/sepia-fat-font.css"},
-     {title: "220", href: "style/themes/220.css"},
-     {title: "057", href: "style/themes/057.css"},
-     {title: "074", href: "style/themes/074.css"},
-     {title: "HV", href: "style/themes/hv.css"},
-     {title: "liberal", href: "style/themes/liberal.css"},
-     {title: "progressive", href: "style/themes/progressive.css"},
-     {title: "background", href: "style/themes/background.css"}
-    ];
-
+    /* +++ driving the timer */
     function outputNextWord(){
         if (rWordTimer){
             window.clearTimeout(rWordTimer);
@@ -92,6 +66,7 @@ define(["../chopper/chopper",
         }
     }
 
+    /* +++ driving the timer - updates dom */
     function displayWord(pWord, pAddsToPlayedCount){
         if (undefined !== pWord) {
             window.__output.textContent = pWord;
@@ -106,6 +81,7 @@ define(["../chopper/chopper",
         }
     }
 
+    /* +++  - updates dom */
     function updateStatus() {
         var lTimeElapsed = rStopwatch.getTimeElapsed();
         var lMinutesRead = lTimeElapsed/MILLISECONDS_PER_MINUTE;
@@ -157,6 +133,7 @@ define(["../chopper/chopper",
         }
     }
 
+    /* +++ FE helper */
     function toastControls(){
         if (rControlsTimer){
             window.clearTimeout(rControlsTimer);
@@ -169,6 +146,7 @@ define(["../chopper/chopper",
                 }, TOAST_FADE_TIME);
     }
 
+    /* +++ FE helper */
     function toast(pString){
         if (rToastTimer){
             window.clearTimeout(rToastTimer);
@@ -181,11 +159,12 @@ define(["../chopper/chopper",
                 },TOAST_FADE_TIME);
     }
 
+    /* +++ FE helper - responsibility mix? */
     function setDocumentTitle(pString) {
         rDocumentTitle = pString;
 
         if (butl.localStorageOK()){
-            localStorage.setItem(LS_KEY_TITLE, pString);
+            localStorage.setItem(C.LS_KEY_TITLE, pString);
         }
     }
 
@@ -201,37 +180,27 @@ define(["../chopper/chopper",
         updateStatus();
         toast(pSpeed.toFixed(0) + " wpm");
         if (butl.localStorageOK()) {
-            localStorage.setItem(LS_KEY_SPEED, pSpeed);
+            localStorage.setItem(C.LS_KEY_SPEED, pSpeed);
         }
     }
 
-    function updateTimeToGo() {
+    function showTimeToGo() {
         toast("<span class='icon-stopwatch'></span>" + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
     function cycleTheme(){
-        rCurrentTheme++;
-        if (rCurrentTheme >= rStyleSheets.length){
-            rCurrentTheme = 0;
+        themeswitcher.cycleTheme();
+        toast(themeswitcher.getCurrentTheme().title);
+        if (butl.localStorageOK()){
+            localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
-        setTheme(rCurrentTheme);
     }
 
     function setTheme(pThemeNumber){
-        var lThemeNumber =
-            Math.max(
-                Math.min(
-                    fmt.sanitizeNumber(pThemeNumber,1),
-                    rStyleSheets.length-1
-                ),
-                0
-            );
-        rCurrentTheme = lThemeNumber;
-        window.customtheme.href=rStyleSheets[lThemeNumber].href;
-
-        toast(rStyleSheets[lThemeNumber].title);
+        themeswitcher.setTheme(pThemeNumber);
+        toast(themeswitcher.getCurrentTheme().title);
         if (butl.localStorageOK()){
-            localStorage.setItem(LS_KEY_THEME, lThemeNumber);
+            localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
     }
 
@@ -299,7 +268,7 @@ define(["../chopper/chopper",
     }
     function savePosition() {
         if (butl.localStorageOK()) {
-            localStorage.setItem(LS_KEY_POSITION, words.getPosition());
+            localStorage.setItem(C.LS_KEY_POSITION, words.getPosition());
         }
         toast("position saved");
     }
@@ -307,13 +276,13 @@ define(["../chopper/chopper",
         rWordsPlayed = 0;
         window.__output.className = "";
         if (butl.localStorageOK()) {
-            localStorage.setItem(LS_KEY_BUFFER, pText);
+            localStorage.setItem(C.LS_KEY_BUFFER, pText);
         }
         words.init(pText);
         window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
         rStopwatch.reset();
         displayWord(words.getCurrentWord(), false);
-        updateTimeToGo();
+        showTimeToGo();
         setDocumentTitle(pTitle);
     }
     function setLooping(pBoolean){
@@ -322,30 +291,14 @@ define(["../chopper/chopper",
     function forgetEverything(){
         initiateText("", "");
         if (butl.localStorageOK()) {
-            localStorage.removeItem(LS_KEY_BUFFER);
-            localStorage.removeItem(LS_KEY_TITLE);
-            localStorage.removeItem(LS_KEY_POSITION);
-            localStorage.removeItem(LS_KEY_SPEED);
-            localStorage.removeItem(LS_KEY_THEME);
+            localStorage.removeItem(C.LS_KEY_BUFFER);
+            localStorage.removeItem(C.LS_KEY_TITLE);
+            localStorage.removeItem(C.LS_KEY_POSITION);
+            localStorage.removeItem(C.LS_KEY_SPEED);
+            localStorage.removeItem(C.LS_KEY_THEME);
         }
         home();
         toast("Forgot everything");
-    }
-
-    function retrieveKeyFromLocalStorage (pKey, pFunction, pParam){
-        if (localStorage.getItem(pKey)){
-            pFunction(localStorage.getItem(pKey), pParam);
-        }
-    }
-
-    function retrieveStateFromLocalStorage() {
-        if (butl.localStorageOK()) {
-            retrieveKeyFromLocalStorage(LS_KEY_SPEED, setSpeed);
-            retrieveKeyFromLocalStorage(LS_KEY_TITLE, setDocumentTitle);
-            retrieveKeyFromLocalStorage(LS_KEY_BUFFER, initiateText, rDocumentTitle);
-            retrieveKeyFromLocalStorage(LS_KEY_POSITION, setPos);
-            retrieveKeyFromLocalStorage(LS_KEY_THEME, localStorage);
-        }
     }
 
     function toggleFullscreen(){
@@ -370,13 +323,15 @@ define(["../chopper/chopper",
     function controlsMouseout(){
         rHoveringOverControls = false;
     }
+    function getDocumentTitle(){
+        return rDocumentTitle;
+    }
     return {
         toggleStatus             : toggleStatus,
         play                     : play,
         pause                    : pause,
         toast                    : toast,
-        setDocumentTitle         : setDocumentTitle,
-        updateTimeToGo           : updateTimeToGo,
+        showTimeToGo             : showTimeToGo,
         setTheme                 : setTheme,
         cycleTheme               : cycleTheme,
         openFile                 : openFile,
@@ -398,12 +353,11 @@ define(["../chopper/chopper",
         initiateText             : initiateText,
         setLooping               : setLooping,
         forgetEverything         : forgetEverything,
-        retrieveStateFromLocalStorage
-                                 : retrieveStateFromLocalStorage,
         toggleFullscreen         : toggleFullscreen,
         mousemove                : mousemove,
         controlsMouseover        : controlsMouseover,
-        controlsMouseout         : controlsMouseout
+        controlsMouseout         : controlsMouseout,
+        getDocumentTitle         : getDocumentTitle
     };
 });
 /*

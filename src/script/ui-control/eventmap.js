@@ -50,7 +50,7 @@ define(["./actions"], function(actions) {
         END_KEY        : {func: actions.end },
         I_KEY          : {func: actions.toggleStatus },
         C_KEY          : {func: actions.forgetEverything },
-        T_KEY          : {func: actions.updateTimeToGo },
+        T_KEY          : {func: actions.showTimeToGo },
         SPACE_KEY      : {func: actions.playpause },
         ENTER_KEY      : {func: actions.playpause },
         LEFT_KEY       : {func: actions.dec },

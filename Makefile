@@ -22,6 +22,8 @@ LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
 SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
 	src/script/ui-control/actions.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/themeswitcher.js \
 	src/script/chopper/chopper.js \
 	src/script/chopper/chopper.js \
 	src/script/utl/formatting.js \
@@ -180,11 +182,14 @@ src/wordywordy.js: src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
 	src/script/utl/browserutl.js \
 	src/script/ui-control/eventmap.js \
-	src/script/ui-control/actions.js 
+	src/script/ui-control/actions.js \
+	src/script/ui-control/constants.js 
 
 src/script/ui-control/eventmap.js: src/script/ui-control/actions.js
 
 src/script/ui-control/actions.js: src/script/chopper/chopper.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/themeswitcher.js \
 	src/script/utl/formatting.js \
 	src/script/utl/stopwatch.js \
 	src/script/utl/browserutl.js \
