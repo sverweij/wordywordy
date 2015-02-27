@@ -5,13 +5,15 @@ require(["utl/formatting",
         "utl/paramslikker",
         "utl/browserutl",
         "ui-control/eventmap",
-        "ui-control/actions"],
+        "ui-control/actions",
+        "ui-control/constants"],
         function(
         fmt,
         paramslikker,
         butl,
         eve,
-        actions
+        actions,
+        C
         ) {
     "use strict";
     
@@ -65,8 +67,25 @@ require(["utl/formatting",
             );
         }
     }
+    
+    function processLocalStorageKey (pKey, pFunction, pParam){
+        if (localStorage.getItem(pKey)){
+            pFunction(localStorage.getItem(pKey), pParam);
+        }
+    }
+
+    function retrieveStateFromLocalStorage() {
+        if (butl.localStorageOK()) {
+            processLocalStorageKey(C.LS_KEY_SPEED, actions.setSpeed);
+            processLocalStorageKey(C.LS_KEY_TITLE, actions.setDocumentTitle);
+            processLocalStorageKey(C.LS_KEY_BUFFER, actions.initiateText, actions.getDocumentTitle());
+            processLocalStorageKey(C.LS_KEY_POSITION, actions.setPos);
+            processLocalStorageKey(C.LS_KEY_THEME, actions.setTheme);
+        }
+    }
+
     eve.addEventListeners();
-    actions.retrieveStateFromLocalStorage();
+    retrieveStateFromLocalStorage();
     processParameters();
 });
 /*
