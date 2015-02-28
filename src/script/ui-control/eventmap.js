@@ -1,7 +1,7 @@
 /* jshint browser:true */
 /* jshint nonstandard:true */
 /* global define */
-define(["./actions"], function(actions) {
+define(["./actions", "../utl/browserutl"], function(actions, utl) {
     "use strict";
 
     var rCode2Key = {
@@ -179,6 +179,7 @@ define(["./actions"], function(actions) {
             }
         }
     }
+
     function drop(pEvent){
         window.__output.className = "playing";
         if (pEvent.dataTransfer.files.length > 0){
@@ -188,21 +189,12 @@ define(["./actions"], function(actions) {
                 rLoadedTitle = lFile.name;
             }
         } else {
-            if (hasTextMime(pEvent.dataTransfer.types)) {
+            if (utl.hasTextMime(pEvent.dataTransfer.types)) {
                 actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
                 actions.play();
             }
         }
         pEvent.preventDefault();
-    }
-
-    function hasTextMime(pKindOfIterableObject){
-        for (var i=0;i<pKindOfIterableObject.length;i++){
-            if ("text/plain" === pKindOfIterableObject[i]) {
-                return true;
-            }
-        }
-        return false;
     }
 
     function addDropAreaListeners() {
