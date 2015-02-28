@@ -11,7 +11,7 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
         188 : "COMMA_KEY",
         190 : "DOT_KEY",
         191 : "SLASH_KEY",
-        192 : "SECTION_KEY",// in safari both the § and ` key listen to 192
+        192 : "SECTION_KEY",// in safari both the paragraph and backtick key listen to 192
         32  : "SPACE_KEY",
         33  : "PAGEUP_KEY",
         34  : "PAGEDOWN_KEY",

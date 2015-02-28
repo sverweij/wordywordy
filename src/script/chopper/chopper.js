@@ -54,7 +54,7 @@ define(["../utl/formatting"], function(fmt) {
     var rAry            = [];
     var rLength         = 0; // words
     var rSelectedSpeed  = DEFAULT_SPEED; // words per minute
-    var rSelectedSpeedFraction 
+    var rSelectedSpeedFraction
                         = (DEFAULT_SPEED - MIN_SPEED)/(MAX_SPEED - MIN_SPEED); // fraction: >=0, <=1
     var rPosition       = 0; // word
     var rMinDelay       = MIN_DELAY*speed2Base(rSelectedSpeed);
@@ -114,11 +114,12 @@ define(["../utl/formatting"], function(fmt) {
 
         rRe2delay = [
             {re: SENTENCE_END_RE,  delay: SENTENCE_END_DELAY*lBase},
-            {re: /[;:\u2026–\u00B7|\u2010-\u2015]/,
+            {re: /[;:\u2026\u2013\u00B7|\u2010-\u2015]/,
                                    delay: LONG_PUNCTUATION_DELAY*lBase},
             {re: /[-,\/\uFF0C]/,   delay: SHORT_PUNCTUATION_DELAY*lBase},
             {re: /[\(\)\[\]\{\}]/, delay: BRACKET_DELAY*lBase},
-            {re: /["'‘’“”]/,       delay: QUOTE_DELAY*lBase},
+            {re: /["'\u2018\u2019\u201c\u201d]/,
+                                   delay: QUOTE_DELAY*lBase},
             {re: /\u00A0/,         delay: PARAGRAPH_END_DELAY*lBase},
             {re: /[0-9=\+]/,       delay: NUMBER_DELAY*lBase},
             {re: /[A-Z]/,          delay: CAPITALS_DELAY*lBase},
@@ -150,8 +151,8 @@ define(["../utl/formatting"], function(fmt) {
 
     function _gotoStartOfSentence() {
         var lFound = false;
-        /* 
-         * when currently at the start of a sentence, hop to the 
+        /*
+         * when currently at the start of a sentence, hop to the
          * previous one
          */
         if (rAry[rPosition-1] && rAry[rPosition-1].match(SENTENCE_END_RE)){
