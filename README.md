@@ -1,10 +1,8 @@
 # WordyWordy
+
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
-[![Code Climate](https://codeclimate.com/github/sverweij/wordywordy/badges/gpa.svg)](https://codeclimate.com/github/sverweij/wordywordy)
-[![Build Status](https://travis-ci.org/sverweij/wordywordy.svg?branch=gh-pages)](https://travis-ci.org/sverweij/wordywordy)
-[![Dependencies](https://david-dm.org/sverweij/wordywordy.svg)](https://david-dm.org/sverweij/wordywordy)
-[![devDependencies](https://david-dm.org/sverweij/wordywordy/dev-status.svg)](https://david-dm.org/sverweij/wordywordy#info=devDependencies)
+![screenshots](src/images/screenshots.gif)
 
 ## Why and for whom?
 **Bigger**.
@@ -29,10 +27,6 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
   I get about 340 wpm comfortably, but I read some people get ~600 wpm, without
   loosing comprehension. The theory is that you don't need to move your eyes so
   much and won't need to hunt for the start of a sentence.
-
-## Screenshots!
-
-![screenshots](src/images/screenshots.gif)
 
 ## Features
 - Proportionally pauses on punctuation and paragraphs, for a natural reading experience.
@@ -125,6 +119,13 @@ says it should. I hope it improves usability for dyslexic people.
 At the time the font was created it was licensed
 [GPLv3](http://www.gnu.org/licenses/gpl.html) or
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## 
+[![Code Climate](https://codeclimate.com/github/sverweij/wordywordy/badges/gpa.svg)](https://codeclimate.com/github/sverweij/wordywordy)
+[![Build Status](https://travis-ci.org/sverweij/wordywordy.svg?branch=gh-pages)](https://travis-ci.org/sverweij/wordywordy)
+[![Dependencies](https://david-dm.org/sverweij/wordywordy.svg)](https://david-dm.org/sverweij/wordywordy)
+[![devDependencies](https://david-dm.org/sverweij/wordywordy/dev-status.svg)](https://david-dm.org/sverweij/wordywordy#info=devDependencies)
+
 
 ## Frequently Anticipated Questions
 Q: You haven't mentioned RSVP (rapid serial visual presentation) once. This _is_ RSVP, isn't it?
