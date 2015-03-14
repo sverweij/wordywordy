@@ -1,13 +1,10 @@
 .SUFFIXES:
 .SUFFIXES: .js .pegjs .css .scss .html .msc .mscin .msgenny .svg .png .jpg
 RJS=node_modules/requirejs/bin/r.js
-PLATO=node_modules/plato/bin/plato
-MOCHA=node_modules/mocha/bin/mocha
 MOCHA_FORK=node_modules/mocha/bin/_mocha
 COVER=node node_modules/istanbul/lib/cli.js
 COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory 
 GIT=git
-LINT=node_modules/jshint/bin/jshint --verbose --show-non-errors --extract auto
 CSSLINT=node node_modules/csslint/cli.js --format=compact --quiet --ignore=ids
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
@@ -232,10 +229,10 @@ csslint:
 	$(CSSLINT) src/style/*.css src/style/themes/*.css
 
 lint:
-	$(LINT) $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html
+	$(NPM) lint
 
 cover: dev-build
-	$(COVER) cover $(MOCHA_FORK) src/script/test/
+	$(NPM) cover
 
 coverage/lcov.info: cover
 
@@ -253,14 +250,14 @@ tag:
 	$(GIT) push --tags
 
 report: dev-build
-	$(PLATO) -r -d platoreports -x "jquery|parser|test|cli|attic" src/script/
+	$(NPM) plato
 
 doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md
 
 test: dev-build
 	# $(MOCHA) -R spec src/script/test/
-	$(MOCHA) -R dot src/script/test/
+	$(NPM) test
 
 check: noconsolestatements lint test
 
