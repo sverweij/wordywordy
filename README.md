@@ -120,7 +120,7 @@ At the time the font was created it was licensed
 [GPLv3](http://www.gnu.org/licenses/gpl.html) or
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-## 
+## Build status
 [![Code Climate](https://codeclimate.com/github/sverweij/wordywordy/badges/gpa.svg)](https://codeclimate.com/github/sverweij/wordywordy)
 [![Build Status](https://travis-ci.org/sverweij/wordywordy.svg?branch=gh-pages)](https://travis-ci.org/sverweij/wordywordy)
 [![Dependencies](https://david-dm.org/sverweij/wordywordy.svg)](https://david-dm.org/sverweij/wordywordy)
