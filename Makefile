@@ -34,7 +34,7 @@ VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
 # SASS=node_modules/node-sass/bin/node-sass
 
-.PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites build-prerequisites-node report test
+.PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites report test
 
 help:
 	@echo \ \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
@@ -210,10 +210,9 @@ lib/require.js: src/lib/require.js
 	cp $< $@
 
 # "phony" targets
-build-prerequisites:
-	$(NPM) install requirejs amdefine jshint plato mocha istanbul csslint node-sass
 
-prerequisites: build-prerequisites
+prerequisites:
+	$(NPM) install
 
 dev-build: src/index.html
 
@@ -229,10 +228,10 @@ csslint:
 	$(CSSLINT) src/style/*.css src/style/themes/*.css
 
 lint:
-	$(NPM) lint
+	$(NPM) run lint
 
 cover: dev-build
-	$(NPM) cover
+	$(NPM) run cover
 
 coverage/lcov.info: cover
 
@@ -250,14 +249,14 @@ tag:
 	$(GIT) push --tags
 
 report: dev-build
-	$(NPM) plato
+	$(NPM) run plato
 
 doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md
 
 test: dev-build
 	# $(MOCHA) -R spec src/script/test/
-	$(NPM) test
+	$(NPM) run test
 
 check: noconsolestatements lint test
 
