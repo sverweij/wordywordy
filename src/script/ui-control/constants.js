@@ -1,5 +1,6 @@
 /* global define */
 define([],function(){
+    "use strict";
 
     /* localStorage keys */
     return {

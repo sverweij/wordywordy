@@ -5,6 +5,7 @@ if ( typeof define !== 'function') {
 }
 
 define([], function() {
+    "use strict";
     return {
         getParams: function (pSearchString) {
             var lRetval = {};
