@@ -9,10 +9,16 @@ node_js:
 
 script:
   - npm run lint
-  - npm run test
+  - npm run cover
   - npm run nsp
 
 branches:
   only:
     - gh-pages
 
+addons:
+   code_climate:
+     repo_token: 67de7a9cad1cc6e224897de8384439e62ce0c8ce70733e02aa2eea964615ab9c
+
+after_success:
+  - npm run codeclimate-cover-submit
