@@ -357,7 +357,8 @@ define(["../chopper/chopper",
         mousemove                : mousemove,
         controlsMouseover        : controlsMouseover,
         controlsMouseout         : controlsMouseout,
-        getDocumentTitle         : getDocumentTitle
+        getDocumentTitle         : getDocumentTitle,
+        setDocumentTitle         : setDocumentTitle
     };
 });
 /*
