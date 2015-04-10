@@ -5,14 +5,14 @@
   "main": "index.html",
   "dependencies": {
     "amdefine": "^0.1.0",
-    "requirejs": "^2.1.16"
+    "requirejs": "^2.1.17"
   },
   "devDependencies": {
-    "node-sass": "^2.0.1",
-    "mocha": "^2.2.1",
+    "node-sass": "^2.1.1",
+    "mocha": "^2.2.4",
     "codeclimate-test-reporter": "^0.0.4",
     "csslint": "^0.10.0",
-    "istanbul": "^0.3.7",
+    "istanbul": "^0.3.13",
     "jshint": "^2.6.3",
     "plato": "^1.4.0",
     "nsp": "^1.0.1"
