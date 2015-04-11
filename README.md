@@ -1,5 +1,7 @@
 # WordyWordy
 
+[![Join the chat at https://gitter.im/sverweij/wordywordy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sverweij/wordywordy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
 
 ![screenshots](src/images/screenshots.gif)
