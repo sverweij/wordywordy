@@ -21,7 +21,7 @@
     "lint": "jshint src/script  --verbose --show-non-errors",
     "test": "mocha -R dot src/script/test/",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test",
-	"plato": "plato -r -d platoreports src/script/",
+	"plato": "plato -r -d platoreports -x \"test\" src/script/", 
     "nsp" : "nsp package",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info"
   },
