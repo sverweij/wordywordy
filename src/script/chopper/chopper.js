@@ -221,7 +221,7 @@ define(["../utl/formatting"], function(fmt) {
         var lDefinedDelays = rRe2delay.filter(function(pElement){
             return pElement.re.test(pChar);
         });
-        return lDefinedDelays.length > 0 ? lalala[0].delay : rLetterDelay;
+        return lDefinedDelays.length > 0 ? lDefinedDelays[0].delay : rLetterDelay;
     }
 
     /*
