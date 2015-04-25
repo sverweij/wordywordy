@@ -23,12 +23,7 @@ define([], function(){
             return (typeof localStorage !== 'undefined');
         },
         hasTextMime: function (pKindOfIterableObject){
-            for (var i=0;i<pKindOfIterableObject.length;i++){
-                if ("text/plain" === pKindOfIterableObject[i]) {
-                    return true;
-                }
-            }
-            return false;
+            return pKindOfIterableObject.contains("text/plain");
         }
 
     };
