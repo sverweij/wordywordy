@@ -230,10 +230,9 @@ define(["../utl/formatting"], function(fmt) {
      * return the average speed in wpm for the current string
      */
     function _getAverageSpeed(){
-        var lTotalDisplayTime = 0;
-        for (var i = 0; i < rLength; i++){
-            lTotalDisplayTime += _determineDisplayTime(rAry[i]);
-        }
+        var lTotalDisplayTime = rAry.reduce(function(pPreviousValue, pItem){
+            return pPreviousValue + _determineDisplayTime(pItem);
+        }, 0);
         return rLength/(lTotalDisplayTime/MILLISECONDS_PER_MINUTE);
     }
 
