@@ -218,12 +218,10 @@ define(["../utl/formatting"], function(fmt) {
     }
 
     function regexp2duration(pChar){
-        for (var i = 0; i < rRe2delayLength; i++){
-            if (rRe2delay[i].re.test(pChar)){
-                return rRe2delay[i].delay;
-            }
-        }
-        return rLetterDelay;
+        var lDefinedDelays = rRe2delay.filter(function(pElement){
+            return pElement.re.test(pChar);
+        });
+        return lDefinedDelays.length > 0 ? lalala[0].delay : rLetterDelay;
     }
 
     /*
@@ -245,14 +243,10 @@ define(["../utl/formatting"], function(fmt) {
     }
 
     function _determineDisplayTime(pWord){
-        var lRetval = 0;
-        if (pWord){
-            lRetval = rMinDelay;
-            for (var i = 0, lLength = pWord.length; i < lLength; i++){
-                lRetval += regexp2duration(pWord[i]);
-            }
-        }
-        return lRetval;
+        return pWord ? pWord.split('').reduce(function(pPrev, pChar){
+                          return pPrev + regexp2duration(pChar);
+                      }, rMinDelay) 
+                     : 0;
     }
 
     function _getEstimatedTimeToGo(){
