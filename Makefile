@@ -60,6 +60,7 @@ help:
 	@echo 
 	@echo install
 	@echo \ creates the production version \(minified js, images, html\)
+	@echo \ in the build directory
 	@echo \ \-\> this is probably the target you want when hosting WordyWordy
 	@echo 
 	@echo clean
