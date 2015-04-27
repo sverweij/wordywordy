@@ -263,7 +263,11 @@ cover-report: testcoverage-report/index.html
 
 install: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
 
-publish: install cover-report
+publish: install
+	cd $(BUILDDIR)
+	$(GIT) add .
+	$(GIT) commit -m "build `cat ../VERSION`"
+	$(GIT) push origin gh-pages
 	
 tag: 
 	$(GIT) tag -a `cat VERSION` -m "tag release `cat VERSION`"
