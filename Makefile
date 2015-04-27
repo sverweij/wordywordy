@@ -14,7 +14,14 @@ SEDVERSION=utl/sedversion.sh
 NPM=npm
 DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
-PRODDIRS=style style/themes font images script lib
+BUILDDIR=build
+PRODDIRS=$(BUILDDIR)/style \
+		 $(BUILDDIR)/style/themes \
+		 $(BUILDDIR)/font \
+		 $(BUILDDIR)/images \
+		 $(BUILDDIR)/script \
+		 $(BUILDDIR)/lib \
+		 $(BUILDDIR)/samples
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
 SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
@@ -29,8 +36,9 @@ SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
 	src/script/utl/browserutl.js
 SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
 FAVICONMASTER=src/images/wordywordy.png
-FAVICONS=favicon.ico
-VERSIONEMBEDDABLESOURCES=index.html script/wordywordy.js
+FAVICONS=$(BUILDDIR)/favicon.ico
+VERSIONEMBEDDABLESOURCES=$(BUILDDIR)/index.html \
+						 $(BUILDDIR)/script/wordywordy.js
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
 # SASS=node_modules/node-sass/bin/node-sass
 
@@ -62,34 +70,37 @@ help:
 
 # production rules
 
-%.html: src/%.html
+$(BUILDDIR)/%.html: src/%.html
 	$(SEDVERSION) < $< > $@
 
 %.css: %.scss
 	$(SASS) $< $@
 
-font/%: src/font/%
+$(BUILDDIR)/font/%: src/font/%
 	cp -R $< $@
 
-style/%.css: src/style/%.css
+$(BUILDDIR)/style/%.css: src/style/%.css
 	cp $< $@
 
-style/themes/%.css: src/style/themes/%.css
+$(BUILDDIR)/style/themes/%.css: src/style/themes/%.css
 	cp $< $@
 
-images/%: src/images/%
+$(BUILDDIR)/images/%: src/images/%
 	cp -R $< $@
 
-lib/%.js: src/lib/%.js
+$(BUILDDIR)/lib/%.js: src/lib/%.js
 	cp -R $< $@
 
-favicon.ico: $(FAVICONMASTER)
+$(BUILDDIR)/samples/%.txt: samples/%.txt
+	cp -R $< $@
+
+$(BUILDDIR)/favicon.ico: $(FAVICONMASTER)
 	$(PNG2FAVICO) $< $@
 
-favicon-%.png: $(FAVICONMASTER)
+$(BUILDDIR)/favicon-%.png: $(FAVICONMASTER)
 	$(RESIZE) $< $@ 
 
-iosfavicon-%.png: $(FAVICONMASTER)
+$(BUILDDIR)/iosfavicon-%.png: $(FAVICONMASTER)
 	$(IOSRESIZE) $< $@ 
 
 $(PRODDIRS):
@@ -98,51 +109,57 @@ $(PRODDIRS):
 # file targets dev
 
 # file targets prod
-index.html: $(PRODDIRS) \
+$(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(FAVICONS) \
 	src/index.html \
 	siteverification.id \
 	tracking.id \
 	tracking.host \
-	lib/require.js \
-	lib/screenfull.js \
-	script/wordywordy.js \
-	style/wordywordy.css \
-	style/themes/057.css \
-	style/themes/074.css \
-	style/themes/220.css \
-	style/themes/background.css \
-	style/themes/day.css \
-	style/themes/dyslexia-day.css \
-	style/themes/dyslexia-high-contrast.css \
-	style/themes/dyslexia-low-contrast.css \
-	style/themes/dyslexia-night.css \
-	style/themes/dyslexia-sepia.css \
-	style/themes/high-contrast.css \
-	style/themes/hv.css \
-	style/themes/liberal.css \
-	style/themes/low-contrast-fat-font.css \
-	style/themes/low-contrast.css \
-	style/themes/night.css \
-	style/themes/progressive.css \
-	style/themes/sepia-fat-font.css \
-	style/themes/sepia.css \
-	style/themes/zany.css \
-	font/OpenDyslexic-Italic.otf \
-	font/OpenDyslexicAlta-Regular.otf \
-	font/Roboto-Italic.ttf \
-	font/Roboto-Light.ttf \
-	font/Roboto-LightItalic.ttf \
-	font/Roboto-Regular.ttf \
-	font/Roboto-Thin.ttf \
-	font/Roboto-ThinItalic.ttf \
-	font/controls.eot \
-	font/controls.svg \
-	font/controls.ttf \
-	font/controls.woff \
-	images/background.jpg
+	$(BUILDDIR)/lib/require.js \
+	$(BUILDDIR)/lib/screenfull.js \
+	$(BUILDDIR)/script/wordywordy.js \
+	$(BUILDDIR)/style/wordywordy.css \
+	$(BUILDDIR)/style/themes/057.css \
+	$(BUILDDIR)/style/themes/074.css \
+	$(BUILDDIR)/style/themes/220.css \
+	$(BUILDDIR)/style/themes/background.css \
+	$(BUILDDIR)/style/themes/day.css \
+	$(BUILDDIR)/style/themes/dyslexia-day.css \
+	$(BUILDDIR)/style/themes/dyslexia-high-contrast.css \
+	$(BUILDDIR)/style/themes/dyslexia-low-contrast.css \
+	$(BUILDDIR)/style/themes/dyslexia-night.css \
+	$(BUILDDIR)/style/themes/dyslexia-sepia.css \
+	$(BUILDDIR)/style/themes/high-contrast.css \
+	$(BUILDDIR)/style/themes/hv.css \
+	$(BUILDDIR)/style/themes/liberal.css \
+	$(BUILDDIR)/style/themes/low-contrast-fat-font.css \
+	$(BUILDDIR)/style/themes/low-contrast.css \
+	$(BUILDDIR)/style/themes/night.css \
+	$(BUILDDIR)/style/themes/progressive.css \
+	$(BUILDDIR)/style/themes/sepia-fat-font.css \
+	$(BUILDDIR)/style/themes/sepia.css \
+	$(BUILDDIR)/style/themes/zany.css \
+	$(BUILDDIR)/font/OpenDyslexic-Italic.otf \
+	$(BUILDDIR)/font/OpenDyslexicAlta-Regular.otf \
+	$(BUILDDIR)/font/Roboto-Italic.ttf \
+	$(BUILDDIR)/font/Roboto-Light.ttf \
+	$(BUILDDIR)/font/Roboto-LightItalic.ttf \
+	$(BUILDDIR)/font/Roboto-Regular.ttf \
+	$(BUILDDIR)/font/Roboto-Thin.ttf \
+	$(BUILDDIR)/font/Roboto-ThinItalic.ttf \
+	$(BUILDDIR)/font/controls.eot \
+	$(BUILDDIR)/font/controls.svg \
+	$(BUILDDIR)/font/controls.ttf \
+	$(BUILDDIR)/font/controls.woff \
+	$(BUILDDIR)/images/background.jpg \
+	$(BUILDDIR)/samples/1984.txt \
+	$(BUILDDIR)/samples/freedom.txt \
+	$(BUILDDIR)/samples/intro.nl.txt \
+	$(BUILDDIR)/samples/intro.txt \
+	$(BUILDDIR)/samples/laozi.txt \
+	$(BUILDDIR)/samples/thoughts.txt
 
-script/wordywordy.js: src/wordywordy.js 
+$(BUILDDIR)/script/wordywordy.js: src/wordywordy.js 
 	$(RJS) -o baseUrl="./src/script" \
 			name="wordywordy" \
 			out=$@ \
@@ -206,7 +223,7 @@ tracking.host:
 VERSION:
 	@echo 0.0.0 > $@
 
-lib/require.js: src/lib/require.js
+$(BUILDDIR)/lib/require.js: src/lib/require.js
 	cp $< $@
 
 # "phony" targets
@@ -240,7 +257,7 @@ testcoverage-report/index.html: coverage/lcov.info
 
 cover-report: testcoverage-report/index.html
 
-install: index.html
+install: $(BUILDDIR)/index.html
 
 publish: install cover-report
 	
@@ -255,13 +272,12 @@ doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md
 
 test: dev-build
-	# $(MOCHA) -R spec src/script/test/
 	$(NPM) run test
 
 check: noconsolestatements lint test
 
 somewhatclean:
-	rm -rf index.html
+	rm -rf $(BUILDDIR)/index.html
 	rm -rf jsdoc
 	rm -rf coverage
 	rm -rf $(PRODDIRS)
