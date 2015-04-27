@@ -1,0 +1,9 @@
+html, body{
+    color: rgba(95, 75, 50, 1);
+    background-color: rgba(251, 240, 217, 1);
+    font: normal normal 400 48pt dyslexic, sans-serif;
+}
+#__output {
+    border-bottom-color: rgba(95, 75, 50, 0.5);
+}
+.icon-theme:before { content: "\e9eb"; }
