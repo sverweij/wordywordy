@@ -226,6 +226,9 @@ VERSION:
 $(BUILDDIR)/lib/require.js: src/lib/require.js
 	cp $< $@
 
+$(BUILDDIR)/bookmarklet.js:
+	cp src/bookmarklet.js $@
+
 # "phony" targets
 
 prerequisites:
@@ -257,7 +260,7 @@ testcoverage-report/index.html: coverage/lcov.info
 
 cover-report: testcoverage-report/index.html
 
-install: $(BUILDDIR)/index.html
+install: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
 
 publish: install cover-report
 	
