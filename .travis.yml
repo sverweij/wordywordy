@@ -10,10 +10,11 @@ script:
   - npm run lint
   - npm run cover
   - npm run nsp
+  - make install
 
 branches:
   only:
-    - gh-pages
+    - master
 
 addons:
    code_climate:
