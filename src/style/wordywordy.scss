@@ -11,6 +11,15 @@ html, body {
   font-weight: 300;
   font-size: 48pt;
 }
+.browsehappy {
+  font-size: 0.7em;
+  margin: 0 0;
+  background: yellow;
+  color: black;
+  padding: 0.2em 0.2em;
+  z-index:481;
+  position: relative;
+}
 .outputwrap {
   width:100%;
   position: absolute;
