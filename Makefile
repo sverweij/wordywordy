@@ -189,9 +189,8 @@ src/index.html: src/wordywordy.js \
 	src/style/themes/sepia.css \
 	src/style/themes/zany.css
 
-src/style/wordywordy.css: src/style/wordywordy.scss
-
-src/style/wordywordy.scss: src/style/_fonts.scss
+src/style/wordywordy.css: src/style/wordywordy.scss \
+	src/style/_fonts.scss
 
 src/wordywordy.js: src/script/utl/formatting.js \
 	src/script/utl/paramslikker.js \
