@@ -5,7 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "amdefine": "^0.1.0",
-    "requirejs": "^2.1.17"
+    "requirejs": "^2.1.18"
   },
   "devDependencies": {
     "node-sass": "^3.1.2",
@@ -30,7 +30,7 @@
     "url": "https://github.com/sverweij/wordywordy.git"
   },
   "author": "Sander Verweij",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/sverweij/wordywordy/issues"
   },
