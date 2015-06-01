@@ -13,7 +13,7 @@
     "codeclimate-test-reporter": "^0.0.4",
     "csslint": "^0.10.0",
     "istanbul": "^0.3.14",
-    "jshint": "^2.7.0",
+    "jshint": "^2.8.0",
     "plato": "^1.5.0",
     "nsp": "^1.0.1"
   },
