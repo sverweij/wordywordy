@@ -8,7 +8,7 @@
     "requirejs": "^2.1.18"
   },
   "devDependencies": {
-    "node-sass": "^3.1.2",
+    "node-sass": "^3.2.0",
     "mocha": "^2.2.5",
     "codeclimate-test-reporter": "^0.0.4",
     "codecov.io": "^0.1.2",
