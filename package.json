@@ -4,7 +4,7 @@
   "description": "WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.",
   "main": "index.html",
   "dependencies": {
-    "amdefine": "^0.1.1",
+    "amdefine": "^1.0.0",
     "requirejs": "^2.1.18"
   },
   "devDependencies": {
