@@ -19,27 +19,25 @@ require(["utl/formatting",
     
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
 
-    var rParams    = paramslikker.getParams(window.location.search);
-
-    function processParameters() {
-        if (rParams.speed) {
-            actions.setSpeed(rParams.speed);
+    function processParameters(pParams) {
+        if (pParams.speed) {
+            actions.setSpeed(pParams.speed);
         }
-        if (rParams.theme) {
-            actions.setTheme(rParams.theme);
+        if (pParams.theme) {
+            actions.setTheme(pParams.theme);
         }
-        if (rParams.text) {
-            actions.initiateText(decodeURIComponent(rParams.text), "url");
+        if (pParams.text) {
+            actions.initiateText(decodeURIComponent(pParams.text), "url");
         }
-        if (rParams.pos) {
-            actions.setPos(rParams.pos);
+        if (pParams.pos) {
+            actions.setPos(pParams.pos);
         }
-        if (rParams.loop && fmt.sanitizeBooleanesque(rParams.loop)) {
+        if (pParams.loop && fmt.sanitizeBooleanesque(pParams.loop)) {
             actions.setLooping(true);
         } else {
             actions.setLooping(false);
         }
-        if (rParams.play && fmt.sanitizeBooleanesque(rParams.play)) {
+        if (pParams.play && fmt.sanitizeBooleanesque(pParams.play)) {
             window.setTimeout(actions.play, INITIAL_DISPLAY_DELAY);
         }
         var rCannedTexts = {
@@ -50,17 +48,17 @@ require(["utl/formatting",
           "intro_nl": "samples/intro.nl.txt",
           "laozi": "samples/laozi.txt"
         };
-        if (!(rParams.text) && rParams.canned ){
-            butl.ajax (decodeURIComponent(rCannedTexts[rParams.canned]), function(pEvent){
-                actions.initiateText(pEvent.target.response, rParams.canned);
+        if (!(pParams.text) && pParams.canned ){
+            butl.ajax (decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
+                actions.initiateText(pEvent.target.response, pParams.canned);
             }, function (){
                 // toast("Can't load that :-/");
             }
             );
         }
-        if (!(rParams.text) && rParams.url ){
-            butl.ajax (decodeURIComponent(rParams.url), function(pEvent){
-                actions.initiateText(pEvent.target.response, rParams.url);
+        if (!(pParams.text) && pParams.url ){
+            butl.ajax (decodeURIComponent(pParams.url), function(pEvent){
+                actions.initiateText(pEvent.target.response, pParams.url);
             }, function (){
                 // toast("Can't load that :-/");
             }
@@ -86,7 +84,7 @@ require(["utl/formatting",
 
     eve.addEventListeners();
     retrieveStateFromLocalStorage();
-    processParameters();
+    processParameters(paramslikker.getParams(window.location.search));
 });
 /*
  This file is part of WordyWordy.

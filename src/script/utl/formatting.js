@@ -34,22 +34,17 @@ define([], function() {
     }
 
     function formatTimeBlob (pInt) {
-        if (pInt < 10) {
-            return "0" + pInt;
-        }
-        return pInt.toString();
+        return pInt < 10 ? "0" + pInt : pInt.toString();
     }
 
     return {
         formatTime : function (pMilliSeconds, pShowMillis) {
             var lTimeStruct = millisToTimeStruct(pMilliSeconds);
             if (!pShowMillis) { pShowMillis = false; }
-            var lRetval =
-                   (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
+            return (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
                    formatTimeBlob (lTimeStruct.minutes) + ":" +
                    formatTimeBlob (lTimeStruct.seconds) +
                    (pShowMillis ? "." + lTimeStruct.milliseconds: "");
-            return lRetval;
         },
         sanitizeNumber : function (pThing, pDefault){
             if (typeof pThing  === 'string') {
