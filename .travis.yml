@@ -14,8 +14,6 @@ script:
   - npm run cover
   - npm run nsp
   - make install
-  - echo $secret_variable
-  - echo $non_secret_variable
 
 branches:
   except:
@@ -27,7 +25,7 @@ cache:
 
 addons:
    code_climate:
-     repo_token: 67de7a9cad1cc6e224897de8384439e62ce0c8ce70733e02aa2eea964615ab9c
+     repo_token: $code_climate_repo_token
 
 after_success:
   - npm run codeclimate-cover-submit
