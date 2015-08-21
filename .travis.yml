@@ -25,8 +25,7 @@ cache:
 
 addons:
    code_climate:
-     repo_token: $code_climate_repo_token
-
+     repo_token: $CODECLIMATE_REPO_TOKEN
 after_success:
   - npm run codeclimate-cover-submit
   - npm run codecov-submit
