@@ -14,6 +14,8 @@ script:
   - npm run cover
   - npm run nsp
   - make install
+  - echo $secret_variable
+  - echo $non_secret_variable
 
 branches:
   except:
