@@ -16,7 +16,7 @@
     "istanbul": "0.3.18",
     "jshint": "2.8.0",
     "plato": "1.5.0",
-    "nsp": "1.0.3"
+    "nsp": "1.1.0"
   },
   "scripts": {
     "lint": "jshint src/script  --verbose --show-non-errors",
