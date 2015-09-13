@@ -101,7 +101,7 @@ However, the actual speed depends on the characteristics of the selected text. E
 - Your text contains many short words and long sentences: the actual speed will be _faster_.
 
 ## Licenses and dependencies
-WordyWordy is free software [licensed under GPLv3](LICENSE). This
+WordyWordy is free software [licensed under GPL-3.0](LICENSE). This
 means (a.o.) you *can* use it as part of other free software. You
 can *not* use it as part of non free software.
 
