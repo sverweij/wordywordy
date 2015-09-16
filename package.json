@@ -16,7 +16,8 @@
     "istanbul": "0.3.19",
     "jshint": "2.8.0",
     "plato": "1.5.0",
-    "nsp": "1.1.0"
+    "nsp": "1.1.0",
+    "npm-check-updates": "2.2.3"
   },
   "scripts": {
     "lint": "jshint src/script  --verbose --show-non-errors",
@@ -25,7 +26,8 @@
 	"plato": "plato -r -d platoreports -x \"test\" src/script/", 
     "nsp" : "nsp package",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info",
-    "codecov-submit": "node node_modules/codecov.io/bin/codecov.io.js < coverage/lcov.info"
+    "codecov-submit": "node node_modules/codecov.io/bin/codecov.io.js < coverage/lcov.info",
+    "npm-check-updates": "ncu --upgrade"
 
   },
   "repository": {
