@@ -8,27 +8,26 @@
     "requirejs": "2.1.20"
   },
   "devDependencies": {
-    "node-sass": "3.3.2",
-    "mocha": "2.3.2",
     "codeclimate-test-reporter": "0.1.1",
     "codecov.io": "0.1.6",
     "csslint": "0.10.0",
-    "istanbul": "0.3.19",
+    "istanbul": "0.3.20",
     "jshint": "2.8.0",
-    "plato": "1.5.0",
+    "mocha": "2.3.2",
+    "node-sass": "3.3.2",
+    "npm-check-updates": "2.2.3",
     "nsp": "1.1.0",
-    "npm-check-updates": "2.2.3"
+    "plato": "1.5.0"
   },
   "scripts": {
     "lint": "jshint src/script  --verbose --show-non-errors",
     "test": "mocha -R dot src/script/test/",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test",
-	"plato": "plato -r -d platoreports -x \"test\" src/script/", 
-    "nsp" : "nsp package",
+    "plato": "plato -r -d platoreports -x \"test\" src/script/",
+    "nsp": "nsp package",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info",
     "codecov-submit": "node node_modules/codecov.io/bin/codecov.io.js < coverage/lcov.info",
     "npm-check-updates": "ncu --upgrade"
-
   },
   "repository": {
     "type": "git",
