@@ -5,6 +5,8 @@ MOCHA_FORK=node_modules/mocha/bin/_mocha
 COVER=node node_modules/istanbul/lib/cli.js
 COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory 
 GIT=git
+GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
+GIT_DEPLOY_FROM_BRANCH=master
 CSSLINT=node node_modules/csslint/cli.js --format=compact --quiet --ignore=ids
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
@@ -13,7 +15,11 @@ IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
 
-BUILDDIR=build
+ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
+	BUILDDIR=build
+else
+	BUILDDIR=build/branches/$(GIT_CURRENT_BRANCH)
+endif
 PRODDIRS=$(BUILDDIR)/style \
 		 $(BUILDDIR)/style/themes \
 		 $(BUILDDIR)/font \
@@ -263,12 +269,13 @@ cover-report: testcoverage-report/index.html
 
 install: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
 
-publish: install
-	cd $(BUILDDIR)
-	$(GIT) add .
-	$(GIT) commit -m "build `cat ../VERSION`"
-	$(GIT) push origin gh-pages
-	
+deploy-gh-pages: install
+	@echo Deploying build `cat VERSION` to $(BUILDDIR)
+	$(GIT) -C $(BUILDDIR) add --all .
+	$(GIT) -C $(BUILDDIR) commit -m "build `cat VERSION`"
+	$(GIT) -C $(BUILDDIR) push origin gh-pages
+	$(GIT) -C $(BUILDDIR) status
+
 tag: 
 	$(GIT) tag -a `cat VERSION` -m "tag release `cat VERSION`"
 	$(GIT) push --tags
