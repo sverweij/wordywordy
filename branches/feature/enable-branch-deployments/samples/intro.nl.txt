@@ -1,0 +1,77 @@
+Hallo, leuk dat je belangstelling heb voor WordyWordy! Je had waarschijnlijk al begrepen dat WordyWordy tekst toont. Woord voor woord. In jouw tempo.  
+
+Je leest deze tekst nu met zo'n 150 woorden per minuut. Als dat te snel is (of te langzaam), dan kun je dat aanpassen met de pijltoetsen {omhoog} en {omlaag} op je toetsenbord. Als je dit leest op een apparaat zonder toetsenbord, dan kun je ook op de omcircelde {omhoog} en {omlaag} knopjes links bovenin beeld klikken.
+
+Kom, pas het meteen maar aan. Sneller={omhoog}. Langzamer={omlaag}.
+
+Dit is wat tekst zodat je kunt uitproberen of de leessnelheid die je aan het selecteren bent een beetje lekker voelt. (Wat? Dat was je niet aan het doen? Kom, {omhoog}, {omhoog}, {omhoog}!). Ter referentie: als gemiddeld volwassene zul je lezen met zo'n 240 woorden per minuut. Als dat te snel voor je is: RELAX. Dat betekent dat je niet gemiddeld bent. Niet gemiddeld zijn is OK. Sterker nog: WordyWordy is speciaal gemaakt voor mensen die niet gemiddeld zijn.
+
+Het kan natuurlijk ook dat je sneller dan 240 woorden per minuut wilt lezen. Gooi je haar los! Er zijn mensen die beweren dat ze 400 woorden per minuut kunnen lezen. Er zijn zèlfs mensen die beweren dat ze sneller kunnen lezen dan dat, al geloof ik dat zelf niet zo...
+
+Nu je de leessnelheid hebt ingesteld op wat voor jou prettig is, zul je wat dingen willen weten.
+
+1. -->WAAROM?<--
+
+Waarom zou je op deze manier willen lezen? Dit zijn een paar redenen:
+1. Beperkt zicht.
+2. Dyslectie.
+3. Lezen zonder handen.
+4. Snellezen.
+
+1/4  Beperkt zicht
+
+Het zal je opgevallen zijn dat de letters GROOT zijn. En dat je je ogen niet zoveel hoeft te bewegen. Dit kan handig zijn voor mensen die een beperkt gezichtsveld hebben. WordyWordy heeft ook een CONTRAST thema (onder de {5} (vijf) toets).
+
+
+2/4 Dyslectie
+
+Er wordt beweerd (al heb ik er geen bewijs voor gezien) dat mensen met dyslectie tekst makkelijker kunnen opnemen als het op deze manier gepresenteerd wordt. Ik heb geen idee of dat klopt. Voor het geval dàt, heb ik een aantal themas gemaakt met een dyslectie vriendelijk lettertype. Dat lettertype heeft dikke onderkanten. En letters verschillen ENORM van elkaar.
+
+Als je het dyslexie vriendelijke lettertype in actie wilt zien, kun je de {6} (zes) op je toetsenbord indrukken. {1} (één) brengt je terug op het doorsnee lettertype.
+
+
+3/4 Lezen zonder handen
+
+Eh, dit had je zelf al door waarschijnlijk. Vanaf het moment dat je begon met lezen heb je geen letter hoeven scrollen. Je kunt op de loopband gaan staan en WordyWordy je een boek laten voorlezen. Of rekoefeningen doen. 
+
+
+4/4 Snellezen
+
+Het schijnt dat je sneller kunt lezen zo. Onderzoek of dit ook ècht zo is heb ik niet gezien. De winst schijnt hem te zitten in het feit dat je je ogen niet naar het begin van de regel hoeft te bewegen. 
+
+Het tweede ding dat je waarschijnlijk wilt weten...
+
+2. Hoe navigeer ik door de tekst?
+
+Als je wilt pauzeren, dan gebruik je de {spatiebalk}. Of je klikt of tikt op de {>} knop op het bedieningseiland.
+
+Wacht even. Bedieningseiland? Waar heb je het over?
+
+Het bedieningseiland is dat ding onderin beeld dat verschijnt zodra je je muis beweegt. Of ergens in het midden van het scherm tikt.
+
+Als je weer verder wilt lezen, gebruik je weer de {spatiebalk} of de {||} knop.
+
+Heen en weer bewegen door de tekst kun je op verschillende manieren doen. Je kunt de {links} en {rechts} pijltjes op je toetsenbord gebruiken. Of de {|<} en {>|} knoppen.  
+
+Goed om te weten voor als je al wat langer leest op deze manier: er zijn ook knoppen om naar het begin van de vorige of volgende zin te springen {page up}, {page down}, {|<<}, {>>|}. Meer knoppen en functies kun je op github vinden (link aan het eind van de tekst).
+
+Het derde ding wat je nu waarschijnlijk wilt weten:
+
+3. Hoe kan ik dit ding MIJN tekst laten voorlezen.
+
+Dat kan op een paar manieren: Met de "open bestand" dialoog. Kopiëren en plakken. En door te slepen. D'r is er nog een, maar die is een beetje technisch (URL). Je kunt er alles over vinden op github.
+
+Je eigen tekst door WordyWordy laten lezen 1/3: bestand openen
+Misschien is het je opgevallen dat rechts bovenin beeld een plaatje van een map staat (als je die niet ziet: beweeg je muis even of tik op het midden van het scherm). Als je op dat plaatje klikt, geeft de browser je de mogelijkheid een tekstbestand te openen. Als je dat doet, gaat WordyWordy meteen enthousiast voorlezen. WordyWordy is getest met vrij forse tekstbestanden (rond de 1Mb) dus ook hier: leef je uit!
+
+Je eigen tekst door WordyWordy laten lezen 2/3: kopiëren en plakken
+Kopieer wat tekst naar het klembord en plak het op de de horizontale lijn in het midden van het scherm. WordyWordy zal meteen beginnen met voorlezen. Op tabletten en veegtelefoons werkt dit nu nog niet.
+
+Je eigen tekst door  WordyWordy laten lezen 3/3: slepen
+Selecteer een tekstbestand en sleep net naar de horizontale lijn. Als je goed bezig bent, lacht WordyWordy naar je. Ook dit zal niet werken op tabletten en veegtelefoons.
+
+Voor al deze manieren: WordyWordy kan alleen omgaan met tekstbestanden. Het weet op dit moment bijvoorbeeld geen raad met worddocumenten of elektronische boekformaten zoals epub. Misschien ga ik het dat ooit nog leren, maar daar zal wat tijd overheen gaan...
+
+Jij daar! Kanjer! Je hebt het helemaal volgehouden tot hier! Als je de snelheid op 150 woorden per minuut hebt laten staan, ben je zo'n zeven minuten bezig geweest. Minder als je em sneller hebt gezet. Wil je weten hoeveel precies? En hoeveel woorden je net voorbij hebt zien komen? Als WordyWordy geglimlacht heeft, tik dan de {i} in of klik de (i) knop op het scherm aan. 
+
+https://github.com/sverweij/wordywordy/blob/gh-pages/README.md

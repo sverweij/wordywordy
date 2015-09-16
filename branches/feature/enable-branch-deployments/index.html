@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <!--
+    todo
+    - local storage for more than one book
+    - change font size
+
+    - Content retrieval methods
+       - rss (?)
+       - bookmarklet
+    - Support other formats
+       - html
+       - epub
+    -->
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow. Runs within your browser. Remembers where you left off between sessions. On the fly adjustable speed. Copious navigation options. GPLv3 open source licensed.">
+        <meta name="keywords" content="rsvp, rapid serial visual presentation, wordywordy, one word at a time">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon.ico">
+        <link rel="icon" sizes="228x228" href="./favicon-228.png">
+        <link rel="icon" sizes="195x195" href="./favicon-195.png">
+        <link rel="icon" sizes="152x152" href="./favicon-152.png">
+        <link rel="icon" sizes="144x144" href="./favicon-144.png">
+        <link rel="icon" sizes="128x128" href="./favicon-128.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./iosfavicon-152.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./iosfavicon-144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./iosfavicon-120.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./iosfavicon-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./iosfavicon-72.png">
+        <link rel="apple-touch-icon-precomposed" href="./iosfavicon-57.png">
+        <link rel="shortcut icon" href="./favicon.ico">
+
+        <title>WordyWordy</title>
+        <script data-main="script/wordywordy.js?20d0e638ecba54d3"
+            src="lib/require.js?20d0e638ecba54d3" defer></script>
+        <link rel="stylesheet" href="style/wordywordy.css?20d0e638ecba54d3" type="text/css" media="screen">
+        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css?20d0e638ecba54d3" type="text/css" media="screen">
+    </head>
+    <body>
+        <!--[if lt IE 19]>
+        <p class="browsehappy">You are using an <strong>outdated</strong>
+        browser. WordyWordy requires a modern one.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a>
+        to improve your experience.
+        </p>
+        <![endif]-->
+
+        <div id="__actionbar">
+            <div id="__btn_open" class="icon-folder" alt="open a text file to read" title="open a text file to read"></div>
+            <div id="__btn_theme" class="icon-theme" alt="switch theme" title="switch theme (`)"></div>
+            <!--
+            <div id="__btn_zoomin" class="icon-zoom-in" title="Bigger letters"></div>
+            <div id="__btn_zoomout" class="icon-zoom-out" title="Smaller letters"></div>
+            -->
+            <div id="__btn_speedup" class="icon-circle-up" alt="speed up" title="speed up (W)"></div>
+            <div id="__btn_slowdown" class="icon-circle-down" alt="slow down" title="slow down (S)"></div>
+            <div id="__btn_fullscreen" class="icon-enlarge" alt="toggle full screen" title="toggle full screen (F)"></div>
+            <div id="__btn_info" class="icon-info hideonmobile" title="toggle stats display (I)"></div>
+        </div>
+
+        <textarea id="__droparea" class="hideonmobile"></textarea>
+        <div class="clickarea" id="__rightarea"></div>
+        <div class="outputwrap">
+            <span id="__output" class="breathing"></span>
+        </div>
+        <span id="__status">
+            <div>
+            <table>
+                <tr>
+                    <td>Document</td>
+                    <td>
+                        <span id="__documentTitle"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Selected speed</td>
+                    <td>
+                        <span id="__selectedSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Calculated speed</td>
+                    <td>
+                        <span id="__avgSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>
+                        <span id="__position"></span> of
+                        <span id="__wordsTotal"></span> words
+                        (<span id="__positionInPercent"></span>%)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Words displayed</td>
+                    <td>
+                        <span id="__wordsPlayed"></span>
+                        @<span id="__actualSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="icon-stopwatch"></span> spent + left = total</td>
+                    <td>
+                        <span id="__timeElapsed"></span> +
+                        <span id="__timeToGo"></span> =
+                        <span id="__timeTotal"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>0.1.20</td>
+                </tr>
+            </table>
+            </div>
+        </span>
+        <span id="__toast"></span>
+        <div id="__percentagewrap">
+            <div id="__percentage"></div>
+        </div>
+        <div id="__controls">
+            <nav id="__nav">
+                <span id="__btn_home" class="icon-first" title="go to start of sentence (Q)"></span><span id="__btn_dec" class="icon-previous2" title="one word back (A)"></span><span id="__btn_playpause" class="icon-play3" title="play/ pause (SPACE BAR)"></span><span id="__btn_inc" class="icon-next2" title="one word forward (D)"></span><span id="__btn_end" class="icon-last" title="go to start of next sentence (E)"></span><span id="__btn_paragraph" class="icon-forward3" title="go to start of next paragraph (R)"></span>
+            </nav>
+            <input id="__input_file" type="file" accept="text/plain" style="display:none"></input>
+        </div>
+    </body>
+</html>
