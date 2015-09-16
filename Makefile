@@ -291,10 +291,12 @@ check: noconsolestatements lint test
 
 fullcheck: check outdated nsp
 
-update-dependencies:
+update-dependencies: run-update-dependencies test
+	$(GIT) diff package.json
+	
+run-update-dependencies: 
 	$(NPM) run npm-check-updates
 	$(NPM) install
-	$(GIT) diff package.json
 
 somewhatclean:
 	rm -rf $(BUILDDIR)/index.html
