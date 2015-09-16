@@ -1,10 +1,12 @@
 .SUFFIXES:
-.SUFFIXES: .js .pegjs .css .scss .html .msc .mscin .msgenny .svg .png .jpg
+.SUFFIXES: .js .pegjs .css .scss .html .svg .png .jpg
 RJS=node_modules/requirejs/bin/r.js
 MOCHA_FORK=node_modules/mocha/bin/_mocha
 COVER=node node_modules/istanbul/lib/cli.js
 COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory 
 GIT=git
+GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
+GIT_DEPLOY_FROM_BRANCH=master
 CSSLINT=node node_modules/csslint/cli.js --format=compact --quiet --ignore=ids
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
@@ -12,9 +14,12 @@ RESIZE=utl/resize.sh
 IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
-DOC=node node_modules/jsdoc/jsdoc.js --destination jsdoc
 
-BUILDDIR=build
+ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
+	BUILDDIR=build
+else
+	BUILDDIR=build/branches/$(GIT_CURRENT_BRANCH)
+endif
 PRODDIRS=$(BUILDDIR)/style \
 		 $(BUILDDIR)/style/themes \
 		 $(BUILDDIR)/font \
@@ -22,6 +27,7 @@ PRODDIRS=$(BUILDDIR)/style \
 		 $(BUILDDIR)/script \
 		 $(BUILDDIR)/lib \
 		 $(BUILDDIR)/samples
+GENERATED_SOURCES=src/style/wordywordy.css
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
 SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
@@ -37,36 +43,35 @@ SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
 SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
-VERSIONEMBEDDABLESOURCES=$(BUILDDIR)/index.html \
-						 $(BUILDDIR)/script/wordywordy.js
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
-# SASS=node_modules/node-sass/bin/node-sass
 
-.PHONY: help dev-build install checkout-gh-pages build-gh-pages deploy-gh-pages check mostlyclean clean noconsolestatements consolecheck lint cover prerequisites report test
+.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean noconsolestatements consolecheck lint cover prerequisites report test update-dependencies run-update-dependencies
 
 help:
-	@echo \ \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
-	@echo \| Just downloaded the WordyWordy sources? \|
-	@echo \| \ First run \'make prerequisites\'  \ \ \ \ \ \ \ \ \|
-	@echo \ \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+	@echo " -----------------------------------------"
+	@echo "| Just downloaded the WordyWordy sources? |"
+	@echo "|  First run 'make prerequisites'         |"
+	@echo " -----------------------------------------"
 	@echo
-	@echo Most important build targets:
+	@echo "Most important build targets:"
 	@echo
-	@echo dev-build
-	@echo \ development build only
+	@echo "dev-build"
+	@echo " development build only"
 	@echo
-	@echo check
-	@echo \ runs the linter and executes all unit tests
-	@echo 
-	@echo install
-	@echo \ creates the production version \(minified js, images, html\)
-	@echo \ in the build directory
-	@echo \ \-\> this is probably the target you want when hosting WordyWordy
-	@echo 
-	@echo clean
-	@echo \ removes everything created by either install or dev-build
+	@echo "check"
+	@echo " runs the linter and all unit tests"
 	@echo
-	@echo \ \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+	@echo "install"
+	@echo " creates the production version (minified"
+	@echo " js, images, html) in the build directory"
+	@echo " -> this is probably the target you want"
+	@echo "    when hosting WordyWordy"
+	@echo
+	@echo "clean"
+	@echo " removes everything created by either"
+	@echo " install or dev-build"
+	@echo
+	@echo " -----------------------------------------"
 	@echo
 
 # production rules
@@ -160,14 +165,38 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/samples/laozi.txt \
 	$(BUILDDIR)/samples/thoughts.txt
 
-$(BUILDDIR)/script/wordywordy.js: src/wordywordy.js 
+$(BUILDDIR)/script/wordywordy.js: src/script/wordywordy.js 
 	$(RJS) -o baseUrl="./src/script" \
 			name="wordywordy" \
 			out=$@ \
 
-src/index.html: src/wordywordy.js \
+src/index.html: src/script/wordywordy.js \
 	src/lib/require.js \
-	src/style/wordywordy.css \
+	src/style/wordywordy.css
+
+src/style/wordywordy.css: src/style/wordywordy.scss \
+	src/style/_fonts.scss
+
+src/script/wordywordy.js: src/script/utl/formatting.js \
+	src/script/utl/paramslikker.js \
+	src/script/utl/browserutl.js \
+	src/script/ui-control/eventmap.js \
+	src/script/ui-control/actions.js \
+	src/script/ui-control/constants.js 
+
+src/script/ui-control/eventmap.js: src/script/ui-control/actions.js
+
+src/script/ui-control/actions.js: src/script/chopper/chopper.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/themeswitcher.js \
+	src/script/utl/formatting.js \
+	src/script/utl/stopwatch.js \
+	src/script/utl/browserutl.js \
+	src/lib/screenfull.js
+
+src/script/chopper/chopper.js: src/script/utl/formatting.js
+
+src/script/ui-control/themeswitcher.js: \
 	src/style/themes/057.css \
 	src/style/themes/074.css \
 	src/style/themes/220.css \
@@ -188,28 +217,6 @@ src/index.html: src/wordywordy.js \
 	src/style/themes/sepia-fat-font.css \
 	src/style/themes/sepia.css \
 	src/style/themes/zany.css
-
-src/style/wordywordy.css: src/style/wordywordy.scss \
-	src/style/_fonts.scss
-
-src/wordywordy.js: src/script/utl/formatting.js \
-	src/script/utl/paramslikker.js \
-	src/script/utl/browserutl.js \
-	src/script/ui-control/eventmap.js \
-	src/script/ui-control/actions.js \
-	src/script/ui-control/constants.js 
-
-src/script/ui-control/eventmap.js: src/script/ui-control/actions.js
-
-src/script/ui-control/actions.js: src/script/chopper/chopper.js \
-	src/script/ui-control/constants.js \
-	src/script/ui-control/themeswitcher.js \
-	src/script/utl/formatting.js \
-	src/script/utl/stopwatch.js \
-	src/script/utl/browserutl.js \
-	src/lib/screenfull.js
-
-src/script/chopper/chopper.js: src/script/utl/formatting.js
 
 siteverification.id:
 	@echo yoursiteverifactionidhere > $@
@@ -262,12 +269,13 @@ cover-report: testcoverage-report/index.html
 
 install: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
 
-publish: install
-	cd $(BUILDDIR)
-	$(GIT) add .
-	$(GIT) commit -m "build `cat ../VERSION`"
-	$(GIT) push origin gh-pages
-	
+deploy-gh-pages: install
+	@echo Deploying build `cat VERSION` to $(BUILDDIR)
+	$(GIT) -C $(BUILDDIR) add --all .
+	$(GIT) -C $(BUILDDIR) commit -m "build `cat VERSION`"
+	$(GIT) -C $(BUILDDIR) push origin gh-pages
+	$(GIT) -C $(BUILDDIR) status
+
 tag: 
 	$(GIT) tag -a `cat VERSION` -m "tag release `cat VERSION`"
 	$(GIT) push --tags
@@ -299,8 +307,8 @@ run-update-dependencies:
 	$(NPM) install
 
 somewhatclean:
+	rm -rf $(GENERATED_SOURCES)
 	rm -rf $(BUILDDIR)/index.html
-	rm -rf jsdoc
 	rm -rf coverage
 	rm -rf $(PRODDIRS)
 	rm -rf testcoverage-report
