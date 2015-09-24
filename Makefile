@@ -299,15 +299,17 @@ check: noconsolestatements lint test
 
 fullcheck: check outdated nsp
 
-update-dependencies: run-update-dependencies test
+update-dependencies: run-update-dependencies clean-generated-sources test nsp
 	$(GIT) diff package.json
 	
 run-update-dependencies: 
 	$(NPM) run npm-check-updates
 	$(NPM) install
 
-somewhatclean:
+clean-generated-sources:
 	rm -rf $(GENERATED_SOURCES)
+
+somewhatclean: clean-generated-sources
 	rm -rf $(BUILDDIR)/index.html
 	rm -rf coverage
 	rm -rf $(PRODDIRS)
