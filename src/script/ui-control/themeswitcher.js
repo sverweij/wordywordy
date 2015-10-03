@@ -38,7 +38,7 @@ define(["../utl/formatting"],
     }
 
     function setTheme(pThemeNumber){
-        var lThemeNumber =
+        rCurrentTheme =
             Math.max(
                 Math.min(
                     fmt.sanitizeNumber(pThemeNumber,1),
@@ -46,8 +46,7 @@ define(["../utl/formatting"],
                 ),
                 0
             );
-        rCurrentTheme = lThemeNumber;
-        window.customtheme.href=rStyleSheets[lThemeNumber].href;
+        window.customtheme.href=rStyleSheets[rCurrentTheme].href;
     }
 
     function getCurrentTheme(){
