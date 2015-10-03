@@ -14,6 +14,7 @@ RESIZE=utl/resize.sh
 IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
+MAKEDEPEND=node_modules/.bin/js-makedepend
 
 ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
 	BUILDDIR=build
@@ -30,16 +31,6 @@ PRODDIRS=$(BUILDDIR)/style \
 GENERATED_SOURCES=src/style/wordywordy.css
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
-SCRIPT_SOURCES_WEB=src/script/ui-control/eventmap.js \
-	src/script/ui-control/actions.js \
-	src/script/ui-control/constants.js \
-	src/script/ui-control/themeswitcher.js \
-	src/script/chopper/chopper.js \
-	src/script/chopper/chopper.js \
-	src/script/utl/formatting.js \
-	src/script/utl/paramslikker.js \
-	src/script/utl/stopwatch.js \
-	src/script/utl/browserutl.js
 SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
@@ -165,36 +156,15 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/samples/laozi.txt \
 	$(BUILDDIR)/samples/thoughts.txt
 
-$(BUILDDIR)/script/wordywordy.js: src/script/wordywordy.js 
+$(BUILDDIR)/script/wordywordy.js: $(SOURCES_WEB)
 	$(RJS) -o baseUrl="./src/script" \
 			name="wordywordy" \
 			out=$@ \
 
-src/index.html: src/script/wordywordy.js \
-	src/lib/require.js \
-	src/style/wordywordy.css
+src/index.html: $(SOURCES_WEB) $(GENERATED_SOURCES)
 
 src/style/wordywordy.css: src/style/wordywordy.scss \
 	src/style/_fonts.scss
-
-src/script/wordywordy.js: src/script/utl/formatting.js \
-	src/script/utl/paramslikker.js \
-	src/script/utl/browserutl.js \
-	src/script/ui-control/eventmap.js \
-	src/script/ui-control/actions.js \
-	src/script/ui-control/constants.js 
-
-src/script/ui-control/eventmap.js: src/script/ui-control/actions.js
-
-src/script/ui-control/actions.js: src/script/chopper/chopper.js \
-	src/script/ui-control/constants.js \
-	src/script/ui-control/themeswitcher.js \
-	src/script/utl/formatting.js \
-	src/script/utl/stopwatch.js \
-	src/script/utl/browserutl.js \
-	src/lib/screenfull.js
-
-src/script/chopper/chopper.js: src/script/utl/formatting.js
 
 src/script/ui-control/themeswitcher.js: \
 	src/style/themes/057.css \
@@ -277,7 +247,10 @@ tag:
 	$(GIT) tag -a `utl/getver` -m "tag release `utl/getver`"
 	$(GIT) push --tags
 
-report: dev-build
+depend:
+	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
+
+static-analysis: dev-build
 	$(NPM) run plato
 
 doc:
@@ -314,3 +287,18 @@ somewhatclean: clean-generated-sources
 
 clean: somewhatclean
 	rm -rf $(FAVICONS)
+
+# DO NOT DELETE THIS LINE -- js-makedepend depends on it.
+
+# amd dependencies
+SCRIPT_SOURCES_WEB=src/script/wordywordy.js \
+	src/lib/screenfull.js \
+	src/script/chopper/chopper.js \
+	src/script/ui-control/actions.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/eventmap.js \
+	src/script/ui-control/themeswitcher.js \
+	src/script/utl/browserutl.js \
+	src/script/utl/formatting.js \
+	src/script/utl/paramslikker.js \
+	src/script/utl/stopwatch.js
