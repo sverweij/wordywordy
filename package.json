@@ -12,7 +12,7 @@
     "codecov.io": "0.1.6",
     "csslint": "0.10.0",
     "istanbul": "0.3.22",
-    "js-makedepend": "0.1.4",
+    "js-makedepend": "0.1.5",
     "jshint": "2.8.0",
     "mocha": "2.3.3",
     "node-sass": "3.3.3",
