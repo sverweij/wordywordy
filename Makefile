@@ -103,6 +103,9 @@ $(BUILDDIR)/iosfavicon-%.png: $(FAVICONMASTER)
 $(PRODDIRS):
 	mkdir -p $@
 
+src/lib/screenfull.js: node_modules/screenfull/dist/screenfull.js
+	cp $< $@
+
 # file targets dev
 
 # file targets prod
