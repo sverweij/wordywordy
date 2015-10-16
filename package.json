@@ -9,6 +9,7 @@
     "screenfull": "^2.0.0"
   },
   "devDependencies": {
+    "chai": "3.3.0",
     "codeclimate-test-reporter": "0.1.1",
     "codecov.io": "0.1.6",
     "csslint": "0.10.0",

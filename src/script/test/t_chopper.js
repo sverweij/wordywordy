@@ -1,4 +1,4 @@
-var assert = require("assert");
+var assert = require("chai").assert;
 var chop = require("../chopper/chopper");
 
 describe('chopper', function() {

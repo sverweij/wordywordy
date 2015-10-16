@@ -1,4 +1,4 @@
-var assert = require("assert");
+var assert = require("chai").assert;
 var fmt = require("../utl/formatting");
 
 describe('formatting', function() {
