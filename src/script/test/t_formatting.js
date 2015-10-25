@@ -41,7 +41,7 @@ describe('formatting', function() {
         it('sanitize valid number', function() {
             assert.equal(42, fmt.sanitizeNumber(42, 1337));
         });
-        it('sanitize valid number', function() {
+        it('sanitize NaN', function() {
             assert.equal(1234, fmt.sanitizeNumber(NaN, 1234));
         });
     });
