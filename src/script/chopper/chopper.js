@@ -247,7 +247,7 @@ define(["../utl/formatting"], function(fmt) {
     function _determineDisplayTime(pWord){
         return pWord ? pWord.split('').reduce(function(pPrev, pChar){
                           return pPrev + regexp2duration(pChar);
-                      }, rMinDelay) 
+                      }, rMinDelay)
                      : 0;
     }
 

@@ -6,20 +6,21 @@
   "dependencies": {
     "amdefine": "1.0.0",
     "requirejs": "2.1.20",
-    "screenfull": "^2.0.0"
+    "screenfull": "2.0.0"
   },
   "devDependencies": {
     "chai": "3.4.0",
     "codeclimate-test-reporter": "0.1.1",
     "codecov.io": "0.1.6",
     "csslint": "0.10.0",
+    "cucumber": "0.8.1",
     "istanbul": "0.4.0",
-    "js-makedepend": "0.1.7",
+    "js-makedepend": "0.1.8",
     "jshint": "2.8.0",
     "mocha": "2.3.3",
-    "node-sass": "3.4.0",
+    "node-sass": "3.4.1",
     "npm-check-updates": "2.3.4",
-    "nsp": "1.1.0",
+    "nsp": "2.0.0",
     "plato": "1.5.0"
   },
   "scripts": {
@@ -27,7 +28,7 @@
     "test": "mocha -R dot src/script/test/",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test",
     "plato": "plato -r -d platoreports -x \"test\" src/script/",
-    "nsp": "nsp package",
+    "nsp": "nsp check",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info",
     "codecov-submit": "node node_modules/codecov.io/bin/codecov.io.js < coverage/lcov.info",
     "npm-check-updates": "ncu --upgrade"
