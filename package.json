@@ -9,18 +9,17 @@
     "screenfull": "2.0.0"
   },
   "devDependencies": {
-    "chai": "3.4.0",
+    "chai": "3.4.1",
     "codeclimate-test-reporter": "0.1.1",
     "codecov.io": "0.1.6",
     "csslint": "0.10.0",
-    "cucumber": "0.8.1",
     "istanbul": "0.4.0",
     "js-makedepend": "0.1.8",
     "jshint": "2.8.0",
     "mocha": "2.3.3",
     "node-sass": "3.4.1",
-    "npm-check-updates": "2.3.4",
-    "nsp": "2.0.1",
+    "npm-check-updates": "2.4.0",
+    "nsp": "2.0.2",
     "plato": "1.5.0"
   },
   "scripts": {
