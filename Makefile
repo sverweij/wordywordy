@@ -15,6 +15,7 @@ IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
 MAKEDEPEND=node_modules/.bin/js-makedepend
+MINIFY=node_modules/.bin/uglifyjs
 
 ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
 	BUILDDIR=build
@@ -99,6 +100,9 @@ $(BUILDDIR)/favicon-%.png: $(FAVICONMASTER)
 
 $(BUILDDIR)/iosfavicon-%.png: $(FAVICONMASTER)
 	$(IOSRESIZE) $< $@ 
+
+src/lib/require.js: node_modules/requirejs/require.js
+	$(MINIFY) $< -m -c > $@
 
 $(PRODDIRS):
 	mkdir -p $@
