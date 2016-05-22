@@ -139,6 +139,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/style/themes/low-contrast-fat-font.css \
 	$(BUILDDIR)/style/themes/low-contrast.css \
 	$(BUILDDIR)/style/themes/night.css \
+	$(BUILDDIR)/style/themes/night-fat-font.css \
 	$(BUILDDIR)/style/themes/progressive.css \
 	$(BUILDDIR)/style/themes/sepia-fat-font.css \
 	$(BUILDDIR)/style/themes/sepia.css \
