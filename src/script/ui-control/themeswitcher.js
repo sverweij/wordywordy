@@ -6,7 +6,7 @@ define(["../utl/formatting"],
     "use strict";
 
     var rCurrentTheme = 1;
-    var rStyleSheets = [ 
+    var rStyleSheets = [
      {nr: 0, title: "Zany", href: "style/themes/zany.css"},
      {nr: 1, title: "Sepia", href: "style/themes/sepia.css"},
      {nr: 2, title: "Day", href: "style/themes/day.css"},
@@ -20,13 +20,14 @@ define(["../utl/formatting"],
      {nr: 10, title: "Dyslexia - high contrast", href: "style/themes/dyslexia-high-contrast.css"},
      {nr: 11, title: "Low contrast fat font", href: "style/themes/low-contrast-fat-font.css"},
      {nr: 12, title: "Sepia fat font", href: "style/themes/sepia-fat-font.css"},
-     {nr: 13, title: "220", href: "style/themes/220.css"},
-     {nr: 14, title: "057", href: "style/themes/057.css"},
-     {nr: 15, title: "074", href: "style/themes/074.css"},
-     {nr: 16, title: "HV", href: "style/themes/hv.css"},
-     {nr: 17, title: "liberal", href: "style/themes/liberal.css"},
-     {nr: 18, title: "progressive", href: "style/themes/progressive.css"},
-     {nr: 19, title: "background", href: "style/themes/background.css"}
+     {nr: 13, title: "Night fat font", href: "style/themes/night-fat-font.css"},
+     {nr: 14, title: "220", href: "style/themes/220.css"},
+     {nr: 15, title: "057", href: "style/themes/057.css"},
+     {nr: 16, title: "074", href: "style/themes/074.css"},
+     {nr: 17, title: "HV", href: "style/themes/hv.css"},
+     {nr: 18, title: "liberal", href: "style/themes/liberal.css"},
+     {nr: 19, title: "progressive", href: "style/themes/progressive.css"},
+     {nr: 20, title: "background", href: "style/themes/background.css"}
     ];
 
     function cycleTheme(){
