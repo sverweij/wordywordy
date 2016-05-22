@@ -126,7 +126,7 @@ At the time the font was created it was licensed
 [![codecov.io](http://codecov.io/github/sverweij/wordywordy/coverage.svg?branch=master)](http://codecov.io/github/sverweij/wordywordy?branch=master)
 [![Dependencies](https://david-dm.org/sverweij/wordywordy.svg)](https://david-dm.org/sverweij/wordywordy)
 [![devDependencies](https://david-dm.org/sverweij/wordywordy/dev-status.svg)](https://david-dm.org/sverweij/wordywordy#info=devDependencies)
-[![wordywordy.js.org](https://img.shields.io/badge/js.org-WordyWordy-ffb400.svg?style=flat-squared)](https://wordywordy.js.org)
+[![wordywordy.js.org](https://img.shields.io/badge/js.org-WordyWordy-ffb400.svg?style=flat-squared)](https://wordywordy.js.org/index.html?canned=intro&play=1&speed=150&theme=1)
 
 
 ## Frequently Anticipated Questions
