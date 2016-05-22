@@ -164,6 +164,10 @@ html, body {
   cursor: pointer;
   opacity: 0.5;
 }
+#__actionbar a {
+    text-decoration: none;
+    color: inherit;
+}
 #__droparea {
   position: fixed;
   z-index: 1;
@@ -205,6 +209,9 @@ html, body {
   font-weight: 300;
   text-align: left;
   font-size: inherit;
+}
+#__status a {
+    color: inherit;
 }
 #__status td:first-child{
   font-style: italic;
@@ -273,7 +280,7 @@ html, body {
 }
 /*
 .icon-enlarge:before { content: "\e989"; }
-.icon-shrink:before { content: "\e98a"; } 
+.icon-shrink:before { content: "\e98a"; }
 */
 html:-webkit-full-screen #__btn_fullscreen:before {
     content: "\e98a";
