@@ -1,7 +1,5 @@
-/* jshint node:true */
-
 /* istanbul ignore else */
-if ( typeof define !== 'function') {
+if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
@@ -14,12 +12,12 @@ define([], function() {
     var HOURS_PER_DAY           = 24; // hours
 
     function millisToTimeStruct (pMilliSeconds) {
-        var lSeconds = pMilliSeconds/ MILLISECONDS_PER_SECOND;
-        var lMinutes = Math.max(0, lSeconds/ SECONDS_PER_MINUTE);
-        var lHours   = Math.max(0, lMinutes/ MINUTES_PER_HOUR);
-        var lDays    = Math.max(0, lHours/ HOURS_PER_DAY);
+        var lSeconds = pMilliSeconds / MILLISECONDS_PER_SECOND;
+        var lMinutes = Math.max(0, lSeconds / SECONDS_PER_MINUTE);
+        var lHours   = Math.max(0, lMinutes / MINUTES_PER_HOUR);
+        var lDays    = Math.max(0, lHours / HOURS_PER_DAY);
 
-        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds)*MILLISECONDS_PER_SECOND));
+        var lMilliSeconds = Math.max(0, pMilliSeconds - (Math.floor(lSeconds) * MILLISECONDS_PER_SECOND));
         lSeconds     = Math.max(0, lSeconds - (Math.floor(lMinutes) * SECONDS_PER_MINUTE));
         lMinutes     = Math.max(0, lMinutes - (Math.floor(lHours) * MINUTES_PER_HOUR));
         lHours       = Math.max(0, lHours - (Math.floor(lDays) * HOURS_PER_DAY));
@@ -42,15 +40,15 @@ define([], function() {
             var lTimeStruct = millisToTimeStruct(pMilliSeconds);
             if (!pShowMillis) { pShowMillis = false; }
             return (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
-                   formatTimeBlob (lTimeStruct.minutes) + ":" +
-                   formatTimeBlob (lTimeStruct.seconds) +
-                   (pShowMillis ? "." + lTimeStruct.milliseconds: "");
+                   formatTimeBlob(lTimeStruct.minutes) + ":" +
+                   formatTimeBlob(lTimeStruct.seconds) +
+                   (pShowMillis ? "." + lTimeStruct.milliseconds : "");
         },
         sanitizeNumber : function (pThing, pDefault){
             if (typeof pThing  === 'string') {
-                pThing = parseInt(pThing);
+                pThing = parseInt(pThing, 10);
             }
-            if (typeof pThing !== 'number' || isNaN(pThing) ){
+            if (typeof pThing !== 'number' || isNaN(pThing)){
                 pThing = pDefault;
             }
             return pThing;
@@ -59,7 +57,7 @@ define([], function() {
          * returns true if pString equals "1", "true", "y" or "yes
          */
         sanitizeBooleanesque : function (pString){
-            return (["1", "true", "y", "yes"].indexOf(pString)> -1);
+            return (["1", "true", "y", "yes"].indexOf(pString) > -1);
         }
     };
 });

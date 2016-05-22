@@ -1,5 +1,3 @@
-/* jshint browser:true */
-/* global define */
 define([], function(){
     "use strict";
 
@@ -7,7 +5,7 @@ define([], function(){
         ajax : function (pURL, pSuccessFunction, pErrorFunction) {
             var lHttpRequest = new XMLHttpRequest();
             lHttpRequest.onreadystatechange = function (pEvent) {
-                if((pEvent.target.readyState === 4) &&
+                if ((pEvent.target.readyState === 4) &&
                     (!pEvent.target.status || (pEvent.target.status === 200))
                 ) {
                     pSuccessFunction(pEvent);

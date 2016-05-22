@@ -1,6 +1,4 @@
-/* jshint browser:true */
-/* jshint nonstandard:true */
-/* global define */
+/* eslint no-undefined:0 */
 define(["../chopper/chopper",
         "../utl/formatting",
         "../utl/stopwatch",
@@ -9,7 +7,7 @@ define(["../chopper/chopper",
         "../ui-control/themeswitcher",
         "../../lib/screenfull"
         ],
-        function(
+function(
         words,
         fmt,
         stopwatch,
@@ -21,9 +19,9 @@ define(["../chopper/chopper",
     var rPlaying     = false;
     var rWordsPlayed = 0;
 
-    var rWordTimer;
-    var rToastTimer;
-    var rControlsTimer;
+    var rWordTimer = null;
+    var rToastTimer = null;
+    var rControlsTimer = null;
     var rHoveringOverControls = false;
     var rShowStatus    = false;
     var rLoop          = false;
@@ -84,18 +82,18 @@ define(["../chopper/chopper",
     /* +++  - updates dom */
     function updateStatus() {
         var lTimeElapsed = rStopwatch.getTimeElapsed();
-        var lMinutesRead = lTimeElapsed/MILLISECONDS_PER_MINUTE;
+        var lMinutesRead = lTimeElapsed / MILLISECONDS_PER_MINUTE;
 
-        var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed/ lMinutesRead : 0;
+        var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed / lMinutesRead : 0;
         var lTimeToGo    = words.getEstimatedTimeToGo();
         var lTimeTotal   = lTimeElapsed + lTimeToGo;
 
         window.__documentTitle.textContent = rDocumentTitle;
         window.__selectedSpeed.textContent = words.getSpeed().toFixed(0);
         window.__actualSpeed.textContent   = lActualSpeed.toFixed(0);
-        window.__position.textContent      =  words.getPosition();
+        window.__position.textContent      = words.getPosition();
         window.__positionInPercent.textContent = words.getPercentage().toFixed(1);
-        window.__wordsPlayed.textContent   =  rWordsPlayed;
+        window.__wordsPlayed.textContent   = rWordsPlayed;
         window.__wordsTotal.textContent    = words.getLength();
 
         window.__timeElapsed.textContent   = fmt.formatTime(lTimeElapsed);
@@ -140,10 +138,11 @@ define(["../chopper/chopper",
         }
         window.__controls.className = "";
         window.__actionbar.className = "";
-        rControlsTimer = window.setTimeout(function(){
-                    window.__controls.className  = "fade-away";
-                    window.__actionbar.className = "fade-away";
-                }, TOAST_FADE_TIME);
+        rControlsTimer =
+            window.setTimeout(function(){
+                window.__controls.className  = "fade-away";
+                window.__actionbar.className = "fade-away";
+            }, TOAST_FADE_TIME);
     }
 
     /* +++ FE helper */
@@ -154,9 +153,10 @@ define(["../chopper/chopper",
         window.__toast.style.display = "block";
         window.__toast.className     = "";
         window.__toast.innerHTML     = pString;
-        rToastTimer = window.setTimeout(function(){
-                    window.__toast.className = "fade-away";
-                },TOAST_FADE_TIME);
+        rToastTimer =
+            window.setTimeout(function(){
+                window.__toast.className = "fade-away";
+            }, TOAST_FADE_TIME);
     }
 
     /* +++ FE helper - responsibility mix? */
@@ -185,7 +185,7 @@ define(["../chopper/chopper",
     }
 
     function showTimeToGo() {
-        toast("<span class='icon-stopwatch'></span>" + " -" + fmt.formatTime(words.getEstimatedTimeToGo()));
+        toast("<span class='icon-stopwatch'></span> -" + fmt.formatTime(words.getEstimatedTimeToGo()));
     }
 
     function cycleTheme(){
@@ -224,7 +224,7 @@ define(["../chopper/chopper",
     }
     function playpause(){
         rPlaying = !rPlaying;
-        if(rPlaying) {
+        if (rPlaying) {
             play();
         } else {
             pause();

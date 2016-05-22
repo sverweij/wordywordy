@@ -1,8 +1,5 @@
-/* jshint browser:true */
-/* jshint nonstandard:true */
-/* global define */
 define(["../utl/formatting"],
-        function(fmt) {
+function(fmt) {
     "use strict";
 
     var rCurrentTheme = 1;
@@ -42,12 +39,12 @@ define(["../utl/formatting"],
         rCurrentTheme =
             Math.max(
                 Math.min(
-                    fmt.sanitizeNumber(pThemeNumber,1),
-                    rStyleSheets.length-1
+                    fmt.sanitizeNumber(pThemeNumber, 1),
+                    rStyleSheets.length - 1
                 ),
                 0
             );
-        window.customtheme.href=rStyleSheets[rCurrentTheme].href;
+        window.customtheme.href = rStyleSheets[rCurrentTheme].href;
     }
 
     function getCurrentTheme(){

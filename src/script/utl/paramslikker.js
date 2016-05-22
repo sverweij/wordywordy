@@ -1,8 +1,5 @@
-/* jshint nonstandard:true */
-/* jshint node:true */
-
 /* istanbul ignore else */
-if ( typeof define !== 'function') {
+if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
@@ -12,7 +9,7 @@ define([], function() {
         getParams: function (pSearchString) {
             var lRetval = {};
             if (pSearchString) {
-                var lKeyValAry;
+                var lKeyValAry = [];
                 //  search string always starts with a "?" - skip this
                 pSearchString.slice(1).split("&").forEach(function(pKeyVal){
                     lKeyValAry = pKeyVal.split("=");

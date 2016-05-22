@@ -1,5 +1,3 @@
-/* jshint browser:true */
-/* jshint nonstandard:true */
 /* global require */
 require(["utl/formatting",
         "utl/paramslikker",
@@ -7,7 +5,7 @@ require(["utl/formatting",
         "ui-control/eventmap",
         "ui-control/actions",
         "ui-control/constants"],
-        function(
+function(
         fmt,
         paramslikker,
         butl,
@@ -16,7 +14,7 @@ require(["utl/formatting",
         C
         ) {
     "use strict";
-    
+
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
 
     function processParameters(pParams) {
@@ -41,23 +39,23 @@ require(["utl/formatting",
             window.setTimeout(actions.play, INITIAL_DISPLAY_DELAY);
         }
         var rCannedTexts = {
-          "thoughts": "samples/thoughts.txt",
-          "1984":"samples/1984.txt",
-          "freedom": "samples/freedom.txt",
-          "intro": "samples/intro.txt",
-          "intro_nl": "samples/intro.nl.txt",
-          "laozi": "samples/laozi.txt"
+            "thoughts": "samples/thoughts.txt",
+            "1984":"samples/1984.txt",
+            "freedom": "samples/freedom.txt",
+            "intro": "samples/intro.txt",
+            "intro_nl": "samples/intro.nl.txt",
+            "laozi": "samples/laozi.txt"
         };
-        if (!(pParams.text) && pParams.canned ){
-            butl.ajax (decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
+        if (!(pParams.text) && pParams.canned){
+            butl.ajax(decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
                 actions.initiateText(pEvent.target.response, pParams.canned);
             }, function (){
                 // toast("Can't load that :-/");
             }
             );
         }
-        if (!(pParams.text) && pParams.url ){
-            butl.ajax (decodeURIComponent(pParams.url), function(pEvent){
+        if (!(pParams.text) && pParams.url){
+            butl.ajax(decodeURIComponent(pParams.url), function(pEvent){
                 actions.initiateText(pEvent.target.response, pParams.url);
             }, function (){
                 // toast("Can't load that :-/");
@@ -65,7 +63,7 @@ require(["utl/formatting",
             );
         }
     }
-    
+
     function processLocalStorageKey (pKey, pFunction, pParam){
         if (localStorage.getItem(pKey)){
             pFunction(localStorage.getItem(pKey), pParam);

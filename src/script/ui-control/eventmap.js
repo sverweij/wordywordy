@@ -1,17 +1,15 @@
-/* jshint browser:true */
-/* jshint nonstandard:true */
-/* global define */
+/* eslint no-undefined: 0 */
 define(["./actions", "../utl/browserutl"], function(actions, utl) {
     "use strict";
 
     var rCode2Key = {
-        0   : "SECTION_KEY_FF",// on FF this is the ` (backquote)
+        0   : "SECTION_KEY_FF", // on FF this is the ` (backquote)
         9   : "TAB_KEY",
         13  : "ENTER_KEY",
         188 : "COMMA_KEY",
         190 : "DOT_KEY",
         191 : "SLASH_KEY",
-        192 : "SECTION_KEY",// in safari both the paragraph and backtick key listen to 192
+        192 : "SECTION_KEY", // in safari both the paragraph and backtick key listen to 192
         32  : "SPACE_KEY",
         33  : "PAGEUP_KEY",
         34  : "PAGEDOWN_KEY",
@@ -46,29 +44,29 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
         87  : "W_KEY"
     };
     var rKey2Func = {
-        HOME_KEY       : {func: actions.home },
-        END_KEY        : {func: actions.end },
-        I_KEY          : {func: actions.toggleStatus },
-        C_KEY          : {func: actions.forgetEverything },
-        T_KEY          : {func: actions.showTimeToGo },
-        SPACE_KEY      : {func: actions.playpause },
-        ENTER_KEY      : {func: actions.playpause },
-        LEFT_KEY       : {func: actions.dec },
-        A_KEY          : {func: actions.dec },
-        PAGEDOWN_KEY   : {func: actions.gotoStartOfNextSentence },
-        E_KEY          : {func: actions.gotoStartOfNextSentence },
-        R_KEY          : {func: actions.gotoStartOfNextParagraph },
-        RIGHT_KEY      : {func: actions.inc },
-        D_KEY          : {func: actions.inc },
-        PAGEUP_KEY     : {func: actions.gotoStartOfSentence },
-        Q_KEY          : {func: actions.gotoStartOfSentence },
-        DOWN_KEY       : {func: actions.slowDown },
-        S_KEY          : {func: actions.slowDown },
-        UP_KEY         : {func: actions.speedUp },
-        W_KEY          : {func: actions.speedUp },
-        O_KEY          : {func: actions.openFile },
-        B_KEY          : {func: actions.savePosition },
-        F_KEY          : {func: actions.toggleFullscreen },
+        HOME_KEY       : {func: actions.home},
+        END_KEY        : {func: actions.end},
+        I_KEY          : {func: actions.toggleStatus},
+        C_KEY          : {func: actions.forgetEverything},
+        T_KEY          : {func: actions.showTimeToGo},
+        SPACE_KEY      : {func: actions.playpause},
+        ENTER_KEY      : {func: actions.playpause},
+        LEFT_KEY       : {func: actions.dec},
+        A_KEY          : {func: actions.dec},
+        PAGEDOWN_KEY   : {func: actions.gotoStartOfNextSentence},
+        E_KEY          : {func: actions.gotoStartOfNextSentence},
+        R_KEY          : {func: actions.gotoStartOfNextParagraph},
+        RIGHT_KEY      : {func: actions.inc},
+        D_KEY          : {func: actions.inc},
+        PAGEUP_KEY     : {func: actions.gotoStartOfSentence},
+        Q_KEY          : {func: actions.gotoStartOfSentence},
+        DOWN_KEY       : {func: actions.slowDown},
+        S_KEY          : {func: actions.slowDown},
+        UP_KEY         : {func: actions.speedUp},
+        W_KEY          : {func: actions.speedUp},
+        O_KEY          : {func: actions.openFile},
+        B_KEY          : {func: actions.savePosition},
+        F_KEY          : {func: actions.toggleFullscreen},
         ONE_KEY        : {func: actions.setTheme, arg: 1},
         TWO_KEY        : {func: actions.setTheme, arg: 2},
         THREE_KEY      : {func: actions.setTheme, arg: 3},
@@ -104,7 +102,7 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
 
     function dragLeave(pEvent){
         pEvent.preventDefault();
-        window.__output.className="";
+        window.__output.className = "";
     }
 
     function dragStart(pEvent){
@@ -122,18 +120,18 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
     }
 
     function percentageClick(pEvent) {
-        var lSelectedPosition = pEvent.clientX/window.__percentagewrap.scrollWidth;
+        var lSelectedPosition = pEvent.clientX / window.__percentagewrap.scrollWidth;
         actions.setPosFraction(lSelectedPosition);
     }
 
     function keydown (pEvent) {
         if (rKey2Func[rCode2Key[pEvent.keyCode]]){
-            if (undefined !== rKey2Func[rCode2Key[pEvent.keyCode]].arg) {
+            if (undefined === rKey2Func[rCode2Key[pEvent.keyCode]].arg) {
+                rKey2Func[rCode2Key[pEvent.keyCode]].func();
+            } else {
                 rKey2Func[rCode2Key[pEvent.keyCode]].func(
                         rKey2Func[rCode2Key[pEvent.keyCode]].arg
                 );
-            } else {
-                rKey2Func[rCode2Key[pEvent.keyCode]].func();
             }
         }
         /*
@@ -147,14 +145,13 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
         if (pEvent.deltaY) {
             if (pEvent.deltaY > 0){
                 actions.inc();
-            } else if(pEvent.deltaY < 0)  {
+            } else if (pEvent.deltaY < 0)  {
                 actions.dec();
             }
-        } else if ( pEvent.deltaX && pEvent.deltaX !== 0 &&
-                    pEvent.deltaY === 0){
+        } else if (pEvent.deltaX && pEvent.deltaX !== 0 && pEvent.deltaY === 0){
             if (pEvent.deltaX > 0){
                 actions.dec(); // not a typo
-            } else if(pEvent.deltaX < 0)  {
+            } else if (pEvent.deltaX < 0){
                 actions.inc(); // not a typo
             }
         }
@@ -187,11 +184,9 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
                 rReader.readAsText(lFile);
                 rLoadedTitle = lFile.name;
             }
-        } else {
-            if (utl.hasTextMime(pEvent.dataTransfer.types)) {
-                actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
-                actions.play();
-            }
+        } else if (utl.hasTextMime(pEvent.dataTransfer.types)) {
+            actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
+            actions.play();
         }
         pEvent.preventDefault();
     }

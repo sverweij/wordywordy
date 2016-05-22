@@ -4,10 +4,10 @@ var fmt = require("../utl/formatting");
 describe('formatting', function() {
     describe('#formatTime', function() {
         it('should return 00:00 for input 0', function() {
-            assert.equal("00:00", fmt.formatTime(0,false));
+            assert.equal("00:00", fmt.formatTime(0, false));
         });
         it('should return 00:00 for input 0', function() {
-            assert.equal("00:00.0", fmt.formatTime(0,true));
+            assert.equal("00:00.0", fmt.formatTime(0, true));
         });
         it('should return 00:01 for input 1000', function() {
             assert.equal("00:01", fmt.formatTime(1000));
@@ -16,7 +16,7 @@ describe('formatting', function() {
             assert.equal("00:00", fmt.formatTime(800));
         });
         it('should not round for input 800 when showing millis', function() {
-            assert.equal("00:00.800", fmt.formatTime(800,true));
+            assert.equal("00:00.800", fmt.formatTime(800, true));
         });
         it('should round for input > 1000 that is not a mod of 1000', function() {
             assert.equal("00:01", fmt.formatTime(1501));
