@@ -78,7 +78,6 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
         SEVEN_KEY      : {func: actions.setTheme, arg: 7},
         EIGHT_KEY      : {func: actions.setTheme, arg: 8},
         NINE_KEY       : {func: actions.setTheme, arg: 9},
-        ZERO_KEY       : {func: actions.setTheme, arg: 10},
         SECTION_KEY    : {func: actions.cycleTheme},
         SECTION_KEY_FF : {func: actions.cycleTheme}
     };

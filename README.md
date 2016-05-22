@@ -16,7 +16,7 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 **Dyslexia friendly (?)**.
   I've read claims that presenting text this way helps people with dyslexia
   read more easily. I don't know. I have included a font designed for
-  people with dyslexia, just in case. They're under keys `6`, `7`, `8`, `9` and `0`.
+  people with dyslexia, just in case. They're under keys `6`, `7`, `8` and `9`.
 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing
@@ -57,7 +57,7 @@ go forward a word          | `RIGHT` or `d`                   | scroll up or cli
 go forward a sentence      | `PAGEDOWN` or `e`                | -
 go to start of text        | `HOME`                           | click the "home" button
 cycle through themes       | `§`, ```                         | click the button with the smiley (~:sunglasses:)
-switch to a theme directly | `1`, `2`, ..., `9`, `0`          | -
+switch to a theme directly | `1`, `2`, ..., `9`               | -
 show amount of time left   | `t`                              | -
 show stats                 | `i`                              | click the (i) button
 save current position      | `b`                              | -
@@ -66,7 +66,7 @@ clear                      | `c`                              | -
 toggle full screen         | `f`                              | click the button with the outward (or inward, in full screen mode) pointing arrows
 
 - @scrolling: effect depends a bit on your mouse/ track pad.
-- @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-0` the  dyslexic ones.
+- @themes: `1`-`5` are the regular themes (with _high contrast_ on `5`),`6-9` the  dyslexic ones.
 - @save current position: pausing or navigating automatically save the position. Heck, it even magically saves _speed_ and _theme_ along with the _position_.
   Hit `b` when you don't trust that. Or when you don't pause or navigate.
 - @clear: makes WordyWordy forget  all stuff it usually remembers (buffer, title, last saved position, speed, theme).
