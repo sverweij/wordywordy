@@ -31,13 +31,13 @@ function() {
             if (true === gTrack) {
                 if (Boolean(window.ga)) {
                     if (ga.loaded) {
-                        console.log(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                        // console.log(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
                         ga(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
                     } else {
-                        console.error('ga exists, not loaded', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                        // console.error('ga exists, not loaded', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
                     }
                 } else {
-                    console.error('ga doesn\'t exist yet', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                    // console.error('ga doesn\'t exist yet', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
                 }
             }
         }
