@@ -120,8 +120,9 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
     }
 
     function percentageClick(pEvent) {
-        var lSelectedPosition = pEvent.clientX / window.__percentagewrap.scrollWidth;
-        actions.setPosFraction(lSelectedPosition);
+        actions.setPosFraction(
+            pEvent.clientX / window.__percentagewrap.scrollWidth
+        );
     }
 
     function keydown (pEvent) {

@@ -38,7 +38,9 @@ define([], function() {
     return {
         formatTime : function (pMilliSeconds, pShowMillis) {
             var lTimeStruct = millisToTimeStruct(pMilliSeconds);
-            if (!pShowMillis) { pShowMillis = false; }
+            if (!pShowMillis) {
+                pShowMillis = false;
+            }
             return (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
                    formatTimeBlob(lTimeStruct.minutes) + ":" +
                    formatTimeBlob(lTimeStruct.seconds) +
