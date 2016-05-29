@@ -37,7 +37,7 @@ FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
 
-.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean noconsolestatements consolecheck lint cover prerequisites report test update-dependencies run-update-dependencies
+.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean lint cover prerequisites report test update-dependencies run-update-dependencies
 
 help:
 	@echo " -----------------------------------------"
@@ -220,14 +220,6 @@ prerequisites:
 
 dev-build: src/index.html
 
-noconsolestatements:
-	@echo "scanning for console statements (run 'make consolecheck' to see offending lines)"
-	grep -r console $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html | grep -c console | grep ^0$$
-	@echo ... ok
-
-consolecheck:
-	grep -r console $(SCRIPT_SOURCES_WEB) $(SCRIPT_SOURCES_NODE) src/index.html
-
 csslint:
 	$(CSSLINT) src/style/*.css src/style/themes/*.css
 
@@ -275,7 +267,7 @@ nsp:
 outdated:
 	$(NPM) outdated
 
-check: noconsolestatements lint test
+check: lint test
 
 fullcheck: check outdated nsp
 
