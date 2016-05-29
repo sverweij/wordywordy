@@ -176,7 +176,7 @@ define(["../utl/formatting"], function(fmt) {
         /*
          * And if you're in a paragraph marker: bump one ahead
          */
-        if (rAry[rPosition].match(PARAGRAPH_END_RE)){
+        if (Boolean(rAry[rPosition]) && rAry[rPosition].match(PARAGRAPH_END_RE)){
             _incPosition(1);
         }
     }
