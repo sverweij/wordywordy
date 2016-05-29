@@ -88,8 +88,6 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
     var rReader      = new FileReader();
     var rLoadedTitle = "";
 
-
-
     /* event handling */
     function paste(pEvent){
         if (pEvent && pEvent.clipboardData) {
