@@ -219,9 +219,11 @@ function(
     }
     function setPosFraction(pFraction){
         setPos(Math.floor(pFraction * words.getLength()));
+        gaga.g('send', 'event', 'app', 'position-fraction');
     }
     function home(){
         setPos(0);
+        gaga.g('send', 'event', 'app', 'position-home');
     }
     function dec(){
         words.decPosition(1);
