@@ -77,16 +77,17 @@ There is a [bookmarklet](bookmarklet.js). It works. It's not yet perfect.
 ## URL parameters
 (Skip this if you don't know what an URL parameter is. You won't miss anything.)
 
-parameter | explanation
---------- | -----------------
-speed     | A `number` between 60 and 600 words per minute. When WordyWordy doesn't understand, it'll pick a default speed (300 wpm).
-pos       | A number representing the position (word) to start reading. When WordyWordy doesn't understand, it will start at position 0.
-text      | Text to read. Expected to be URI encoded. When left out, WordyWordy will start reading from the latest text you left last time your started it. Has precedence over the `canned` and `url` parameters described below.
-theme     | a number between 0 and 18 - each of which represents a theme.
-play      | 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was loaded.
-loop      | 1 or 0 - if this parameter equals `1`, the text will infinitely loop. Usefull for kiosk display.
-canned    | plays one of the texts pre-installed in WordyWordy. Values e.g. `intro`, `intro_nl` (which plays the soft landing/ instruction text in English or Dutch respectively), `thoughts`, `freedom`, `1984` (all three short test strings) and `laozi` (which plays the first few paragraphs from the 道德經 (Dàodé jīng) by 老子 (Lǎo zi) - useful for testing picture scripts)
-url       | plays the text present at the provided url. WordyWordy uses ajax to access the url, so it is restricted to (1) the current domain or (2) content from sites for which CORS is enabled.
+parameter  | explanation
+---------  | -----------------
+speed      | A `number` between 60 and 600 words per minute. When WordyWordy doesn't understand, it'll pick a default speed (300 wpm).
+pos        | A number representing the position (word) to start reading. When WordyWordy doesn't understand, it will start at position 0.
+text       | Text to read. Expected to be URI encoded. When left out, WordyWordy will start reading from the latest text you left last time your started it. Has precedence over the `canned` and `url` parameters described below.
+theme      | a number between 0 and 18 - each of which represents a theme.
+play       | 1 or 0 - if this parameter equals `1`, the text will automatically start playing, about a second after it was loaded.
+loop       | 1 or 0 - if this parameter equals `1`, the text will infinitely loop. Usefull for kiosk display.
+canned     | plays one of the texts pre-installed in WordyWordy. Values e.g. `intro`, `intro_nl` (which plays the soft landing/ instruction text in English or Dutch respectively), `thoughts`, `freedom`, `1984` (all three short test strings) and `laozi` (which plays the first few paragraphs from the 道德經 (Dàodé jīng) by 老子 (Lǎo zi) - useful for testing picture scripts)
+url        | plays the text present at the provided url. WordyWordy uses ajax to access the url, so it is restricted to (1) the current domain or (2) content from sites for which CORS is enabled.
+donottrack | 1 or 0 - when 1, switches tracking (google analytics tagging) off.
 
 
 Example:
