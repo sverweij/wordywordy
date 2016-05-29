@@ -48,7 +48,12 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
         END_KEY        : {func: actions.end},
         I_KEY          : {func: actions.toggleStatus},
         C_KEY          : {func: actions.forgetEverything},
-        T_KEY          : {func: actions.showTimeToGo},
+        T_KEY          : {func:
+                            function() {
+                                actions.showTimeToGo();
+                                gaga.g('send', 'event', 'app', 'time-to-go-show');
+                            }
+                         },
         SPACE_KEY      : {func: actions.playpause},
         ENTER_KEY      : {func: actions.playpause},
         LEFT_KEY       : {func: actions.dec},
@@ -83,6 +88,8 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
     var rReader      = new FileReader();
     var rLoadedTitle = "";
 
+
+
     /* event handling */
     function paste(pEvent){
         if (pEvent && pEvent.clipboardData) {
@@ -90,7 +97,7 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
             actions.play();
         }
         pEvent.preventDefault();
-        gaga.g('send', 'event', 'source-paste');
+        gaga.g('send', 'event', 'app', 'source-paste');
     }
 
     function drag(pEvent){
@@ -163,7 +170,7 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
         if (pEvent && pEvent.target && pEvent.target.result) {
             actions.initiateText(pEvent.target.result, rLoadedTitle);
             actions.play();
-            gaga.g('send', 'event', 'source-file-open-success');
+            gaga.g('send', 'event', 'app', 'source-file-open-success');
         }
     }
 
@@ -175,12 +182,18 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
             if (lFile.type === "text/plain"){
                 rReader.readAsText(lFile);
                 rLoadedTitle = lFile.name;
-                gaga.g('send', 'event', 'source-file-open');
+                gaga.g('send', 'event', 'app', 'source-file-open');
             } else {
-                gaga.g('send', 'event', 'error-source-file-open-not-plain-text');
+                gaga.g('send', 'exception', {
+                    'exDescription' : 'source-file-open-not-plain-text',
+                    'exFatal' : false
+                });
             }
         } else {
-            gaga.g('send', 'event', 'error-source-file-open-no-files');
+            gaga.g('send', 'exception', {
+                'exDescription' : 'source-file-open-no-files',
+                'exFatal' : false
+            });
         }
     }
 
@@ -191,14 +204,17 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
             if (lFile.type === "text/plain"){
                 rReader.readAsText(lFile);
                 rLoadedTitle = lFile.name;
-                gaga.g('send', 'event', 'source-file-open-drop');
+                gaga.g('send', 'event', 'app', 'source-file-open-drop');
             } else {
-                gaga.g('send', 'event', 'error-source-file-open-drop-not-plain-text');
+                gaga.g('send', 'exception', {
+                    'exDescription' : 'source-file-open-drop-not-plain-text',
+                    'exFatal' : false
+                });
             }
         } else if (utl.hasTextMime(pEvent.dataTransfer.types)) {
             actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
             actions.play();
-            gaga.g('send', 'event', 'source-text-drop');
+            gaga.g('send', 'event', 'app', 'source-text-drop');
         }
         pEvent.preventDefault();
     }
@@ -229,6 +245,9 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
         window.__btn_speedup.addEventListener("click", actions.speedUp, true);
         window.__btn_fullscreen.addEventListener("click", actions.toggleFullscreen, true);
         window.__btn_info.addEventListener("click", actions.toggleStatus, true);
+        window.__lnk_more_information.addEventListener("click", function(pEvent){
+            gaga.g('send', 'event', 'Outbound link', null, pEvent.target.href);
+        }, true);
     }
     function addMouseEventListeners (){
         window.document.body.addEventListener("wheel", wheel, true);

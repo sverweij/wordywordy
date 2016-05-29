@@ -61,6 +61,11 @@ function(
                 actions.initiateText(pEvent.target.response, pParams.canned);
             }, function (){
                 // toast("Can't load that :-/");
+                gaga.g('send', 'exception', {
+                    'exDescription' : 'could-not-load-canned-text ' + pParams.canned,
+                    'exFatal' : false
+                });
+
             }
             );
         }
@@ -69,6 +74,10 @@ function(
                 actions.initiateText(pEvent.target.response, pParams.url);
             }, function (){
                 // toast("Can't load that :-/");
+                gaga.g('send', 'exception', {
+                    'exDescription' : 'could-not-load-text-from-url ' + pParams.url,
+                    'exFatal' : false
+                });
             }
             );
         }

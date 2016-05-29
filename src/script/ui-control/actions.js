@@ -111,7 +111,7 @@ function(
         } else {
             window.__status.style.display = "none";
         }
-        gaga.g('send', 'event', 'status-toggle');
+        gaga.g('send', 'event', 'app', 'status-toggle');
     }
 
     function play() {
@@ -189,7 +189,6 @@ function(
 
     function showTimeToGo() {
         toast("<span class='icon-stopwatch'></span> -" + fmt.formatTime(words.getEstimatedTimeToGo()));
-        gaga.g('send', 'event', 'time-to-go-show');
     }
 
     function cycleTheme(){
@@ -198,7 +197,7 @@ function(
         if (butl.localStorageOK()){
             localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
-        gaga.g('send', 'event', 'theme-cycle');
+        gaga.g('send', 'event', 'app', 'theme-cycle');
     }
 
     function setTheme(pThemeNumber){
@@ -207,7 +206,7 @@ function(
         if (butl.localStorageOK()){
             localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
-        gaga.g('send', 'event', 'theme-set');
+        gaga.g('send', 'event', 'app', 'theme-set');
     }
 
     function openFile(){
@@ -227,7 +226,7 @@ function(
     function dec(){
         words.decPosition(1);
         updateNavigation(true);
-        gaga.g('send', 'event', 'position-previous-word');
+        gaga.g('send', 'event', 'app', 'position-previous-word');
     }
     function playpause(){
         rPlaying = !rPlaying;
@@ -236,59 +235,59 @@ function(
         } else {
             pause();
         }
-        gaga.g('send', 'event', 'play-pause');
+        gaga.g('send', 'event', 'app', 'play-pause');
     }
     function inc(){
         words.incPosition(1);
         updateNavigation(true);
-        gaga.g('send', 'event', 'position-next-word');
+        gaga.g('send', 'event', 'app', 'position-next-word');
     }
     function end(){
         setPos(words.getLength());
-        gaga.g('send', 'event', 'position-end');
+        gaga.g('send', 'event', 'app', 'position-end');
     }
 
     function speedUp(){
         words.incSpeed(5);
         updateSpeed(words.getSpeed());
-        gaga.g('send', 'event', 'speed-up');
+        gaga.g('send', 'event', 'app', 'speed-up');
     }
     function slowDown(){
         words.decSpeed(5);
         updateSpeed(words.getSpeed());
-        gaga.g('send', 'event', 'speed-slow-down');
+        gaga.g('send', 'event', 'app', 'speed-slow-down');
     }
     function setSpeed(pSpeed){
         words.setSpeed(pSpeed);
         updateSpeed(words.getSpeed());
-        gaga.g('send', 'event', 'speed-set');
+        gaga.g('send', 'event', 'app', 'speed-set');
     }
     function setSpeedFraction(pFraction){
         words.setSpeedFraction(pFraction);
         updateSpeed(words.getSpeed());
-        gaga.g('send', 'event', 'speed-set-fraction');
+        gaga.g('send', 'event', 'app', 'speed-set-fraction');
     }
     function gotoStartOfNextSentence() {
         words.gotoStartOfNextSentence();
         updateNavigation(false);
-        gaga.g('send', 'event', 'position-start-of-next-sentence');
+        gaga.g('send', 'event', 'app', 'position-start-of-next-sentence');
     }
     function gotoStartOfNextParagraph() {
         words.gotoStartOfNextParagraph();
         updateNavigation(false);
-        gaga.g('send', 'event', 'position-start-of-next-paragraph');
+        gaga.g('send', 'event', 'app', 'position-start-of-next-paragraph');
     }
     function gotoStartOfSentence() {
         words.gotoStartOfSentence();
         updateNavigation(true);
-        gaga.g('send', 'event', 'position-start-of-sentence');
+        gaga.g('send', 'event', 'app', 'position-start-of-sentence');
     }
     function savePosition() {
         if (butl.localStorageOK()) {
             localStorage.setItem(C.LS_KEY_POSITION, words.getPosition());
         }
         toast("position saved");
-        gaga.g('send', 'event', 'position-save');
+        gaga.g('send', 'event', 'app', 'position-save');
     }
     function initiateText(pText, pTitle) {
         rWordsPlayed = 0;
@@ -317,14 +316,14 @@ function(
         }
         home();
         toast("Forgot everything");
-        gaga.g('send', 'event', 'forget-everything');
+        gaga.g('send', 'event', 'app', 'forget-everything');
     }
 
     function toggleFullscreen(){
         if (window.screenfull.enabled) {
             window.screenfull.toggle();
         }
-        gaga.g('send', 'event', 'toggle-fullscreen');
+        gaga.g('send', 'event', 'app', 'toggle-fullscreen');
     }
 
     function mousemove(){
