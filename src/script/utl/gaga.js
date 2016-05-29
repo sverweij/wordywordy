@@ -21,26 +21,11 @@ function() {
          */
         gaSetup : function (pTrack) {
             gTrack = pTrack;
-            //
-            // if (true === pTrack) {
-            //     (function(i, s, o, g, r, a, m) {
-            //         i['GoogleAnalyticsObject'] = r;
-            //         i[r] = i[r] ||
-            //         function() {
-            //             (i[r].q = i[r].q || []).push(arguments);
-            //         }, i[r].l = 1 * new Date();
-            //         a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            //         a.async = 1;
-            //         a.src = g;
-            //         m.parentNode.insertBefore(a, m);
-            //     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            // }
+            window['ga-disable-{{trackingid}}'] = !gTrack;
         },
         /**
          * If analytics was setup using gaSetup, and tracking is on, sends
          * a ga event. Parameters same as the analytics ga function
-         *
-         *
          */
         g : function (pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
             if (true === gTrack) {
@@ -61,16 +46,16 @@ function() {
 /*
  This file is part of WordyWordy.
 
- mscgen_js is free software: you can redistribute it and/or modify
+ WordyWordy is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
 
- mscgen_js is distributed in the hope that it will be useful,
+ WordyWordy is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with mscgen_js.  If not, see <http://www.gnu.org/licenses/>.
- */
+ along with WordyWordy.  If not, see <http://www.gnu.org/licenses/>.
+*/
