@@ -3,7 +3,7 @@
 RJS=node_modules/requirejs/bin/r.js
 MOCHA_FORK=node_modules/mocha/bin/_mocha
 COVER=node node_modules/istanbul/lib/cli.js
-COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory 
+COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory
 GIT=git
 GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
 GIT_DEPLOY_FROM_BRANCH=master
@@ -32,7 +32,7 @@ PRODDIRS=$(BUILDDIR)/style \
 GENERATED_SOURCES=src/style/wordywordy.css
 LIB_SOURCES_WEB=src/lib/require.js \
 	src/lib/screenfull.js
-SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB) 
+SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
@@ -96,10 +96,10 @@ $(BUILDDIR)/favicon.ico: $(FAVICONMASTER)
 	$(PNG2FAVICO) $< $@
 
 $(BUILDDIR)/favicon-%.png: $(FAVICONMASTER)
-	$(RESIZE) $< $@ 
+	$(RESIZE) $< $@
 
 $(BUILDDIR)/iosfavicon-%.png: $(FAVICONMASTER)
-	$(IOSRESIZE) $< $@ 
+	$(IOSRESIZE) $< $@
 
 src/lib/require.js: node_modules/requirejs/require.js
 	$(MINIFY) $< -m -c > $@
@@ -167,7 +167,9 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 $(BUILDDIR)/script/wordywordy.js: $(SOURCES_WEB)
 	$(RJS) -o baseUrl="./src/script" \
 			name="wordywordy" \
-			out=$@ \
+			out=$@.tmp
+	$(SEDVERSION) < $@.tmp > $@
+	rm $@.tmp
 
 src/index.html: $(SOURCES_WEB) $(GENERATED_SOURCES)
 
@@ -251,7 +253,7 @@ deploy-gh-pages: install
 	$(GIT) -C $(BUILDDIR) push origin gh-pages
 	$(GIT) -C $(BUILDDIR) status
 
-tag: 
+tag:
 	$(GIT) tag -a `utl/getver` -m "tag release `utl/getver`"
 	$(GIT) push --tags
 
@@ -266,10 +268,10 @@ doc:
 
 test: dev-build
 	$(NPM) run test
-	
+
 nsp:
 	$(NPM) run nsp
-	
+
 outdated:
 	$(NPM) outdated
 
@@ -279,8 +281,8 @@ fullcheck: check outdated nsp
 
 update-dependencies: run-update-dependencies clean-generated-sources test nsp
 	$(GIT) diff package.json
-	
-run-update-dependencies: 
+
+run-update-dependencies:
 	$(NPM) run npm-check-updates
 	$(NPM) install
 
@@ -308,5 +310,6 @@ SCRIPT_SOURCES_WEB=src/script/wordywordy.js \
 	src/script/ui-control/themeswitcher.js \
 	src/script/utl/browserutl.js \
 	src/script/utl/formatting.js \
+	src/script/utl/gaga.js \
 	src/script/utl/paramslikker.js \
 	src/script/utl/stopwatch.js

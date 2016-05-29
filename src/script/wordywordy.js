@@ -2,6 +2,7 @@
 require(["utl/formatting",
         "utl/paramslikker",
         "utl/browserutl",
+        "utl/gaga",
         "ui-control/eventmap",
         "ui-control/actions",
         "ui-control/constants"],
@@ -9,6 +10,7 @@ function(
         fmt,
         paramslikker,
         butl,
+        gaga,
         eve,
         actions,
         C
@@ -16,8 +18,24 @@ function(
     "use strict";
 
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
+    var rCannedTexts = {
+        "thoughts": "samples/thoughts.txt",
+        "1984":"samples/1984.txt",
+        "freedom": "samples/freedom.txt",
+        "intro": "samples/intro.txt",
+        "intro_nl": "samples/intro.nl.txt",
+        "laozi": "samples/laozi.txt"
+    };
+
+    function setupGA (pDoNotTrack){
+        gaga.gaSetup(!pDoNotTrack);
+        gaga.g('create', '{{trackingid}}', '{{host}}');
+        gaga.g('send', 'pageview');
+    }
 
     function processParameters(pParams) {
+        setupGA(fmt.sanitizeBooleanesque(pParams.donottrack));
+
         if (pParams.speed) {
             actions.setSpeed(pParams.speed);
         }
@@ -38,14 +56,6 @@ function(
         if (pParams.play && fmt.sanitizeBooleanesque(pParams.play)) {
             window.setTimeout(actions.play, INITIAL_DISPLAY_DELAY);
         }
-        var rCannedTexts = {
-            "thoughts": "samples/thoughts.txt",
-            "1984":"samples/1984.txt",
-            "freedom": "samples/freedom.txt",
-            "intro": "samples/intro.txt",
-            "intro_nl": "samples/intro.nl.txt",
-            "laozi": "samples/laozi.txt"
-        };
         if (!(pParams.text) && pParams.canned){
             butl.ajax(decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
                 actions.initiateText(pEvent.target.response, pParams.canned);
