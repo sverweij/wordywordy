@@ -1,5 +1,5 @@
 /* eslint no-undefined: 0 */
-define(["./actions", "../utl/browserutl"], function(actions, utl) {
+define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl, gaga) {
     "use strict";
 
     var rCode2Key = {
@@ -90,6 +90,7 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
             actions.play();
         }
         pEvent.preventDefault();
+        gaga.g('send', 'event', 'source-paste');
     }
 
     function drag(pEvent){
@@ -162,6 +163,7 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
         if (pEvent && pEvent.target && pEvent.target.result) {
             actions.initiateText(pEvent.target.result, rLoadedTitle);
             actions.play();
+            gaga.g('send', 'event', 'source-file-open-success');
         }
     }
 
@@ -173,7 +175,12 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
             if (lFile.type === "text/plain"){
                 rReader.readAsText(lFile);
                 rLoadedTitle = lFile.name;
+                gaga.g('send', 'event', 'source-file-open');
+            } else {
+                gaga.g('send', 'event', 'error-source-file-open-not-plain-text');
             }
+        } else {
+            gaga.g('send', 'event', 'error-source-file-open-no-files');
         }
     }
 
@@ -184,10 +191,14 @@ define(["./actions", "../utl/browserutl"], function(actions, utl) {
             if (lFile.type === "text/plain"){
                 rReader.readAsText(lFile);
                 rLoadedTitle = lFile.name;
+                gaga.g('send', 'event', 'source-file-open-drop');
+            } else {
+                gaga.g('send', 'event', 'error-source-file-open-drop-not-plain-text');
             }
         } else if (utl.hasTextMime(pEvent.dataTransfer.types)) {
             actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
             actions.play();
+            gaga.g('send', 'event', 'source-text-drop');
         }
         pEvent.preventDefault();
     }
