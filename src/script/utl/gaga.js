@@ -12,30 +12,6 @@ function() {
 
     var gTrack = true;
 
-    function _gaSetup(pTrack) {
-        gTrack = pTrack;
-
-        if (true === pTrack) {
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] ||
-                function() {
-                    (i[r].q = i[r].q || []).push(arguments);
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        }
-    }
-
-    function _g(pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
-        if (true === gTrack) {
-            ga(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
-        }
-    }
-
     return {
         /**
          * if pTrack === true, calls the google analytics setup code.
@@ -43,8 +19,22 @@ function() {
          *
          * @param {boolean} pTrack
          */
-        gaSetup : function(pTrack) {
-            return _gaSetup(pTrack);
+        gaSetup : function (pTrack) {
+            gTrack = pTrack;
+            //
+            // if (true === pTrack) {
+            //     (function(i, s, o, g, r, a, m) {
+            //         i['GoogleAnalyticsObject'] = r;
+            //         i[r] = i[r] ||
+            //         function() {
+            //             (i[r].q = i[r].q || []).push(arguments);
+            //         }, i[r].l = 1 * new Date();
+            //         a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            //         a.async = 1;
+            //         a.src = g;
+            //         m.parentNode.insertBefore(a, m);
+            //     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            // }
         },
         /**
          * If analytics was setup using gaSetup, and tracking is on, sends
@@ -52,13 +42,24 @@ function() {
          *
          *
          */
-        g : function(pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
-            return _g(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+        g : function (pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
+            if (true === gTrack) {
+                if (Boolean(window.ga)) {
+                    if (ga.loaded) {
+                        console.log(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                        ga(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                    } else {
+                        console.error('ga exists, not loaded', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                    }
+                } else {
+                    console.error('ga doesn\'t exist yet', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                }
+            }
         }
     };
 });
 /*
- This file is part of wordywordy.
+ This file is part of WordyWordy.
 
  mscgen_js is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
