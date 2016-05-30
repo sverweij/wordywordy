@@ -225,10 +225,12 @@ function(
         setPos(0);
         gaga.g('send', 'event', 'app', 'position-home');
     }
-    function dec(){
+    function dec(pDoNotTag){
         words.decPosition(1);
         updateNavigation(true);
-        gaga.g('send', 'event', 'app', 'position-previous-word');
+        if (!pDoNotTag) {
+            gaga.g('send', 'event', 'app', 'position-previous-word');
+        }
     }
     function playpause(){
         rPlaying = !rPlaying;
@@ -239,10 +241,12 @@ function(
         }
         gaga.g('send', 'event', 'app', 'play-pause');
     }
-    function inc(){
+    function inc(pDoNotTag){
         words.incPosition(1);
         updateNavigation(true);
-        gaga.g('send', 'event', 'app', 'position-next-word');
+        if (!pDoNotTag) {
+            gaga.g('send', 'event', 'app', 'position-next-word');
+        }
     }
     function end(){
         setPos(words.getLength());

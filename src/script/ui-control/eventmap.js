@@ -151,15 +151,15 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
         pEvent.preventDefault();
         if (pEvent.deltaY) {
             if (pEvent.deltaY > 0){
-                actions.inc();
+                actions.inc(true);
             } else if (pEvent.deltaY < 0)  {
-                actions.dec();
+                actions.dec(true);
             }
         } else if (pEvent.deltaX && pEvent.deltaX !== 0 && pEvent.deltaY === 0){
             if (pEvent.deltaX > 0){
-                actions.dec(); // not a typo
+                actions.dec(true); // not a typo
             } else if (pEvent.deltaX < 0){
-                actions.inc(); // not a typo
+                actions.inc(true); // not a typo
             }
         }
     }
@@ -229,9 +229,9 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
     }
     function addControlsIslandListeners (){
         window.__btn_home.addEventListener("click", actions.gotoStartOfSentence, true);
-        window.__btn_dec.addEventListener("click", actions.dec, true);
+        window.__btn_dec.addEventListener("click", function(){ actions.dec(false); }, true);
         window.__btn_playpause.addEventListener("click", actions.playpause, false);
-        window.__btn_inc.addEventListener("click", actions.inc, true);
+        window.__btn_inc.addEventListener("click", function(){ actions.inc(false); }, true);
         window.__btn_end.addEventListener("click", actions.gotoStartOfNextSentence, true);
         window.__btn_paragraph.addEventListener("click", actions.gotoStartOfNextParagraph, true);
     }
