@@ -1,4 +1,4 @@
-/* eslint no-undefined: 0 */
+/* eslint no-undefined: 0, max-statements-per-line: 0 */
 define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl, gaga) {
     "use strict";
 
