@@ -3,26 +3,26 @@ var assert = require("chai").assert;
 var chop = require("../chopper/chopper");
 
 describe('chopper', function() {
-    var gFixtureString = "De pruimeboom \
-Eene vertelling \
-\n\
-Jantje zag eens pruimen hangen, o! als eieren zo groot. \
-'t Scheen, dat Jantje wou gaan plukken, schoon zijn vader 't hem verbood. \
-\n\n\
-Hier is, zei hij, noch mijn vader, noch de tuinman, die het ziet: \
-Aan een boom, zo vol geladen, mist men vijf zes pruimen niet. \
-\n\n\
-Maar ik wil gehoorzaam wezen, en niet plukken: ik loop heen. \
-Zou ik, om een hand vol pruimen, ongehoorzaam wezen? Neen. \
-\n\n\
-Voord ging Jantje: maar zijn vader, die hem stil beluisterd had, \
-Kwam hem in het loopen tegen voor aan op het middelpad. \
-\n\n\
-Kom mijn Jantje, zei de vader, kom mijn kleine hartedief! \
-Nu zal ik u pruimen plukken; nu heeft vader Jantje lief. \
-\n\n\n\n\n\
-Daar op ging Papa aan 't schudden, Jantje raapte schielijk op; \
-Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
+    var gFixtureString = "De pruimeboom " +
+        "Eene vertelling " +
+        "\n" +
+        "Jantje zag eens pruimen hangen, o! als eieren zo groot. " +
+        "'t Scheen, dat Jantje wou gaan plukken, schoon zijn vader 't hem verbood. " +
+        "\n\n" +
+        "Hier is, zei hij, noch mijn vader, noch de tuinman, die het ziet: " +
+        "Aan een boom, zo vol geladen, mist men vijf zes pruimen niet. " +
+        "\n\n" +
+        "Maar ik wil gehoorzaam wezen, en niet plukken: ik loop heen. " +
+        "Zou ik, om een hand vol pruimen, ongehoorzaam wezen? Neen. " +
+        "\n\n" +
+        "Voord ging Jantje: maar zijn vader, die hem stil beluisterd had, " +
+        "Kwam hem in het loopen tegen voor aan op het middelpad. " +
+        "\n\n" +
+        "Kom mijn Jantje, zei de vader, kom mijn kleine hartedief! " +
+        "Nu zal ik u pruimen plukken; nu heeft vader Jantje lief. " +
+        "\n\n\n\n\n" +
+        "Daar op ging Papa aan 't schudden, Jantje raapte schielijk op; " +
+        "Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
 
     chop.init(gFixtureString);
     chop.setSpeed(100);
@@ -125,16 +125,34 @@ Jantje kreeg zijn hoed vol pruimen, en liep heen op een galop.";
             assert.equal("Hier", chop.getCurrentWord());
         });
     });
-    describe('#setSpeedFraction', function(){
-        it('Derives the correct speed from a relative value', function(){
-            chop.setSpeedFraction(0.5);
-            assert.equal(330, chop.getSpeed());
-            assert.equal(0.5, chop.getSpeedFraction());
+    xdescribe('tests on null values', function (){
+        // chop.init(null);
+
+        it('returns the empty string when asked for the current word', function (){
+            assert.equal("", chop.getCurrentWord());
         });
-        it('Derives the correct relative speed from an absolute value', function(){
-            chop.setSpeed(465);
-            assert.equal(465, chop.getSpeed());
-            assert.equal(0.75, chop.getSpeedFraction());
+        it('returns 1 when asked for the length', function (){
+            assert.equal(1, chop.getLength());
+        });
+        it('returns 0 when asked for the percentage', function (){
+            assert.equal(0, chop.getPercentage());
+        });
+        it('returns 0 when asked for the current position', function (){
+            assert.equal(0, chop.getPosition());
+        });
+        it('returns 0 when asked for the current position, even when set to 69', function (){
+            chop.setPosition(69);
+            assert.equal(0, chop.getPosition());
+            assert.equal("", chop.getCurrentWord());
+        });
+    });
+    xdescribe('tests on an empty strings', function (){
+        // chop.init("");
+        it('returns 1 when asked for the length', function (){
+            assert.equal(1, chop.getLength());
+        });
+        it('returns 0 when asked for the percentage', function (){
+            assert.equal(0, chop.getPercentage());
         });
     });
 });

@@ -251,6 +251,7 @@ tag:
 
 depend:
 	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
+	$(MAKEDEPEND) --system amd --append src/script/wordywordy.js
 
 static-analysis: dev-build
 	$(NPM) run plato
@@ -296,6 +297,10 @@ clean: somewhatclean
 SCRIPT_SOURCES_WEB=src/script/wordywordy.js \
 	src/lib/screenfull.js \
 	src/script/chopper/chopper.js \
+	src/script/chopper/constants.js \
+	src/script/chopper/gear.js \
+	src/script/chopper/navigator.js \
+	src/script/chopper/tokenizer.js \
 	src/script/ui-control/actions.js \
 	src/script/ui-control/constants.js \
 	src/script/ui-control/eventmap.js \
@@ -305,3 +310,48 @@ SCRIPT_SOURCES_WEB=src/script/wordywordy.js \
 	src/script/utl/gaga.js \
 	src/script/utl/paramslikker.js \
 	src/script/utl/stopwatch.js
+# amd dependencies
+src/script/wordywordy.js: \
+	src/script/ui-control/actions.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/eventmap.js \
+	src/script/utl/browserutl.js \
+	src/script/utl/formatting.js \
+	src/script/utl/gaga.js \
+	src/script/utl/paramslikker.js
+
+src/script/ui-control/actions.js: \
+	src/lib/screenfull.js \
+	src/script/chopper/chopper.js \
+	src/script/ui-control/constants.js \
+	src/script/ui-control/themeswitcher.js \
+	src/script/utl/browserutl.js \
+	src/script/utl/formatting.js \
+	src/script/utl/gaga.js \
+	src/script/utl/stopwatch.js
+
+src/script/chopper/chopper.js: \
+	src/script/chopper/constants.js \
+	src/script/chopper/gear.js \
+	src/script/chopper/navigator.js \
+	src/script/chopper/tokenizer.js
+
+src/script/chopper/gear.js: \
+	src/script/chopper/constants.js \
+	src/script/utl/formatting.js
+
+src/script/chopper/navigator.js: \
+	src/script/chopper/constants.js \
+	src/script/utl/formatting.js
+
+src/script/chopper/tokenizer.js: \
+	src/script/chopper/constants.js
+
+src/script/ui-control/themeswitcher.js: \
+	src/script/utl/formatting.js
+
+src/script/ui-control/eventmap.js: \
+	src/script/ui-control/actions.js \
+	src/script/utl/browserutl.js \
+	src/script/utl/gaga.js
+
