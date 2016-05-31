@@ -11,7 +11,7 @@ function(tokenizer, gear, navi, C) {
 
     return {
         init: function (pString, pPosition){
-            rWordArray = tokenizer.tokenize(pString || "");
+            rWordArray = tokenizer.tokenize(pString);
             navi.init(rWordArray, pPosition);
         },
         getSpeed: gear.getSpeed,

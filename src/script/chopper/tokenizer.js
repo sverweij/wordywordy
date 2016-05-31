@@ -7,6 +7,7 @@ define(["./constants"], function(C) {
 
     return {
         tokenize: function(pString) {
+            pString = pString || "";
             return pString
                 .replace(/[\-]{4,}/g, "---") //
                 .replace(/[_]{4,}/g, "___") //
