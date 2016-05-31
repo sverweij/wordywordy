@@ -4,8 +4,10 @@ var chop = require("../chopper/chopper");
 describe('chopper', function() {
     var gFixtureString = require("./fixtures").pruimeboom;
 
-    chop.init(gFixtureString);
-    chop.setSpeed(100);
+    beforeEach(function(){
+        chop.init(gFixtureString);
+        chop.setSpeed(100);
+    });
 
     describe('#getEstimatedTimeToGo', function(){
         it('returns the correct time to go', function() {
