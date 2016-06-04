@@ -15,7 +15,6 @@ define([], function() {
         };
         */
 
-        // constructor hack
         this.reset();
     }
 
