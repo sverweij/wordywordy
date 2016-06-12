@@ -24,5 +24,19 @@ describe('tokenizer', function() {
                 fixtures.laozi_tokenized
             );
         });
+        it('does not treat abbreviations as consecutive line ends', function() {
+            expect(tokenizer.tokenize(
+                "This is a.o. the best."
+            )).to.deep.equal(
+                ["This", "is", "a.o.", "the", "best."]
+            );
+        });
+        it('Corrects for forgotten spaces after ', function() {
+            expect(tokenizer.tokenize(
+                "This is the best.But I forgot a space."
+            )).to.deep.equal(
+                ["This", "is", "the", "best.", "But", "I", "forgot", "a", "space."]
+            );
+        });
     });
 });
