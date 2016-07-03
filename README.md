@@ -170,6 +170,9 @@ Q: Do you have a time line?
 > A: Not really. This thing shares time with some other projects
 > ([mscgen_js](https://sverweij.github.io/mscgen_js). Work. Life).
 
-Q: Are you afraid you'll stay the only user of this?
-> A: No. On the other hand - having an FAQ on github
-> could be considered awkward.
+Q: You know of any articles about speed reading?
+> A: [This](https://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/)
+> looks like a balanced one. It discusses a probable hard upper
+> limit for comprehension (~600 wpm), the need for natural pauses,
+> some sound, founded scepticism about speed reading and even 
+> some useful sounding tips.
