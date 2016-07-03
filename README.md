@@ -172,7 +172,7 @@ Q: Do you have a time line?
 
 Q: You know of any articles about speed reading?
 > A: [This](https://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/)
-> looks like a balanced one. It discusses a probable hard upper
-> limit for comprehension (~600 wpm), the need for natural pauses,
-> some sound, founded scepticism about speed reading and even 
-> some useful sounding tips.
+> looks like a balanced one. It discusses a.o. a probable hard upper
+> limit for comprehension (~600 wpm), the need for natural pauses 
+> and some context on where speed reading might work and where not.
+> It also offers some sound, founded scepticism about 'speed reading'.
