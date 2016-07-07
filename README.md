@@ -1,6 +1,6 @@
 # WordyWordy
 
-WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
+WordyWordy takes text that's dropped on it and shows it. One word at a time. As slow as you want (or as fast as you want, if you're into that kind of thing).
 
 ![screenshots](src/images/screenshots.gif)
 
@@ -21,6 +21,7 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing
   something else. Working out for example.
+
 
 **Faster**.
   It is possible to read faster than reading the typical ~250-300 words per minute.
