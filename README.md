@@ -1,6 +1,6 @@
 # WordyWordy
 
-WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.
+WordyWordy takes text that's dropped on it and shows it. One word at a time. As slow as you want (or as fast as you want, if you're into that kind of thing).
 
 ![screenshots](src/images/screenshots.gif)
 
@@ -21,6 +21,7 @@ WordyWordy takes text that's dropped on it and shows it. One word at a time. As 
 **Hands free**.
   It keeps on rolling. Practical when you want to read while doing
   something else. Working out for example.
+
 
 **Faster**.
   It is possible to read faster than reading the typical ~250-300 words per minute.
@@ -170,6 +171,9 @@ Q: Do you have a time line?
 > A: Not really. This thing shares time with some other projects
 > ([mscgen_js](https://sverweij.github.io/mscgen_js). Work. Life).
 
-Q: Are you afraid you'll stay the only user of this?
-> A: No. On the other hand - having an FAQ on github
-> could be considered awkward.
+Q: You know of any articles about speed reading?
+> A: [This](https://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/)
+> looks like a balanced one. It discusses a.o. a probable hard upper
+> limit for comprehension (~600 wpm), the need for natural pauses 
+> and some context on where speed reading might work and where not.
+> It also offers some sound, founded scepticism about 'speed reading'.
