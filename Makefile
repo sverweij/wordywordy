@@ -121,6 +121,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	tracking.host \
 	$(BUILDDIR)/lib/require.js \
 	$(BUILDDIR)/lib/screenfull.js \
+	$(BUILDDIR)/service-worker.js \
 	$(BUILDDIR)/script/wordywordy.js \
 	$(BUILDDIR)/style/wordywordy.css \
 	$(BUILDDIR)/style/themes/057.css \
@@ -171,6 +172,7 @@ $(BUILDDIR)/script/wordywordy.js: $(SOURCES_WEB)
 	$(SEDVERSION) < $@.tmp > $@
 	rm $@.tmp
 
+
 src/index.html: $(SOURCES_WEB) $(GENERATED_SOURCES)
 
 src/style/wordywordy.css: src/style/wordywordy.scss \
@@ -212,6 +214,9 @@ $(BUILDDIR)/lib/require.js: src/lib/require.js
 
 $(BUILDDIR)/bookmarklet.js:
 	cp src/bookmarklet.js $@
+
+$(BUILDDIR)/service-worker.js: src/service-worker.js
+	cp $< $@
 
 # "phony" targets
 
