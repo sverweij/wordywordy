@@ -6,6 +6,9 @@
     // "warn" => 1
 
     "root": true,
+    "plugins": [
+        "security"
+    ],
     "parserOptions": {
         "ecmaVersion": 4,
         "sourceType": "module",
@@ -236,7 +239,21 @@
         "require-yield": 0,
         "sort-imports": 0,
         "template-curly-spacing": 0,
-        "yield-star-spacing": 0
+        "yield-star-spacing": 0,
+
+        // security
+        "security/detect-unsafe-regex": 2,
+        "security/detect-buffer-noassert": 2,
+        "security/detect-child-process": 2,
+        "security/detect-disable-mustache-escape": 2,
+        "security/detect-eval-with-expression": 2,
+        "security/detect-no-csrf-before-method-override": 2,
+        "security/detect-non-literal-fs-filename": 2,
+        "security/detect-non-literal-regexp": 2,
+        "security/detect-non-literal-require": 0, // we're using requirejs - requires have non-literals by definition
+        "security/detect-object-injection": 2,
+        "security/detect-possible-timing-attacks": 0, // not doing anything which would need this kind of secrecy
+        "security/detect-pseudoRandomBytes": 2
     },
     "env": {
         "amd": true,

@@ -3,6 +3,11 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
+/* eslint security/detect-object-injection: 0 */
+/* we're using object[key] constructs a lot. As far as we
+ * can see not a security risk as none of the keys are
+ * user input
+ */
 define(["../utl/formatting", "./constants"], function(fmt, C) {
 
     var MAX_SKIP_AHEAD = 69; // words

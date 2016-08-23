@@ -1,3 +1,7 @@
+/* eslint security/detect-object-injection:0 */
+/* the [variable] constructs here accept user input in
+ * one place - where it's sanitized
+ */
 define(["../utl/formatting"],
 function(fmt) {
     "use strict";
