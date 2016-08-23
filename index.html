@@ -42,15 +42,26 @@
 
         <title>WordyWordy</title>
         <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+        </script>
+        <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         </script>
-        <script data-main="script/wordywordy.js?52f00f1b839c2210"
-            src="lib/require.js?52f00f1b839c2210" defer></script>
-        <link rel="stylesheet" href="style/wordywordy.css?52f00f1b839c2210" type="text/css" media="screen">
-        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css?52f00f1b839c2210" type="text/css" media="screen">
+        <script data-main="script/wordywordy.js"
+            src="lib/require.js" defer></script>
+        <link rel="stylesheet" href="style/wordywordy.css" type="text/css" media="screen">
+        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css" type="text/css" media="screen">
     </head>
     <body>
         <!--[if lt IE 19]>
@@ -131,7 +142,7 @@
                 </tr>
                 <tr>
                     <td>Version</td>
-                    <td>0.2.2</td>
+                    <td>0.3.0</td>
                 </tr>
             </table>
             </div>
