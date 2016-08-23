@@ -1,4 +1,4 @@
-var CACHE_NAME = 'wordywordy-0-2-3';
+var CACHE_NAME = 'wordywordy-0-3-0';
 var urlsToCache = [
     "./",
     "./index.html",
