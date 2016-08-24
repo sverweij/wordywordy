@@ -1,14 +1,15 @@
-var CACHE_NAME = 'wordywordy-0-3-0';
+var CACHE_NAME = 'wordywordy-{{version}}';
 var urlsToCache = [
     "./",
     "./index.html",
-    "./service-worker.js",
-    "./lib/require.js",
+    "./service-worker.js?{{commit}}",
+    "./lib/require.js?{{commit}}",
+    "./script/wordywordy.js?{{commit}}",
     "./lib/screenfull.js",
-    "./font/controls.eot",
-    "./font/controls.svg",
-    "./font/controls.ttf",
-    "./font/controls.woff",
+    "./font/controls.eot?tf5yt7",
+    "./font/controls.svg?tf5yt7",
+    "./font/controls.ttf?tf5yt7",
+    "./font/controls.woff?tf5yt7#controls",
     "./font/OpenDyslexic-Italic.otf",
     "./font/OpenDyslexicAlta-Regular.otf",
     "./font/Roboto-Italic.ttf",
@@ -24,7 +25,6 @@ var urlsToCache = [
     "./samples/intro.txt",
     "./samples/laozi.txt",
     "./samples/thoughts.txt",
-    "./script/wordywordy.js",
     "./style/themes/057.css",
     "./style/themes/074.css",
     "./style/themes/220.css",
@@ -44,8 +44,9 @@ var urlsToCache = [
     "./style/themes/night.css",
     "./style/themes/progressive.css",
     "./style/themes/sepia-fat-font.css",
-    "./style/themes/sepia.css",
+    "./style/themes/sepia.css?{{commit}}",
     "./style/themes/zany.css",
+    "./style/wordywordy.css?{{commit}}",
     "./style/wordywordy.css",
     "./favicon.ico"
 ];

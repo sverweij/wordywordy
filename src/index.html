@@ -43,7 +43,7 @@
         <title>WordyWordy</title>
         <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            navigator.serviceWorker.register('service-worker.js?{{commit}}').then(function(registration) {
                 // Registration was successful
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
             }).catch(function(err) {
@@ -58,10 +58,10 @@
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         </script>
-        <script data-main="script/wordywordy.js"
-            src="lib/require.js" defer></script>
-        <link rel="stylesheet" href="style/wordywordy.css" type="text/css" media="screen">
-        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css" type="text/css" media="screen">
+        <script data-main="script/wordywordy.js?{{commit}}"
+            src="lib/require.js?{{commit}}" defer></script>
+        <link rel="stylesheet" href="style/wordywordy.css?{{commit}}" type="text/css" media="screen">
+        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css?{{commit}}" type="text/css" media="screen">
     </head>
     <body>
         <!--[if lt IE 19]>

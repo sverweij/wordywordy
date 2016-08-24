@@ -216,7 +216,7 @@ $(BUILDDIR)/bookmarklet.js:
 	cp src/bookmarklet.js $@
 
 $(BUILDDIR)/service-worker.js: src/service-worker.js
-	cp $< $@
+	$(SEDVERSION) < $< > $@
 
 # "phony" targets
 
@@ -289,6 +289,7 @@ clean-generated-sources:
 
 somewhatclean: clean-generated-sources
 	rm -rf $(BUILDDIR)/index.html
+	rm -rf $(BUILDDIR)/service-worker.js
 	rm -rf coverage
 	rm -rf $(PRODDIRS)
 	rm -rf testcoverage-report
@@ -359,4 +360,3 @@ src/script/ui-control/eventmap.js: \
 	src/script/ui-control/actions.js \
 	src/script/utl/browserutl.js \
 	src/script/utl/gaga.js
-
