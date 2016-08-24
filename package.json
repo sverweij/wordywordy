@@ -12,16 +12,16 @@
     "chai": "3.5.0",
     "codeclimate-test-reporter": "0.3.3",
     "csslint": "1.0.2",
-    "eslint": "3.3.0",
+    "eslint": "3.3.1",
     "eslint-plugin-security": "1.2.0",
-    "istanbul": "0.4.4",
-    "js-makedepend": "1.0.1",
+    "istanbul": "0.4.5",
+    "js-makedepend": "1.0.2",
     "mocha": "3.0.2",
     "node-sass": "3.8.0",
     "npm-check-updates": "2.8.0",
     "nsp": "2.6.1",
     "plato": "1.7.0",
-    "uglify-js": "2.7.1"
+    "uglify-js": "2.7.3"
   },
   "scripts": {
     "lint": "eslint src/script",
