@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="320" height="240"
+     viewBox="0 0 320 240"
+     version="1.1">
+     <!-- <rect x="0" y="0" width="320" height="240" fill="rgba(24, 164, 229, 1)" /> -->
+     <path d="M100,240 L220,40 S240,4 270,0 L320,0 L320,240 z" stroke-width="0" fill="white"/>
+</svg>

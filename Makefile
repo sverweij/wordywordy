@@ -158,6 +158,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/font/controls.ttf \
 	$(BUILDDIR)/font/controls.woff \
 	$(BUILDDIR)/images/background.jpg \
+	$(BUILDDIR)/images/tail.png \
 	$(BUILDDIR)/samples/1984.txt \
 	$(BUILDDIR)/samples/freedom.txt \
 	$(BUILDDIR)/samples/intro.nl.txt \
