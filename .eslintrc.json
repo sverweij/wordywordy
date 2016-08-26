@@ -111,7 +111,7 @@
         "no-with": 2,
         "radix": 2,
         "vars-on-top": 0,
-        "wrap-iife": [2, "inside"],
+        "wrap-iife": [2, "outside"],
         "yoda": 0,
 
         // Strict mode
