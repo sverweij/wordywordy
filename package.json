@@ -1,6 +1,6 @@
 {
   "name": "wordywordy",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.",
   "main": "index.html",
   "dependencies": {
@@ -24,7 +24,7 @@
     "uglify-js": "2.7.3"
   },
   "scripts": {
-    "lint": "eslint src/script",
+    "lint": "eslint src/script service-worker.js",
     "test": "mocha -R dot src/script/test/",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test",
     "plato": "plato -r -d platoreports -x \"test\" src/script/",
