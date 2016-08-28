@@ -4,5 +4,12 @@
      viewBox="0 0 320 240"
      version="1.1">
      <!-- <rect x="0" y="0" width="320" height="240" fill="rgba(24, 164, 229, 1)" /> -->
+
      <path d="M100,240 L220,40 S240,4 270,0 L320,0 L320,240 z" stroke-width="0" fill="white"/>
+     <!-- <circle cx="218" cy="105" r="8" fill="rgba(24, 164, 229, 1)" />
+     <circle cx="238" cy="105" r="8" fill="rgba(24, 164, 229, 1)" />
+     <rect x="234" y="76" width="8" height="16" fill="rgba(24, 164, 229, 1)" />
+     <circle cx="258" cy="105" r="8" fill="rgba(24, 164, 229, 1)" />
+     <rect x="205" y="115" width="70" height="8" fill="rgba(24, 164, 229, 1)" /> -->
+     <text x="220" y="160" fill="rgba(24, 164, 229, 1)" style="font-family: sans-serif;font-size:42px;">074</text>
 </svg>

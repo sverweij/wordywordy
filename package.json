@@ -12,7 +12,7 @@
     "chai": "3.5.0",
     "codeclimate-test-reporter": "0.3.3",
     "csslint": "1.0.2",
-    "eslint": "3.3.1",
+    "eslint": "3.4.0",
     "eslint-plugin-security": "1.2.0",
     "istanbul": "0.4.5",
     "js-makedepend": "1.0.2",

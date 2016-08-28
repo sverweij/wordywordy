@@ -58,7 +58,7 @@
         "./favicon.ico"
     ];
 
-    function isSimilarCache(pCacheName) {
+    function isSimilarCacheName(pCacheName) {
         return function(pKey){
             var lCacheRootName = pCacheName.split('-')[0];
             var lCacheVersion  = pCacheName.split('-')[1];
@@ -70,17 +70,17 @@
         };
     }
     /*
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.1")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.4")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-poink")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3a")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3-a")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("lalala")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("totally different")).to.be.false;
-        expect(isSimilarCache("lalala")("lalala")).to.be.false;
-        expect(isSimilarCache("lalala")("lalala-1.2.3")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.1")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.4")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-poink")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3a")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3-a")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("totally different")).to.be.false;
+        expect(isSimilarCacheName("lalala")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala")("lalala-1.2.3")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
 
      */
     function deleteCache (pKey){
@@ -92,7 +92,7 @@
         caches.keys().then(
             function(pKeys) {
                 pKeys
-                    .filter(isSimilarCache(pCacheName))
+                    .filter(isSimilarCacheName(pCacheName))
                     .forEach(deleteCache);
             }
         );
