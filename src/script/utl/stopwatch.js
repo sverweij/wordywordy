@@ -7,12 +7,20 @@ define([], function() {
 
     function Stopwatch () {
         /*
-        this.reset = function () {
-            this.state = "paused"; // running, paused
-            this.startTime = Date.now();
-            this.pauseStartTime = this.startTime;
-            this.cumulativePauses = 0;
-        };
+        paused -> running:
+			start/
+			startTime = pauseStartTime = now
+			pauses = 0;
+        paused -> running:
+			resume/
+			pauses += now - pauseStartTime;
+        running -> paused:
+			reset/
+			startTime = pauseStartTime = now
+			pauses = 0;
+        running -> paused:
+			pause/
+			pauseStartTime = now;
         */
 
         this.reset();
