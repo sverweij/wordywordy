@@ -17,7 +17,7 @@
     "istanbul": "0.4.5",
     "js-makedepend": "1.0.3",
     "mocha": "3.0.2",
-    "node-sass": "3.9.3",
+    "node-sass": "3.10.0",
     "npm-check-updates": "2.8.0",
     "nsp": "2.6.1",
     "plato": "1.7.0",
