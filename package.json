@@ -5,7 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "amdefine": "1.0.0",
-    "requirejs": "2.3.1",
+    "requirejs": "2.3.2",
     "screenfull": "3.0.2"
   },
   "devDependencies": {
