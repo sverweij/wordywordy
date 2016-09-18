@@ -1,14 +1,14 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.3.3';
+    var CACHE_NAME = 'wordywordy-0.3.4';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?1a7f4c85b5d9c451",
+        "./service-worker.js?df22e666fa8d6bbd",
         "./service-worker.js",
-        "./lib/require.js?1a7f4c85b5d9c451",
+        "./lib/require.js?df22e666fa8d6bbd",
         "./lib/require.js",
-        "./script/wordywordy.js?1a7f4c85b5d9c451",
+        "./script/wordywordy.js?df22e666fa8d6bbd",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -50,15 +50,15 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?1a7f4c85b5d9c451",
+        "./style/themes/sepia.css?df22e666fa8d6bbd",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?1a7f4c85b5d9c451",
+        "./style/wordywordy.css?df22e666fa8d6bbd",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
 
-    function isSimilarCache(pCacheName) {
+    function isSimilarCacheName(pCacheName) {
         return function(pKey){
             var lCacheRootName = pCacheName.split('-')[0];
             var lCacheVersion  = pCacheName.split('-')[1];
@@ -70,17 +70,17 @@
         };
     }
     /*
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.1")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.4")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-poink")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3a")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3-a")).to.be.true;
-        expect(isSimilarCache("lalala-1.2.3")("lalala-1.2.3")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("lalala")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("totally different")).to.be.false;
-        expect(isSimilarCache("lalala")("lalala")).to.be.false;
-        expect(isSimilarCache("lalala")("lalala-1.2.3")).to.be.false;
-        expect(isSimilarCache("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.1")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.4")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-poink")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3a")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3-a")).to.be.true;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala-1.2.3")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("totally different")).to.be.false;
+        expect(isSimilarCacheName("lalala")("lalala")).to.be.false;
+        expect(isSimilarCacheName("lalala")("lalala-1.2.3")).to.be.false;
+        expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
 
      */
     function deleteCache (pKey){
@@ -92,7 +92,7 @@
         caches.keys().then(
             function(pKeys) {
                 pKeys
-                    .filter(isSimilarCache(pCacheName))
+                    .filter(isSimilarCacheName(pCacheName))
                     .forEach(deleteCache);
             }
         );
