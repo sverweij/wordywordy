@@ -1,15 +1,15 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.4.0';
+    var CACHE_NAME = 'wordywordy-0.4.0-a';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?80b53457a6ce191b",
+        "./service-worker.js?b191fbf96febe9f8",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?80b53457a6ce191b",
+        "./lib/require.js?b191fbf96febe9f8",
         "./lib/require.js",
-        "./script/wordywordy.js?80b53457a6ce191b",
+        "./script/wordywordy.js?b191fbf96febe9f8",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -27,6 +27,7 @@
         "./images/background.jpg",
         "./images/tail.png",
         "./images/057pattern.png",
+        "./images/wordywordy.png",
         "./samples/1984.txt",
         "./samples/freedom.txt",
         "./samples/intro.nl.txt",
@@ -52,10 +53,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?80b53457a6ce191b",
+        "./style/themes/sepia.css?b191fbf96febe9f8",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?80b53457a6ce191b",
+        "./style/wordywordy.css?b191fbf96febe9f8",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];

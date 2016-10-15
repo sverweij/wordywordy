@@ -1,6 +1,8 @@
 {
   "short_name": "WordyWordy",
   "name": "WordyWordy - slow reader",
+  "theme_color": "rgba(251, 240, 217, 1)",
+  "background_color": "rgba(251, 240, 217, 1)",
   "icons": [
     {
       "src": "images/wordywordy.png",
@@ -9,6 +11,6 @@
     }
   ],
   "start_url": "./index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape"
 }
