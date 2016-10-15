@@ -25,6 +25,7 @@
         "./font/Roboto-ThinItalic.ttf",
         "./images/background.jpg",
         "./images/tail.png",
+        "./images/057pattern.png",
         "./samples/1984.txt",
         "./samples/freedom.txt",
         "./samples/intro.nl.txt",
