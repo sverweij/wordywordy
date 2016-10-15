@@ -1,14 +1,14 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.3.4';
+    var CACHE_NAME = 'wordywordy-0.3.5';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?df22e666fa8d6bbd",
+        "./service-worker.js?8347ad22bac2c34a",
         "./service-worker.js",
-        "./lib/require.js?df22e666fa8d6bbd",
+        "./lib/require.js?8347ad22bac2c34a",
         "./lib/require.js",
-        "./script/wordywordy.js?df22e666fa8d6bbd",
+        "./script/wordywordy.js?8347ad22bac2c34a",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -25,6 +25,7 @@
         "./font/Roboto-ThinItalic.ttf",
         "./images/background.jpg",
         "./images/tail.png",
+        "./images/057pattern.png",
         "./samples/1984.txt",
         "./samples/freedom.txt",
         "./samples/intro.nl.txt",
@@ -50,10 +51,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?df22e666fa8d6bbd",
+        "./style/themes/sepia.css?8347ad22bac2c34a",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?df22e666fa8d6bbd",
+        "./style/wordywordy.css?8347ad22bac2c34a",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
