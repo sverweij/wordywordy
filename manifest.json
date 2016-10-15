@@ -1,0 +1,14 @@
+{
+  "short_name": "WordyWordy",
+  "name": "WordyWordy - slow reader",
+  "icons": [
+    {
+      "src": "images/wordywordy.png",
+      "sizes": "400x400",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}
