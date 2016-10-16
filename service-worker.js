@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.4.0-a';
+    var CACHE_NAME = 'wordywordy-0.4.0-b';
     var urlsToCache = [
         "./",
         "./index.html",

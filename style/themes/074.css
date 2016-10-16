@@ -20,7 +20,4 @@ html, body{
 #__percentagewrap {
     background-color: white;
 }
-.outputwrap {
-    background-color: transparent;
-}
 .icon-theme:before { content: "\e9af"; }
