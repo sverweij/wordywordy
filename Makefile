@@ -71,6 +71,9 @@ help:
 $(BUILDDIR)/%.html: src/%.html
 	$(SEDVERSION) < $< > $@
 
+$(BUILDDIR)/%.json: src/%.json
+	$(SEDVERSION) < $< > $@
+
 %.css: %.scss
 	$(SASS) $< $@
 
@@ -119,6 +122,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	siteverification.id \
 	tracking.id \
 	tracking.host \
+	$(BUILDDIR)/manifest.json \
 	$(BUILDDIR)/lib/require.js \
 	$(BUILDDIR)/lib/screenfull.js \
 	$(BUILDDIR)/service-worker.js \
@@ -158,7 +162,9 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/font/controls.ttf \
 	$(BUILDDIR)/font/controls.woff \
 	$(BUILDDIR)/images/background.jpg \
+	$(BUILDDIR)/images/057pattern.png \
 	$(BUILDDIR)/images/tail.png \
+	$(BUILDDIR)/images/wordywordy.png \
 	$(BUILDDIR)/samples/1984.txt \
 	$(BUILDDIR)/samples/freedom.txt \
 	$(BUILDDIR)/samples/intro.nl.txt \
