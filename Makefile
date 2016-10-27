@@ -7,7 +7,6 @@ COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_li
 GIT=git
 GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
 GIT_DEPLOY_FROM_BRANCH=master
-CSSLINT=node node_modules/csslint/cli.js --format=compact --quiet --ignore=ids
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
 RESIZE=utl/resize.sh
@@ -231,9 +230,6 @@ prerequisites:
 	$(NPM) install
 
 dev-build: src/index.html
-
-csslint:
-	$(CSSLINT) src/style/*.css src/style/themes/*.css
 
 lint:
 	$(NPM) run lint

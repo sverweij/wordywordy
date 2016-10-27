@@ -11,17 +11,16 @@
   "devDependencies": {
     "chai": "3.5.0",
     "codeclimate-test-reporter": "0.4.0",
-    "csslint": "1.0.3",
-    "eslint": "3.8.0",
+    "eslint": "3.8.1",
     "eslint-plugin-security": "1.2.0",
     "istanbul": "0.4.5",
     "js-makedepend": "1.0.5",
     "mocha": "3.1.2",
     "node-sass": "3.10.1",
-    "npm-check-updates": "2.8.5",
+    "npm-check-updates": "2.8.6",
     "nsp": "2.6.2",
     "plato": "1.7.0",
-    "uglify-js": "2.7.3"
+    "uglify-js": "2.7.4"
   },
   "scripts": {
     "lint": "eslint src/script service-worker.js",
