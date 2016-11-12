@@ -130,6 +130,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/style/themes/057.css \
 	$(BUILDDIR)/style/themes/074.css \
 	$(BUILDDIR)/style/themes/220.css \
+	$(BUILDDIR)/style/themes/fountainpen.css \
 	$(BUILDDIR)/style/themes/background.css \
 	$(BUILDDIR)/style/themes/day.css \
 	$(BUILDDIR)/style/themes/dyslexia-day.css \

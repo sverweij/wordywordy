@@ -40,6 +40,7 @@
         "./style/themes/057.css",
         "./style/themes/074.css",
         "./style/themes/220.css",
+        "./style/themes/fountainpen.css",
         "./style/themes/background.css",
         "./style/themes/day.css",
         "./style/themes/dyslexia-day.css",
