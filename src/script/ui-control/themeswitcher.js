@@ -28,7 +28,8 @@ function(fmt) {
      {nr: 17, title: "HV", href: "style/themes/hv.css"},
      {nr: 18, title: "liberal", href: "style/themes/liberal.css"},
      {nr: 19, title: "progressive", href: "style/themes/progressive.css"},
-     {nr: 20, title: "background", href: "style/themes/background.css"}
+     {nr: 20, title: "Fountain Pen", href: "style/themes/fountainpen.css"},
+     {nr: 21, title: "background", href: "style/themes/background.css"}
     ];
 
     function cycleTheme(){

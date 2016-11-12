@@ -1,0 +1,12 @@
+html, body{
+    color: rgba(0, 0, 128, 0.7);
+    background-color: rgba(255, 255, 255, 1);
+    font: normal normal 100 48pt "Gochi Hand", Roboto, sans-serif;
+}
+#__output {
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+#__actionbar, #__percentage {
+    color: rgba(200, 0, 0, 0.7);
+}
+.icon-theme:before { content: "\e9eb"; }

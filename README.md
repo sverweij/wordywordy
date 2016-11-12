@@ -120,6 +120,8 @@ says it should. I hope it improves usability for dyslexic people.
 - A custom font for icons, created with the [IcoMoon App](https://icomoon.io/app/).
 At the time the font was created it was licensed
 [GPLv3](http://www.gnu.org/licenses/gpl.html) or
+- **Gochi Hand** (from Google fonts)
+For the fountain pen theme.
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## Build status
