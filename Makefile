@@ -150,16 +150,19 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/style/themes/zany.css \
 	$(BUILDDIR)/font/OpenDyslexic-Italic.otf \
 	$(BUILDDIR)/font/OpenDyslexicAlta-Regular.otf \
-	$(BUILDDIR)/font/Roboto-Italic.ttf \
-	$(BUILDDIR)/font/Roboto-Light.ttf \
-	$(BUILDDIR)/font/Roboto-LightItalic.ttf \
-	$(BUILDDIR)/font/Roboto-Regular.ttf \
-	$(BUILDDIR)/font/Roboto-Thin.ttf \
-	$(BUILDDIR)/font/Roboto-ThinItalic.ttf \
+	$(BUILDDIR)/font/Roboto-Italic.woff \
+	$(BUILDDIR)/font/Roboto-Light.woff \
+	$(BUILDDIR)/font/Roboto-LightItalic.woff \
+	$(BUILDDIR)/font/Roboto-Regular.woff \
+	$(BUILDDIR)/font/Roboto-Thin.woff \
+	$(BUILDDIR)/font/Roboto-ThinItalic.woff \
+	$(BUILDDIR)/font/Gochi_Hand_Regular.woff \
 	$(BUILDDIR)/font/controls.eot \
 	$(BUILDDIR)/font/controls.svg \
 	$(BUILDDIR)/font/controls.ttf \
 	$(BUILDDIR)/font/controls.woff \
+	$(BUILDDIR)/font/057.woff \
+	$(BUILDDIR)/font/074.woff \
 	$(BUILDDIR)/images/background.jpg \
 	$(BUILDDIR)/images/057pattern.png \
 	$(BUILDDIR)/images/tail.png \

@@ -1,12 +1,12 @@
 @font-face {
-	font-family: 'controls';
-	src:url('../font/controls.eot?tf5yt7');
-	src:url('../font/controls.eot?#iefixtf5yt7') format('embedded-opentype'),
-		url('../font/controls.woff?tf5yt7') format('woff'),
-		url('../font/controls.ttf?tf5yt7') format('truetype'),
-		url('../font/controls.svg?tf5yt7#controls') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'controls';
+  src:url('../font/controls.eot?tf5yt7');
+  src:url('../font/controls.eot?#iefixtf5yt7') format('embedded-opentype'),
+    url('../font/controls.woff?tf5yt7') format('woff'),
+    url('../font/controls.ttf?tf5yt7') format('truetype'),
+    url('../font/controls.svg?tf5yt7#controls') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'controls';
@@ -95,41 +95,59 @@
   font-family    : "Roboto";
   font-weight    : 100;
   font-style     : normal;
-  src: url('../font/Roboto-Thin.ttf');
+  src: url('../font/Roboto-Thin.woff');
 }
 @font-face {
   font-family    : "Roboto";
   font-weight    : 100;
   font-style     : italic;
-  src: url('../font/Roboto-ThinItalic.ttf');
+  src: url('../font/Roboto-ThinItalic.woff');
 }
 @font-face {
   font-family    : "Roboto";
   font-weight    : 300;
   font-style     : normal;
-  src: url('../font/Roboto-Light.ttf');
+  src: url('../font/Roboto-Light.woff');
 }
 @font-face {
   font-family    : "Roboto";
   font-weight    : 300;
   font-style     : italic;
-  src: url('../font/Roboto-LightItalic.ttf');
+  src: url('../font/Roboto-LightItalic.woff');
 }
 @font-face {
   font-family    : "Roboto";
   font-weight    : 400;
   font-style     : normal;
-  src: url('../font/Roboto-Regular.ttf');
+  src: url('../font/Roboto-Regular.woff');
 }
 @font-face {
   font-family    : "Roboto";
   font-weight    : 400;
   font-style     : italic;
-  src: url('../font/Roboto-Italic.ttf');
+  src: url('../font/Roboto-Italic.woff');
 }
 @font-face {
   font-family    : "dyslexic";
   font-weight    : normal;
   font-style     : normal;
   src: url('../font/OpenDyslexicAlta-Regular.otf');
+}
+@font-face {
+  font-family   : "ZeroFiftySeven";
+  font-style    : normal;
+  font-weight   : 300;
+  src: url('../font/057.woff');
+}
+@font-face {
+  font-family   : "ZeroSeventyFour";
+  font-style    : normal;
+  font-weight   : 300;
+  src: url('../font/074.woff');
+}
+@font-face {
+  font-family   : "Gochi Hand";
+  font-style    : normal;
+  font-weight   : 300;
+  src: url('../font/Gochi_Hand_Regular.woff');
 }
