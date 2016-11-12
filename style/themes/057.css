@@ -2,7 +2,7 @@ html, body{
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 43, 84, 1);
     background-image: url('../../images/057pattern.png');
-    font: normal normal 500 48pt Roboto, sans-serif;
+    font: normal normal 500 48pt ZeroFiftySeven, Roboto, sans-serif;
 }
 #__output {
     border-bottom-color: rgba(255, 50, 0, 1);
