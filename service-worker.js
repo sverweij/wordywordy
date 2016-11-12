@@ -1,15 +1,15 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.4.4';
+    var CACHE_NAME = 'wordywordy-0.4.5';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?457c1b1266f8d153",
+        "./service-worker.js?562c3bc843795a90",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?457c1b1266f8d153",
+        "./lib/require.js?562c3bc843795a90",
         "./lib/require.js",
-        "./script/wordywordy.js?457c1b1266f8d153",
+        "./script/wordywordy.js?562c3bc843795a90",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -40,6 +40,7 @@
         "./style/themes/057.css",
         "./style/themes/074.css",
         "./style/themes/220.css",
+        "./style/themes/fountainpen.css",
         "./style/themes/background.css",
         "./style/themes/day.css",
         "./style/themes/dyslexia-day.css",
@@ -56,10 +57,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?457c1b1266f8d153",
+        "./style/themes/sepia.css?562c3bc843795a90",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?457c1b1266f8d153",
+        "./style/wordywordy.css?562c3bc843795a90",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
