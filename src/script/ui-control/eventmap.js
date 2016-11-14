@@ -53,7 +53,7 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
                                 actions.showTimeToGo();
                                 gaga.g('send', 'event', 'app', 'time-to-go-show');
                             }
-                         },
+        },
         SPACE_KEY      : {func: actions.playpause},
         ENTER_KEY      : {func: actions.playpause},
         LEFT_KEY       : {func: actions.dec},

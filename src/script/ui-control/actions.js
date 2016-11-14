@@ -1,13 +1,13 @@
 /* eslint no-undefined:0 */
 define(["../chopper/chopper",
-        "../utl/formatting",
-        "../utl/stopwatch",
-        "../utl/browserutl",
-        "../utl/gaga",
-        "../ui-control/constants",
-        "../ui-control/themeswitcher",
-        "../../lib/screenfull"
-        ],
+    "../utl/formatting",
+    "../utl/stopwatch",
+    "../utl/browserutl",
+    "../utl/gaga",
+    "../ui-control/constants",
+    "../ui-control/themeswitcher",
+    "../../lib/screenfull"
+],
 function(
         words,
         fmt,

@@ -36,17 +36,17 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
         rLetterDelay   = LETTER_DELAY * pBase;
 
         rRe2delay = [
-            {re: C.SENTENCE_END_RE,  delay: SENTENCE_END_DELAY * pBase},
+            {re: C.SENTENCE_END_RE, delay: SENTENCE_END_DELAY * pBase},
             {re: /[;:\u2026\u2013\u00B7|\u2010-\u2015]/,
-                                   delay: LONG_PUNCTUATION_DELAY * pBase},
-            {re: /[-,\/\uFF0C]/,   delay: SHORT_PUNCTUATION_DELAY * pBase},
-            {re: /[\(\)\[\]\{\}]/, delay: BRACKET_DELAY * pBase},
+                delay: LONG_PUNCTUATION_DELAY * pBase},
+            {re: /[-,/\uFF0C]/,     delay: SHORT_PUNCTUATION_DELAY * pBase},
+            {re: /[()[]{}]/,        delay: BRACKET_DELAY * pBase},
             {re: /["'\u2018\u2019\u201c\u201d]/,
-                                   delay: QUOTE_DELAY * pBase},
-            {re: /\u00A0/,         delay: PARAGRAPH_END_DELAY * pBase},
-            {re: /[0-9=\+]/,       delay: NUMBER_DELAY * pBase},
-            {re: /[A-Z]/,          delay: CAPITALS_DELAY * pBase},
-            {re: C.CJK_RE,         delay: CJK_DELAY * pBase}
+                delay: QUOTE_DELAY * pBase},
+            {re: /\u00A0/,          delay: PARAGRAPH_END_DELAY * pBase},
+            {re: /[0-9=+]/,         delay: NUMBER_DELAY * pBase},
+            {re: /[A-Z]/,           delay: CAPITALS_DELAY * pBase},
+            {re: C.CJK_RE,          delay: CJK_DELAY * pBase}
         ];
     }
     function regexp2duration(pChar){
