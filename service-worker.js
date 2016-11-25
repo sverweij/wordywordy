@@ -1,23 +1,23 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.4.5';
+    var CACHE_NAME = 'wordywordy-0.4.6';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?562c3bc843795a90",
+        "./service-worker.js?eb34ff0fc98d854b",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?562c3bc843795a90",
+        "./lib/require.js?eb34ff0fc98d854b",
         "./lib/require.js",
-        "./script/wordywordy.js?562c3bc843795a90",
+        "./script/wordywordy.js?eb34ff0fc98d854b",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
         "./font/controls.svg?tf5yt7",
         "./font/controls.ttf?tf5yt7",
         "./font/controls.woff?tf5yt7#controls",
-		"./font/057.woff",
-		"./font/074.woff",
+        "./font/057.woff",
+        "./font/074.woff",
         "./font/OpenDyslexic-Italic.otf",
         "./font/OpenDyslexicAlta-Regular.otf",
         "./font/Roboto-Italic.woff",
@@ -57,10 +57,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?562c3bc843795a90",
+        "./style/themes/sepia.css?eb34ff0fc98d854b",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?562c3bc843795a90",
+        "./style/wordywordy.css?eb34ff0fc98d854b",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
