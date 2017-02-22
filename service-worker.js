@@ -4,12 +4,12 @@
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?eb34ff0fc98d854b",
+        "./service-worker.js?f072a4d6d82316f7",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?eb34ff0fc98d854b",
+        "./lib/require.js?f072a4d6d82316f7",
         "./lib/require.js",
-        "./script/wordywordy.js?eb34ff0fc98d854b",
+        "./script/wordywordy.js?f072a4d6d82316f7",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -57,10 +57,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?eb34ff0fc98d854b",
+        "./style/themes/sepia.css?f072a4d6d82316f7",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?eb34ff0fc98d854b",
+        "./style/wordywordy.css?f072a4d6d82316f7",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
