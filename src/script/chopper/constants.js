@@ -1,4 +1,10 @@
 /* eslint no-control-regex: 0, no-useless-escape: 0 */
+/* on disabling detect-non-literal-regexp here:
+   it is a false positive (/ acceptable risk) because the regexp only
+   receives a locally declared variable (which is not a const only
+   because the target environments don't support it)
+*/
+/* eslint security/detect-non-literal-regexp: 0 */
 /* istanbul ignore else */
 if (typeof define !== 'function') {
     var define = require('amdefine')(module);
