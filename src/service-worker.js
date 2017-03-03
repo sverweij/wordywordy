@@ -67,8 +67,26 @@
 
     function isSimilarCacheName(pCacheName) {
         return function(pKey){
+
             var lCacheRootName = pCacheName.split('-')[0];
             var lCacheVersion  = pCacheName.split('-')[1];
+
+            /*
+             * - Only allow supersimple cachenames to be matched
+             *   to prevent freaky cachenames  (think ([a]*)* - or worse
+             *   which will make the machine this is running on very slow
+             *   from wreaking havoc.
+             * - return false because freaky cachenames are better not meddled
+             *   with in any case.
+             */
+            if (!lCacheRootName.match(/^[a-z]+$/)){
+                return false;
+            }
+
+            /* now the lCacheRootName is established to be sort of sane
+               the risk of having it matched in a variable is
+               acceptable */
+            /* eslint security/detect-non-literal-regexp: 0 */
             var lMatch         = pKey.match(
                                     new RegExp("(" + lCacheRootName + ")-(.+)")
                                 );
@@ -88,6 +106,8 @@
         expect(isSimilarCacheName("lalala")("lalala")).to.be.false;
         expect(isSimilarCacheName("lalala")("lalala-1.2.3")).to.be.false;
         expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("WappieJeeJeee-1.2.3")("WappieJeeJeee")).to.be.false;
+        expect(isSimilarCacheName("(([a-z]*)*)*-1.2.3")("(([a-z]*)*)*")).to.be.false;
 
      */
     function deleteCache (pKey){
