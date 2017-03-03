@@ -1,15 +1,15 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-0.4.6';
+    var CACHE_NAME = 'wordywordy-0.4.8';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?f072a4d6d82316f7",
+        "./service-worker.js?67e65eeea9261f2e",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?f072a4d6d82316f7",
+        "./lib/require.js?67e65eeea9261f2e",
         "./lib/require.js",
-        "./script/wordywordy.js?f072a4d6d82316f7",
+        "./script/wordywordy.js?67e65eeea9261f2e",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -57,18 +57,36 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?f072a4d6d82316f7",
+        "./style/themes/sepia.css?67e65eeea9261f2e",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?f072a4d6d82316f7",
+        "./style/wordywordy.css?67e65eeea9261f2e",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
 
     function isSimilarCacheName(pCacheName) {
         return function(pKey){
+
             var lCacheRootName = pCacheName.split('-')[0];
             var lCacheVersion  = pCacheName.split('-')[1];
+
+            /*
+             * - Only allow supersimple cachenames to be matched
+             *   to prevent freaky cachenames  (think ([a]*)* - or worse
+             *   which will make the machine this is running on very slow
+             *   from wreaking havoc.
+             * - return false because freaky cachenames are better not meddled
+             *   with in any case.
+             */
+            if (!lCacheRootName.match(/^[a-z]+$/)){
+                return false;
+            }
+
+            /* now the lCacheRootName is established to be sort of sane
+               the risk of having it matched in a variable is
+               acceptable */
+            /* eslint security/detect-non-literal-regexp: 0 */
             var lMatch         = pKey.match(
                                     new RegExp("(" + lCacheRootName + ")-(.+)")
                                 );
@@ -88,6 +106,8 @@
         expect(isSimilarCacheName("lalala")("lalala")).to.be.false;
         expect(isSimilarCacheName("lalala")("lalala-1.2.3")).to.be.false;
         expect(isSimilarCacheName("lalala-1.2.3")("lalala")).to.be.false;
+        expect(isSimilarCacheName("WappieJeeJeee-1.2.3")("WappieJeeJeee")).to.be.false;
+        expect(isSimilarCacheName("(([a-z]*)*)*-1.2.3")("(([a-z]*)*)*")).to.be.false;
 
      */
     function deleteCache (pKey){
