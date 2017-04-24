@@ -1,6 +1,6 @@
 {
   "name": "wordywordy",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.",
   "main": "index.html",
   "dependencies": {
