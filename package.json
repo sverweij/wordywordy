@@ -15,12 +15,12 @@
     "eslint-plugin-security": "1.3.0",
     "istanbul": "0.4.5",
     "js-makedepend": "2.2.3",
-    "mocha": "3.3.0",
-    "node-sass": "4.5.2",
-    "npm-check-updates": "2.11.0",
+    "mocha": "3.4.1",
+    "node-sass": "4.5.3",
+    "npm-check-updates": "2.11.1",
     "nsp": "2.6.3",
     "plato": "1.7.0",
-    "uglify-js": "2.8.22"
+    "uglify-js": "3.0.10"
   },
   "scripts": {
     "lint": "eslint src/script service-worker.js",
