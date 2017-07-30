@@ -238,8 +238,11 @@ dev-build: src/index.html
 lint:
 	$(NPM) run lint
 
+lint-fix:
+	$(NPM) run lint:fix
+
 cover: dev-build
-	$(NPM) run cover
+	$(NPM) run test:cover
 
 coverage/lcov.info: cover
 
