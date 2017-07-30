@@ -63,11 +63,11 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
 
     function _determineDisplayTime(pWord){
         return pWord
-                ? pWord.split('')
-                        .reduce(function(pPrev, pChar){
-                            return pPrev + regexp2duration(pChar);
-                        }, rMinDelay)
-                : 0;
+            ? pWord.split('')
+                .reduce(function(pPrev, pChar){
+                    return pPrev + regexp2duration(pChar);
+                }, rMinDelay)
+            : 0;
     }
 
     return {

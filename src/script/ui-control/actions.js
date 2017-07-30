@@ -9,14 +9,14 @@ define(["../chopper/chopper",
     "../../lib/screenfull"
 ],
 function(
-        words,
-        fmt,
-        stopwatch,
-        butl,
-        gaga,
-        C,
-        themeswitcher
-        ) {
+    words,
+    fmt,
+    stopwatch,
+    butl,
+    gaga,
+    C,
+    themeswitcher
+) {
     "use strict";
     var rPlaying     = false;
     var rWordsPlayed = 0;
@@ -71,7 +71,7 @@ function(
         if (undefined !== pWord) {
             window.__output.textContent = pWord;
             window.__percentage.setAttribute("style",
-                            "width: " + words.getPercentage() + "%;");
+                "width: " + words.getPercentage() + "%;");
             if (rShowStatus){
                 updateStatus();
             }

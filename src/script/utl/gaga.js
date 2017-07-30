@@ -7,42 +7,42 @@ define([],
  * @exports gaga
  * @author {@link https://github.com/sverweij | Sander Verweij}
  */
-function() {
-    "use strict";
+    function() {
+        "use strict";
 
-    var gTrack = true;
+        var gTrack = true;
 
-    return {
+        return {
         /**
          * if pTrack === true, calls the google analytics setup code.
          * Does nothing otherwise
          *
          * @param {boolean} pTrack
          */
-        gaSetup : function (pTrack) {
-            gTrack = pTrack;
-            window['ga-disable-{{trackingid}}'] = !gTrack;
-        },
-        /**
+            gaSetup : function (pTrack) {
+                gTrack = pTrack;
+                window['ga-disable-{{trackingid}}'] = !gTrack;
+            },
+            /**
          * If analytics was setup using gaSetup, and tracking is on, sends
          * a ga event. Parameters same as the analytics ga function
          */
-        g : function (pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
-            if (true === gTrack) {
-                if (Boolean(window.ga)) {
-                    if (ga.loaded) {
+            g : function (pCommand, pEvent, pCategory, pAction, pLabel, pValue) {
+                if (true === gTrack) {
+                    if (Boolean(window.ga)) {
+                        if (ga.loaded) {
                         // console.log(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
-                        ga(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
-                    } else {
+                            ga(pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                        } else {
                         // console.error('ga exists, not loaded', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
-                    }
-                } else {
+                        }
+                    } else {
                     // console.error('ga doesn\'t exist yet', pCommand, pEvent, pCategory, pAction, pLabel, pValue);
+                    }
                 }
             }
-        }
-    };
-});
+        };
+    });
 /*
  This file is part of WordyWordy.
 

@@ -4,47 +4,47 @@ if (typeof define !== 'function') {
 }
 
 define(["./tokenizer", "./gear", "./navigator", "./constants"],
-function(tokenizer, gear, navi, C) {
-    "use strict";
+    function(tokenizer, gear, navi, C) {
+        "use strict";
 
-    var rWordArray = [];
+        var rWordArray = [];
 
-    return {
-        init: function (pString, pPosition){
-            rWordArray = tokenizer.tokenize(pString);
-            navi.init(rWordArray, pPosition);
-        },
-        getSpeed: gear.getSpeed,
-        setSpeed: gear.setSpeed,
-        incSpeed: gear.incSpeed,
-        decSpeed: gear.decSpeed,
-        getCurrentWord: navi.getCurrentWord,
-        getLength: navi.getLength,
-        getPercentage: navi.getPercentage,
-        getPosition: navi.getPosition,
-        setPosition: navi.setPosition,
-        incPosition: navi.incPosition,
-        decPosition: navi.decPosition,
-        gotoEndOfSentence: navi.gotoEndOfSentence,
-        gotoStartOfSentence: navi.gotoStartOfSentence,
-        gotoStartOfNextSentence: navi.gotoStartOfNextSentence,
-        gotoStartOfNextParagraph: navi.gotoStartOfNextParagraph,
+        return {
+            init: function (pString, pPosition){
+                rWordArray = tokenizer.tokenize(pString);
+                navi.init(rWordArray, pPosition);
+            },
+            getSpeed: gear.getSpeed,
+            setSpeed: gear.setSpeed,
+            incSpeed: gear.incSpeed,
+            decSpeed: gear.decSpeed,
+            getCurrentWord: navi.getCurrentWord,
+            getLength: navi.getLength,
+            getPercentage: navi.getPercentage,
+            getPosition: navi.getPosition,
+            setPosition: navi.setPosition,
+            incPosition: navi.incPosition,
+            decPosition: navi.decPosition,
+            gotoEndOfSentence: navi.gotoEndOfSentence,
+            gotoStartOfSentence: navi.gotoStartOfSentence,
+            gotoStartOfNextSentence: navi.gotoStartOfNextSentence,
+            gotoStartOfNextParagraph: navi.gotoStartOfNextParagraph,
 
-        getDisplayTime: function (){
-            return gear.determineDisplayTime(navi.getCurrentWord());
-        },
-        getEstimatedTimeToGo: function (){
-            return C.MILLISECONDS_PER_MINUTE * (navi.getLength() - navi.getPosition()) / gear.getSpeed();
-        },
-        /* average speed in wpm */
-        getAverageSpeed: function (){
-            var lTotalDisplayTime = rWordArray.reduce(function(pPreviousValue, pItem){
-                return pPreviousValue + gear.determineDisplayTime(pItem);
-            }, 0);
-            return rWordArray.length / (lTotalDisplayTime / C.MILLISECONDS_PER_MINUTE);
-        }
-    };
-});
+            getDisplayTime: function (){
+                return gear.determineDisplayTime(navi.getCurrentWord());
+            },
+            getEstimatedTimeToGo: function (){
+                return C.MILLISECONDS_PER_MINUTE * (navi.getLength() - navi.getPosition()) / gear.getSpeed();
+            },
+            /* average speed in wpm */
+            getAverageSpeed: function (){
+                var lTotalDisplayTime = rWordArray.reduce(function(pPreviousValue, pItem){
+                    return pPreviousValue + gear.determineDisplayTime(pItem);
+                }, 0);
+                return rWordArray.length / (lTotalDisplayTime / C.MILLISECONDS_PER_MINUTE);
+            }
+        };
+    });
 
 /*
  This file is part of WordyWordy.

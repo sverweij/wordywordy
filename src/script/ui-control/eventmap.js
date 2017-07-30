@@ -137,7 +137,7 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
                 rKey2Func[rCode2Key[pEvent.keyCode]].func();
             } else {
                 rKey2Func[rCode2Key[pEvent.keyCode]].func(
-                        rKey2Func[rCode2Key[pEvent.keyCode]].arg
+                    rKey2Func[rCode2Key[pEvent.keyCode]].arg
                 );
             }
         }

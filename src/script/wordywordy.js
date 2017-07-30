@@ -7,14 +7,14 @@ require(["utl/formatting",
     "ui-control/actions",
     "ui-control/constants"],
 function(
-        fmt,
-        paramslikker,
-        butl,
-        gaga,
-        eve,
-        actions,
-        C
-        ) {
+    fmt,
+    paramslikker,
+    butl,
+    gaga,
+    eve,
+    actions,
+    C
+) {
     "use strict";
 
     var INITIAL_DISPLAY_DELAY   = 1000;  // milliseconds
