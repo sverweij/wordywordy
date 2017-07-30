@@ -1,15 +1,15 @@
 (function() {
     'use strict';
-    var CACHE_NAME = 'wordywordy-1.0.0';
+    var CACHE_NAME = 'wordywordy-1.0.1';
     var urlsToCache = [
         "./",
         "./index.html",
-        "./service-worker.js?5b243bb8e70d3e67",
+        "./service-worker.js?6181d12c3c3839cf",
         "./service-worker.js",
         "./manifest.json",
-        "./lib/require.js?5b243bb8e70d3e67",
+        "./lib/require.js?6181d12c3c3839cf",
         "./lib/require.js",
-        "./script/wordywordy.js?5b243bb8e70d3e67",
+        "./script/wordywordy.js?6181d12c3c3839cf",
         "./script/wordywordy.js",
         "./lib/screenfull.js",
         "./font/controls.eot?tf5yt7",
@@ -57,10 +57,10 @@
         "./style/themes/night.css",
         "./style/themes/progressive.css",
         "./style/themes/sepia-fat-font.css",
-        "./style/themes/sepia.css?5b243bb8e70d3e67",
+        "./style/themes/sepia.css?6181d12c3c3839cf",
         "./style/themes/sepia.css",
         "./style/themes/zany.css",
-        "./style/wordywordy.css?5b243bb8e70d3e67",
+        "./style/wordywordy.css?6181d12c3c3839cf",
         "./style/wordywordy.css",
         "./favicon.ico"
     ];
