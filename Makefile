@@ -238,6 +238,9 @@ dev-build: src/index.html
 lint:
 	$(NPM) run lint
 
+depcruise:
+	$(NPM) run depcruise
+
 lint-fix:
 	$(NPM) run lint:fix
 
@@ -283,7 +286,7 @@ nsp:
 outdated:
 	$(NPM) outdated
 
-check: lint test
+check: lint depcruise test
 
 fullcheck: check outdated nsp
 
