@@ -10,6 +10,7 @@ install:
 
 script:
   - npm run lint
+  - npm run depcruise
   - npm run test:cover
   - npm run nsp
   - make install
