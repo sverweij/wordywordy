@@ -1,11 +1,11 @@
 /* global require */
-require(["utl/formatting",
-    "utl/paramslikker",
-    "utl/browserutl",
-    "utl/gaga",
-    "ui-control/eventmap",
-    "ui-control/actions",
-    "ui-control/constants"],
+require(["./utl/formatting",
+    "./utl/paramslikker",
+    "./utl/browserutl",
+    "./utl/gaga",
+    "./ui-control/eventmap",
+    "./ui-control/actions",
+    "./ui-control/constants"],
 function(
     fmt,
     paramslikker,
