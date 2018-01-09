@@ -5,10 +5,10 @@
       "comment": "Don't allow dependencies from outside the test folder to test",
       "severity": "error",
       "from": {
-        "pathNot": "^test"
+        "pathNot": "^src/script/(test|spec)"
       },
       "to": {
-        "path": "^test"
+        "path": "^src/script/(test|spec)"
       }
     },
     {
@@ -21,6 +21,15 @@
       }
     },
     {
+      "name": "no-circular",
+      "severity": "warn",
+      "comment": "Warn in case there's circular dependencies",
+      "from": {},
+      "to": {
+        "circular": true
+      }
+    },
+    {
       "name": "no-deprecated-core",
       "comment": "Warn about dependencies on deprecated core modules.",
       "severity": "warn",
@@ -29,7 +38,7 @@
         "dependencyTypes": [
           "core"
         ],
-        "path": "^(punycode|domain)$"
+        "path": "^(punycode|domain|constants|sys|_linklist)$"
       }
     },
     {
@@ -57,8 +66,8 @@
       "severity": "error",
       "comment": "Don't allow dependencies from src/app/lib to a development only package",
       "from": {
-        "path": "^(src|app|lib)",
-        "pathNot": "test"
+        "path": "^src/script",
+        "pathNot": "^src/script/test"
       },
       "to": {
         "dependencyTypes": [
@@ -106,21 +115,15 @@
     },
     {
       "name": "no-duplicate-dep-types",
-      "comment": "Warn if a dependency occurs in your package.json more than once (technically: has more than one dependency type)",
+      "comment": "Warn if a dependency you're actually using occurs in your package.json more than once (technically: has more than one dependency type)",
       "severity": "warn",
       "from": {},
       "to": {
         "moreThanOneDependencyType": true
       }
-    },
-    {
-      "name": "no-circular",
-      "severity": "warn",
-      "comment": "Warn in case there's circular dependencies",
-      "from": {},
-      "to": {
-        "circular": true
-      }
     }
-  ]
+  ],
+  "options": {
+    "doNotFollow": "^node_modules"
+  }
 }
