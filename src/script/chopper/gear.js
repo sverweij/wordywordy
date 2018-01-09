@@ -3,7 +3,11 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define(["../utl/formatting", "./constants"], function(fmt, C) {
+define(function(require) {
+
+    var formatting = require("../utl/formatting");
+    var constants  = require("./constants");
+
     var MIN_SPEED     = 60; // words per minute
     var DEFAULT_SPEED = 300; // words per minute
     var MAX_SPEED     = 600; // words per minute
@@ -26,7 +30,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
     var rRe2delay       = [];
 
     function _setSpeed(pSpeed) {
-        pSpeed         = fmt.sanitizeNumber(pSpeed, DEFAULT_SPEED);
+        pSpeed         = formatting.sanitizeNumber(pSpeed, DEFAULT_SPEED);
         rSelectedSpeed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, pSpeed));
         updateDelays(speed2Base(pSpeed));
     }
@@ -36,7 +40,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
         rLetterDelay   = LETTER_DELAY * pBase;
 
         rRe2delay = [
-            {re: C.SENTENCE_END_RE, delay: SENTENCE_END_DELAY * pBase},
+            {re: constants.SENTENCE_END_RE, delay: SENTENCE_END_DELAY * pBase},
             {re: /[;:\u2026\u2013\u00B7|\u2010-\u2015]/,
                 delay: LONG_PUNCTUATION_DELAY * pBase},
             {re: /[-,/\uFF0C]/,     delay: SHORT_PUNCTUATION_DELAY * pBase},
@@ -46,7 +50,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
             {re: /\u00A0/,          delay: PARAGRAPH_END_DELAY * pBase},
             {re: /[0-9=+]/,         delay: NUMBER_DELAY * pBase},
             {re: /[A-Z]/,           delay: CAPITALS_DELAY * pBase},
-            {re: C.CJK_RE,          delay: CJK_DELAY * pBase}
+            {re: constants.CJK_RE,          delay: CJK_DELAY * pBase}
         ];
     }
     function regexp2duration(pChar){
@@ -58,7 +62,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
 
     function speed2Base (pSpeed) {
         // 300 = min delay + (6 2/3)xletter delay. Works ok for english.
-        return (C.MILLISECONDS_PER_MINUTE / pSpeed) / 300;
+        return (constants.MILLISECONDS_PER_MINUTE / pSpeed) / 300;
     }
 
     function _determineDisplayTime(pWord){

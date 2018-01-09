@@ -8,7 +8,9 @@ if (typeof define !== 'function') {
  * can see not a security risk as none of the keys are
  * user input
  */
-define(["../utl/formatting", "./constants"], function(fmt, C) {
+define(function(require) {
+    var formatting = require("../utl/formatting");
+    var constants  = require("./constants");
 
     var MAX_SKIP_AHEAD = 69; // words
 
@@ -41,7 +43,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
     return {
         init: function (pWordArray, pPosition){
             rWords = pWordArray;
-            _setPosition(fmt.sanitizeNumber(pPosition, 0));
+            _setPosition(formatting.sanitizeNumber(pPosition, 0));
         },
         setPosition: _setPosition,
         incPosition: _incPosition,
@@ -62,7 +64,7 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
             var lFound = false;
             var lLimit = Math.min(rPosition + MAX_SKIP_AHEAD, rWords.length);
             for (rPosition; (!lFound && (rPosition < lLimit)); rPosition++){
-                if (rWords[rPosition] && rWords[rPosition].match(C.SENTENCE_END_RE)){
+                if (rWords[rPosition] && rWords[rPosition].match(constants.SENTENCE_END_RE)){
                     lFound = true;
                     rPosition -= 1;
                 }
@@ -74,19 +76,19 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
              * when currently at the start of a sentence, hop to the
              * previous one
              */
-            if (rWords[rPosition - 1] && rWords[rPosition - 1].match(C.SENTENCE_END_RE)){
+            if (rWords[rPosition - 1] && rWords[rPosition - 1].match(constants.SENTENCE_END_RE)){
                 _decPosition(1);
             }
             /*
              * when currently at the end of a sentence, skip one word back
              * so the searching doesn't get stuck on the current word
              */
-            if (rWords[rPosition] && rWords[rPosition].match(C.SENTENCE_END_RE)){
+            if (rWords[rPosition] && rWords[rPosition].match(constants.SENTENCE_END_RE)){
                 _decPosition(1);
             }
             var lLimit = Math.max(rPosition - MAX_SKIP_AHEAD, 0);
             for (rPosition; (!lFound && (rPosition > lLimit)); rPosition--){
-                if (rWords[rPosition] && rWords[rPosition].match(C.SENTENCE_END_RE)){
+                if (rWords[rPosition] && rWords[rPosition].match(constants.SENTENCE_END_RE)){
                     lFound = true;
                     rPosition += 2;
                 }
@@ -94,15 +96,15 @@ define(["../utl/formatting", "./constants"], function(fmt, C) {
             /*
              * And if you're in a paragraph marker: bump one ahead
              */
-            if (Boolean(rWords[rPosition]) && rWords[rPosition].match(C.PARAGRAPH_END_RE)){
+            if (Boolean(rWords[rPosition]) && rWords[rPosition].match(constants.PARAGRAPH_END_RE)){
                 _incPosition(1);
             }
         },
         gotoStartOfNextSentence: function (){
-            gotoStartOfNextRE(C.SENTENCE_END_RE);
+            gotoStartOfNextRE(constants.SENTENCE_END_RE);
         },
         gotoStartOfNextParagraph: function (){
-            gotoStartOfNextRE(C.PARAGRAPH_END_RE);
+            gotoStartOfNextRE(constants.PARAGRAPH_END_RE);
         }
     };
 });

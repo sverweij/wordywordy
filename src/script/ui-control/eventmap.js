@@ -1,6 +1,10 @@
 /* eslint no-undefined: 0, max-statements-per-line: 0 */
-define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl, gaga) {
+define(function(require) {
     "use strict";
+
+    var actions = require("./actions");
+    var $       = require("../utl/browserutl");
+    var gaga    = require("../utl/gaga");
 
     var rCode2Key = {
         0   : "SECTION_KEY_FF", // on FF this is the ` (backquote)
@@ -209,7 +213,7 @@ define(["./actions", "../utl/browserutl", "../utl/gaga"], function(actions, utl,
                     'exFatal' : false
                 });
             }
-        } else if (utl.hasTextMime(pEvent.dataTransfer.types)) {
+        } else if ($.hasTextMime(pEvent.dataTransfer.types)) {
             actions.initiateText(pEvent.dataTransfer.getData("text/plain"), "drag/ drop");
             actions.play();
             gaga.g('send', 'event', 'app', 'source-text-drop');

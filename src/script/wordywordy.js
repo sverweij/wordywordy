@@ -1,4 +1,5 @@
 /* global require */
+/* eslint max-params: 0 */
 require(["./utl/formatting",
     "./utl/paramslikker",
     "./utl/browserutl",
@@ -7,13 +8,13 @@ require(["./utl/formatting",
     "./ui-control/actions",
     "./ui-control/constants"],
 function(
-    fmt,
+    formatting,
     paramslikker,
-    butl,
+    $,
     gaga,
-    eve,
+    eventmap,
     actions,
-    C
+    constants
 ) {
     "use strict";
 
@@ -34,7 +35,7 @@ function(
     }
 
     function processParameters(pParams) {
-        setupGA(fmt.sanitizeBooleanesque(pParams.donottrack));
+        setupGA(formatting.sanitizeBooleanesque(pParams.donottrack));
 
         if (pParams.speed) {
             actions.setSpeed(pParams.speed);
@@ -48,16 +49,16 @@ function(
         if (pParams.pos) {
             actions.setPos(pParams.pos);
         }
-        if (pParams.loop && fmt.sanitizeBooleanesque(pParams.loop)) {
+        if (pParams.loop && formatting.sanitizeBooleanesque(pParams.loop)) {
             actions.setLooping(true);
         } else {
             actions.setLooping(false);
         }
-        if (pParams.play && fmt.sanitizeBooleanesque(pParams.play)) {
+        if (pParams.play && formatting.sanitizeBooleanesque(pParams.play)) {
             window.setTimeout(actions.play, INITIAL_DISPLAY_DELAY);
         }
         if (!(pParams.text) && pParams.canned){
-            butl.ajax(decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
+            $.ajax(decodeURIComponent(rCannedTexts[pParams.canned]), function(pEvent){
                 actions.initiateText(pEvent.target.response, pParams.canned);
             }, function (){
                 // toast("Can't load that :-/");
@@ -70,7 +71,7 @@ function(
             );
         }
         if (!(pParams.text) && pParams.url){
-            butl.ajax(decodeURIComponent(pParams.url), function(pEvent){
+            $.ajax(decodeURIComponent(pParams.url), function(pEvent){
                 actions.initiateText(pEvent.target.response, pParams.url);
             }, function (){
                 // toast("Can't load that :-/");
@@ -90,16 +91,16 @@ function(
     }
 
     function retrieveStateFromLocalStorage() {
-        if (butl.localStorageOK()) {
-            processLocalStorageKey(C.LS_KEY_SPEED, actions.setSpeed);
-            processLocalStorageKey(C.LS_KEY_TITLE, actions.setDocumentTitle);
-            processLocalStorageKey(C.LS_KEY_BUFFER, actions.initiateText, actions.getDocumentTitle());
-            processLocalStorageKey(C.LS_KEY_POSITION, actions.setPos);
-            processLocalStorageKey(C.LS_KEY_THEME, actions.setTheme);
+        if ($.localStorageOK()) {
+            processLocalStorageKey(constants.LS_KEY_SPEED, actions.setSpeed);
+            processLocalStorageKey(constants.LS_KEY_TITLE, actions.setDocumentTitle);
+            processLocalStorageKey(constants.LS_KEY_BUFFER, actions.initiateText, actions.getDocumentTitle());
+            processLocalStorageKey(constants.LS_KEY_POSITION, actions.setPos);
+            processLocalStorageKey(constants.LS_KEY_THEME, actions.setTheme);
         }
     }
 
-    eve.addEventListeners();
+    eventmap.addEventListeners();
     retrieveStateFromLocalStorage();
     processParameters(paramslikker.getParams(window.location.search));
 });

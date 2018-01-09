@@ -3,48 +3,52 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define(["./tokenizer", "./gear", "./navigator", "./constants"],
-    function(tokenizer, gear, navi, C) {
-        "use strict";
+define(function(require) {
+    "use strict";
 
-        var rWordArray = [];
+    var tokenizer = require("./tokenizer");
+    var gear      = require("./gear");
+    var navigator = require("./navigator");
+    var constants = require("./constants");
 
-        return {
-            init: function (pString, pPosition){
-                rWordArray = tokenizer.tokenize(pString);
-                navi.init(rWordArray, pPosition);
-            },
-            getSpeed: gear.getSpeed,
-            setSpeed: gear.setSpeed,
-            incSpeed: gear.incSpeed,
-            decSpeed: gear.decSpeed,
-            getCurrentWord: navi.getCurrentWord,
-            getLength: navi.getLength,
-            getPercentage: navi.getPercentage,
-            getPosition: navi.getPosition,
-            setPosition: navi.setPosition,
-            incPosition: navi.incPosition,
-            decPosition: navi.decPosition,
-            gotoEndOfSentence: navi.gotoEndOfSentence,
-            gotoStartOfSentence: navi.gotoStartOfSentence,
-            gotoStartOfNextSentence: navi.gotoStartOfNextSentence,
-            gotoStartOfNextParagraph: navi.gotoStartOfNextParagraph,
+    var rWordArray = [];
 
-            getDisplayTime: function (){
-                return gear.determineDisplayTime(navi.getCurrentWord());
-            },
-            getEstimatedTimeToGo: function (){
-                return C.MILLISECONDS_PER_MINUTE * (navi.getLength() - navi.getPosition()) / gear.getSpeed();
-            },
-            /* average speed in wpm */
-            getAverageSpeed: function (){
-                var lTotalDisplayTime = rWordArray.reduce(function(pPreviousValue, pItem){
-                    return pPreviousValue + gear.determineDisplayTime(pItem);
-                }, 0);
-                return rWordArray.length / (lTotalDisplayTime / C.MILLISECONDS_PER_MINUTE);
-            }
-        };
-    });
+    return {
+        init: function (pString, pPosition){
+            rWordArray = tokenizer.tokenize(pString);
+            navigator.init(rWordArray, pPosition);
+        },
+        getSpeed: gear.getSpeed,
+        setSpeed: gear.setSpeed,
+        incSpeed: gear.incSpeed,
+        decSpeed: gear.decSpeed,
+        getCurrentWord: navigator.getCurrentWord,
+        getLength: navigator.getLength,
+        getPercentage: navigator.getPercentage,
+        getPosition: navigator.getPosition,
+        setPosition: navigator.setPosition,
+        incPosition: navigator.incPosition,
+        decPosition: navigator.decPosition,
+        gotoEndOfSentence: navigator.gotoEndOfSentence,
+        gotoStartOfSentence: navigator.gotoStartOfSentence,
+        gotoStartOfNextSentence: navigator.gotoStartOfNextSentence,
+        gotoStartOfNextParagraph: navigator.gotoStartOfNextParagraph,
+
+        getDisplayTime: function (){
+            return gear.determineDisplayTime(navigator.getCurrentWord());
+        },
+        getEstimatedTimeToGo: function (){
+            return constants.MILLISECONDS_PER_MINUTE * (navigator.getLength() - navigator.getPosition()) / gear.getSpeed();
+        },
+        /* average speed in wpm */
+        getAverageSpeed: function (){
+            var lTotalDisplayTime = rWordArray.reduce(function(pPreviousValue, pItem){
+                return pPreviousValue + gear.determineDisplayTime(pItem);
+            }, 0);
+            return rWordArray.length / (lTotalDisplayTime / constants.MILLISECONDS_PER_MINUTE);
+        }
+    };
+});
 
 /*
  This file is part of WordyWordy.

@@ -1,38 +1,32 @@
-/* eslint no-undefined:0 */
-define(["../chopper/chopper",
-    "../utl/formatting",
-    "../utl/stopwatch",
-    "../utl/browserutl",
-    "../utl/gaga",
-    "../ui-control/constants",
-    "../ui-control/themeswitcher",
-    "../../lib/screenfull"
-],
-function(
-    words,
-    fmt,
-    stopwatch,
-    butl,
-    gaga,
-    C,
-    themeswitcher
-) {
+/* eslint no-undefined:0, max-statements:0 */
+define(function(require) {
     "use strict";
-    var rPlaying     = false;
-    var rWordsPlayed = 0;
 
-    var rWordTimer = null;
-    var rToastTimer = null;
-    var rControlsTimer = null;
+    var chopper       = require("../chopper/chopper");
+    var formatting    = require("../utl/formatting");
+    var stopwatch     = require("../utl/stopwatch");
+    var $             = require("../utl/browserutl");
+    var gaga          = require("../utl/gaga");
+    var constants     = require("../ui-control/constants");
+    var themeswitcher = require("../ui-control/themeswitcher");
+
+    require("../../lib/screenfull");
+
+    var rPlaying              = false;
+    var rWordsPlayed          = 0;
+
+    var rWordTimer            = null;
+    var rToastTimer           = null;
+    var rControlsTimer        = null;
     var rHoveringOverControls = false;
-    var rShowStatus    = false;
-    var rLoop          = false;
-    var rDocumentTitle = "";
-    var rAppName       = "WordyWordy";
+    var rShowStatus           = false;
+    var rLoop                 = false;
+    var rDocumentTitle        = "";
+    var rAppName              = "WordyWordy";
 
-    var CH_PLAY           = '\u25B7'; // or \u23F5 which not available in std font
-    var ICON_PLAY_CLASS   = "icon-play3";
-    var ICON_PAUSE_CLASS  = "icon-pause2";
+    var CH_PLAY               = '\u25B7'; // or \u23F5 which not available in std font
+    var ICON_PLAY_CLASS       = "icon-play3";
+    var ICON_PAUSE_CLASS      = "icon-pause2";
 
     var MILLISECONDS_PER_MINUTE = 60000; // milliseconds
     var TOAST_FADE_TIME         = 2200;  // milliseconds
@@ -50,12 +44,12 @@ function(
         }
 
         if (rPlaying){
-            if (words.getPosition() < words.getLength()){
-                rWordTimer = window.setTimeout(outputNextWord, words.getDisplayTime());
-                displayWord(words.getCurrentWord(), true);
-                words.incPosition(1);
+            if (chopper.getPosition() < chopper.getLength()){
+                rWordTimer = window.setTimeout(outputNextWord, chopper.getDisplayTime());
+                displayWord(chopper.getCurrentWord(), true);
+                chopper.incPosition(1);
             } else if (rLoop === true) {
-                words.setPosition(0);
+                chopper.setPosition(0);
                 window.__output.className = "reload";
                 rWordTimer = window.setTimeout(outputNextWord, 1000);
             } else {
@@ -71,7 +65,7 @@ function(
         if (undefined !== pWord) {
             window.__output.textContent = pWord;
             window.__percentage.setAttribute("style",
-                "width: " + words.getPercentage() + "%;");
+                "width: " + chopper.getPercentage() + "%;");
             if (rShowStatus){
                 updateStatus();
             }
@@ -87,20 +81,20 @@ function(
         var lMinutesRead = lTimeElapsed / MILLISECONDS_PER_MINUTE;
 
         var lActualSpeed = lMinutesRead > 0 ? rWordsPlayed / lMinutesRead : 0;
-        var lTimeToGo    = words.getEstimatedTimeToGo();
+        var lTimeToGo    = chopper.getEstimatedTimeToGo();
         var lTimeTotal   = lTimeElapsed + lTimeToGo;
 
         window.__documentTitle.textContent = rDocumentTitle;
-        window.__selectedSpeed.textContent = words.getSpeed().toFixed(0);
+        window.__selectedSpeed.textContent = chopper.getSpeed().toFixed(0);
         window.__actualSpeed.textContent   = lActualSpeed.toFixed(0);
-        window.__position.textContent      = words.getPosition();
-        window.__positionInPercent.textContent = words.getPercentage().toFixed(1);
+        window.__position.textContent      = chopper.getPosition();
+        window.__positionInPercent.textContent = chopper.getPercentage().toFixed(1);
         window.__wordsPlayed.textContent   = rWordsPlayed;
-        window.__wordsTotal.textContent    = words.getLength();
+        window.__wordsTotal.textContent    = chopper.getLength();
 
-        window.__timeElapsed.textContent   = fmt.formatTime(lTimeElapsed);
-        window.__timeToGo.textContent      = fmt.formatTime(lTimeToGo);
-        window.__timeTotal.textContent     = fmt.formatTime(lTimeTotal);
+        window.__timeElapsed.textContent   = formatting.formatTime(lTimeElapsed);
+        window.__timeToGo.textContent      = formatting.formatTime(lTimeToGo);
+        window.__timeTotal.textContent     = formatting.formatTime(lTimeTotal);
     }
 
     function toggleStatus(){
@@ -129,8 +123,8 @@ function(
         // __output.className = "breathing";
         document.title = rDocumentTitle + " - " + rAppName;
         window.__btn_playpause.className = ICON_PLAY_CLASS;
-        if (butl.localStorageOK()) {
-            localStorage.setItem("position", words.getPosition());
+        if ($.localStorageOK()) {
+            localStorage.setItem("position", chopper.getPosition());
         }
     }
 
@@ -166,8 +160,8 @@ function(
     function setDocumentTitle(pString) {
         rDocumentTitle = pString;
 
-        if (butl.localStorageOK()){
-            localStorage.setItem(C.LS_KEY_TITLE, pString);
+        if ($.localStorageOK()){
+            localStorage.setItem(constants.LS_KEY_TITLE, pString);
         }
     }
 
@@ -175,27 +169,27 @@ function(
         if (pPause) {
             pause();
         }
-        displayWord(words.getCurrentWord(), false);
-        toast(words.getPercentage().toFixed(1) + "%");
+        displayWord(chopper.getCurrentWord(), false);
+        toast(chopper.getPercentage().toFixed(1) + "%");
     }
 
     function updateSpeed (pSpeed) {
         updateStatus();
         toast(pSpeed.toFixed(0) + " wpm");
-        if (butl.localStorageOK()) {
-            localStorage.setItem(C.LS_KEY_SPEED, pSpeed);
+        if ($.localStorageOK()) {
+            localStorage.setItem(constants.LS_KEY_SPEED, pSpeed);
         }
     }
 
     function showTimeToGo() {
-        toast("<span class='icon-stopwatch'></span> -" + fmt.formatTime(words.getEstimatedTimeToGo()));
+        toast("<span class='icon-stopwatch'></span> -" + formatting.formatTime(chopper.getEstimatedTimeToGo()));
     }
 
     function cycleTheme(){
         themeswitcher.cycleTheme();
         toast(themeswitcher.getCurrentTheme().title);
-        if (butl.localStorageOK()){
-            localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
+        if ($.localStorageOK()){
+            localStorage.setItem(constants.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
         gaga.g('send', 'event', 'app', 'theme-cycle');
     }
@@ -203,8 +197,8 @@ function(
     function setTheme(pThemeNumber){
         themeswitcher.setTheme(pThemeNumber);
         toast(themeswitcher.getCurrentTheme().title);
-        if (butl.localStorageOK()){
-            localStorage.setItem(C.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
+        if ($.localStorageOK()){
+            localStorage.setItem(constants.LS_KEY_THEME, themeswitcher.getCurrentTheme().nr);
         }
         gaga.g('send', 'event', 'app', 'theme-set');
     }
@@ -214,11 +208,11 @@ function(
         window.__input_file.click();
     }
     function setPos(pPosition){
-        words.setPosition(pPosition);
+        chopper.setPosition(pPosition);
         updateNavigation(false);
     }
     function setPosFraction(pFraction){
-        setPos(Math.floor(pFraction * words.getLength()));
+        setPos(Math.floor(pFraction * chopper.getLength()));
         gaga.g('send', 'event', 'app', 'position-fraction');
     }
     function home(){
@@ -226,7 +220,7 @@ function(
         gaga.g('send', 'event', 'app', 'position-home');
     }
     function dec(pDoNotTag){
-        words.decPosition(1);
+        chopper.decPosition(1);
         updateNavigation(true);
         if (!pDoNotTag) {
             gaga.g('send', 'event', 'app', 'position-previous-word');
@@ -242,55 +236,55 @@ function(
         gaga.g('send', 'event', 'app', 'play-pause');
     }
     function inc(pDoNotTag){
-        words.incPosition(1);
+        chopper.incPosition(1);
         updateNavigation(true);
         if (!pDoNotTag) {
             gaga.g('send', 'event', 'app', 'position-next-word');
         }
     }
     function end(){
-        setPos(words.getLength());
+        setPos(chopper.getLength());
         gaga.g('send', 'event', 'app', 'position-end');
     }
 
     function speedUp(){
-        words.incSpeed(5);
-        updateSpeed(words.getSpeed());
+        chopper.incSpeed(5);
+        updateSpeed(chopper.getSpeed());
         gaga.g('send', 'event', 'app', 'speed-up');
     }
     function slowDown(){
-        words.decSpeed(5);
-        updateSpeed(words.getSpeed());
+        chopper.decSpeed(5);
+        updateSpeed(chopper.getSpeed());
         gaga.g('send', 'event', 'app', 'speed-slow-down');
     }
     function setSpeed(pSpeed){
-        words.setSpeed(pSpeed);
-        updateSpeed(words.getSpeed());
+        chopper.setSpeed(pSpeed);
+        updateSpeed(chopper.getSpeed());
         gaga.g('send', 'event', 'app', 'speed-set');
     }
     function setSpeedFraction(pFraction){
-        words.setSpeedFraction(pFraction);
-        updateSpeed(words.getSpeed());
+        chopper.setSpeedFraction(pFraction);
+        updateSpeed(chopper.getSpeed());
         gaga.g('send', 'event', 'app', 'speed-set-fraction');
     }
     function gotoStartOfNextSentence() {
-        words.gotoStartOfNextSentence();
+        chopper.gotoStartOfNextSentence();
         updateNavigation(false);
         gaga.g('send', 'event', 'app', 'position-start-of-next-sentence');
     }
     function gotoStartOfNextParagraph() {
-        words.gotoStartOfNextParagraph();
+        chopper.gotoStartOfNextParagraph();
         updateNavigation(false);
         gaga.g('send', 'event', 'app', 'position-start-of-next-paragraph');
     }
     function gotoStartOfSentence() {
-        words.gotoStartOfSentence();
+        chopper.gotoStartOfSentence();
         updateNavigation(true);
         gaga.g('send', 'event', 'app', 'position-start-of-sentence');
     }
     function savePosition() {
-        if (butl.localStorageOK()) {
-            localStorage.setItem(C.LS_KEY_POSITION, words.getPosition());
+        if ($.localStorageOK()) {
+            localStorage.setItem(constants.LS_KEY_POSITION, chopper.getPosition());
         }
         toast("position saved");
         gaga.g('send', 'event', 'app', 'position-save');
@@ -298,13 +292,13 @@ function(
     function initiateText(pText, pTitle) {
         rWordsPlayed = 0;
         window.__output.className = "";
-        if (butl.localStorageOK()) {
-            localStorage.setItem(C.LS_KEY_BUFFER, pText);
+        if ($.localStorageOK()) {
+            localStorage.setItem(constants.LS_KEY_BUFFER, pText);
         }
-        words.init(pText);
-        window.__avgSpeed.textContent = words.getAverageSpeed().toFixed(1);
+        chopper.init(pText);
+        window.__avgSpeed.textContent = chopper.getAverageSpeed().toFixed(1);
         rStopwatch.reset();
-        displayWord(words.getCurrentWord(), false);
+        displayWord(chopper.getCurrentWord(), false);
         showTimeToGo();
         setDocumentTitle(pTitle);
     }
@@ -313,12 +307,12 @@ function(
     }
     function forgetEverything(){
         initiateText("", "");
-        if (butl.localStorageOK()) {
-            localStorage.removeItem(C.LS_KEY_BUFFER);
-            localStorage.removeItem(C.LS_KEY_TITLE);
-            localStorage.removeItem(C.LS_KEY_POSITION);
-            localStorage.removeItem(C.LS_KEY_SPEED);
-            localStorage.removeItem(C.LS_KEY_THEME);
+        if ($.localStorageOK()) {
+            localStorage.removeItem(constants.LS_KEY_BUFFER);
+            localStorage.removeItem(constants.LS_KEY_TITLE);
+            localStorage.removeItem(constants.LS_KEY_POSITION);
+            localStorage.removeItem(constants.LS_KEY_SPEED);
+            localStorage.removeItem(constants.LS_KEY_THEME);
         }
         home();
         toast("Forgot everything");

@@ -3,7 +3,9 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define(["./constants"], function(C) {
+define(function(require) {
+
+    var constants = require("./constants");
 
     return {
         tokenize: function(pString) {
@@ -20,8 +22,8 @@ define(["./constants"], function(C) {
                 .replace(/\u00A0/g, " ") //
                 .replace(/\r\n/g, "\n") //
                 .replace(/[\n]{2,}/g, "\u00A0 ") // so we can distinguish "paragraph" ends
-                .replace(C.CJK_RE, " $1") //
-                .split(C.SPACES_RE);
+                .replace(constants.CJK_RE, " $1") //
+                .split(constants.SPACES_RE);
         }
     };
 });

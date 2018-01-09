@@ -10,7 +10,7 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define([], function() {
+define(function() {
     var SENTENCE_END_CHARS = "\.\?!\u3002\uFF1F";
 
     /*

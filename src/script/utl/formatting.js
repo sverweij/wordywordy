@@ -3,7 +3,7 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define([], function() {
+define(function() {
     "use strict";
 
     var MILLISECONDS_PER_SECOND = 1000; // milliseconds
