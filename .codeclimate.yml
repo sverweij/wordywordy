@@ -1,7 +1,27 @@
-# Save as .codeclimate.yml (note leading .) in project root directory
-languages:
-  JavaScript: true
-exclude_paths:
-- "src/lib/*"
-- "src/lib/screenfull.js"
-- "src/bookmarklet.js"
+version: "2"
+checks:
+  method-lines:
+    config:
+      threshold: 30
+plugins:
+  eslint:
+    enabled: true
+    channel: "eslint-4"
+    config: 
+      config: .eslintrc.json
+    checks:
+      # compat is not a codeclimeate supported eslint plugin
+      compat/compat:
+        enabled: false  
+exclude_patterns:
+  - ".github/"
+  - "samples/"
+  - "build/"
+  - "utl/"
+  - "src/*.js"
+  - "src/font"
+  - "src/images"
+  - "src/lib"
+  - "src/style"
+  - "**/node_modules/"
+  - "**/*.d.ts"

@@ -259,5 +259,13 @@
         "amd": true,
         "node": true,
         "browser": true
-    }
+    },
+    "overrides": [
+        {
+            "files": ["src/script/test/**/*.js"],
+            "env": {
+                "mocha": true
+            }
+        }
+    ]
 }
