@@ -1,4 +1,4 @@
-/* eslint no-control-regex: 0, no-useless-escape: 0 */
+/* eslint no-control-regex: 0, no-useless-escape: 0, max-len:0 */
 /* on disabling detect-non-literal-regexp here:
    it is a false positive (/ acceptable risk) because the regexp only
    receives a locally declared variable (which is not a const only

@@ -38,7 +38,8 @@ define(function(require) {
             return gear.determineDisplayTime(navigator.getCurrentWord());
         },
         getEstimatedTimeToGo: function (){
-            return constants.MILLISECONDS_PER_MINUTE * (navigator.getLength() - navigator.getPosition()) / gear.getSpeed();
+            return constants.MILLISECONDS_PER_MINUTE *
+                    (navigator.getLength() - navigator.getPosition()) / gear.getSpeed();
         },
         /* average speed in wpm */
         getAverageSpeed: function (){
