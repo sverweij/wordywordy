@@ -271,9 +271,6 @@ depend:
 	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
 	$(MAKEDEPEND) --system amd --append src/script/wordywordy.js
 
-static-analysis: dev-build
-	$(NPM) run plato
-
 doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md
 
