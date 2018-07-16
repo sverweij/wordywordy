@@ -18,22 +18,27 @@
     "js-makedepend": "2.4.3",
     "mocha": "4.1.0",
     "node-sass": "4.7.2",
-    "npm-check-updates": "2.14.0",
+    "npm-run-all": "4.1.3",
     "nsp": "3.1.0",
     "plato": "1.7.0",
-    "uglify-js": "3.3.5"
+    "uglify-js": "3.3.5",
+    "upem": "1.0.0"
   },
   "scripts": {
+    "build": "make clean dev-build install",
+    "check": "npm-run-all --parallel depcruise lint test:cover",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info",
     "depcruise": "depcruise -v -- src/script",
     "depcruise:graph": "depcruise -v -M amd -x \"test\" -T dot src | dot -T svg > tmp_deps.svg",
-    "lint": "eslint src/script service-worker.js",
-    "lint:fix": "eslint --fix src/script service-worker.js",
-    "npm-check-updates": "ncu --upgrade",
+    "lint": "eslint src/script",
+    "lint:fix": "eslint --fix src/script",
     "nsp": "nsp check",
     "plato": "plato -r -d platoreports -x \"test\" src/script/",
     "test": "mocha -R dot src/script/test/",
-    "test:cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test"
+    "test:cover": "istanbul cover node_modules/mocha/bin/_mocha src/script/test",
+    "update-dependencies": "npm-run-all upem:update upem:install build lint:fix check",
+    "upem:update": "npm outdated --json | upem",
+    "upem:install": "npm install"
   },
   "repository": {
     "type": "git",

@@ -36,7 +36,7 @@ FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
 SASS=node_modules/node-sass/bin/node-sass --output-style compressed
 
-.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean lint cover prerequisites report test update-dependencies run-update-dependencies
+.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean lint cover prerequisites report test
 
 help:
 	@echo " -----------------------------------------"
@@ -292,10 +292,6 @@ fullcheck: check outdated nsp
 
 update-dependencies: run-update-dependencies clean-generated-sources test nsp
 	$(GIT) diff package.json
-
-run-update-dependencies:
-	$(NPM) run npm-check-updates
-	$(NPM) install
 
 clean-generated-sources:
 	rm -rf $(GENERATED_SOURCES)
