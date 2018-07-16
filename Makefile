@@ -280,17 +280,11 @@ doc:
 test: dev-build
 	$(NPM) run test
 
-nsp:
-	$(NPM) run nsp
-
-outdated:
-	$(NPM) outdated
-
 check: lint depcruise test
 
-fullcheck: check outdated nsp
+fullcheck: check
 
-update-dependencies: run-update-dependencies clean-generated-sources test nsp
+update-dependencies: run-update-dependencies clean-generated-sources test
 	$(GIT) diff package.json
 
 clean-generated-sources:
