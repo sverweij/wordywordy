@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
-    "codeclimate-test-reporter": "0.5.0",
     "dependency-cruiser": "4.3.1",
     "eslint": "5.1.0",
     "eslint-plugin-security": "1.4.0",
