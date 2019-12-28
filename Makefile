@@ -13,7 +13,7 @@ RESIZE=utl/resize.sh
 IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
-MAKEDEPEND=node_modules/.bin/js-makedepend
+# MAKEDEPEND=node_modules/.bin/js-makedepend
 MINIFY=node_modules/.bin/uglifyjs
 
 ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
@@ -267,9 +267,9 @@ tag:
 	$(GIT) tag -a `utl/getver` -m "tag release `utl/getver`"
 	$(GIT) push --tags
 
-depend:
-	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
-	$(MAKEDEPEND) --system amd --append src/script/wordywordy.js
+# depend:
+# 	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
+# 	$(MAKEDEPEND) --system amd --append src/script/wordywordy.js
 
 doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md

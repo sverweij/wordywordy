@@ -1,4 +1,3 @@
-/* global require */
 /* eslint max-params: 0 */
 require(["./utl/formatting",
     "./utl/paramslikker",

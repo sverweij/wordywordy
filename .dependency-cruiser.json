@@ -17,7 +17,7 @@
       "severity": "error",
       "from": {},
       "to": {
-        "path": "\\.spec\\.[js|ts|ls|coffee|litcoffee|coffee\\.md]$"
+        "path": "\\.spec\\.js$"
       }
     },
     {
@@ -30,14 +30,26 @@
       }
     },
     {
+      "name": "no-orphans",
+      "severity": "warn",
+      "comment": "Warn in case there's orphans",
+      "from": { "orphan": true },
+      "to": {}
+    },
+    {
+      "name": "no-unreachable-from-the-entry",
+      "severity": "warn",
+      "comment": "Warn in case there's orphans",
+      "from": { "path": "^src/script/wordywordy\\.js$" },
+      "to": { "reachable": false, "pathNot": "\\.spec\\.js$" }
+    },
+    {
       "name": "no-deprecated-core",
       "comment": "Warn about dependencies on deprecated core modules.",
       "severity": "warn",
       "from": {},
       "to": {
-        "dependencyTypes": [
-          "core"
-        ],
+        "dependencyTypes": ["core"],
         "path": "^(punycode|domain|constants|sys|_linklist)$"
       }
     },
@@ -47,9 +59,7 @@
       "severity": "warn",
       "from": {},
       "to": {
-        "dependencyTypes": [
-          "deprecated"
-        ]
+        "dependencyTypes": ["deprecated"]
       }
     },
     {
@@ -70,9 +80,7 @@
         "pathNot": "^src/script/test"
       },
       "to": {
-        "dependencyTypes": [
-          "npm-dev"
-        ]
+        "dependencyTypes": ["npm-dev"]
       }
     },
     {
@@ -97,9 +105,7 @@
       "comment": "nothing serious - but just check you have some serious try/ catches around the import/ requires of these",
       "from": {},
       "to": {
-        "dependencyTypes": [
-          "npm-optional"
-        ]
+        "dependencyTypes": ["npm-optional"]
       }
     },
     {
@@ -108,9 +114,7 @@
       "severity": "warn",
       "from": {},
       "to": {
-        "dependencyTypes": [
-          "npm-peer"
-        ]
+        "dependencyTypes": ["npm-peer"]
       }
     },
     {
@@ -124,6 +128,14 @@
     }
   ],
   "options": {
-    "doNotFollow": "^node_modules"
+    "doNotFollow": "^node_modules",
+    "reporterOptions": {
+      "dot": {
+        "theme": {
+          "graph": { "splines": "ortho", "rankdir": "TD" },
+          "edge": { "penwidth": "1.0", "color": "#666666" }
+        }
+      }
+    }
   }
 }

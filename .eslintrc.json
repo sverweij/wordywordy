@@ -10,7 +10,7 @@
         "security"
     ],
     "parserOptions": {
-        "ecmaVersion": 4,
+        "ecmaVersion": 2015,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": false
