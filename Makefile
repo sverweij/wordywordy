@@ -168,6 +168,7 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/images/057pattern.png \
 	$(BUILDDIR)/images/tail.png \
 	$(BUILDDIR)/images/wordywordy.png \
+	$(BUILDDIR)/images/wordywordy-social-sharing-pic.png \
 	$(BUILDDIR)/samples/1984.txt \
 	$(BUILDDIR)/samples/freedom.txt \
 	$(BUILDDIR)/samples/intro.nl.txt \
