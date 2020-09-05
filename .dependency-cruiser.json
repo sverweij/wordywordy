@@ -128,12 +128,52 @@
     }
   ],
   "options": {
+    "progress": { "type": "cli-feedback" },
     "doNotFollow": "^node_modules",
     "reporterOptions": {
       "dot": {
         "theme": {
           "graph": { "splines": "ortho", "rankdir": "TD" },
-          "edge": { "penwidth": "1.0", "color": "#666666" }
+          "edge": { "penwidth": "1.0", "color": "#666666" },
+          "modules": [
+            {
+              "criteria": { "source": "ui-control" },
+              "attributes": { "fillcolor": "darkgreen", "fontcolor": "white" }
+            },
+            {
+              "criteria": { "source": "chopper" },
+              "attributes": {
+                "fillcolor": "magenta",
+                "fontcolor": "white"
+              }
+            },
+            {
+              "criteria": { "source": "utl" },
+              "attributes": { "fillcolor": "gray", "fontcolor": "white" }
+            },
+            {
+              "criteria": { "source": "lib" },
+              "attributes": { "fillcolor": "darkblue", "fontcolor": "white" }
+            }
+          ],
+          "dependencies": [
+            {
+              "criteria": { "resolved": "ui-control" },
+              "attributes": { "color": "darkgreen" }
+            },
+            {
+              "criteria": { "resolved": "chopper" },
+              "attributes": { "color": "fuchsia" }
+            },
+            {
+              "criteria": { "resolved": "utl" },
+              "attributes": { "color": "#aaaaaa" }
+            },
+            {
+              "criteria": { "resolved": "lib" },
+              "attributes": { "color": "darkblue" }
+            }
+          ]
         }
       }
     }
