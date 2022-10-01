@@ -33,7 +33,7 @@
       "name": "no-orphans",
       "severity": "warn",
       "comment": "Warn in case there's orphans",
-      "from": { "orphan": true },
+      "from": { "orphan": true, "pathNot": "^src/script/test/features" },
       "to": {}
     },
     {
@@ -41,7 +41,11 @@
       "severity": "warn",
       "comment": "Warn in case there's orphans",
       "from": { "path": "^src/script/wordywordy\\.js$" },
-      "to": { "reachable": false, "pathNot": "\\.spec\\.js$" }
+      "to": {
+        "reachable": false,
+        "path": "^src/",
+        "pathNot": "^src/script/test/"
+      }
     },
     {
       "name": "no-deprecated-core",

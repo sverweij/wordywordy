@@ -1,7 +1,7 @@
 .DS_Store
 *.swp
 *.swo
-.nyc_output
+coverage/
 .project
 .settings/*
 node_modules

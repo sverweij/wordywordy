@@ -290,7 +290,6 @@ clean-generated-sources:
 somewhatclean: clean-generated-sources
 	rm -rf $(BUILDDIR)/index.html
 	rm -rf $(BUILDDIR)/service-worker.js
-	rm -rf coverage
 	rm -rf $(PRODDIRS)
 	rm -rf testcoverage-report
 
