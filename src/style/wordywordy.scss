@@ -1,11 +1,17 @@
-@import 'fonts';
-* { transition: all ease 0.1s } /*cough* errm *cough*/
-body, span, div, textarea {
+@import "fonts";
+* {
+  transition: all ease 0.1s;
+} /*cough* errm *cough*/
+body,
+span,
+div,
+textarea {
   margin: 0;
   border: 0;
   padding: 0;
 }
-html, body {
+html,
+body {
   background-color: rgba(251, 240, 217, 1);
   color: rgba(95, 75, 50, 1);
   font-family: Roboto, sans-serif;
@@ -18,52 +24,61 @@ html, body {
   background: yellow;
   color: black;
   padding: 0.2em 0.2em;
-  z-index:481;
+  z-index: 481;
   position: relative;
 }
 .outputwrap {
-  width:100%;
+  width: 100%;
   position: absolute;
   text-align: center;
   top: 40%;
   background-color: transparent;
 }
 @-webkit-keyframes openmouth {
-  0% {}
-  100% {border-radius:1em; border-width: 0.2em; }
+  0% {
+  }
+  100% {
+    border-radius: 1em;
+    border-width: 0.2em;
+  }
 }
 @keyframes openmouth {
-  0% {}
-  100% {border-radius:1em; border-width: 0.2em; }
+  0% {
+  }
+  100% {
+    border-radius: 1em;
+    border-width: 0.2em;
+  }
 }
 .openmouth {
   -webkit-animation-name: openmouth;
   -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count:1;
+  -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: linear;
   -webkit-animation-direction: alternate;
-  -webkit-animation-fill-mode:forwards;
+  -webkit-animation-fill-mode: forwards;
   animation-name: openmouth;
   animation-duration: 1s;
-  animation-iteration-count:1;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-direction: alternate;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 }
 .smile {
   -webkit-animation-name: openmouth;
-  -webkit-animation-duration: 1.0s;
-  -webkit-animation-iteration-count:2;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 2;
   -webkit-animation-timing-function: linear;
   -webkit-animation-direction: alternate;
   animation-name: openmouth;
-  animation-duration: 1.0s;
-  animation-iteration-count:2;
+  animation-duration: 1s;
+  animation-iteration-count: 2;
   animation-timing-function: linear;
   animation-direction: alternate;
 }
 @-webkit-keyframes reload {
-  0% {}
+  0% {
+  }
   85% {
     padding: 0 0 0.2em 25%;
     border-radius: 0 0 0 1em;
@@ -74,7 +89,8 @@ html, body {
   }
 }
 @keyframes reload {
-  0% {}
+  0% {
+  }
   85% {
     padding: 0 0 0.2em 25%;
     border-radius: 0 0 0 1em;
@@ -97,18 +113,38 @@ html, body {
   animation-timing-function: linear;
 }
 @-webkit-keyframes breathe-border {
-  0% { border-color: currentColor; }
-  40% { border-color: rgba(128, 128, 128, 1); }
-  50% { border-color: rgba(128, 128, 128, 1); }
-  60% { border-color: rgba(128, 128, 128, 1); }
-  100% { border-color: currentColor; }
+  0% {
+    border-color: currentColor;
+  }
+  40% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  50% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  60% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  100% {
+    border-color: currentColor;
+  }
 }
 @keyframes breathe-border {
-  0% { border-color: currentColor; }
-  40% { border-color: rgba(128, 128, 128, 1); }
-  50% { border-color: rgba(128, 128, 128, 1); }
-  60% { border-color: rgba(128, 128, 128, 1); }
-  100% { border-color: currentColor; }
+  0% {
+    border-color: currentColor;
+  }
+  40% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  50% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  60% {
+    border-color: rgba(128, 128, 128, 1);
+  }
+  100% {
+    border-color: currentColor;
+  }
 }
 .breathing {
   /*
@@ -133,26 +169,26 @@ html, body {
 }
 #__percentagewrap {
   position: fixed;
-  bottom:0;
-  left:0;
+  bottom: 0;
+  left: 0;
   height: 0.2em;
   width: 100%;
   z-index: 3;
 }
 #__percentage {
-  background-color:currentColor; /*accent*/
+  background-color: currentColor; /*accent*/
   opacity: 0.5;
   text-align: left;
   height: inherit;
   width: 0;
   bottom: 0;
-  position:absolute;
+  position: absolute;
 }
 #__actionbar {
   font-family: sans-serif;
   font-size: 60%;
   position: fixed;
-  top:0;
+  top: 0;
   width: 1em;
   z-index: 4;
   margin-top: 0.5em;
@@ -166,8 +202,8 @@ html, body {
   opacity: 0.5;
 }
 #__actionbar a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 #__droparea {
   position: fixed;
@@ -212,9 +248,9 @@ html, body {
   font-size: inherit;
 }
 #__status a {
-    color: inherit;
+  color: inherit;
 }
-#__status td:first-child{
+#__status td:first-child {
   font-style: italic;
   padding-right: 1em;
   text-align: right;
@@ -234,28 +270,33 @@ html, body {
 }
 
 @keyframes fadeaway {
-  100% {opacity: 0}
+  100% {
+    opacity: 0;
+  }
 }
 @-webkit-keyframes fadeaway {
-  0% {}
-  100% {opacity: 0}
+  0% {
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .fade-away {
   -webkit-animation-name: fadeaway;
   -webkit-animation-duration: 0.3s;
   -webkit-animation-timing-function: ease-in;
-  -webkit-animation-fill-mode : forwards;
+  -webkit-animation-fill-mode: forwards;
   animation-name: fadeaway;
   animation-duration: 0.3s;
   animation-timing-function: ease-in;
-  animation-fill-mode : forwards;
+  animation-fill-mode: forwards;
 }
 #__controls {
   font-family: controls;
   position: fixed;
   text-align: center;
   width: 99%;
-  bottom: .5em;
+  bottom: 0.5em;
   z-index: 3;
 }
 #__controls nav {
@@ -284,20 +325,20 @@ html, body {
 .icon-shrink:before { content: "\e98a"; }
 */
 html:-webkit-full-screen #__btn_fullscreen:before {
-    content: "\e98a";
+  content: "\e98a";
 }
 html:-moz-full-screen #__btn_fullscreen:before {
-    content: "\e98a";
+  content: "\e98a";
 }
 html:-ms-fullscreen #__btn_fullscreen:before {
-    content: "\e98a";
+  content: "\e98a";
 }
 html:fullscreen #__btn_fullscreen:before {
-    content: "\e98a";
+  content: "\e98a";
 }
 @media only screen and (max-width: 480px), (max-height: 480px) {
   .hideonmobile {
-    display:none;
+    display: none;
   }
   #__controls {
     width: 100%;
@@ -309,7 +350,7 @@ html:fullscreen #__btn_fullscreen:before {
     bottom: 0;
   }
   #__controls span {
-      padding: 0.1em;
+    padding: 0.1em;
   }
   #__percentagewrap {
     bottom: inherit;
@@ -328,7 +369,7 @@ html:fullscreen #__btn_fullscreen:before {
 }
 
 /* default style: sepia */
-body{
+body {
   color: rgba(95, 75, 50, 1);
   background-color: rgba(251, 240, 217, 1);
   font: normal normal 100 48pt Roboto, sans-serif;

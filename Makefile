@@ -13,7 +13,6 @@ RESIZE=utl/resize.sh
 IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
-# MAKEDEPEND=node_modules/.bin/js-makedepend
 MINIFY=node_modules/.bin/uglifyjs
 
 ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
@@ -34,7 +33,7 @@ LIB_SOURCES_WEB=src/lib/require.js \
 SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
-SASS=node_modules/node-sass/bin/node-sass --output-style compressed
+SASS=node_modules/.bin/sass --style=compressed --no-source-map
 
 .PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean lint cover prerequisites report test
 

@@ -1,31 +1,33 @@
 /* istanbul ignore else */
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
+if (typeof define !== "function") {
+  var define = require("amdefine")(module);
 }
 
-define(function(require) {
+define(function (require) {
+  var constants = require("./constants");
 
-    var constants = require("./constants");
-
-    return {
-        tokenize: function(pString) {
-            pString = pString || "";
-            return pString
-                .replace(/[-]{4,}/g, "---") //
-                .replace(/[_]{4,}/g, "___") //
-                .replace(/[=]{4,}/g, "===") //
-                .replace(/[+]{4,}/g, "+++") //
-                .replace(/[~]{4,}/g, "~~~") //
-                .replace(/\.\.\./g, "\u2026") //
-                .replace(/([a-zA-Z]{2,})([()[\]{}.?!:;\-,\u2026/|\u2010-\u2015]{1,2})([a-zA-Z]{2,})/g, "$1$2 $3")
-                .replace(/&nbsp;/g, " ") //
-                .replace(/\u00A0/g, " ") //
-                .replace(/\r\n/g, "\n") //
-                .replace(/[\n]{2,}/g, "\u00A0 ") // so we can distinguish "paragraph" ends
-                .replace(constants.CJK_RE, " $1") //
-                .split(constants.SPACES_RE);
-        }
-    };
+  return {
+    tokenize: function (pString) {
+      pString = pString || "";
+      return pString
+        .replace(/[-]{4,}/g, "---") //
+        .replace(/[_]{4,}/g, "___") //
+        .replace(/[=]{4,}/g, "===") //
+        .replace(/[+]{4,}/g, "+++") //
+        .replace(/[~]{4,}/g, "~~~") //
+        .replace(/\.\.\./g, "\u2026") //
+        .replace(
+          /([a-zA-Z]{2,})([()[\]{}.?!:;\-,\u2026/|\u2010-\u2015]{1,2})([a-zA-Z]{2,})/g,
+          "$1$2 $3"
+        )
+        .replace(/&nbsp;/g, " ") //
+        .replace(/\u00A0/g, " ") //
+        .replace(/\r\n/g, "\n") //
+        .replace(/[\n]{2,}/g, "\u00A0 ") // so we can distinguish "paragraph" ends
+        .replace(constants.CJK_RE, " $1") //
+        .split(constants.SPACES_RE);
+    },
+  };
 });
 
 /*

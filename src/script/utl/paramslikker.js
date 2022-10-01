@@ -1,26 +1,29 @@
 /* istanbul ignore else */
-if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
+if (typeof define !== "function") {
+  var define = require("amdefine")(module);
 }
 
-define(function() {
-    "use strict";
-    return {
-        getParams: function (pSearchString) {
-            var lRetval = {};
-            if (pSearchString) {
-                var lKeyValAry = [];
-                //  search string always starts with a "?" - skip this
-                pSearchString.slice(1).split("&").forEach(function(pKeyVal){
-                    lKeyValAry = pKeyVal.split("=");
-                    if (2 === lKeyValAry.length) {
-                        lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
-                    }
-                });
+define(function () {
+  "use strict";
+  return {
+    getParams: function (pSearchString) {
+      var lRetval = {};
+      if (pSearchString) {
+        var lKeyValAry = [];
+        //  search string always starts with a "?" - skip this
+        pSearchString
+          .slice(1)
+          .split("&")
+          .forEach(function (pKeyVal) {
+            lKeyValAry = pKeyVal.split("=");
+            if (2 === lKeyValAry.length) {
+              lRetval[lKeyValAry[0]] = unescape(lKeyValAry[1]);
             }
-            return lRetval;
-        }
-    };
+          });
+      }
+      return lRetval;
+    },
+  };
 });
 /*
  This file is part of WordyWordy.
