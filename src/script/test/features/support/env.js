@@ -1,3 +1,3 @@
 module.exports = function () {
-    this.setDefaultTimeout(60 * 1000);
+  this.setDefaultTimeout(60 * 1000);
 };
