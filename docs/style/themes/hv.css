@@ -1,0 +1,10 @@
+html, body{
+    color: #00D66C;
+    background-color: rgba(255, 255, 255, 1);
+    font: normal normal 400 48pt Roboto, sans-serif;
+}
+#__output {
+    border-bottom-color: #2800a0; /* dark blue. The red = #FF3268; */
+    border-bottom-width: 4px;
+}
+.icon-theme:before { content: "\e9af"; }

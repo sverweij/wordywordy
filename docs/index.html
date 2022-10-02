@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+    <head>
+    <!--
+    todo
+    - local storage for more than one book
+    - change font size
+
+    - Content retrieval methods
+       - rss (?)
+       - bookmarklet
+    - Support other formats
+       - html
+       - epub
+    -->
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="application-name" content="WordyWordy">
+        <meta name="theme-color" content="rgba(251, 240, 217, 1)">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As slow as you want. Or as fast. Runs within your browser. Remembers where you left off between sessions. On the fly adjustable speed. Copious navigation options. GPLv3 open source licensed.">
+        <meta name="subject" content="speed reader">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="WordyWordy">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="google" value="notranslate">
+        <meta name="google-site-verification" content="K0j5zueKp7lYKMR7WihmcTJbLpHxBOpaXZEI_s0nHTw" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@mcmeadow">
+        <meta name="twitter:creator" content="@mcmeadow">
+        <meta name="twitter:title" content="WordyWordy - the slow reader">
+        <meta name="twitter:description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As slow as you want.">
+        <meta name="twitter:image" content="https://wordywordy.js.org/images/wordywordy-social-sharing-pic.png">
+        <meta property="og:title" content="WordyWordy - the slow reader">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="WordyWordy takes text that's dropped on it and shows it. One word at a time. As slow as you want.">
+        <meta property="og:image" content="https://wordywordy.js.org/images/wordywordy-social-sharing-pic.png">
+        <meta property="og:image:type" content="image/png" />
+        <link rel="icon" sizes="16x16 32x32 64x64" href="../favicon.ico">
+        <link rel="icon" sizes="228x228" href="./favicon-228.png">
+        <link rel="icon" sizes="195x195" href="./favicon-195.png">
+        <link rel="icon" sizes="152x152" href="./favicon-152.png">
+        <link rel="icon" sizes="144x144" href="./favicon-144.png">
+        <link rel="icon" sizes="128x128" href="./favicon-128.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./iosfavicon-152.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./iosfavicon-144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./iosfavicon-120.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./iosfavicon-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./iosfavicon-72.png">
+        <link rel="apple-touch-icon-precomposed" href="./iosfavicon-57.png">
+        <link rel="shortcut icon" href="./favicon.ico">
+        <link rel="manifest" href="manifest.json">
+
+        <title>WordyWordy</title>
+        <link rel="stylesheet" href="style/wordywordy.css?35577b2f38bc1f63" type="text/css" media="screen">
+        <link id="customtheme" rel="stylesheet" href="style/themes/sepia.css?35577b2f38bc1f63" type="text/css" media="screen">
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js?35577b2f38bc1f63').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+        </script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        </script>
+        <script data-main="script/wordywordy.js?35577b2f38bc1f63"
+            src="lib/require.js?35577b2f38bc1f63" defer></script>
+    </head>
+    <body>
+        <!--[if lt IE 19]>
+        <p class="browsehappy">You are using an <strong>outdated</strong>
+        browser. WordyWordy requires a modern one.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a>
+        to improve your experience.
+        </p>
+        <![endif]-->
+
+        <div id="__actionbar">
+            <div id="__btn_open" class="icon-folder" alt="open a text file to read" title="open a text file to read"></div>
+            <div id="__btn_theme" class="icon-theme" alt="switch theme" title="switch theme (`)"></div>
+            <!--
+            <div id="__btn_zoomin" class="icon-zoom-in" title="Bigger letters"></div>
+            <div id="__btn_zoomout" class="icon-zoom-out" title="Smaller letters"></div>
+            -->
+            <div id="__btn_speedup" class="icon-circle-up" alt="speed up" title="speed up (W)"></div>
+            <div id="__btn_slowdown" class="icon-circle-down" alt="slow down" title="slow down (S)"></div>
+            <div id="__btn_fullscreen" class="icon-enlarge" alt="toggle full screen" title="toggle full screen (F)"></div>
+            <div id="__btn_info" class="icon-info hideonmobile" title="toggle stats display (I)"></div>
+            <div class="hideonmobile">
+                <a id="__lnk_more_information" href="https://github.com/sverweij/wordywordy/blob/main/README.md#wordywordy" class="icon-question" title="Source code &amp; more information"></a>
+            </div>
+        </div>
+
+        <textarea id="__droparea" class="hideonmobile"></textarea>
+        <div class="clickarea" id="__rightarea"></div>
+        <div class="outputwrap">
+            <span id="__output" class="breathing"></span>
+        </div>
+        <span id="__status">
+            <div>
+            <table>
+                <tr>
+                    <td>Document</td>
+                    <td>
+                        <span id="__documentTitle"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Selected speed</td>
+                    <td>
+                        <span id="__selectedSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Calculated speed</td>
+                    <td>
+                        <span id="__avgSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>
+                        <span id="__position"></span> of
+                        <span id="__wordsTotal"></span> words
+                        (<span id="__positionInPercent"></span>%)
+                    </td>
+                </tr>
+                <tr>
+                    <td>Words displayed</td>
+                    <td>
+                        <span id="__wordsPlayed"></span>
+                        @<span id="__actualSpeed"></span>
+                        <span title="words per minute">wpm</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="icon-stopwatch"></span> spent + left = total</td>
+                    <td>
+                        <span id="__timeElapsed"></span> +
+                        <span id="__timeToGo"></span> =
+                        <span id="__timeTotal"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>1.0.9</td>
+                </tr>
+            </table>
+            </div>
+        </span>
+        <span id="__toast"></span>
+        <div id="__percentagewrap">
+            <div id="__percentage"></div>
+        </div>
+        <div id="__controls">
+            <nav id="__nav">
+                <span id="__btn_home" class="icon-first" title="go to start of sentence (Q)"></span><span id="__btn_dec" class="icon-previous2" title="one word back (A)"></span><span id="__btn_playpause" class="icon-play3" title="play/ pause (SPACE BAR)"></span><span id="__btn_inc" class="icon-next2" title="one word forward (D)"></span><span id="__btn_end" class="icon-last" title="go to start of next sentence (E)"></span><span id="__btn_paragraph" class="icon-forward3" title="go to start of next paragraph (R)"></span>
+            </nav>
+            <input id="__input_file" type="file" accept="text/plain" style="display:none"></input>
+        </div>
+    </body>
+</html>

@@ -14,5 +14,4 @@ src/*tmp*.*
 tracking.*
 siteverification.id
 *tmp*
-build
 npm-debug.log

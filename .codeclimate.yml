@@ -16,7 +16,7 @@ plugins:
 exclude_patterns:
   - ".github/"
   - "samples/"
-  - "build/"
+  - "docs/"
   - "utl/"
   - "src/*.js"
   - "src/font"

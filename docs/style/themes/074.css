@@ -1,0 +1,23 @@
+html, body{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(24, 164, 229, 1);
+    font: normal normal 400 48pt ZeroSeventyFour, Roboto, sans-serif;
+    background-image: url('../../images/tail.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom right;
+	/*
+    background-size: auto 33%;
+	*/
+}
+#__output {
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
+#__percentage {
+    background-color: rgba(24, 164, 229, 1);
+    opacity: 1;
+}
+#__percentagewrap {
+    background-color: white;
+}
+.icon-theme:before { content: "\e9af"; }

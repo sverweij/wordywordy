@@ -16,9 +16,9 @@ NPM=npm
 MINIFY=node_modules/.bin/uglifyjs
 
 ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
-	BUILDDIR=build
+	BUILDDIR=docs
 else
-	BUILDDIR=build/branches/$(GIT_CURRENT_BRANCH)
+	BUILDDIR=docs/branches/$(GIT_CURRENT_BRANCH)
 endif
 PRODDIRS=$(BUILDDIR)/style \
 		 $(BUILDDIR)/style/themes \
