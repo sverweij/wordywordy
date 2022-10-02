@@ -1,77 +1,65 @@
-/* istanbul ignore else */
-if (typeof define !== "function") {
-  var define = require("amdefine")(module);
-}
+var MILLISECONDS_PER_SECOND = 1000; // milliseconds
+var SECONDS_PER_MINUTE = 60; // seconds
+var MINUTES_PER_HOUR = 60; // minutes
+var HOURS_PER_DAY = 24; // hours
 
-define(function () {
-  "use strict";
+function millisToTimeStruct(pMilliSeconds) {
+  var lSeconds = pMilliSeconds / MILLISECONDS_PER_SECOND;
+  var lMinutes = Math.max(0, lSeconds / SECONDS_PER_MINUTE);
+  var lHours = Math.max(0, lMinutes / MINUTES_PER_HOUR);
+  var lDays = Math.max(0, lHours / HOURS_PER_DAY);
 
-  var MILLISECONDS_PER_SECOND = 1000; // milliseconds
-  var SECONDS_PER_MINUTE = 60; // seconds
-  var MINUTES_PER_HOUR = 60; // minutes
-  var HOURS_PER_DAY = 24; // hours
-
-  function millisToTimeStruct(pMilliSeconds) {
-    var lSeconds = pMilliSeconds / MILLISECONDS_PER_SECOND;
-    var lMinutes = Math.max(0, lSeconds / SECONDS_PER_MINUTE);
-    var lHours = Math.max(0, lMinutes / MINUTES_PER_HOUR);
-    var lDays = Math.max(0, lHours / HOURS_PER_DAY);
-
-    var lMilliSeconds = Math.max(
-      0,
-      pMilliSeconds - Math.floor(lSeconds) * MILLISECONDS_PER_SECOND
-    );
-    lSeconds = Math.max(
-      0,
-      lSeconds - Math.floor(lMinutes) * SECONDS_PER_MINUTE
-    );
-    lMinutes = Math.max(0, lMinutes - Math.floor(lHours) * MINUTES_PER_HOUR);
-    lHours = Math.max(0, lHours - Math.floor(lDays) * HOURS_PER_DAY);
-
-    return {
-      days: Math.floor(lDays),
-      hours: Math.floor(lHours),
-      minutes: Math.floor(lMinutes),
-      seconds: Math.floor(lSeconds),
-      milliseconds: lMilliSeconds,
-    };
-  }
-
-  function formatTimeBlob(pInt) {
-    return pInt < 10 ? "0" + pInt : pInt.toString();
-  }
+  var lMilliSeconds = Math.max(
+    0,
+    pMilliSeconds - Math.floor(lSeconds) * MILLISECONDS_PER_SECOND
+  );
+  lSeconds = Math.max(0, lSeconds - Math.floor(lMinutes) * SECONDS_PER_MINUTE);
+  lMinutes = Math.max(0, lMinutes - Math.floor(lHours) * MINUTES_PER_HOUR);
+  lHours = Math.max(0, lHours - Math.floor(lDays) * HOURS_PER_DAY);
 
   return {
-    formatTime: function (pMilliSeconds, pShowMillis) {
-      var lTimeStruct = millisToTimeStruct(pMilliSeconds);
-      if (!pShowMillis) {
-        pShowMillis = false;
-      }
-      return (
-        (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
-        formatTimeBlob(lTimeStruct.minutes) +
-        ":" +
-        formatTimeBlob(lTimeStruct.seconds) +
-        (pShowMillis ? "." + lTimeStruct.milliseconds : "")
-      );
-    },
-    sanitizeNumber: function (pThing, pDefault) {
-      if (typeof pThing === "string") {
-        pThing = parseInt(pThing, 10);
-      }
-      if (typeof pThing !== "number" || isNaN(pThing)) {
-        pThing = pDefault;
-      }
-      return pThing;
-    },
-    /**
-     * returns true if pString equals "1", "true", "y" or "yes
-     */
-    sanitizeBooleanesque: function (pString) {
-      return ["1", "true", "y", "yes"].indexOf(pString) > -1;
-    },
+    days: Math.floor(lDays),
+    hours: Math.floor(lHours),
+    minutes: Math.floor(lMinutes),
+    seconds: Math.floor(lSeconds),
+    milliseconds: lMilliSeconds,
   };
-});
+}
+
+function formatTimeBlob(pInt) {
+  return pInt < 10 ? "0" + pInt : pInt.toString();
+}
+
+module.exports = {
+  formatTime: function (pMilliSeconds, pShowMillis) {
+    var lTimeStruct = millisToTimeStruct(pMilliSeconds);
+    if (!pShowMillis) {
+      pShowMillis = false;
+    }
+    return (
+      (lTimeStruct.hours > 0 ? lTimeStruct.hours + ":" : "") +
+      formatTimeBlob(lTimeStruct.minutes) +
+      ":" +
+      formatTimeBlob(lTimeStruct.seconds) +
+      (pShowMillis ? "." + lTimeStruct.milliseconds : "")
+    );
+  },
+  sanitizeNumber: function (pThing, pDefault) {
+    if (typeof pThing === "string") {
+      pThing = parseInt(pThing, 10);
+    }
+    if (typeof pThing !== "number" || isNaN(pThing)) {
+      pThing = pDefault;
+    }
+    return pThing;
+  },
+  /**
+   * returns true if pString equals "1", "true", "y" or "yes
+   */
+  sanitizeBooleanesque: function (pString) {
+    return ["1", "true", "y", "yes"].indexOf(pString) > -1;
+  },
+};
 
 /*
  This file is part of WordyWordy.

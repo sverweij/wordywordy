@@ -1,12 +1,5 @@
-if (typeof define !== "function") {
-  var define = require("amdefine")(module);
-}
-
-define(function () {
-  "use strict";
-
-  function Stopwatch() {
-    /*
+function Stopwatch() {
+  /*
         paused -> running:
 			start/
 			startTime = pauseStartTime = now
@@ -23,46 +16,45 @@ define(function () {
 			pauseStartTime = now;
         */
 
-    this.reset();
+  this.reset();
+}
+
+Stopwatch.prototype.reset = function () {
+  this.state = "paused"; // running, paused
+  this.startTime = Date.now();
+  this.pauseStartTime = this.startTime;
+  this.cumulativePauses = 0;
+};
+
+Stopwatch.prototype.start = function () {
+  this.state = "running";
+  this.startTime = Date.now();
+  this.pauseStartTime = this.startTime;
+  this.cumulativePauses = 0;
+};
+
+Stopwatch.prototype.resume = function () {
+  this.state = "running";
+  var lPause = Date.now() - this.pauseStartTime;
+  this.cumulativePauses += lPause;
+};
+
+Stopwatch.prototype.pause = function () {
+  if (this.state !== "paused") {
+    this.state = "paused";
+    this.pauseStartTime = Date.now();
   }
+};
 
-  Stopwatch.prototype.reset = function () {
-    this.state = "paused"; // running, paused
-    this.startTime = Date.now();
-    this.pauseStartTime = this.startTime;
-    this.cumulativePauses = 0;
-  };
+Stopwatch.prototype.getTimeElapsed = function () {
+  if (this.state === "running") {
+    return Date.now() - this.startTime - this.cumulativePauses;
+  } else {
+    return this.pauseStartTime - this.startTime - this.cumulativePauses;
+  }
+};
 
-  Stopwatch.prototype.start = function () {
-    this.state = "running";
-    this.startTime = Date.now();
-    this.pauseStartTime = this.startTime;
-    this.cumulativePauses = 0;
-  };
-
-  Stopwatch.prototype.resume = function () {
-    this.state = "running";
-    var lPause = Date.now() - this.pauseStartTime;
-    this.cumulativePauses += lPause;
-  };
-
-  Stopwatch.prototype.pause = function () {
-    if (this.state !== "paused") {
-      this.state = "paused";
-      this.pauseStartTime = Date.now();
-    }
-  };
-
-  Stopwatch.prototype.getTimeElapsed = function () {
-    if (this.state === "running") {
-      return Date.now() - this.startTime - this.cumulativePauses;
-    } else {
-      return this.pauseStartTime - this.startTime - this.cumulativePauses;
-    }
-  };
-
-  return { Stopwatch: Stopwatch };
-});
+module.exports = { Stopwatch };
 /*
  This file is part of WordyWordy.
 

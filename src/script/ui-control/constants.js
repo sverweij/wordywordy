@@ -1,15 +1,11 @@
-define(function () {
-  "use strict";
-
-  /* localStorage keys */
-  return {
-    LS_KEY_BUFFER: "buffer",
-    LS_KEY_TITLE: "title",
-    LS_KEY_POSITION: "position",
-    LS_KEY_SPEED: "speed",
-    LS_KEY_THEME: "theme",
-  };
-});
+/* localStorage keys */
+module.exports = {
+  LS_KEY_BUFFER: "buffer",
+  LS_KEY_TITLE: "title",
+  LS_KEY_POSITION: "position",
+  LS_KEY_SPEED: "speed",
+  LS_KEY_THEME: "theme",
+};
 /*
  This file is part of WordyWordy.
 

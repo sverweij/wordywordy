@@ -1,41 +1,26 @@
 .SUFFIXES:
-.SUFFIXES: .js .pegjs .css .scss .html .svg .png .jpg
-RJS=node_modules/requirejs/bin/r.js
-MOCHA_FORK=node_modules/mocha/bin/_mocha
-COVER=node node_modules/istanbul/lib/cli.js
-COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory
+.SUFFIXES: .js .css .scss .html .svg .png .jpg
+BUNDLE=node_modules/.bin/esbuild
 GIT=git
-GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
-GIT_DEPLOY_FROM_BRANCH=main
-CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
 RESIZE=utl/resize.sh
 IOSRESIZE=utl/iosresize.sh
 SEDVERSION=utl/sedversion.sh
 NPM=npm
-MINIFY=node_modules/.bin/uglifyjs
-
-ifeq ($(GIT_DEPLOY_FROM_BRANCH), $(GIT_CURRENT_BRANCH))
-	BUILDDIR=docs
-else
-	BUILDDIR=docs/branches/$(GIT_CURRENT_BRANCH)
-endif
+BUILDDIR=docs
 PRODDIRS=$(BUILDDIR)/style \
 		 $(BUILDDIR)/style/themes \
 		 $(BUILDDIR)/font \
 		 $(BUILDDIR)/images \
 		 $(BUILDDIR)/script \
-		 $(BUILDDIR)/lib \
 		 $(BUILDDIR)/samples
 GENERATED_SOURCES=src/style/wordywordy.css
-LIB_SOURCES_WEB=src/lib/require.js \
-	src/lib/screenfull.js
-SOURCES_WEB=$(LIB_SOURCES_WEB) $(SCRIPT_SOURCES_WEB)
+SOURCES_WEB=$(SCRIPT_SOURCES_WEB)
 FAVICONMASTER=src/images/wordywordy.png
 FAVICONS=$(BUILDDIR)/favicon.ico
 SASS=node_modules/.bin/sass --style=compressed --no-source-map
 
-.PHONY: help dev-build install  deploy-gh-pages check fullcheck  mostlyclean clean lint cover prerequisites report test
+.PHONY: help build mostlyclean clean prerequisites
 
 help:
 	@echo " -----------------------------------------"
@@ -45,21 +30,14 @@ help:
 	@echo
 	@echo "Most important build targets:"
 	@echo
-	@echo "dev-build"
-	@echo " development build only"
-	@echo
-	@echo "check"
-	@echo " runs the linter and all unit tests"
-	@echo
-	@echo "install"
+	@echo "build"
 	@echo " creates the production version (minified"
 	@echo " js, images, html) in the build directory"
 	@echo " -> this is probably the target you want"
 	@echo "    when hosting WordyWordy"
 	@echo
 	@echo "clean"
-	@echo " removes everything created by either"
-	@echo " install or dev-build"
+	@echo " removes everything created by build"
 	@echo
 	@echo " -----------------------------------------"
 	@echo
@@ -87,9 +65,6 @@ $(BUILDDIR)/style/themes/%.css: src/style/themes/%.css
 $(BUILDDIR)/images/%: src/images/%
 	cp -R $< $@
 
-$(BUILDDIR)/lib/%.js: src/lib/%.js
-	cp -R $< $@
-
 $(BUILDDIR)/samples/%.txt: samples/%.txt
 	cp -R $< $@
 
@@ -102,14 +77,8 @@ $(BUILDDIR)/favicon-%.png: $(FAVICONMASTER)
 $(BUILDDIR)/iosfavicon-%.png: $(FAVICONMASTER)
 	$(IOSRESIZE) $< $@
 
-src/lib/require.js: node_modules/requirejs/require.js
-	$(MINIFY) $< -m -c > $@
-
 $(PRODDIRS):
 	mkdir -p $@
-
-src/lib/screenfull.js: node_modules/screenfull/dist/screenfull.js
-	cp $< $@
 
 # file targets dev
 
@@ -121,8 +90,6 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	tracking.id \
 	tracking.host \
 	$(BUILDDIR)/manifest.json \
-	$(BUILDDIR)/lib/require.js \
-	$(BUILDDIR)/lib/screenfull.js \
 	$(BUILDDIR)/service-worker.js \
 	$(BUILDDIR)/script/wordywordy.js \
 	$(BUILDDIR)/style/wordywordy.css \
@@ -176,9 +143,12 @@ $(BUILDDIR)/index.html: $(PRODDIRS) \
 	$(BUILDDIR)/samples/thoughts.txt
 
 $(BUILDDIR)/script/wordywordy.js: $(SOURCES_WEB)
-	$(RJS) -o baseUrl="./src/script" \
-			name="wordywordy" \
-			out=$@.tmp
+	$(BUNDLE) src/script/wordywordy.js \
+			--platform=browser \
+			--bundle \
+			--format=esm \
+			--minify \
+			--outfile=$@.tmp
 	$(SEDVERSION) < $@.tmp > $@
 	rm $@.tmp
 
@@ -219,9 +189,6 @@ tracking.id:
 tracking.host:
 	@echo auto > $@
 
-$(BUILDDIR)/lib/require.js: src/lib/require.js
-	cp $< $@
-
 $(BUILDDIR)/bookmarklet.js:
 	cp src/bookmarklet.js $@
 
@@ -233,39 +200,7 @@ $(BUILDDIR)/service-worker.js: src/service-worker.js
 prerequisites:
 	$(NPM) install
 
-dev-build: src/index.html
-
-lint:
-	$(NPM) run lint
-
-depcruise:
-	$(NPM) run depcruise
-
-lint-fix:
-	$(NPM) run lint:fix
-
-cover: dev-build
-	$(NPM) run test:cover
-
-coverage/lcov.info: cover
-
-testcoverage-report/index.html: coverage/lcov.info
-	$(COVER2REPORT) testcoverage-report $<
-
-cover-report: testcoverage-report/index.html
-
-install: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
-
-deploy-gh-pages: install
-	@echo Deploying build `utl/getver` to $(BUILDDIR)
-	$(GIT) -C $(BUILDDIR) add --all .
-	$(GIT) -C $(BUILDDIR) commit -m "build `utl/getver`"
-	$(GIT) -C $(BUILDDIR) push origin gh-pages
-	$(GIT) -C $(BUILDDIR) status
-
-tag:
-	$(GIT) tag -a `utl/getver` -m "tag release `utl/getver`"
-	$(GIT) push --tags
+build: $(BUILDDIR)/index.html $(BUILDDIR)/bookmarklet.js
 
 # depend:
 # 	$(MAKEDEPEND) --system amd --flat-define SCRIPT_SOURCES_WEB src/script/wordywordy.js
@@ -273,16 +208,6 @@ tag:
 
 doc:
 	$(DOC) $(SCRIPT_SOURCES_WEB) src/script/README.md
-
-test: dev-build
-	$(NPM) run test
-
-check: lint depcruise test
-
-fullcheck: check
-
-update-dependencies: run-update-dependencies clean-generated-sources test
-	$(GIT) diff package.json
 
 clean-generated-sources:
 	rm -rf $(GENERATED_SOURCES)
@@ -300,7 +225,6 @@ clean: somewhatclean
 
 # amd dependencies
 SCRIPT_SOURCES_WEB=src/script/wordywordy.js \
-	src/lib/screenfull.js \
 	src/script/chopper/chopper.js \
 	src/script/chopper/constants.js \
 	src/script/chopper/gear.js \
@@ -326,7 +250,6 @@ src/script/wordywordy.js: \
 	src/script/utl/paramslikker.js
 
 src/script/ui-control/actions.js: \
-	src/lib/screenfull.js \
 	src/script/chopper/chopper.js \
 	src/script/ui-control/constants.js \
 	src/script/ui-control/themeswitcher.js \

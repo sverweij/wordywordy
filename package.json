@@ -4,14 +4,13 @@
   "description": "WordyWordy takes text that's dropped on it and shows it. One word at a time. As fast as you want. Or as slow.",
   "main": "index.html",
   "dependencies": {
-    "amdefine": "1.0.1",
-    "requirejs": "2.3.6",
-    "screenfull": "^5.2.0"
+    "screenfull": "5.2.0"
   },
   "devDependencies": {
     "c8": "7.12.0",
     "chai": "4.3.6",
     "dependency-cruiser": "11.16.1",
+    "esbuild": "0.15.10",
     "eslint": "8.24.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-security": "1.5.0",
@@ -19,12 +18,11 @@
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
     "sass": "1.55.0",
-    "uglify-js": "3.17.2",
     "upem": "7.3.0",
     "watskeburt": "0.7.0"
   },
   "scripts": {
-    "build": "make clean dev-build install",
+    "build": "make clean build",
     "check": "npm-run-all --parallel depcruise lint format:check test:cover ",
     "codeclimate-cover-submit": "node node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info",
     "depcruise": "depcruise src/script --config .dependency-cruiser.json",
