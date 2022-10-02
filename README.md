@@ -134,11 +134,7 @@ WordyWordy uses some non-standard fonts:
 
 ## Build status
 
-[![Build Status](https://travis-ci.org/sverweij/wordywordy.svg?branch=gh-pages)](https://travis-ci.org/sverweij/wordywordy)
 [![Code Climate](https://codeclimate.com/github/sverweij/wordywordy/badges/gpa.svg)](https://codeclimate.com/github/sverweij/wordywordy)
-[![codecov.io](http://codecov.io/github/sverweij/wordywordy/coverage.svg?branch=master)](http://codecov.io/github/sverweij/wordywordy?branch=master)
-[![Dependencies](https://david-dm.org/sverweij/wordywordy.svg)](https://david-dm.org/sverweij/wordywordy)
-[![devDependencies](https://david-dm.org/sverweij/wordywordy/dev-status.svg)](https://david-dm.org/sverweij/wordywordy#info=devDependencies)
 [![wordywordy.js.org](https://img.shields.io/badge/js.org-WordyWordy-ffb400.svg?style=flat-squared)](https://wordywordy.js.org/index.html?canned=intro&play=1&speed=150&theme=1)
 
 ## Frequently Anticipated Questions

@@ -6,7 +6,7 @@ COVER=node node_modules/istanbul/lib/cli.js
 COVER2REPORT=genhtml --no-source --branch-coverage --no-sort --rc genhtml_med_limit=50 --rc genhtml_hi_limit=80 --quiet --output-directory
 GIT=git
 GIT_CURRENT_BRANCH=$(shell utl/get_current_git_branch.sh)
-GIT_DEPLOY_FROM_BRANCH=master
+GIT_DEPLOY_FROM_BRANCH=main
 CJS2AMD=utl/commonjs2amd.sh
 PNG2FAVICO=utl/png2favico.sh
 RESIZE=utl/resize.sh
