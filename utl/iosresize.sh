@@ -1,14 +1,14 @@
 #!/bin/sh
-SIZE=`expr "$2" : "[^-]*-\(.*\).png"`
-CONVERT=`which convert`
-OPTIPNG=`which optipng`
+SIZE=$(expr "$2" : "[^-]*-\(.*\).png")
+CONVERT=$(which convert)
+OPTIPNG=$(which optipng)
 # convert $1  -bordercolor white -border 0 \
-if [ $CONVERT ]
+if [ "$CONVERT" ]
 then
-    $CONVERT $1 -bordercolor white -border 0 \( -clone 0 -resize $SIZEx$SIZE \) -delete 0 -alpha off $2
+    $CONVERT "$1" -bordercolor white -border 0 \( -clone 0 -resize "$SIZE"x"$SIZE" \) -delete 0 -alpha off "$2"
 fi
 
-if [ $OPTIPNG ]
+if [ "$OPTIPNG" ]
 then
-    $OPTIPNG -quiet $2
+    $OPTIPNG -quiet "$2"
 fi
