@@ -1,35 +1,27 @@
-/* istanbul ignore else */
-if (typeof define !== "function") {
-  var define = require("amdefine")(module);
-}
+var constants = require("./constants");
 
-define(function (require) {
-  var constants = require("./constants");
-
-  return {
-    tokenize: function (pString) {
-      pString = pString || "";
-      return pString
-        .replace(/[-]{4,}/g, "---") //
-        .replace(/[_]{4,}/g, "___") //
-        .replace(/[=]{4,}/g, "===") //
-        .replace(/[+]{4,}/g, "+++") //
-        .replace(/[~]{4,}/g, "~~~") //
-        .replace(/\.\.\./g, "\u2026") //
-        .replace(
-          /([a-zA-Z]{2,})([()[\]{}.?!:;\-,\u2026/|\u2010-\u2015]{1,2})([a-zA-Z]{2,})/g,
-          "$1$2 $3"
-        )
-        .replace(/&nbsp;/g, " ") //
-        .replace(/\u00A0/g, " ") //
-        .replace(/\r\n/g, "\n") //
-        .replace(/[\n]{2,}/g, "\u00A0 ") // so we can distinguish "paragraph" ends
-        .replace(constants.CJK_RE, " $1") //
-        .split(constants.SPACES_RE);
-    },
-  };
-});
-
+module.exports = {
+  tokenize: function (pString) {
+    pString = pString || "";
+    return pString
+      .replace(/[-]{4,}/g, "---") //
+      .replace(/[_]{4,}/g, "___") //
+      .replace(/[=]{4,}/g, "===") //
+      .replace(/[+]{4,}/g, "+++") //
+      .replace(/[~]{4,}/g, "~~~") //
+      .replace(/\.\.\./g, "\u2026") //
+      .replace(
+        /([a-zA-Z]{2,})([()[\]{}.?!:;\-,\u2026/|\u2010-\u2015]{1,2})([a-zA-Z]{2,})/g,
+        "$1$2 $3"
+      )
+      .replace(/&nbsp;/g, " ") //
+      .replace(/\u00A0/g, " ") //
+      .replace(/\r\n/g, "\n") //
+      .replace(/[\n]{2,}/g, "\u00A0 ") // so we can distinguish "paragraph" ends
+      .replace(constants.CJK_RE, " $1") //
+      .split(constants.SPACES_RE);
+  },
+};
 /*
  This file is part of WordyWordy.
 

@@ -1,11 +1,17 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "plugin:security/recommended", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": false
+    }
+  },
   "overrides": [
     {
       "files": ["src/script/**/*.js"],
       "env": {
-        "amd": true,
         "node": true,
         "browser": true
       },

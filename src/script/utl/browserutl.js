@@ -1,31 +1,27 @@
-define(function () {
-  "use strict";
-
-  return {
-    ajax: function (pURL, pSuccessFunction, pErrorFunction) {
-      var lHttpRequest = new XMLHttpRequest();
-      lHttpRequest.onreadystatechange = function (pEvent) {
-        if (
-          pEvent.target.readyState === 4 &&
-          (!pEvent.target.status || pEvent.target.status === 200)
-        ) {
-          pSuccessFunction(pEvent);
-        } else {
-          pErrorFunction(pEvent);
-        }
-      };
-      lHttpRequest.open("GET", pURL);
-      lHttpRequest.responseType = "text";
-      lHttpRequest.send();
-    },
-    localStorageOK: function () {
-      return typeof localStorage !== "undefined";
-    },
-    hasTextMime: function (pKindOfIterableObject) {
-      return pKindOfIterableObject.contains("text/plain");
-    },
-  };
-});
+module.exports = {
+  ajax: function (pURL, pSuccessFunction, pErrorFunction) {
+    var lHttpRequest = new XMLHttpRequest();
+    lHttpRequest.onreadystatechange = function (pEvent) {
+      if (
+        pEvent.target.readyState === 4 &&
+        (!pEvent.target.status || pEvent.target.status === 200)
+      ) {
+        pSuccessFunction(pEvent);
+      } else {
+        pErrorFunction(pEvent);
+      }
+    };
+    lHttpRequest.open("GET", pURL);
+    lHttpRequest.responseType = "text";
+    lHttpRequest.send();
+  },
+  localStorageOK: function () {
+    return typeof localStorage !== "undefined";
+  },
+  hasTextMime: function (pKindOfIterableObject) {
+    return pKindOfIterableObject.contains("text/plain");
+  },
+};
 /*
  This file is part of WordyWordy.
 

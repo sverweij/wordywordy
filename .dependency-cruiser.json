@@ -13,7 +13,7 @@
     },
     {
       "name": "not-to-spec",
-      "comment": "Don't allow dependencies to (typescript/ javascript/ coffeescript) spec files",
+      "comment": "Don't allow dependencies to spec files",
       "severity": "error",
       "from": {},
       "to": {
